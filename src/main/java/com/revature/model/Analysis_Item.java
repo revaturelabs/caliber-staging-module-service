@@ -13,46 +13,46 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "analysis_items")
-public class analysis_items {
+public class Analysis_Item {
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	@Column(name = "content")
 	private String content;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "swot_analysis_id")
-	private swot_analysis swot_analysis_id;
-	
+	private Swot_Analysis swot_analysis_id;
+
 	@Column(name = "type")
-	private String type;
-	
-	public analysis_items() {
+	private Analysis_Type type;
+
+	public Analysis_Item() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public analysis_items(int id, String content, swot_analysis swot_analysis_id, String type) {
+	@Override
+	public String toString() {
+		return "Analysis_Item [id=" + id + ", content=" + content + ", swot_analysis_id=" + swot_analysis_id + ", type="
+				+ type + "]";
+	}
+
+	public Analysis_Item(String content, Swot_Analysis swot_analysis_id, Analysis_Type type) {
+		super();
+		this.content = content;
+		this.swot_analysis_id = swot_analysis_id;
+		this.type = type;
+	}
+
+	public Analysis_Item(int id, String content, Swot_Analysis swot_analysis_id, Analysis_Type type) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.swot_analysis_id = swot_analysis_id;
 		this.type = type;
-	}
-
-	public analysis_items(String content, swot_analysis swot_analysis_id, String type) {
-		super();
-		this.content = content;
-		this.swot_analysis_id = swot_analysis_id;
-		this.type = type;
-	}
-
-	@Override
-	public String toString() {
-		return "analysis_items [id=" + id + ", content=" + content + ", swot_analysis_id=" + swot_analysis_id
-				+ ", type=" + type + "]";
 	}
 
 	public int getId() {
@@ -71,19 +71,19 @@ public class analysis_items {
 		this.content = content;
 	}
 
-	public swot_analysis getSwot_analysis_id() {
+	public Swot_Analysis getSwot_analysis_id() {
 		return swot_analysis_id;
 	}
 
-	public void setSwot_analysis_id(swot_analysis swot_analysis_id) {
+	public void setSwot_analysis_id(Swot_Analysis swot_analysis_id) {
 		this.swot_analysis_id = swot_analysis_id;
 	}
 
-	public String getType() {
+	public Analysis_Type getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Analysis_Type type) {
 		this.type = type;
 	}
 
@@ -106,7 +106,7 @@ public class analysis_items {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		analysis_items other = (analysis_items) obj;
+		Analysis_Item other = (Analysis_Item) obj;
 		if (content == null) {
 			if (other.content != null)
 				return false;
@@ -119,14 +119,9 @@ public class analysis_items {
 				return false;
 		} else if (!swot_analysis_id.equals(other.swot_analysis_id))
 			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
+		if (type != other.type)
 			return false;
 		return true;
 	}
-	
-	
 
 }

@@ -15,44 +15,44 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "swot_analysis")
-public class swot_analysis {
-	
+public class Swot_Analysis {
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "associate_id")
-	private associates associate_id;
-	
+	private Associate associate;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "created_by")
-	private managers created_by;
-	
+	private Manager created_by;
+
 	@Column(name = "created_on")
 	private Timestamp created_on;
-	
+
 	@Column(name = "last_modified")
 	private Timestamp last_modified;
-	
-	public swot_analysis() {
+
+	public Swot_Analysis() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public swot_analysis(int id, associates associate_id, managers created_by, Timestamp created_on,
+	public Swot_Analysis(int id, Associate associate_id, Manager created_by, Timestamp created_on,
 			Timestamp last_modified) {
 		super();
 		this.id = id;
-		this.associate_id = associate_id;
+		this.associate = associate_id;
 		this.created_by = created_by;
 		this.created_on = created_on;
 		this.last_modified = last_modified;
 	}
 
-	public swot_analysis(associates associate_id, managers created_by, Timestamp created_on, Timestamp last_modified) {
+	public Swot_Analysis(Associate associate_id, Manager created_by, Timestamp created_on, Timestamp last_modified) {
 		super();
-		this.associate_id = associate_id;
+		this.associate = associate_id;
 		this.created_by = created_by;
 		this.created_on = created_on;
 		this.last_modified = last_modified;
@@ -60,7 +60,7 @@ public class swot_analysis {
 
 	@Override
 	public String toString() {
-		return "swot_analysis [id=" + id + ", associate_id=" + associate_id + ", created_by=" + created_by
+		return "swot_analysis [id=" + id + ", associate_id=" + associate + ", created_by=" + created_by
 				+ ", created_on=" + created_on + ", last_modified=" + last_modified + "]";
 	}
 
@@ -72,19 +72,19 @@ public class swot_analysis {
 		this.id = id;
 	}
 
-	public associates getAssociate_id() {
-		return associate_id;
+	public Associate getAssociate_id() {
+		return associate;
 	}
 
-	public void setAssociate_id(associates associate_id) {
-		this.associate_id = associate_id;
+	public void setAssociate_id(Associate associate_id) {
+		this.associate = associate_id;
 	}
 
-	public managers getCreated_by() {
+	public Manager getCreated_by() {
 		return created_by;
 	}
 
-	public void setCreated_by(managers created_by) {
+	public void setCreated_by(Manager created_by) {
 		this.created_by = created_by;
 	}
 
@@ -108,7 +108,7 @@ public class swot_analysis {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((associate_id == null) ? 0 : associate_id.hashCode());
+		result = prime * result + ((associate == null) ? 0 : associate.hashCode());
 		result = prime * result + ((created_by == null) ? 0 : created_by.hashCode());
 		result = prime * result + ((created_on == null) ? 0 : created_on.hashCode());
 		result = prime * result + id;
@@ -124,11 +124,11 @@ public class swot_analysis {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		swot_analysis other = (swot_analysis) obj;
-		if (associate_id == null) {
-			if (other.associate_id != null)
+		Swot_Analysis other = (Swot_Analysis) obj;
+		if (associate == null) {
+			if (other.associate != null)
 				return false;
-		} else if (!associate_id.equals(other.associate_id))
+		} else if (!associate.equals(other.associate))
 			return false;
 		if (created_by == null) {
 			if (other.created_by != null)
@@ -149,7 +149,5 @@ public class swot_analysis {
 			return false;
 		return true;
 	}
-	
-	
 
 }

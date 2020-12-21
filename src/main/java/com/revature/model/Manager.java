@@ -8,28 +8,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "managers")
-public class managers {
+@Table(name = "manager")
+public class Manager {
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String first_name;
-	
-	@Column(name="lastname")
+
+	@Column(name = "lastname")
 	private String last_name;
-	
-	public managers() {
+
+	public Manager() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public managers(int id, String email, String first_name, String last_name) {
+	public Manager(int id, String email, String first_name, String last_name) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -37,7 +37,7 @@ public class managers {
 		this.last_name = last_name;
 	}
 
-	public managers(String email, String first_name, String last_name) {
+	public Manager(String email, String first_name, String last_name) {
 		super();
 		this.email = email;
 		this.first_name = first_name;
@@ -101,7 +101,7 @@ public class managers {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		managers other = (managers) obj;
+		Manager other = (Manager) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -121,6 +121,5 @@ public class managers {
 			return false;
 		return true;
 	}
-	
-	
+
 }

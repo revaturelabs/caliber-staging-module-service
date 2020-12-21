@@ -9,30 +9,30 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "batch")
-public class batch {
-	
+public class Batch {
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column(name="salesforce_id")
+
+	@Column(name = "salesforce_id")
 	private String salesforce_id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="skill")
+
+	@Column(name = "skill")
 	private String skill;
-	
-	@Column(name="location")
+
+	@Column(name = "location")
 	private String location;
 
-	public batch() {
+	public Batch() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public batch(int id, String salesforce_id, String name, String skill, String location) {
+
+	public Batch(int id, String salesforce_id, String name, String skill, String location) {
 		super();
 		this.id = id;
 		this.salesforce_id = salesforce_id;
@@ -41,7 +41,7 @@ public class batch {
 		this.location = location;
 	}
 
-	public batch(String salesforce_id, String name, String skill, String location) {
+	public Batch(String salesforce_id, String name, String skill, String location) {
 		super();
 		this.salesforce_id = salesforce_id;
 		this.name = name;
@@ -115,7 +115,7 @@ public class batch {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		batch other = (batch) obj;
+		Batch other = (Batch) obj;
 		if (id != other.id)
 			return false;
 		if (location == null) {
@@ -140,7 +140,5 @@ public class batch {
 			return false;
 		return true;
 	}
-	
-	
 
 }

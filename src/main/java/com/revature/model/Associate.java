@@ -12,42 +12,42 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "associates")
-public class associates {
+@Table(name = "associate")
+public class Associate {
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column(name="salesforce_id")
+
+	@Column(name = "salesforce_id")
 	private String salesforce_id;
 
-	@Column(name="email")
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String first_name;
-	
-	@Column(name="lastname")
+
+	@Column(name = "lastname")
 	private String last_name;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "manager_id")
-	private managers manager_id;
-	
+	private Manager manager_id;
+
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "batch_id")
-	private batch batch_id;
-	
-	private String status;
+	private Batch batch_id;
 
-	public associates() {
+	private Associates_Status status;
+
+	public Associate() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public associates(int id, String salesforce_id, String email, String first_name, String last_name,
-			managers manager_id, batch batch_id, String status) {
+
+	public Associate(int id, String salesforce_id, String email, String first_name, String last_name,
+			Manager manager_id, Batch batch_id, Associates_Status status) {
 		super();
 		this.id = id;
 		this.salesforce_id = salesforce_id;
@@ -59,8 +59,8 @@ public class associates {
 		this.status = status;
 	}
 
-	public associates(String salesforce_id, String email, String first_name, String last_name, managers manager_id,
-			batch batch_id, String status) {
+	public Associate(String salesforce_id, String email, String first_name, String last_name, Manager manager_id,
+			Batch batch_id, Associates_Status status) {
 		super();
 		this.salesforce_id = salesforce_id;
 		this.email = email;
@@ -73,7 +73,7 @@ public class associates {
 
 	@Override
 	public String toString() {
-		return "associates [id=" + id + ", salesforce_id=" + salesforce_id + ", email=" + email + ", first_name="
+		return "Associate [id=" + id + ", salesforce_id=" + salesforce_id + ", email=" + email + ", first_name="
 				+ first_name + ", last_name=" + last_name + ", manager_id=" + manager_id + ", batch_id=" + batch_id
 				+ ", status=" + status + "]";
 	}
@@ -118,27 +118,27 @@ public class associates {
 		this.last_name = last_name;
 	}
 
-	public managers getManager_id() {
+	public Manager getManager_id() {
 		return manager_id;
 	}
 
-	public void setManager_id(managers manager_id) {
+	public void setManager_id(Manager manager_id) {
 		this.manager_id = manager_id;
 	}
 
-	public batch getBatch_id() {
+	public Batch getBatch_id() {
 		return batch_id;
 	}
 
-	public void setBatch_id(batch batch_id) {
+	public void setBatch_id(Batch batch_id) {
 		this.batch_id = batch_id;
 	}
 
-	public String getStatus() {
+	public Associates_Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Associates_Status status) {
 		this.status = status;
 	}
 
@@ -165,7 +165,7 @@ public class associates {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		associates other = (associates) obj;
+		Associate other = (Associate) obj;
 		if (batch_id == null) {
 			if (other.batch_id != null)
 				return false;
@@ -198,15 +198,9 @@ public class associates {
 				return false;
 		} else if (!salesforce_id.equals(other.salesforce_id))
 			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
+		if (status != other.status)
 			return false;
 		return true;
 	}
-	
-	
 
-	
 }

@@ -134,11 +134,8 @@ public class Batch {
         } else if (!salesforce_id.equals(other.salesforce_id))
             return false;
         if (skill == null) {
-            if (other.skill != null)
-                return false;
-        } else if (!skill.equals(other.skill))
-            return false;
-        return true;
+            return other.skill == null;
+        } else return skill.equals(other.skill);
     }
 
 }

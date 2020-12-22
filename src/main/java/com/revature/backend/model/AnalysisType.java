@@ -1,5 +1,5 @@
 package com.revature.backend.model;
 
-public enum Analysis_Type {
+public enum AnalysisType {
     strengths, weaknesses, opportunities, threats
 }

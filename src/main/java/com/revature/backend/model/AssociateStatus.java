@@ -1,5 +1,5 @@
 package com.revature.backend.model;
 
-public enum Associate_Status {
+public enum AssociateStatus {
     staging, project
 }

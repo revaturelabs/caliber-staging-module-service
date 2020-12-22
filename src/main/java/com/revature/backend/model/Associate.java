@@ -1,6 +1,7 @@
 package com.revature.backend.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "associate")
@@ -31,14 +32,14 @@ public class Associate {
     @JoinColumn(name = "batch_id")
     private Batch batch_id;
 
-    private Associate_Status status;
+    private AssociateStatus status;
 
     public Associate() {
         // TODO Auto-generated constructor stub
     }
 
     public Associate(int id, String salesforce_id, String email, String first_name, String last_name,
-                     Manager manager_id, Batch batch_id, Associate_Status status) {
+                     Manager manager_id, Batch batch_id, AssociateStatus status) {
         super();
         this.id = id;
         this.salesforce_id = salesforce_id;
@@ -51,7 +52,7 @@ public class Associate {
     }
 
     public Associate(String salesforce_id, String email, String first_name, String last_name, Manager manager_id,
-                     Batch batch_id, Associate_Status status) {
+                     Batch batch_id, AssociateStatus status) {
         super();
         this.salesforce_id = salesforce_id;
         this.email = email;
@@ -90,7 +91,7 @@ public class Associate {
         return this.batch_id;
     }
 
-    public Associate_Status getStatus() {
+    public AssociateStatus getStatus() {
         return this.status;
     }
 
@@ -122,7 +123,7 @@ public class Associate {
         this.batch_id = batch_id;
     }
 
-    public void setStatus(Associate_Status status) {
+    public void setStatus(AssociateStatus status) {
         this.status = status;
     }
 
@@ -130,33 +131,32 @@ public class Associate {
         if (o == this) return true;
         if (!(o instanceof Associate)) return false;
         final Associate other = (Associate) o;
-        if (!other.canEqual((Object) this)) return false;
+        if (!other.canEqual(this)) return false;
         if (this.getId() != other.getId()) return false;
         final Object this$salesforce_id = this.getSalesforce_id();
         final Object other$salesforce_id = other.getSalesforce_id();
-        if (this$salesforce_id == null ? other$salesforce_id != null : !this$salesforce_id.equals(other$salesforce_id))
+        if (!Objects.equals(this$salesforce_id, other$salesforce_id))
             return false;
         final Object this$email = this.getEmail();
         final Object other$email = other.getEmail();
-        if (this$email == null ? other$email != null : !this$email.equals(other$email)) return false;
+        if (!Objects.equals(this$email, other$email)) return false;
         final Object this$first_name = this.getFirst_name();
         final Object other$first_name = other.getFirst_name();
-        if (this$first_name == null ? other$first_name != null : !this$first_name.equals(other$first_name))
+        if (!Objects.equals(this$first_name, other$first_name))
             return false;
         final Object this$last_name = this.getLast_name();
         final Object other$last_name = other.getLast_name();
-        if (this$last_name == null ? other$last_name != null : !this$last_name.equals(other$last_name)) return false;
+        if (!Objects.equals(this$last_name, other$last_name)) return false;
         final Object this$manager_id = this.getManager_id();
         final Object other$manager_id = other.getManager_id();
-        if (this$manager_id == null ? other$manager_id != null : !this$manager_id.equals(other$manager_id))
+        if (!Objects.equals(this$manager_id, other$manager_id))
             return false;
         final Object this$batch_id = this.getBatch_id();
         final Object other$batch_id = other.getBatch_id();
-        if (this$batch_id == null ? other$batch_id != null : !this$batch_id.equals(other$batch_id)) return false;
+        if (!Objects.equals(this$batch_id, other$batch_id)) return false;
         final Object this$status = this.getStatus();
         final Object other$status = other.getStatus();
-        if (this$status == null ? other$status != null : !this$status.equals(other$status)) return false;
-        return true;
+        return Objects.equals(this$status, other$status);
     }
 
     protected boolean canEqual(final Object other) {

@@ -1,6 +1,7 @@
 package com.revature.backend.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "manager")
@@ -75,19 +76,18 @@ public class Manager {
         if (o == this) return true;
         if (!(o instanceof Manager)) return false;
         final Manager other = (Manager) o;
-        if (!other.canEqual((Object) this)) return false;
+        if (!other.canEqual(this)) return false;
         if (this.getId() != other.getId()) return false;
         final Object this$email = this.getEmail();
         final Object other$email = other.getEmail();
-        if (this$email == null ? other$email != null : !this$email.equals(other$email)) return false;
+        if (!Objects.equals(this$email, other$email)) return false;
         final Object this$first_name = this.getFirst_name();
         final Object other$first_name = other.getFirst_name();
-        if (this$first_name == null ? other$first_name != null : !this$first_name.equals(other$first_name))
+        if (!Objects.equals(this$first_name, other$first_name))
             return false;
         final Object this$last_name = this.getLast_name();
         final Object other$last_name = other.getLast_name();
-        if (this$last_name == null ? other$last_name != null : !this$last_name.equals(other$last_name)) return false;
-        return true;
+        return Objects.equals(this$last_name, other$last_name);
     }
 
     protected boolean canEqual(final Object other) {

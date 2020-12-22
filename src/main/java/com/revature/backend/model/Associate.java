@@ -13,24 +13,24 @@ public class Associate {
     private int id;
 
     @Column(name = "salesforce_id")
-    private String salesforce_id;
+    private String salesforceId;
 
     @Column(name = "email")
     private String email;
 
     @Column(name = "first_name")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "lastname")
-    private String last_name;
+    private String lastName;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id")
-    private Manager manager_id;
+    private Manager managerID;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "batch_id")
-    private Batch batch_id;
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name = "batch_id")
+  private Batch batchID;
 
     private AssociateStatus status;
 
@@ -38,28 +38,28 @@ public class Associate {
         // TODO Auto-generated constructor stub
     }
 
-    public Associate(int id, String salesforce_id, String email, String first_name, String last_name,
-                     Manager manager_id, Batch batch_id, AssociateStatus status) {
+    public Associate(int id, String salesforceId, String email, String firstName, String lastName,
+                     Manager managerID, Batch batchID, AssociateStatus status) {
         super();
         this.id = id;
-        this.salesforce_id = salesforce_id;
+        this.salesforceId = salesforceId;
         this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.manager_id = manager_id;
-        this.batch_id = batch_id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.managerID = managerID;
+        this.batchID = batchID;
         this.status = status;
     }
 
-    public Associate(String salesforce_id, String email, String first_name, String last_name, Manager manager_id,
-                     Batch batch_id, AssociateStatus status) {
+    public Associate(String salesforceId, String email, String firstName, String lastName, Manager managerID,
+                     Batch batchID, AssociateStatus status) {
         super();
-        this.salesforce_id = salesforce_id;
+        this.salesforceId = salesforceId;
         this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.manager_id = manager_id;
-        this.batch_id = batch_id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.managerID = managerID;
+        this.batchID = batchID;
         this.status = status;
     }
 
@@ -67,28 +67,28 @@ public class Associate {
         return this.id;
     }
 
-    public String getSalesforce_id() {
-        return this.salesforce_id;
+    public String getSalesforceId() {
+        return this.salesforceId;
     }
 
     public String getEmail() {
         return this.email;
     }
 
-    public String getFirst_name() {
-        return this.first_name;
+    public String getFirstName() {
+        return this.firstName;
     }
 
-    public String getLast_name() {
-        return this.last_name;
+    public String getLastName() {
+        return this.lastName;
     }
 
-    public Manager getManager_id() {
-        return this.manager_id;
+    public Manager getManagerID() {
+        return this.managerID;
     }
 
-    public Batch getBatch_id() {
-        return this.batch_id;
+    public Batch getBatchID() {
+        return this.batchID;
     }
 
     public AssociateStatus getStatus() {
@@ -99,28 +99,28 @@ public class Associate {
         this.id = id;
     }
 
-    public void setSalesforce_id(String salesforce_id) {
-        this.salesforce_id = salesforce_id;
+    public void setSalesforceId(String salesforce_id) {
+        this.salesforceId = salesforce_id;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String first_name) {
+        this.firstName = first_name;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String last_name) {
+        this.lastName = last_name;
     }
 
-    public void setManager_id(Manager manager_id) {
-        this.manager_id = manager_id;
+    public void setManagerID(Manager manager_id) {
+        this.managerID = manager_id;
     }
 
-    public void setBatch_id(Batch batch_id) {
-        this.batch_id = batch_id;
+    public void setBatchID(Batch batch_id) {
+        this.batchID = batch_id;
     }
 
     public void setStatus(AssociateStatus status) {
@@ -132,15 +132,15 @@ public class Associate {
         if (this == o) return true;
         if (!(o instanceof Associate)) return false;
         Associate associate = (Associate) o;
-        return getId() == associate.getId() && Objects.equals(getSalesforce_id(), associate.getSalesforce_id()) && Objects.equals(getEmail(), associate.getEmail()) && Objects.equals(getFirst_name(), associate.getFirst_name()) && Objects.equals(getLast_name(), associate.getLast_name()) && Objects.equals(getManager_id(), associate.getManager_id()) && Objects.equals(getBatch_id(), associate.getBatch_id()) && getStatus() == associate.getStatus();
+        return getId() == associate.getId() && Objects.equals(getSalesforceId(), associate.getSalesforceId()) && Objects.equals(getEmail(), associate.getEmail()) && Objects.equals(getFirstName(), associate.getFirstName()) && Objects.equals(getLastName(), associate.getLastName()) && Objects.equals(getManagerID(), associate.getManagerID()) && Objects.equals(getBatchID(), associate.getBatchID()) && getStatus() == associate.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getSalesforce_id(), getEmail(), getFirst_name(), getLast_name(), getManager_id(), getBatch_id(), getStatus());
+        return Objects.hash(getId(), getSalesforceId(), getEmail(), getFirstName(), getLastName(), getManagerID(), getBatchID(), getStatus());
     }
 
     public String toString() {
-        return "Associate(id=" + this.getId() + ", salesforce_id=" + this.getSalesforce_id() + ", email=" + this.getEmail() + ", first_name=" + this.getFirst_name() + ", last_name=" + this.getLast_name() + ", manager_id=" + this.getManager_id() + ", batch_id=" + this.getBatch_id() + ", status=" + this.getStatus() + ")";
+        return "Associate(id=" + this.getId() + ", salesforce_id=" + this.getSalesforceId() + ", email=" + this.getEmail() + ", first_name=" + this.getFirstName() + ", last_name=" + this.getLastName() + ", manager_id=" + this.getManagerID() + ", batch_id=" + this.getBatchID() + ", status=" + this.getStatus() + ")";
     }
 }

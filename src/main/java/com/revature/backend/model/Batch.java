@@ -18,7 +18,7 @@ public class Batch {
     private int id;
 
     @Column(name = "salesforce_id")
-    private String salesforce_id;
+    private String salesforceID;
 
     @Column(name = "name")
     private String name;
@@ -33,18 +33,18 @@ public class Batch {
         // TODO Auto-generated constructor stub
     }
 
-    public Batch(int id, String salesforce_id, String name, String skill, String location) {
+    public Batch(int id, String salesforceID, String name, String skill, String location) {
         super();
         this.id = id;
-        this.salesforce_id = salesforce_id;
+        this.salesforceID = salesforceID;
         this.name = name;
         this.skill = skill;
         this.location = location;
     }
 
-    public Batch(String salesforce_id, String name, String skill, String location) {
+    public Batch(String salesforceID, String name, String skill, String location) {
         super();
-        this.salesforce_id = salesforce_id;
+        this.salesforceID = salesforceID;
         this.name = name;
         this.skill = skill;
         this.location = location;
@@ -52,7 +52,7 @@ public class Batch {
 
     @Override
     public String toString() {
-        return "batch [id=" + id + ", salesforce_id=" + salesforce_id + ", name=" + name + ", skill=" + skill
+        return "batch [id=" + id + ", salesforce_id=" + salesforceID + ", name=" + name + ", skill=" + skill
                 + ", location=" + location + "]";
     }
 
@@ -64,12 +64,12 @@ public class Batch {
         this.id = id;
     }
 
-    public String getSalesforce_id() {
-        return salesforce_id;
+    public String getSalesforceID() {
+        return salesforceID;
     }
 
-    public void setSalesforce_id(String salesforce_id) {
-        this.salesforce_id = salesforce_id;
+    public void setSalesforceID(String salesforce_id) {
+        this.salesforceID = salesforce_id;
     }
 
     public String getName() {
@@ -101,11 +101,11 @@ public class Batch {
         if (this == o) return true;
         if (!(o instanceof Batch)) return false;
         Batch batch = (Batch) o;
-        return getId() == batch.getId() && Objects.equals(getSalesforce_id(), batch.getSalesforce_id()) && Objects.equals(getName(), batch.getName()) && Objects.equals(getSkill(), batch.getSkill()) && Objects.equals(getLocation(), batch.getLocation());
+        return getId() == batch.getId() && Objects.equals(getSalesforceID(), batch.getSalesforceID()) && Objects.equals(getName(), batch.getName()) && Objects.equals(getSkill(), batch.getSkill()) && Objects.equals(getLocation(), batch.getLocation());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getSalesforce_id(), getName(), getSkill(), getLocation());
+        return Objects.hash(getId(), getSalesforceID(), getName(), getSkill(), getLocation());
     }
 }

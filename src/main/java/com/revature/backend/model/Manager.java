@@ -16,28 +16,28 @@ public class Manager {
     private String email;
 
     @Column(name = "first_name")
-    private String first_name;
+    private String firstName;
 
-    @Column(name = "lastname")
-    private String last_name;
+    @Column(name = "last_name")
+    private String lastName;
 
     public Manager() {
         // TODO Auto-generated constructor stub
     }
 
-    public Manager(int id, String email, String first_name, String last_name) {
+    public Manager(int id, String email, String firstName, String lastName) {
         super();
         this.id = id;
         this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public Manager(String email, String first_name, String last_name) {
+    public Manager(String email, String firstName, String lastName) {
         super();
         this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public int getId() {
@@ -48,12 +48,12 @@ public class Manager {
         return this.email;
     }
 
-    public String getFirst_name() {
-        return this.first_name;
+    public String getFirstName() {
+        return this.firstName;
     }
 
-    public String getLast_name() {
-        return this.last_name;
+    public String getLastName() {
+        return this.lastName;
     }
 
     public void setId(int id) {
@@ -64,12 +64,12 @@ public class Manager {
         this.email = email;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String first_name) {
+        this.firstName = first_name;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String last_name) {
+        this.lastName = last_name;
     }
 
     @Override
@@ -77,15 +77,15 @@ public class Manager {
         if (this == o) return true;
         if (!(o instanceof Manager)) return false;
         Manager manager = (Manager) o;
-        return getId() == manager.getId() && Objects.equals(getEmail(), manager.getEmail()) && Objects.equals(getFirst_name(), manager.getFirst_name()) && Objects.equals(getLast_name(), manager.getLast_name());
+        return getId() == manager.getId() && Objects.equals(getEmail(), manager.getEmail()) && Objects.equals(getFirstName(), manager.getFirstName()) && Objects.equals(getLastName(), manager.getLastName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getEmail(), getFirst_name(), getLast_name());
+        return Objects.hash(getId(), getEmail(), getFirstName(), getLastName());
     }
 
     public String toString() {
-        return "Manager(id=" + this.getId() + ", email=" + this.getEmail() + ", first_name=" + this.getFirst_name() + ", last_name=" + this.getLast_name() + ")";
+        return "Manager(id=" + this.getId() + ", email=" + this.getEmail() + ", first_name=" + this.getFirstName() + ", last_name=" + this.getLastName() + ")";
     }
 }

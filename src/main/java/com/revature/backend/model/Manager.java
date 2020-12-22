@@ -72,39 +72,17 @@ public class Manager {
         this.last_name = last_name;
     }
 
-    public boolean equals(final Object o) {
-        if (o == this) return true;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof Manager)) return false;
-        final Manager other = (Manager) o;
-        if (!other.canEqual(this)) return false;
-        if (this.getId() != other.getId()) return false;
-        final Object this$email = this.getEmail();
-        final Object other$email = other.getEmail();
-        if (!Objects.equals(this$email, other$email)) return false;
-        final Object this$first_name = this.getFirst_name();
-        final Object other$first_name = other.getFirst_name();
-        if (!Objects.equals(this$first_name, other$first_name))
-            return false;
-        final Object this$last_name = this.getLast_name();
-        final Object other$last_name = other.getLast_name();
-        return Objects.equals(this$last_name, other$last_name);
+        Manager manager = (Manager) o;
+        return getId() == manager.getId() && Objects.equals(getEmail(), manager.getEmail()) && Objects.equals(getFirst_name(), manager.getFirst_name()) && Objects.equals(getLast_name(), manager.getLast_name());
     }
 
-    protected boolean canEqual(final Object other) {
-        return other instanceof Manager;
-    }
-
+    @Override
     public int hashCode() {
-        final int PRIME = 59;
-        int result = 1;
-        result = result * PRIME + this.getId();
-        final Object $email = this.getEmail();
-        result = result * PRIME + ($email == null ? 43 : $email.hashCode());
-        final Object $first_name = this.getFirst_name();
-        result = result * PRIME + ($first_name == null ? 43 : $first_name.hashCode());
-        final Object $last_name = this.getLast_name();
-        result = result * PRIME + ($last_name == null ? 43 : $last_name.hashCode());
-        return result;
+        return Objects.hash(getId(), getEmail(), getFirst_name(), getLast_name());
     }
 
     public String toString() {

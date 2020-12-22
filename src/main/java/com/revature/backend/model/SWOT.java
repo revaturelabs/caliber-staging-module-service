@@ -49,10 +49,6 @@ public class SWOT {
         this.last_modified = last_modified;
     }
 
-    protected boolean canEqual(final Object other) {
-        return other instanceof SWOT;
-    }
-
     public int getId() {
         return this.id;
     }
@@ -93,41 +89,17 @@ public class SWOT {
         this.last_modified = last_modified;
     }
 
-    public boolean equals(final Object o) {
-        if (o == this) return true;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
         if (!(o instanceof SWOT)) return false;
-        final SWOT other = (SWOT) o;
-        if (!other.canEqual(this)) return false;
-        if (this.getId() != other.getId()) return false;
-        final Object this$associate = this.getAssociate();
-        final Object other$associate = other.getAssociate();
-        if (!Objects.equals(this$associate, other$associate)) return false;
-        final Object this$created_by = this.getCreated_by();
-        final Object other$created_by = other.getCreated_by();
-        if (!Objects.equals(this$created_by, other$created_by))
-            return false;
-        final Object this$created_on = this.getCreated_on();
-        final Object other$created_on = other.getCreated_on();
-        if (!Objects.equals(this$created_on, other$created_on))
-            return false;
-        final Object this$last_modified = this.getLast_modified();
-        final Object other$last_modified = other.getLast_modified();
-        return Objects.equals(this$last_modified, other$last_modified);
+        SWOT swot = (SWOT) o;
+        return getId() == swot.getId() && Objects.equals(getAssociate(), swot.getAssociate()) && Objects.equals(getCreated_by(), swot.getCreated_by()) && Objects.equals(getCreated_on(), swot.getCreated_on()) && Objects.equals(getLast_modified(), swot.getLast_modified());
     }
 
+    @Override
     public int hashCode() {
-        final int PRIME = 59;
-        int result = 1;
-        result = result * PRIME + this.getId();
-        final Object $associate = this.getAssociate();
-        result = result * PRIME + ($associate == null ? 43 : $associate.hashCode());
-        final Object $created_by = this.getCreated_by();
-        result = result * PRIME + ($created_by == null ? 43 : $created_by.hashCode());
-        final Object $created_on = this.getCreated_on();
-        result = result * PRIME + ($created_on == null ? 43 : $created_on.hashCode());
-        final Object $last_modified = this.getLast_modified();
-        result = result * PRIME + ($last_modified == null ? 43 : $last_modified.hashCode());
-        return result;
+        return Objects.hash(getId(), getAssociate(), getCreated_by(), getCreated_on(), getLast_modified());
     }
 
     public String toString() {

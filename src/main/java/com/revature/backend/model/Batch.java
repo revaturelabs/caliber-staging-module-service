@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "batch")
@@ -96,46 +97,15 @@ public class Batch {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        result = prime * result + ((location == null) ? 0 : location.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((salesforce_id == null) ? 0 : salesforce_id.hashCode());
-        result = prime * result + ((skill == null) ? 0 : skill.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Batch)) return false;
+        Batch batch = (Batch) o;
+        return getId() == batch.getId() && Objects.equals(getSalesforce_id(), batch.getSalesforce_id()) && Objects.equals(getName(), batch.getName()) && Objects.equals(getSkill(), batch.getSkill()) && Objects.equals(getLocation(), batch.getLocation());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Batch other = (Batch) obj;
-        if (id != other.id)
-            return false;
-        if (location == null) {
-            if (other.location != null)
-                return false;
-        } else if (!location.equals(other.location))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (salesforce_id == null) {
-            if (other.salesforce_id != null)
-                return false;
-        } else if (!salesforce_id.equals(other.salesforce_id))
-            return false;
-        if (skill == null) {
-            return other.skill == null;
-        } else return skill.equals(other.skill);
+    public int hashCode() {
+        return Objects.hash(getId(), getSalesforce_id(), getName(), getSkill(), getLocation());
     }
-
 }

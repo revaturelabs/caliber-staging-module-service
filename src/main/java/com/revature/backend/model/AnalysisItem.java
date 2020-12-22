@@ -17,7 +17,7 @@ public class AnalysisItem {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "swot_analysis_id")
-    private Swot SwotId;
+    private Swot swot;
 
     @Column(name = "type")
     private AnalysisType type;
@@ -26,27 +26,27 @@ public class AnalysisItem {
         // TODO Auto-generated constructor stub
     }
 
-    public AnalysisItem(String content, Swot SwotId, AnalysisType type) {
+    public AnalysisItem(String content, Swot swot, AnalysisType type) {
         super();
         this.content = content;
-        this.SwotId = SwotId;
+        this.swot = swot;
         this.type = type;
     }
 
-    public AnalysisItem(int id, String content, Swot SwotId, AnalysisType type) {
+    public AnalysisItem(int id, String content, Swot swot, AnalysisType type) {
         super();
         this.id = id;
         this.content = content;
-        this.SwotId = SwotId;
+        this.swot = swot;
         this.type = type;
     }
 
     public Swot getSwot_analysis_id() {
-        return SwotId;
+        return swot;
     }
 
     public void setSwot_analysis_id(Swot SwotId) {
-        this.SwotId = SwotId;
+        this.swot = SwotId;
     }
 
     public int getId() {
@@ -78,12 +78,12 @@ public class AnalysisItem {
         if (this == o) return true;
         if (!(o instanceof AnalysisItem)) return false;
         AnalysisItem that = (AnalysisItem) o;
-        return getId() == that.getId() && Objects.equals(getContent(), that.getContent()) && Objects.equals(SwotId, that.SwotId) && getType() == that.getType();
+        return getId() == that.getId() && Objects.equals(getContent(), that.getContent()) && Objects.equals(swot, that.swot) && getType() == that.getType();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getContent(), SwotId, getType());
+        return Objects.hash(getId(), getContent(), swot, getType());
     }
 
     public String toString() {

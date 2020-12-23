@@ -23,7 +23,7 @@ public class ManagerBalancerImpl implements ManagerBalancer {
     // ----------
 
     /**
-     * This method takes the given batches/associates and assigns them to staging
+     * This method takes the given associates and assigns them to staging
      * managers. It uses the following criteria:
      *  - associates from a given batch should all be assigned to the same manager
      *  - each manager should end up with a (rougly) equivalent amount of associates.
@@ -33,17 +33,66 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * 
      * @param managerMap : should map each Staging Manager to the number of associates
      * they already have assigned to them.
-     * @param newBatches : should be a list of new, unassigned batches
      * @param newAssociates : should be a list of new, unassigned associates. Each
      * of these associates should be in one of the given batches.
      */
     @Override
     public void balanceNewBatches(
-        Map<Manager, Integer> managerMap, 
-        List<Batch> newBatches,
-        List<Associate> newAssociates) {
-        // TODO Auto-generated method stub
+        Map<Manager, Integer> managerMap, List<Associate> newAssociates) {
+        // Group the associates by batches
+        Associate[][] batches = sortIntoBatches(newAssociates);
 
+        // sort batches from largest to smallest
+        sortBatchesBySize(batches);
+
+        // assign batches in order, always assigning to the manager with the currently
+        // smallest amount of associates
+        for (Associate[] batch : batches){
+            Manager managerWithLeast = findManagerWithLeast(managerMap);
+            // update this manager's count to reflect this new batch
+            int oldCount = managerMap.get(managerWithLeast);
+            managerMap.put(managerWithLeast, oldCount + batch.length);
+
+            // update each associate with the assignment
+            for (Associate associate : batch){
+                associate.setManager(managerWithLeast);
+            } // end inner for loop (only current batch)
+
+        } // end outer for loop (all batches)
     }
-    
+
+    // ----------
+    // HELPER METHODS
+    // ----------
+
+    /**
+     * Splits a List of associates into batches.
+     * 
+     * @param associates
+     * @return a 2-dimensional array of Associates, where each sub-array contains
+     *         all of, and only, the associates from a single batch
+     */
+    public Associate[][] sortIntoBatches(List<Associate> associates) {
+        return null;
+    }
+
+    /**
+     * Sorts the given 2D array of batches in decreasing order by size
+     * (largest array to smallest array).
+     * 
+     * @param batches
+     */
+    private void sortBatchesBySize(Associate[][] batches) {
+    }
+
+    /**
+     * Searches the given map of managers/integers for the manager key with the smallest
+     * Integer value (that is, the manager with the least assigned associates).
+     * 
+     * @param managerMap
+     * @return
+     */
+    private Manager findManagerWithLeast(Map<Manager, Integer> managerMap) {
+        return null;
+    }
 }

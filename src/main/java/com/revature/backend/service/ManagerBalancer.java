@@ -20,7 +20,7 @@ public interface ManagerBalancer {
     // ----------
     
     /**
-     * This method takes the given batches/associates and assigns them to staging
+     * This method takes the given associates and assigns them to staging
      * managers. It uses the following criteria:
      *  - associates from a given batch should all be assigned to the same manager
      *  - each manager should end up with a (rougly) equivalent amount of associates.
@@ -30,12 +30,9 @@ public interface ManagerBalancer {
      * 
      * @param managerMap : should map each Staging Manager to the number of associates
      * they already have assigned to them.
-     * @param newBatches : should be a list of new, unassigned batches
      * @param newAssociates : should be a list of new, unassigned associates. Each
      * of these associates should be in one of the given batches.
      */
     public void balanceNewBatches(
-        Map<Manager, Integer> managerMap, 
-        List<Batch> newBatches,
-        List<Associate> newAssociates);
+        Map<Manager, Integer> managerMap, List<Associate> newAssociates);
 }

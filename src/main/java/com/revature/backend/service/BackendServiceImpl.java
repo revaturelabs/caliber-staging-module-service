@@ -15,7 +15,11 @@ public class BackendServiceImpl implements BackendService {
 	BackendRepo backendRepo;
 
 	/**
-	 * This method takes the managers id number and returns a list of all associates assigned to him.
+	 * This method takes the managers id and returns all associates assigned to him.
+	 * 
+	 * The return value is a list of all associates assigned to the managers id number.
+	 * 
+	 * @param id : should be a valid id assigned to a manager.
 	 */
 	@Override
 	public List<Associate> findAssociatesByManagerId(int id) {

@@ -70,7 +70,8 @@ public class BatchRetrieverImpl implements BatchRetriever {
 		logger.trace("In BatchRetriever: gathering newly staging batches...");
 
 		// call the Caliper to get the associate list information
-		List<Batch> batchList = gson.fromJson(json, Batch.class);  
+		//List<Batch> batchList = gson.fromJson(json, Batch.class);  
+		List<Batch> batchList = null; // TODO fix this before push/merge!
 
 		// ending logging activity
 		logger.trace("Gathering batch list is complete. Leaving BatchRetriever...");

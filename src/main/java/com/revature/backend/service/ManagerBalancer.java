@@ -14,6 +14,10 @@ import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 
 public interface ManagerBalancer {
+
+    // ----------
+    // INTERFACE METHODS
+    // ----------
     
     /**
      * This method takes the given batches/associates and assigns them to staging

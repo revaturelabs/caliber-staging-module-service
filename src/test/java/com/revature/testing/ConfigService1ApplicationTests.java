@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.revature.model.Associate;
-import com.revature.repo.repo;
+import com.revature.backend.backend.model.Associate;
+import com.revature.backend.repo.repo;
 
 @SpringBootTest
-class ConfigService1ApplicationTests {
+class CaliberApplicationTests {
 	
 	@Autowired
 	repo managerService;

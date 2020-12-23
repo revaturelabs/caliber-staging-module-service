@@ -1,13 +1,13 @@
-package com.revature;
+package com.revature.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConfigService1Application {
+public class CaliberApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConfigService1Application.class, args);
+		SpringApplication.run(CaliberApplication.class, args);
 	}
 
 }

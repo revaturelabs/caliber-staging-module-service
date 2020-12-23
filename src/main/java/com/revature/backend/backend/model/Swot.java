@@ -1,4 +1,4 @@
-package com.revature.backend.model;
+package com.revature.backend.backend.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

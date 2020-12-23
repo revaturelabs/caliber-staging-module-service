@@ -6,6 +6,6 @@ import com.revature.backend.model.Associate;
 
 public interface BackendService {
 
-	public List<Associate> findAssociatesByManager_Id(int id);
+	public List<Associate> findAssociatesByManagerId(int id);
 
 }

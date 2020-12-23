@@ -14,9 +14,12 @@ public class BackendServiceImpl implements BackendService {
 	@Autowired
 	BackendRepo backendRepo;
 
+	/**
+	 * This method takes the managers id number and returns a list of all associates assigned to him.
+	 */
 	@Override
-	public List<Associate> findAssociatesByManager_Id(int id) {
-		return backendRepo.findAssociatesByManager_Id(id);
+	public List<Associate> findAssociatesByManagerId(int id) {
+		return backendRepo.findAssociatesByManagerId(id);
 	}
 
 }

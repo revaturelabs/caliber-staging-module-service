@@ -25,14 +25,14 @@ class BackendTesting {
 	int managerid;
 
 	@Test
-	void PASSfindAssociatesByManager_Id() {
-		List<Associate> a = backendService.findAssociatesByManager_Id(managerid);
+	void PASSfindAssociatesByManagerId() {
+		List<Associate> a = backendService.findAssociatesByManagerId(managerid);
 		assertNotEquals(0, a.size());
 	}
 
 	@Test
-	void FAILfindAssociatesByManager_Id() {
-		List<Associate> a = backendService.findAssociatesByManager_Id(0);
+	void FAILfindAssociatesByManagerId() {
+		List<Associate> a = backendService.findAssociatesByManagerId(0);
 		assertEquals(0, a.size());
 	}
 

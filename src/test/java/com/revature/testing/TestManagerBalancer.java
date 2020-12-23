@@ -36,9 +36,12 @@ public class TestManagerBalancer {
     // TEST METHODS
     // ----------
 
+    // ----------
+    // sortBatchesBySize() TESTS
+    // ----------
+
     @Test
-    public void testTest(){
-        assertNotNull(managerBalancer);
+    public void testSortBatchesBySize(){
+
     }
-    
 }

@@ -8,6 +8,8 @@ package com.revature.backend.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
@@ -57,7 +59,6 @@ public class ManagerBalancerImpl implements ManagerBalancer {
             for (Associate associate : batch){
                 associate.setManager(managerWithLeast);
             } // end inner for loop (only current batch)
-
         } // end outer for loop (all batches)
     }
 
@@ -73,6 +74,7 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      *         all of, and only, the associates from a single batch
      */
     public Associate[][] sortIntoBatches(List<Associate> associates) {
+        // TODO
         return null;
     }
 
@@ -83,6 +85,11 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * @param batches
      */
     private void sortBatchesBySize(Associate[][] batches) {
+        java.util.Arrays.sort(batches, new java.util.Comparator<Associate[]>() {
+            public int compare(Associate[] a, Associate[] b) {
+                return Integer.compare(a.length, b.length);
+            }
+        });
     }
 
     /**

@@ -41,12 +41,12 @@ public class AnalysisItem {
     this.type = type;
   }
 
-  public Swot getSwot_analysis_id() {
+  public Swot getSwot() {
     return swot;
   }
 
-  public void setSwot_analysis_id(Swot SwotId) {
-    this.swot = SwotId;
+  public void setSwot(Swot swot) {
+    this.swot = swot;
   }
 
   public int getId() {

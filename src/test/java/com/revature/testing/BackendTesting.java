@@ -10,27 +10,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.revature.backend.model.Associate;
-import com.revature.backend.repo.repo;
+import com.revature.backend.service.BackendService;
 
 @SpringBootTest
-class CaliberApplicationTests {
+class BackendTesting {
 	
 	@Autowired
-	repo managerService;
+	BackendService backendService;
 
 	@Test
 	void contextLoads() {
 	}
 	
+	int managerid;
+	
 	@Test
 	void PASSfindAssociatesByManager_Id() {
-		List<Associate> a = managerService.findAssociatesByManager_Id(5);
+		List<Associate> a = backendService.findAssociatesByManager_Id(managerid);
 		assertNotEquals(0, a.size());
 	}
 	
 	@Test
 	void FAILfindAssociatesByManager_Id() {
-		List<Associate> a = managerService.findAssociatesByManager_Id(0);
+		List<Associate> a = backendService.findAssociatesByManager_Id(0);
 		assertEquals(0, a.size());
 	}
 

@@ -13,7 +13,7 @@ public class BackendServiceImpl implements BackendService {
 
 	@Autowired
 	BackendRepo backendRepo;
-	
+
 	@Override
 	public List<Associate> findAssociatesByManager_Id(int id) {
 		return backendRepo.findAssociatesByManager_Id(id);

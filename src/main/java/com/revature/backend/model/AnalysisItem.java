@@ -15,7 +15,7 @@ public class AnalysisItem {
 	@Column(name = "content")
 	private String content;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
 	@JoinColumn(name = "swot_analysis_id")
 	private Swot swot;
 

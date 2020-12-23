@@ -32,8 +32,8 @@ public class Associate {
 	@JoinColumn(name = "batch_id")
 	private Batch batch;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "status")
+	//@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@Column(name = "status")
 	private AssociateStatus status;
 
 	public Associate() {

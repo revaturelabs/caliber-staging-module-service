@@ -24,15 +24,15 @@ public class Associate {
   @Column(name = "lastname")
   private String lastName;
 
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "manager_id")
   private Manager manager;
 
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "batch_id")
   private Batch batch;
 
-  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, surprise surprise.
   @JoinColumn(name = "status")
   private AssociateStatus status;
 

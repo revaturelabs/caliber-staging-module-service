@@ -13,11 +13,11 @@ public class Swot {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
 
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "associate_id")
   private Associate associate;
 
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "created_by")
   private Manager manager;
 

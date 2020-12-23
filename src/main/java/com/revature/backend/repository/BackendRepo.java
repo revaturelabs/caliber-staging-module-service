@@ -15,6 +15,4 @@ public interface BackendRepo extends JpaRepository<Associate, Long>{
 	@Query(value = "select * from associates where manager_id =?1", nativeQuery = true)
 	List<Associate> findAssociatesByManager_Id(int id);
 	
-	
-	
 }

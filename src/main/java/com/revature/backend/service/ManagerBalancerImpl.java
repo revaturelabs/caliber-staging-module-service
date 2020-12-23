@@ -1,4 +1,9 @@
-
+/**
+ * This class impelements the method(s) necessary to assign new batches of associates to
+ * staging managers, and to ensure that this assignment is done as evenly as possible.
+ * 
+ * @author Andrew Curry
+ */
 package com.revature.backend.service;
 
 import java.util.List;

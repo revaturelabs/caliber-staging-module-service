@@ -1,4 +1,4 @@
-package com.revature.backend.AssignmentManagerUtil;
+package com.revature.backend.util;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -13,17 +13,16 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.jboss.logging.Logger;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.revature.backend.model.Batch;
 
 @Component(value="StagingListener")
 public class StagingListenerImpl  implements StagingListener {
 	private LocalDateTime nextDateToWaitFor;
 	private List<Batch> latestBatches = new ArrayList<>();
-	
+	public static Logger log = Logger.getLogger(StagingListenerImpl.class);
 	
 	@Override
 	public void startListening() {
@@ -57,6 +56,7 @@ public class StagingListenerImpl  implements StagingListener {
 			int respCode = connection.getResponseCode();
 			if(respCode !=200)
 			{
+				log.error("Error retrieving data");
 				throw new RuntimeException("HttpResonseCode: "+respCode);
 			}
 			else {
@@ -67,8 +67,7 @@ public class StagingListenerImpl  implements StagingListener {
 					inline+= sc.nextLine();
 				}
 				sc.close();
-				Gson gson = new Gson();
-				List<Batch> list = gson.fromJson(inline, new TypeToken<List<Batch>>() {}.getType());
+				
 				
 				
 				

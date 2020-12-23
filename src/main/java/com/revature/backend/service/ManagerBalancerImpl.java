@@ -7,6 +7,7 @@
 package com.revature.backend.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
@@ -26,14 +27,17 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * There is no return value; the Associate objects will be updated directly with their
      * assignments.
      * 
-     * @param stagingManagers : should be a list of all staging managers in the system.
+     * @param managerMap : should map each Staging Manager to the number of associates
+     * they already have assigned to them.
      * @param newBatches : should be a list of new, unassigned batches
      * @param newAssociates : should be a list of new, unassigned associates. Each
      * of these associates should be in one of the given batches.
      */
     @Override
-    public void balanceNewBatches(List<Manager> stagingManagers, List<Batch> newBatches,
-            List<Associate> newAssociates) {
+    public void balanceNewBatches(
+        Map<Manager, Integer> managerMap, 
+        List<Batch> newBatches,
+        List<Associate> newAssociates) {
         // TODO Auto-generated method stub
 
     }

@@ -18,6 +18,10 @@ import org.springframework.stereotype.Service;
 @Service("managerBalancer")
 public class ManagerBalancerImpl implements ManagerBalancer {
 
+    // ----------
+    // INTERFACE METHODS
+    // ----------
+
     /**
      * This method takes the given batches/associates and assigns them to staging
      * managers. It uses the following criteria:

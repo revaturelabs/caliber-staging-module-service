@@ -1,11 +1,14 @@
 package com.revature.backend.util;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 
@@ -26,38 +29,46 @@ public class BatchRetrieverImpl implements BatchRetriever {
 
 	public static Logger logger = Logger.getLogger(BatchRetrieverImpl.class);
 
-	@Autowired
-	private BatchService batchService;
-
-	@Autowired
-	private AssociateService associateService;
+	// If using Jackson's ObjectMapper, have a static reference here
+	public static ObjectMapper om = new ObjectMapper();
 
 	public BatchRetrieverImpl() {
 		logger.info("In BatchRetriever no-args constructor");
 	}
 
 	@Override
-	public List<Associate> retrieveNewlyStagingAssociates() {
+	public List<Associate> retrieveNewlyStagingAssociates(String json) {
 		// start logging activity
 		logger.trace("In BatchRetriever: gathering newly staging associates...");
 
-		// call the appropriate service to get the associate list information
-		List<Associate> associateList = associateService.getAllAssociates();
+		List<Associate> associateList = new ArrayList<>();
+
+		// call the Caliper to get the associate list information
+		try {
+			//TODO: find the proper
+			URL url = new URL("https://caliber2-mock.revaturelabs.com/mock/training/");
+			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+			connection.setRequestMethod("GET");
+
+		} catch (Exception e) {
+			logger.warn("Error getting info from Caliper API", e);
+		}
+
 
 		// ending logging activity
 		logger.trace("Gathering associate list is complete. Leaving BatchRetriever...");
 
 		// send found information back to the controller
-		return associateList;
+		return null;
 	}
 
 	@Override
-	public List<Batch> retrieveNewlyStagingBatches() {
+	public List<Batch> retrieveNewlyStagingBatches(String json) {
 		// start logging activity
 		logger.trace("In BatchRetriever: gathering newly staging batches...");
 
-		// call the appropriate service to get the associate list information
-		List<Batch> batchList = batchService.getAllBatches();
+		// call the Caliper to get the associate list information
+		List<Batch> batchList = gson.fromJson(json, Batch.class);  
 
 		// ending logging activity
 		logger.trace("Gathering batch list is complete. Leaving BatchRetriever...");

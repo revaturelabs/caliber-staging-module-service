@@ -7,7 +7,7 @@ import com.revature.backend.model.Batch;
 
 public interface BatchRetriever {
 
-	public List<Associate> retrieveNewlyStagingAssociates();
+	public List<Associate> retrieveNewlyStagingAssociates(String json);
 	
-	public List<Batch> retrieveNewlyStagingBatches();
+	public List<Batch> retrieveNewlyStagingBatches(String json);
 }

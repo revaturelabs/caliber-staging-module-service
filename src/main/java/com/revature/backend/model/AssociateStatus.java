@@ -1,4 +1,4 @@
-package com.revature.backend.backend.model;
+package com.revature.backend.model;
 
 public enum AssociateStatus {
     STAGING,

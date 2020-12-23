@@ -10,11 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 import com.revature.backend.model.Associate;
 
 @Transactional
-public interface BackendRepo extends JpaRepository<Associate, Long>{
+public interface BackendRepo extends JpaRepository<Associate, Long> {
 
 	@Query(value = "select * from associates where manager_id =?1", nativeQuery = true)
 	List<Associate> findAssociatesByManager_Id(int id);
-	
-	
-	
+
 }

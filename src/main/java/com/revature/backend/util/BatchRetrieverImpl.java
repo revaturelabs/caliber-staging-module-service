@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
+import com.revature.backend.service.AssociateService;
+import com.revature.backend.service.BatchService;
 
 /**
  * This class will handle retrieving associates and batches from the Caliper

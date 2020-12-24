@@ -6,8 +6,11 @@
  */
 package com.revature.testing;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
@@ -55,8 +58,10 @@ public class TestManagerBalancerImpl {
     /**
      * Tests a few different possibilities, expecting success in all of them
      */
+    @Test
     public void testGroupIntoBatches(){
         testGroupIntoBatchesHelper(new int[] {});
+        testGroupIntoBatchesHelper(new int[] {5, 7, 1});
     }
 
     // ----------
@@ -93,11 +98,56 @@ public class TestManagerBalancerImpl {
      */
     public void testGroupIntoBatchesHelper(int[] sizes){
         List<Associate> associateList = generateAssociateList(sizes);
+        Associate[][] groupedAssociates = managerBalancer.groupIntoBatches(associateList);
+        areAssociatesGroupedCorrectly(groupedAssociates, sizes);
     }
 
+	/**
+     * Generates a randomly-ordered list of associates, where associates are grouped into
+     * batches, where each batch is sized according to a size from sizes
+     */
     private List<Associate> generateAssociateList(int[] sizes) {
-        return null;
+        List<Associate> associateList = new ArrayList<>();
+
+        for (int i = 0; i < sizes.length; i++){
+            Batch b = new Batch();
+            b.setName("" + i);
+            int size = sizes[i];
+            for (int x = 0; x < size; x++){
+                Associate a = new Associate();
+                a.setBatch(b);
+                associateList.add(a);
+            }// end inner for loop
+        } // end outer for loop
+
+        Collections.shuffle(associateList); // randomizes order
+        return associateList;
     }
+
+    /**
+     * Determines if the given 2-d array of associates is correctly grouped into batches;
+     * that is, each sub-array contains associates from exactly one batch.
+     * The sizes array will be used to verify that the batches are of the correct size
+     * (eg, that all of the associates were included and were not modified)
+     */
+    private boolean areAssociatesGroupedCorrectly(
+        Associate[][] groupedAssociates, int[] sizes) {
+        
+        for (Associate[] group : groupedAssociates){
+            if (group.length == 0) continue; // shouldn't happen?
+            Batch b = group[0].getBatch();
+            int batchIndex = Integer.parseInt(b.getName()); // i set up the names this way
+            //if (sizes[batchIndex] != group.length) return false; // batch is wrong size
+            assertEquals(sizes[batchIndex], group.length);
+            // now make sure every associate in this group is in batch b
+            for (int i = 1; i < group.length; i++){
+                Associate a = group[i];
+                //if (!a.getBatch().getName().equals(b.getName())) return false;
+                assertTrue(a.getBatch().getName().equals(b.getName()));
+            }
+        }
+		return true; // no problems found
+	}
 
     // ----------
     // sortBatchesBySize() HELPERS

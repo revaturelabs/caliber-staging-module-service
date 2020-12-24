@@ -9,6 +9,7 @@ package com.revature.backend.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -65,18 +66,22 @@ public class ManagerBalancerImpl implements ManagerBalancer {
 
         for (Associate a : associates){
             Batch b = a.getBatch();
-            List<Associate> batchList = batchMap.get(b);
+            List<Associate> batchList = new ArrayList<>();
             batchList.add(a);
+            batchMap.put(b, batchList);
         }
 
         // now put this data into a 2D array
-        Batch[] batchArray = (Batch[])batchMap.keySet().toArray();
-        Associate[][] result = new Associate[batchArray.length][]; // not the best name...
+        Set<Batch> batchSet = batchMap.keySet();
+        Associate[][] result = new Associate[batchSet.size()][]; // not the best name...
 
-        for (int i = 0; i < batchArray.length; i ++){
-            List<Associate> associateList = batchMap.get(batchArray[i]);
-            Associate[] associateArray = (Associate[])associateList.toArray();
+        int i = 0; // clumsy but it should work
+        for (Batch b : batchSet){
+            List<Associate> associateList = batchMap.get(b);
+            Associate[] associateArray = new Associate[associateList.size()];
+            associateArray = associateList.toArray(associateArray);
             result[i] = associateArray;
+            i += 1;
         }
 
         return result;

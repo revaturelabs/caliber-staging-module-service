@@ -2,6 +2,7 @@ package com.revature.backend.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,6 +27,9 @@ public class Swot {
 
   @Column(name = "last_modified")
   private Timestamp lastModified;
+  
+  @OneToMany	// TODO: We might need to change this later.
+  private List<AnalysisItem> analysisItems;
 
   public Swot() {
     // TODO Auto-generated constructor stub

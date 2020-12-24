@@ -19,7 +19,7 @@ public class AnalysisItem {
 	private String content;
 
 	@JsonIgnore	// Meant to help when trying to create a SWOT.
-	@ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
+	@ManyToOne(fetch = FetchType.LAZY)	// removed CascadeType.ALL, this will cause problems with deletion.
 	@JoinColumn(name = "swot_analysis_id")
 	private Swot swot;
 

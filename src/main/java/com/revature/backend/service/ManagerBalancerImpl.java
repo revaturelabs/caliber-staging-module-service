@@ -13,7 +13,7 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * This method takes the given batches/associates and assigns them to staging
      * managers. It uses the following criteria:
      *  - associates from a given batch should all be assigned to the same manager
-     *  - each manager should end up with a (rougly) equivalent amount of associates.
+     *  - each manager should end up with a (roughly) equivalent amount of associates.
      * 
      * There is no return value; the Associate objects will be updated directly with their
      * assignments.

@@ -1,9 +1,6 @@
 package com.revature.backend.model.dto;
 
 import com.revature.backend.model.Associate;
-import com.revature.backend.model.AssociateStatus;
-import com.revature.backend.model.Batch;
-import com.revature.backend.model.Manager;
 
 public class AssociateDTO {
 
@@ -40,8 +37,8 @@ public class AssociateDTO {
 		this.status = status;
 	}
 
-	public AssociateDTO(String salesforceId, String email, String firstName, String lastName, int manager,
-			int batch, String status) {
+	public AssociateDTO(String salesforceId, String email, String firstName, String lastName, int manager, int batch,
+			String status) {
 		super();
 		this.salesforceId = salesforceId;
 		this.email = email;
@@ -51,7 +48,7 @@ public class AssociateDTO {
 		this.batchId = batch;
 		this.status = status;
 	}
-	
+
 	public AssociateDTO(Associate associate) {
 		super();
 		this.id = associate.getId();
@@ -67,8 +64,8 @@ public class AssociateDTO {
 	@Override
 	public String toString() {
 		return "AssociateDTO [id=" + id + ", salesforceId=" + salesforceId + ", email=" + email + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", manageIdr=" + managerId + ", batchId=" + batchId + ", status="
-				+ status + "]";
+				+ firstName + ", lastName=" + lastName + ", manageIdr=" + managerId + ", batchId=" + batchId
+				+ ", status=" + status + "]";
 	}
 
 	public int getId() {
@@ -192,7 +189,5 @@ public class AssociateDTO {
 			return false;
 		return true;
 	}
-
-	
 
 }

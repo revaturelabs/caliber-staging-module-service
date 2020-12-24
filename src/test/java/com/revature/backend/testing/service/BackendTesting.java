@@ -1,4 +1,4 @@
-package com.revature.backend.service;
+package com.revature.backend.testing.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

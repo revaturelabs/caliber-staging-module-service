@@ -10,13 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.revature.backend.model.Associate;
-import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 
 public interface ManagerBalancer {
 
     // ----------
-    // INTERFACE METHODS
+    // PRIMARY METHOD(S)
     // ----------
     
     /**
@@ -35,4 +34,5 @@ public interface ManagerBalancer {
      */
     public void balanceNewBatches(
         Map<Manager, Integer> managerMap, List<Associate> newAssociates);
+
 }

@@ -8,7 +8,9 @@ package com.revature.backend.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
@@ -40,13 +42,9 @@ public class ManagerBalancerImpl implements ManagerBalancer {
     @Override
     public void balanceNewBatches(
         Map<Manager, Integer> managerMap, List<Associate> newAssociates) {
-        // Group the associates by batches
+
         Associate[][] batches = groupIntoBatches(newAssociates);
-
-        // sort batches from largest to smallest
         sortBatchesBySize(batches);
-
-        // actually do the assignments
         assignAssociatesEvenly(managerMap, batches);
     }
 
@@ -62,8 +60,26 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      *         all of, and only, the associates from a single batch
      */
     public Associate[][] groupIntoBatches(List<Associate> associates) {
-        // TODO
-        return null;
+        // maybe this map should have been the end results rather than a 2d array...
+        Map<Batch, List<Associate>> batchMap = new HashMap<>();
+
+        for (Associate a : associates){
+            Batch b = a.getBatch();
+            List<Associate> batchList = batchMap.get(b);
+            batchList.add(a);
+        }
+
+        // now put this data into a 2D array
+        Batch[] batchArray = (Batch[])batchMap.keySet().toArray();
+        Associate[][] result = new Associate[batchArray.length][]; // not the best name...
+
+        for (int i = 0; i < batchArray.length; i ++){
+            List<Associate> associateList = batchMap.get(batchArray[i]);
+            Associate[] associateArray = (Associate[])associateList.toArray();
+            result[i] = associateArray;
+        }
+
+        return result;
     }
 
     /**

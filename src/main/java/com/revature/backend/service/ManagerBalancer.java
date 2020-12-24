@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.revature.backend.model.Associate;
-import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 
 public interface ManagerBalancer {

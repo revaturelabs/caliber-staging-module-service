@@ -62,6 +62,9 @@ public class TestManagerBalancerImpl {
     public void testGroupIntoBatches(){
         testGroupIntoBatchesHelper(new int[] {});
         testGroupIntoBatchesHelper(new int[] {5, 7, 1});
+        testGroupIntoBatchesHelper(new int[] {7, 5, 1});
+        testGroupIntoBatchesHelper(new int[] {4, 4, 4, 3, 2, 1});
+        testGroupIntoBatchesHelper(new int[] {9, 18, 17, 1, 2, 3});
     }
 
     // ----------
@@ -133,17 +136,16 @@ public class TestManagerBalancerImpl {
     private boolean areAssociatesGroupedCorrectly(
         Associate[][] groupedAssociates, int[] sizes) {
         
+        assertEquals(sizes.length, groupedAssociates.length);
         for (Associate[] group : groupedAssociates){
             if (group.length == 0) continue; // shouldn't happen?
             Batch b = group[0].getBatch();
             int batchIndex = Integer.parseInt(b.getName()); // i set up the names this way
-            //if (sizes[batchIndex] != group.length) return false; // batch is wrong size
             assertEquals(sizes[batchIndex], group.length);
             // now make sure every associate in this group is in batch b
             for (int i = 1; i < group.length; i++){
                 Associate a = group[i];
-                //if (!a.getBatch().getName().equals(b.getName())) return false;
-                assertTrue(a.getBatch().getName().equals(b.getName()));
+                assertEquals(a.getBatch().getName(), b.getName());
             }
         }
 		return true; // no problems found

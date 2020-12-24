@@ -66,7 +66,8 @@ public class ManagerBalancerImpl implements ManagerBalancer {
 
         for (Associate a : associates){
             Batch b = a.getBatch();
-            List<Associate> batchList = new ArrayList<>();
+            List<Associate> batchList = batchMap.get(b);
+            if (batchList == null) batchList = new ArrayList<>();
             batchList.add(a);
             batchMap.put(b, batchList);
         }

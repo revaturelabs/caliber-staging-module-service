@@ -26,7 +26,7 @@ public class Swot {
   private Timestamp createdOn;
 
   @Column(name = "last_modified")
-  private Timestamp lastModified;
+  private Timestamp lastModified;	// TODO: this will need to be updated each time the SWOT is updated.
   
   @OneToMany	// TODO: We might need to change this later.
   private List<AnalysisItem> analysisItems;

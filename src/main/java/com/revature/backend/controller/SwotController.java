@@ -52,10 +52,14 @@ public class SwotController {
 	
 	//update -item
 	@PutMapping(path="/item/update", consumes= {MediaType.APPLICATION_JSON_VALUE})
-	public <T> ResponseEntity<T> updateItem(@RequestBody AnalysisItem analysisItem) {
+	public ResponseEntity<AnalysisItem> updateItem(@RequestBody AnalysisItem analysisItem) {
 		AnalysisItem updatedItem = swotService.updateItem(analysisItem);
-		if (updatedItem == null) return (ResponseEntity<T>) ResponseEntity.badRequest();
-		else return (ResponseEntity<T>) ResponseEntity.ok(updatedItem); //TODO: this causes problems, needs to be fixed.
+		if (updatedItem == null) {
+			return ResponseEntity.badRequest().body(updatedItem);
+		}
+		else {
+			return ResponseEntity.ok(updatedItem); //TODO: this causes problems, needs to be fixed.
+		}
 	}
 	
 	//delete -item

@@ -5,12 +5,12 @@ public class ApiAssociateTemplate {
 	String salesforceId;
 	String firstName;
 	String lastName;
-	String flag;
+	ApiFlagTemplate flag;
 	public ApiAssociateTemplate() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ApiAssociateTemplate(String email, String salesforceId, String firstName, String lastName, String flag) {
+	public ApiAssociateTemplate(String email, String salesforceId, String firstName, String lastName, ApiFlagTemplate flag) {
 		super();
 		this.email = email;
 		this.salesforceId = salesforceId;
@@ -42,10 +42,10 @@ public class ApiAssociateTemplate {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getFlag() {
+	public ApiFlagTemplate getFlag() {
 		return flag;
 	}
-	public void setFlag(String flag) {
+	public void setFlag(ApiFlagTemplate flag) {
 		this.flag = flag;
 	}
 	@Override

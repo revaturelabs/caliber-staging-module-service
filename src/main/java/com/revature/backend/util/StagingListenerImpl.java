@@ -24,8 +24,9 @@ import com.revature.backend.model.api.ApiBatchTemplate;
 @Component(value = "StagingListener")
 public class StagingListenerImpl implements StagingListener {
 	private LocalDateTime nextDateToWaitFor;
-	private List<ApiBatchTemplate> latestBatchIds = new ArrayList<>();
+	private List<ApiBatchTemplate> latestBatches = new ArrayList<>();
 	public static Logger log = Logger.getLogger(StagingListenerImpl.class);
+	//Day that the update will occur each week. 
 	private DayOfWeek weeklyUpdateDay = DayOfWeek.SUNDAY;
 	private boolean shouldUpdate;
 
@@ -55,11 +56,10 @@ public class StagingListenerImpl implements StagingListener {
 
 	@Override
 	public void checkForNewBatches() {
-		// TODO Auto-generated method stub
 		// Pulls ALL batches from the last year then filters to see only batches with an
 		// ending date between two specified parameters
 		log.info("Checking for new batches.....");
-		latestBatchIds = new ArrayList<>();
+		latestBatches = new ArrayList<>();
 		int year = LocalDateTime.now().getYear();
 		try {
 			URL url = new URL("https://caliber2-mock.revaturelabs.com/mock/training/batch?year=" + year);
@@ -86,16 +86,18 @@ public class StagingListenerImpl implements StagingListener {
 				LocalDateTime lastDayChecked = LocalDateTime.now().with(TemporalAdjusters.previous(weeklyUpdateDay));
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				for (ApiBatchTemplate batch : myBatches) {
+					//Find the end date of the batch.
 					LocalDate ld = LocalDate.parse(batch.getEndDate(), formatter);
 					LocalDateTime batchDate = LocalDateTime.of(ld, LocalDateTime.now().toLocalTime());
-
-					if (batchDate.isAfter(lastDayChecked) && batchDate.isBefore(LocalDateTime.now())) {
+					
+					//If the end date is between the last date the method was run and the current time, it's a new batch.
+					if (batchDate.isAfter(lastDayChecked) && batchDate.isBefore(LocalDateTime.now()) || batchDate.isEqual(LocalDateTime.now())) {
 						// Batch should be retrieved/id stored for retrieval from another class
-						latestBatchIds.add(batch);
+						latestBatches.add(batch);
 						log.info("New batch found, adding to latestBatches list....");
 					}
 				}
-				if (latestBatchIds.size() == 0) {
+				if (latestBatches.size() == 0) {
 					log.info("No new batches found.");
 					shouldUpdate = false;
 				} else {
@@ -122,7 +124,7 @@ public class StagingListenerImpl implements StagingListener {
 
 	@Override
 	public List<ApiBatchTemplate> getLatestBatches() {
-		return latestBatchIds;
+		return latestBatches;
 	}
 
 	// Use this method to set shouldUpdate back to false after updating the

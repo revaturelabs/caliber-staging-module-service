@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Manager;
+import com.revature.backend.repository.ManagerRepository;
 
-public class SelectAllManagersImpl implements SelectAllManagers {
+@Service("selectAllManagers")
+public class ManagerServiceImpl implements ManagerService {
 	
-	private static Logger log = Logger.getLogger(SelectAllManagersImpl.class);
+	private static Logger log = Logger.getLogger(ManagerServiceImpl.class);
+	
+	@Autowired
+	ManagerRepository managerRepo;
 
 	/* 
 	 * This class will return a list of Manager objects as well as Manager - Associate mappings.
@@ -23,6 +31,7 @@ public class SelectAllManagersImpl implements SelectAllManagers {
 		
 		try {
 			// Dao method here
+			managerRepo.findAllManagers();
 		} catch(Exception e) {
 			
 			if(managerList.size() != 0) {

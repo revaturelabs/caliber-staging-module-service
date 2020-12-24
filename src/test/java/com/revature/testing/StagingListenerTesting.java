@@ -2,7 +2,6 @@ package com.revature.testing;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.Console;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;

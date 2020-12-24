@@ -21,99 +21,95 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.api.ApiBatchTemplate;
 
-@Component(value="StagingListener")
-public class StagingListenerImpl  implements StagingListener {
+@Component(value = "StagingListener")
+public class StagingListenerImpl implements StagingListener {
 	private LocalDateTime nextDateToWaitFor;
-	private  List<ApiBatchTemplate> latestBatchIds = new ArrayList<>();
+	private List<ApiBatchTemplate> latestBatchIds = new ArrayList<>();
 	public static Logger log = Logger.getLogger(StagingListenerImpl.class);
 	private DayOfWeek weeklyUpdateDay = DayOfWeek.SUNDAY;
+	private boolean shouldUpdate;
+
 	@Override
 	public void startListening() {
-		/* Method MUST run on server startup & repeat after each batch check
-		 * Configures timer to check for new batches on a specified day of the week every week. 
-		 * If this method does not run, the entire sorting system will fail to operate.
-		*/
+		/*
+		 * Method MUST run on server startup & repeat after each batch check Configures
+		 * timer to check for new batches on a specified day of the week every week. If
+		 * this method does not run, the entire sorting system will fail to operate.
+		 */
 		log.info("Restarting stagingListener timer.");
 		nextDateToWaitFor = LocalDateTime.now().with(TemporalAdjusters.next(weeklyUpdateDay));
 		Date d = Date.from(nextDateToWaitFor.atZone((ZoneId.systemDefault())).toInstant());
 		log.info(d);
 		Timer t = new Timer();
 		t.schedule(new TimerTask() {
-			
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				checkForNewBatches();
-				//t.cancel();
+				// t.cancel();
 			}
 		}, d);
-		
-	}
 
-	
+	}
 
 	@Override
 	public void checkForNewBatches() {
 		// TODO Auto-generated method stub
-		//Pulls ALL batches from the last year then filters to see only batches with an ending date between two specified parameters
+		// Pulls ALL batches from the last year then filters to see only batches with an
+		// ending date between two specified parameters
 		log.info("Checking for new batches.....");
 		latestBatchIds = new ArrayList<>();
 		int year = LocalDateTime.now().getYear();
 		try {
-			URL url = new URL("https://caliber2-mock.revaturelabs.com/mock/training/batch?year="+year);
-			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+			URL url = new URL("https://caliber2-mock.revaturelabs.com/mock/training/batch?year=" + year);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("accept", "application/json");
 			connection.connect();
 			int respCode = connection.getResponseCode();
-			if(respCode !=200)
-			{
+			if (respCode != 200) {
 				log.error("Caliber API did not respond with a response code of 200!");
-				throw new RuntimeException("HttpResonseCode: "+respCode);
-			}
-			else {
+				throw new RuntimeException("HttpResonseCode: " + respCode);
+			} else {
 				String inline = "";
 				Scanner sc = new Scanner(url.openStream());
-				while(sc.hasNext())
-				{
-					inline+= sc.nextLine();
+				while (sc.hasNext()) {
+					inline += sc.nextLine();
 				}
 				sc.close();
-				
-				//Process batch data into a usable object
+
+				// Process batch data into a usable object
 				ObjectMapper mapper = new ObjectMapper();
 				ApiBatchTemplate[] myBatches = mapper.readValue(inline, ApiBatchTemplate[].class);
-				//Find the last day that the update should have been run.
+				// Find the last day that the update should have been run.
 				LocalDateTime lastDayChecked = LocalDateTime.now().with(TemporalAdjusters.previous(weeklyUpdateDay));
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				for( ApiBatchTemplate batch : myBatches)
-				{
-					LocalDate ld = LocalDate.parse(batch.getEndDate(),formatter);
-					LocalDateTime batchDate = LocalDateTime.of(ld,LocalDateTime.now().toLocalTime());
-					
-					if(batchDate.isAfter(lastDayChecked) && batchDate.isBefore(LocalDateTime.now()))
-					{
-						//Batch should be retrieved/id stored for retrieval from another class
+				for (ApiBatchTemplate batch : myBatches) {
+					LocalDate ld = LocalDate.parse(batch.getEndDate(), formatter);
+					LocalDateTime batchDate = LocalDateTime.of(ld, LocalDateTime.now().toLocalTime());
+
+					if (batchDate.isAfter(lastDayChecked) && batchDate.isBefore(LocalDateTime.now())) {
+						// Batch should be retrieved/id stored for retrieval from another class
 						latestBatchIds.add(batch);
 						log.info("New batch found, adding to latestBatches list....");
 					}
 				}
-				if(latestBatchIds.size() ==0)
-				{
+				if (latestBatchIds.size() == 0) {
 					log.info("No new batches found.");
+					shouldUpdate = false;
+				} else {
+					shouldUpdate = true;
 				}
-				
+
 			}
-			
-			
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			log.error("Failed to retrieve info from Caliber API",e);
-		}
-		finally {
-			//After all code has been executed restart the timer.
+			log.error("Failed to retrieve info from Caliber API", e);
+		} finally {
+			// After all code has been executed restart the timer.
 			startListening();
 		}
 	}
@@ -121,13 +117,19 @@ public class StagingListenerImpl  implements StagingListener {
 	@Override
 	public boolean triggerUpdate() {
 		// TODO Auto-generated method stub
-		return false;
+		return shouldUpdate;
 	}
-	
-	public List<ApiBatchTemplate> getLatestBatches()
-	{
+
+	@Override
+	public List<ApiBatchTemplate> getLatestBatches() {
 		return latestBatchIds;
 	}
-	
+
+	// Use this method to set shouldUpdate back to false after updating the
+	// database.
+	@Override
+	public void setShouldUpdate(boolean shouldUpdate) {
+		this.shouldUpdate = shouldUpdate;
+	}
 
 }

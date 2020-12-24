@@ -8,6 +8,7 @@ package com.revature.testing;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.function.BooleanSupplier;
 
 import com.revature.backend.model.Associate;
@@ -48,6 +49,17 @@ public class TestManagerBalancerImpl {
     // ----------
 
     // ----------
+    // groupIntoBatches() TESTS
+    // ----------
+
+    /**
+     * Tests a few different possibilities, expecting success in all of them
+     */
+    public void testGroupIntoBatches(){
+        testGroupIntoBatchesHelper(new int[] {});
+    }
+
+    // ----------
     // sortBatchesBySize() TESTS
     // ----------
 
@@ -68,9 +80,32 @@ public class TestManagerBalancerImpl {
     // HELPER METHODS
     // ----------
 
+    // ----------
+    // groupIntoBatches() HELPERS
+    // ----------
+
     /**
-     * Builds a mock set of batches (each batch sized according to a length from lengths),
-     * and then tests to make sure the managerBalancerImpl sorts it correctly.
+     * Builds a List of mock associates (which are placed in batches, each batch sized
+     * according to a size from sizes), and then verifies that groupIntoBatches splits
+     * them up correctly. The order of the mock list will be random.
+     * 
+     * @param lengths
+     */
+    public void testGroupIntoBatchesHelper(int[] sizes){
+        List<Associate> associateList = generateAssociateList(sizes);
+    }
+
+    private List<Associate> generateAssociateList(int[] sizes) {
+        return null;
+    }
+
+    // ----------
+    // sortBatchesBySize() HELPERS
+    // ----------
+
+    /**
+     * Builds a mock group of batches (each batch sized according to a length from 
+     * lengths), and then tests to make sure the managerBalancerImpl sorts it correctly.
      * 
      * @param lengths
      */

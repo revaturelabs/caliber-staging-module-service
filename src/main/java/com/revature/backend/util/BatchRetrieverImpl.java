@@ -11,6 +11,10 @@ import org.jboss.logging.Logger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
+import com.revature.backend.model.api.ApiAssociateAssignment;
+import com.revature.backend.model.api.ApiAssociateTemplate;
+import com.revature.backend.model.api.ApiBatchTemplate;
+
 
 /**
  * This class will handle retrieving associates and batches from the Caliper
@@ -29,6 +33,7 @@ import com.revature.backend.model.Batch;
 public class BatchRetrieverImpl implements BatchRetriever {
 
 	public static Logger logger = Logger.getLogger(BatchRetrieverImpl.class);
+	public static StagingListener stagingListener = new StagingListenerImpl();
 
 	// If using Jackson's ObjectMapper, have a static reference here
 	public static ObjectMapper om = new ObjectMapper();
@@ -38,39 +43,27 @@ public class BatchRetrieverImpl implements BatchRetriever {
 	}
 
 	@Override
-	public List<Associate> retrieveNewlyStagingAssociates() {
+	public List<ApiAssociateTemplate> retrieveNewlyStagingAssociates() {
 		// start logging activity
 		logger.trace("In BatchRetriever: gathering newly staging associates...");
 
-		List<Associate> associateList = new ArrayList<>();
+		List<ApiAssociateTemplate> associateList = new ArrayList<>();
 
-		// call the Caliper to get the associate list information
-		try {
-			//NOTE: find the proper endpoint that gets the associates
-			URL url = new URL("https://caliber2-mock.revaturelabs.com/mock/training/associate");
-			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-			connection.setRequestMethod("GET");
-			connection.setRequestProperty("accept", "application/json");
-			connection.connect();
-			int statusCode = connection.getResponseCode();
-
-			if(statusCode != 200){
-				throw new RuntimeException("ERROR: Status Code - " + statusCode);
-			}else{
-				String line = "";
-				Scanner scanner = new Scanner(url.openStream());
-				while(scanner.hasNext()){
-					line += scanner.nextLine();
-					//change line into an associate object
-					Associate a = om.readValue(line, Associate.class);
-					//add associate to list
-					associateList.add(a);
+		List<ApiBatchTemplate> batchList = new ArrayList<>();
+		stagingListener.checkForNewBatches();
+		try{
+			batchList = stagingListener.getLatestBatches();
+			//from the batchList, extract out the associates into their own separate list
+			for (ApiBatchTemplate apiBatchTemplate : batchList) {
+				System.out.println(apiBatchTemplate);
+				ApiAssociateAssignment[] arr = apiBatchTemplate.getAssociateAssignments();
+				for (ApiAssociateAssignment assignment : arr) {
+					ApiAssociateTemplate associate = assignment.getAssociate();
+					associateList.add(associate);
 				}
-				scanner.close();
 			}
-			
 		} catch (Exception e) {
-			logger.warn("Error getting info from Caliper API", e);
+			logger.warn("Error getting info from Staging Listener", e);
 		}
 		// ending logging activity
 		logger.trace("Gathering associate list is complete. Leaving BatchRetriever...");
@@ -80,39 +73,18 @@ public class BatchRetrieverImpl implements BatchRetriever {
 	}
 
 	@Override
-	public List<Batch> retrieveNewlyStagingBatches() {
+	public List<ApiBatchTemplate> retrieveNewlyStagingBatches() {
 		// start logging activity
 		logger.trace("In BatchRetriever: gathering newly staging batches...");
-
-		List<Batch> batchList = new ArrayList<>();
-
-		// call the Caliper to get the associate list information
-		try {
-			//NOTE: find the proper endpoint that gets the associates
-			URL url = new URL("https://caliber2-mock.revaturelabs.com/mock/training/batch");
-			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-			connection.setRequestMethod("GET");
-			connection.setRequestProperty("accept", "application/json");
-			connection.connect();
-			int statusCode = connection.getResponseCode();
-
-			if(statusCode != 200){
-				throw new RuntimeException("ERROR: Status Code - " + statusCode);
-			}else{
-				String line = "";
-				Scanner scanner = new Scanner(url.openStream());
-				while(scanner.hasNext()){
-					line += scanner.nextLine();
-					//change line into an associate object
-					Batch b = om.readValue(line, Batch.class);
-					//add associate to list
-					batchList.add(b);
-				}
-				scanner.close();
+		List<ApiBatchTemplate> batchList = new ArrayList<>();
+		stagingListener.checkForNewBatches();
+		try{
+			batchList = stagingListener.getLatestBatches();
+			for (ApiBatchTemplate apiBatchTemplate : batchList) {
+				System.out.println(apiBatchTemplate);
 			}
-			
 		} catch (Exception e) {
-			logger.warn("Error getting info from Caliper API", e);
+			logger.warn("Error getting info from Staging Listener", e);
 		}
 		// ending logging activity
 		logger.trace("Gathering batch list is complete. Leaving BatchRetriever...");
@@ -120,5 +92,4 @@ public class BatchRetrieverImpl implements BatchRetriever {
 		// send found information back to the controller
 		return batchList;
 	}
-
 }

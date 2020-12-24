@@ -2,12 +2,12 @@ package com.revature.backend.util;
 
 import java.util.List;
 
-import com.revature.backend.model.Associate;
-import com.revature.backend.model.Batch;
+import com.revature.backend.model.api.ApiAssociateTemplate;
+import com.revature.backend.model.api.ApiBatchTemplate;
 
 public interface BatchRetriever {
 
-	public List<Associate> retrieveNewlyStagingAssociates();
+	public List<ApiAssociateTemplate> retrieveNewlyStagingAssociates();
 	
-	public List<Batch> retrieveNewlyStagingBatches();
+	public List<ApiBatchTemplate> retrieveNewlyStagingBatches();
 }

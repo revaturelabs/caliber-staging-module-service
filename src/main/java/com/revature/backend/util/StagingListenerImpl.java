@@ -16,7 +16,9 @@ import java.util.TimerTask;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.Batch;
+import com.revature.backend.model.api.ApiBatchTemplate;
 
 @Component(value="StagingListener")
 public class StagingListenerImpl  implements StagingListener {
@@ -68,8 +70,9 @@ public class StagingListenerImpl  implements StagingListener {
 				}
 				sc.close();
 				
-				
-				
+				//Process batch data into a usable object
+				ObjectMapper mapper = new ObjectMapper();
+				ApiBatchTemplate[] myBatches = mapper.readValue(inline, ApiBatchTemplate[].class);
 				
 			}
 			

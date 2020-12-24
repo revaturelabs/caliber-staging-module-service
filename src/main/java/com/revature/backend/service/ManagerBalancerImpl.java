@@ -47,19 +47,8 @@ public class ManagerBalancerImpl implements ManagerBalancer {
         // sort batches from largest to smallest
         sortBatchesBySize(batches);
 
-        // assign batches in order, always assigning to the manager with the currently
-        // smallest amount of associates
-        for (Associate[] batch : batches){
-            Manager managerWithLeast = findManagerWithLeast(managerMap);
-            // update this manager's count to reflect this new batch
-            int oldCount = managerMap.get(managerWithLeast);
-            managerMap.put(managerWithLeast, oldCount + batch.length);
-
-            // update each associate with the assignment
-            for (Associate associate : batch){
-                associate.setManager(managerWithLeast);
-            } // end inner for loop (only current batch)
-        } // end outer for loop (all batches)
+        // actually do the assignments
+        assignAssociatesEvenly(managerMap, batches);
     }
 
     // ----------
@@ -93,6 +82,28 @@ public class ManagerBalancerImpl implements ManagerBalancer {
     }
 
     /**
+     * Assigns batches in order, always assigning to the manager with the currently
+     * smallest amount of associates.
+     * 
+     * @param managerMap
+     * @param batches
+     */
+    private void assignAssociatesEvenly(
+        Map<Manager, Integer> managerMap, Associate[][] batches){
+        for (Associate[] batch : batches){
+            Manager managerWithLeast = findManagerWithLeast(managerMap);
+            // update this manager's count to reflect this new batch
+            int oldCount = managerMap.get(managerWithLeast);
+            managerMap.put(managerWithLeast, oldCount + batch.length);
+
+            // update each associate with the assignment
+            for (Associate associate : batch){
+                associate.setManager(managerWithLeast);
+            } // end inner for loop (only current batch)
+        } // end outer for loop (all batches)
+    }
+
+    /**
      * Searches the given map of managers/integers for the manager key with the smallest
      * Integer value (that is, the manager with the least assigned associates).
      * 
@@ -100,6 +111,6 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * @return
      */
     private Manager findManagerWithLeast(Map<Manager, Integer> managerMap) {
-        return null;
+        return null; // TODO
     }
 }

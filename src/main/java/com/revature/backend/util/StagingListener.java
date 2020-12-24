@@ -1,4 +1,4 @@
-package com.revature.backend.AssignmentManagerUtil;
+package com.revature.backend.util;
 
 import java.time.LocalDateTime;
 import java.util.List;

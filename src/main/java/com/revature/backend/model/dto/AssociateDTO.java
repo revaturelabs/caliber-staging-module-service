@@ -1,5 +1,6 @@
 package com.revature.backend.model.dto;
 
+import com.revature.backend.model.Associate;
 import com.revature.backend.model.AssociateStatus;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
@@ -16,45 +17,57 @@ public class AssociateDTO {
 
 	private String lastName;
 
-	private Manager manager;
+	private int managerId;
 
-	private Batch batch;
+	private int batchId;
 
-	private AssociateStatus status;
+	private String status;
 
 	public AssociateDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AssociateDTO(int id, String salesforceId, String email, String firstName, String lastName, Manager manager,
-			Batch batch, AssociateStatus status) {
+	public AssociateDTO(int id, String salesforceId, String email, String firstName, String lastName, int manager,
+			int batch, String status) {
 		super();
 		this.id = id;
 		this.salesforceId = salesforceId;
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.manager = manager;
-		this.batch = batch;
+		this.managerId = manager;
+		this.batchId = batch;
 		this.status = status;
 	}
 
-	public AssociateDTO(String salesforceId, String email, String firstName, String lastName, Manager manager,
-			Batch batch, AssociateStatus status) {
+	public AssociateDTO(String salesforceId, String email, String firstName, String lastName, int manager,
+			int batch, String status) {
 		super();
 		this.salesforceId = salesforceId;
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.manager = manager;
-		this.batch = batch;
+		this.managerId = manager;
+		this.batchId = batch;
 		this.status = status;
+	}
+	
+	public AssociateDTO(Associate associate) {
+		super();
+		this.id = associate.getId();
+		this.salesforceId = associate.getSalesforceId();
+		this.email = associate.getEmail();
+		this.firstName = associate.getFirstName();
+		this.lastName = associate.getLastName();
+		this.managerId = associate.getManager().getId();
+		this.batchId = associate.getBatch().getId();
+		this.status = associate.getStatus().toString();
 	}
 
 	@Override
 	public String toString() {
 		return "AssociateDTO [id=" + id + ", salesforceId=" + salesforceId + ", email=" + email + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", manager=" + manager + ", batch=" + batch + ", status="
+				+ firstName + ", lastName=" + lastName + ", manageIdr=" + managerId + ", batchId=" + batchId + ", status="
 				+ status + "]";
 	}
 
@@ -98,27 +111,27 @@ public class AssociateDTO {
 		this.lastName = lastName;
 	}
 
-	public Manager getManager() {
-		return manager;
+	public int getManager() {
+		return managerId;
 	}
 
-	public void setManager(Manager manager) {
-		this.manager = manager;
+	public void setManager(int manager) {
+		this.managerId = manager;
 	}
 
-	public Batch getBatch() {
-		return batch;
+	public int getBatch() {
+		return batchId;
 	}
 
-	public void setBatch(Batch batch) {
-		this.batch = batch;
+	public void setBatch(int batch) {
+		this.batchId = batch;
 	}
 
-	public AssociateStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(AssociateStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -126,12 +139,12 @@ public class AssociateDTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((batch == null) ? 0 : batch.hashCode());
+		result = prime * result + batchId;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((manager == null) ? 0 : manager.hashCode());
+		result = prime * result + managerId;
 		result = prime * result + ((salesforceId == null) ? 0 : salesforceId.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
@@ -146,10 +159,7 @@ public class AssociateDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		AssociateDTO other = (AssociateDTO) obj;
-		if (batch == null) {
-			if (other.batch != null)
-				return false;
-		} else if (!batch.equals(other.batch))
+		if (batchId != other.batchId)
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -168,19 +178,21 @@ public class AssociateDTO {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (manager == null) {
-			if (other.manager != null)
-				return false;
-		} else if (!manager.equals(other.manager))
+		if (managerId != other.managerId)
 			return false;
 		if (salesforceId == null) {
 			if (other.salesforceId != null)
 				return false;
 		} else if (!salesforceId.equals(other.salesforceId))
 			return false;
-		if (status != other.status)
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
 			return false;
 		return true;
 	}
+
+	
 
 }

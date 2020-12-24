@@ -16,7 +16,7 @@ import com.revature.backend.model.Manager;
 public interface ManagerBalancer {
 
     // ----------
-    // INTERFACE METHODS
+    // PRIMARY METHOD(S)
     // ----------
     
     /**
@@ -35,4 +35,5 @@ public interface ManagerBalancer {
      */
     public void balanceNewBatches(
         Map<Manager, Integer> managerMap, List<Associate> newAssociates);
+
 }

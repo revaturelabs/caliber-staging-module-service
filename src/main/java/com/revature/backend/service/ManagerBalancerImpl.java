@@ -9,7 +9,6 @@ package com.revature.backend.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Arrays;
-import java.util.Comparator;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
@@ -42,7 +41,7 @@ public class ManagerBalancerImpl implements ManagerBalancer {
     public void balanceNewBatches(
         Map<Manager, Integer> managerMap, List<Associate> newAssociates) {
         // Group the associates by batches
-        Associate[][] batches = sortIntoBatches(newAssociates);
+        Associate[][] batches = groupIntoBatches(newAssociates);
 
         // sort batches from largest to smallest
         sortBatchesBySize(batches);
@@ -62,7 +61,7 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * @return a 2-dimensional array of Associates, where each sub-array contains
      *         all of, and only, the associates from a single batch
      */
-    public Associate[][] sortIntoBatches(List<Associate> associates) {
+    public Associate[][] groupIntoBatches(List<Associate> associates) {
         // TODO
         return null;
     }
@@ -73,10 +72,10 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * 
      * @param batches
      */
-    private void sortBatchesBySize(Associate[][] batches) {
-        java.util.Arrays.sort(batches, new java.util.Comparator<Associate[]>() {
+    public void sortBatchesBySize(Associate[][] batches) {
+        Arrays.sort(batches, new java.util.Comparator<Associate[]>() {
             public int compare(Associate[] a, Associate[] b) {
-                return Integer.compare(a.length, b.length);
+                return Integer.compare(b.length, a.length);
             }
         });
     }
@@ -88,7 +87,7 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * @param managerMap
      * @param batches
      */
-    private void assignAssociatesEvenly(
+    public void assignAssociatesEvenly(
         Map<Manager, Integer> managerMap, Associate[][] batches){
         for (Associate[] batch : batches){
             Manager managerWithLeast = findManagerWithLeast(managerMap);
@@ -110,7 +109,7 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * @param managerMap
      * @return
      */
-    private Manager findManagerWithLeast(Map<Manager, Integer> managerMap) {
+    public Manager findManagerWithLeast(Map<Manager, Integer> managerMap) {
         return null; // TODO
     }
 }

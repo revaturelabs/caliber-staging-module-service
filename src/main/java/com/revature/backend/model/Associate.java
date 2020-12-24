@@ -35,9 +35,7 @@ public class Associate {
 	@Column(name = "status")
 	private AssociateStatus status;
 
-	public Associate() {
-		// TODO Auto-generated constructor stub
-	}
+	public Associate() {}
 
 	public Associate(int id, String salesforceId, String email, String firstName, String lastName, Manager manager,
 			Batch batch, AssociateStatus status) {

@@ -1,6 +1,9 @@
 package com.revature.backend.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 @Entity
@@ -15,6 +18,7 @@ public class AnalysisItem {
 	@Column(name = "content")
 	private String content;
 
+	@JsonIgnore	// Meant to help when trying to create a SWOT.
 	@ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
 	@JoinColumn(name = "swot_analysis_id")
 	private Swot swot;
@@ -22,9 +26,7 @@ public class AnalysisItem {
 	@Column(name = "type")
 	private AnalysisType type;
 
-	public AnalysisItem() {
-		// TODO Auto-generated constructor stub
-	}
+	public AnalysisItem() {}
 
 	public AnalysisItem(String content, Swot swot, AnalysisType type) {
 		super();

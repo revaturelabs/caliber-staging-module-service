@@ -21,7 +21,15 @@ public class SwotService {
 	
 	//create -swot
 	public boolean createNewSwot(Swot swot) {
-		return swotRepository.save(swot) != null;
+		Swot parent = new Swot(swot.getAssociate(), swot.getManager(), swot.getCreatedOn(), swot.getLastModified());
+		parent = swotRepository.save(parent);
+		for (AnalysisItem analysisItem : swot.getAnalysisItems()) {
+			analysisItem.setSwot(parent);
+			analysisItemRepository.save(analysisItem);
+		}
+		
+//		return swotRepository.save(swot) != null;
+		return parent != null; // improve later
 	}
 
 	//get all by associate id -swot
@@ -43,6 +51,10 @@ public class SwotService {
 	public boolean deleteItem(AnalysisItem analysisItem) {
 		analysisItemRepository.delete(analysisItem);
 		return true; //TODO: this will always return true, fix the condition.
+	}
+	
+	public List<Swot> retrieveAllSwot() {
+		return swotRepository.findAll();
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.revature.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,13 +34,21 @@ public class SwotController {
 	@PostMapping(path="/create", consumes= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ClientMessage> createSwot(@RequestBody Swot swot) {
 		ClientMessage body = swotService.createNewSwot(swot) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
-		return ResponseEntity.ok(body); //TODO this should be 201: CREATED
+//		return ResponseEntity.ok(body); //TODO this should be 201: CREATED
+		return ResponseEntity.status(HttpStatus.CREATED).body(body); //needs testing
 	}
 	
 	//get all -swot
 	@GetMapping(path="/view", consumes= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<Swot>> viewSwot(@RequestParam("associateId") int associateId) {
 		List<Swot> swotList = swotService.retrieveAllSwotByAssociateID(associateId);
+		return ResponseEntity.ok(swotList);
+	}
+	
+	//get all -swot
+	@GetMapping(path="/view/all", produces= {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<Swot>> viewAllSwot() {
+		List<Swot> swotList = swotService.retrieveAllSwot();
 		return ResponseEntity.ok(swotList);
 	}
 	
@@ -55,10 +64,9 @@ public class SwotController {
 	public ResponseEntity<AnalysisItem> updateItem(@RequestBody AnalysisItem analysisItem) {
 		AnalysisItem updatedItem = swotService.updateItem(analysisItem);
 		if (updatedItem == null) {
-			return ResponseEntity.badRequest().body(updatedItem);
-		}
-		else {
-			return ResponseEntity.ok(updatedItem); //TODO: this causes problems, needs to be fixed.
+			return ResponseEntity.badRequest().body(null);	// Update likely failed due to misinput of information.
+		}else {
+			return ResponseEntity.ok(updatedItem);
 		}
 	}
 	

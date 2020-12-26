@@ -1,10 +1,13 @@
 package com.revature.backend.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 @Entity
-@Table(name = "analysis_ìtems")
+@Table(name = "analysis_items")
 public class AnalysisItem {
 
 	@Id
@@ -15,16 +18,15 @@ public class AnalysisItem {
 	@Column(name = "content")
 	private String content;
 
-	@ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
+	@JsonIgnore	// Meant to help when trying to create a SWOT.
+	@ManyToOne(fetch = FetchType.LAZY)	// removed CascadeType.ALL, this will cause problems with deletion.
 	@JoinColumn(name = "swot_analysis_id")
 	private Swot swot;
 
 	@Column(name = "type")
 	private AnalysisType type;
 
-	public AnalysisItem() {
-		// TODO Auto-generated constructor stub
-	}
+	public AnalysisItem() {}
 
 	public AnalysisItem(String content, Swot swot, AnalysisType type) {
 		super();

@@ -2,7 +2,8 @@ package com.revature.backend.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "swot_analysis")
@@ -25,11 +26,12 @@ public class Swot {
   private Timestamp createdOn;
 
   @Column(name = "last_modified")
-  private Timestamp lastModified;
+  private Timestamp lastModified;	// TODO: this will need to be updated each time the SWOT is updated.
+  
+  @OneToMany(mappedBy = "swot", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<AnalysisItem> analysisItems = new ArrayList<>();
 
-  public Swot() {
-    // TODO Auto-generated constructor stub
-  }
+  public Swot() {}
 
   public Swot(
       int id,
@@ -52,6 +54,16 @@ public class Swot {
     this.manager = manager;
     this.createdOn = createdOn;
     this.lastModified = lastModified;
+  }
+  
+  public Swot(Associate associate, Manager manager, Timestamp createdOn, Timestamp lastModified,
+		List<AnalysisItem> analysisItems) {
+	super();
+	this.associate = associate;
+	this.manager = manager;
+	this.createdOn = createdOn;
+	this.lastModified = lastModified;
+	this.analysisItems = analysisItems;
   }
 
   public int getId() {
@@ -94,34 +106,70 @@ public class Swot {
     this.lastModified = last_modified;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Swot)) return false;
-    Swot swot = (Swot) o;
-    return getId() == swot.getId()
-        && Objects.equals(getAssociate(), swot.getAssociate())
-        && Objects.equals(getManager(), swot.getManager())
-        && Objects.equals(getCreatedOn(), swot.getCreatedOn())
-        && Objects.equals(getLastModified(), swot.getLastModified());
+  public List<AnalysisItem> getAnalysisItems() {
+	return analysisItems;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(getId(), getAssociate(), getManager(), getCreatedOn(), getLastModified());
+  public void setAnalysisItems(List<AnalysisItem> analysisItems) {
+	this.analysisItems = analysisItems;
   }
 
-  public String toString() {
-    return "SWOT_Analysis(id="
-        + this.getId()
-        + ", associate="
-        + this.getAssociate()
-        + ", created_by="
-        + this.getManager()
-        + ", created_on="
-        + this.getCreatedOn()
-        + ", last_modified="
-        + this.getLastModified()
-        + ")";
-  }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((analysisItems == null) ? 0 : analysisItems.hashCode());
+		result = prime * result + ((associate == null) ? 0 : associate.hashCode());
+		result = prime * result + ((createdOn == null) ? 0 : createdOn.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((lastModified == null) ? 0 : lastModified.hashCode());
+		result = prime * result + ((manager == null) ? 0 : manager.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Swot other = (Swot) obj;
+		if (analysisItems == null) {
+			if (other.analysisItems != null)
+				return false;
+		} else if (!analysisItems.equals(other.analysisItems))
+			return false;
+		if (associate == null) {
+			if (other.associate != null)
+				return false;
+		} else if (!associate.equals(other.associate))
+			return false;
+		if (createdOn == null) {
+			if (other.createdOn != null)
+				return false;
+		} else if (!createdOn.equals(other.createdOn))
+			return false;
+		if (id != other.id)
+			return false;
+		if (lastModified == null) {
+			if (other.lastModified != null)
+				return false;
+		} else if (!lastModified.equals(other.lastModified))
+			return false;
+		if (manager == null) {
+			if (other.manager != null)
+				return false;
+		} else if (!manager.equals(other.manager))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Swot [id=" + id + ", associate=" + associate + ", manager=" + manager + ", createdOn=" + createdOn
+				+ ", lastModified=" + lastModified + ", analysisItems=" + analysisItems + "]";
+	}
+  
 }

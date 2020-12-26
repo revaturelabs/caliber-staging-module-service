@@ -1,4 +1,4 @@
-package com.revature.testing;
+package com.revature.backend.testing.service;
 
 import static org.junit.Assert.assertTrue;
 

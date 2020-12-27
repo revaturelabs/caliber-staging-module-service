@@ -1,14 +1,20 @@
 package com.revature.backend.util;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
-import com.revature.backend.service.AssociateService;
-import com.revature.backend.service.BatchService;
+import com.revature.backend.model.api.ApiAssociateAssignment;
+import com.revature.backend.model.api.ApiAssociateTemplate;
+import com.revature.backend.model.api.ApiBatchTemplate;
+
 
 /**
  * This class will handle retrieving associates and batches from the Caliper
@@ -23,28 +29,42 @@ import com.revature.backend.service.BatchService;
  * 
  * @author Azhya Knox
  **/
+
 public class BatchRetrieverImpl implements BatchRetriever {
 
 	public static Logger logger = Logger.getLogger(BatchRetrieverImpl.class);
+	public static StagingListener stagingListener = new StagingListenerImpl();
 
-	@Autowired
-	private BatchService batchService;
-
-	@Autowired
-	private AssociateService associateService;
+	// If using Jackson's ObjectMapper, have a static reference here
+	public static ObjectMapper om = new ObjectMapper();
 
 	public BatchRetrieverImpl() {
 		logger.info("In BatchRetriever no-args constructor");
 	}
 
 	@Override
-	public List<Associate> retrieveNewlyStagingAssociates() {
+	public List<ApiAssociateTemplate> retrieveNewlyStagingAssociates() {
 		// start logging activity
 		logger.trace("In BatchRetriever: gathering newly staging associates...");
 
-		// call the appropriate service to get the associate list information
-		List<Associate> associateList = associateService.getAllAssociates();
+		List<ApiAssociateTemplate> associateList = new ArrayList<>();
 
+		List<ApiBatchTemplate> batchList = new ArrayList<>();
+		stagingListener.checkForNewBatches();
+		try{
+			batchList = stagingListener.getLatestBatches();
+			//from the batchList, extract out the associates into their own separate list
+			for (ApiBatchTemplate apiBatchTemplate : batchList) {
+				System.out.println(apiBatchTemplate);
+				ApiAssociateAssignment[] arr = apiBatchTemplate.getAssociateAssignments();
+				for (ApiAssociateAssignment assignment : arr) {
+					ApiAssociateTemplate associate = assignment.getAssociate();
+					associateList.add(associate);
+				}
+			}
+		} catch (Exception e) {
+			logger.warn("Error getting info from Staging Listener", e);
+		}
 		// ending logging activity
 		logger.trace("Gathering associate list is complete. Leaving BatchRetriever...");
 
@@ -53,18 +73,23 @@ public class BatchRetrieverImpl implements BatchRetriever {
 	}
 
 	@Override
-	public List<Batch> retrieveNewlyStagingBatches() {
+	public List<ApiBatchTemplate> retrieveNewlyStagingBatches() {
 		// start logging activity
 		logger.trace("In BatchRetriever: gathering newly staging batches...");
-
-		// call the appropriate service to get the associate list information
-		List<Batch> batchList = batchService.getAllBatches();
-
+		List<ApiBatchTemplate> batchList = new ArrayList<>();
+		stagingListener.checkForNewBatches();
+		try{
+			batchList = stagingListener.getLatestBatches();
+			for (ApiBatchTemplate apiBatchTemplate : batchList) {
+				System.out.println(apiBatchTemplate);
+			}
+		} catch (Exception e) {
+			logger.warn("Error getting info from Staging Listener", e);
+		}
 		// ending logging activity
 		logger.trace("Gathering batch list is complete. Leaving BatchRetriever...");
 
 		// send found information back to the controller
 		return batchList;
 	}
-
 }

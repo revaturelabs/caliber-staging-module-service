@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
@@ -24,7 +23,6 @@ import com.revature.backend.model.Manager;
 import com.revature.backend.service.ManagerBalancer;
 import com.revature.backend.service.ManagerBalancerImpl;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

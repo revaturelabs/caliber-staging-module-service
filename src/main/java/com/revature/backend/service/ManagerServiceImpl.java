@@ -2,12 +2,10 @@ package com.revature.backend.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.backend.model.Associate;
 import com.revature.backend.model.Manager;
 import com.revature.backend.repository.ManagerRepository;
 

@@ -12,7 +12,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;

@@ -128,10 +128,25 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * Searches the given map of managers/integers for the manager key with the smallest
      * Integer value (that is, the manager with the least assigned associates).
      * 
+     * If there is a tie, the first tied Manager in the map's key set will be returned.
+     * Given an empty map, returns null
+     * 
      * @param managerMap
      * @return
      */
     public Manager findManagerWithLeast(Map<Manager, Integer> managerMap) {
-        return null; // TODO
+        Manager currentManagerWithLeast = null;
+        int currentLeastAssociates = -1; // flagged to always accept first manager's count
+
+        for (Manager manager : managerMap.keySet()){
+            int numAssociates = managerMap.get(manager);
+            if (numAssociates < currentLeastAssociates || currentLeastAssociates == -1)
+            {
+                currentLeastAssociates = numAssociates;
+                currentManagerWithLeast = manager;
+            } 
+        }
+
+        return currentManagerWithLeast; 
     }
 }

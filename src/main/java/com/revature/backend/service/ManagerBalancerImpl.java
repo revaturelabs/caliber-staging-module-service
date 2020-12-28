@@ -106,8 +106,8 @@ public class ManagerBalancerImpl implements ManagerBalancer {
      * Assigns batches in order, always assigning to the manager with the currently
      * smallest amount of associates.
      * 
-     * @param managerMap
-     * @param batches
+     * @param managerMap : associate counts WILL be updated
+     * @param batches : associate objects WILL be updated
      */
     public void assignAssociatesEvenly(
         Map<Manager, Integer> managerMap, Associate[][] batches){

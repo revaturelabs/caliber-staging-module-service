@@ -7,13 +7,16 @@
 package com.revature.testing;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
@@ -113,6 +116,12 @@ public class TestManagerBalancerImpl {
     @Test
     public void testAssignAssociatesEvenly(){
         testAssignAssociatesEvenlyHelper(new int[] {20, 30}, new int[] {5, 7, 1});
+        testAssignAssociatesEvenlyHelper(new int[] {20, 30, 15}, new int[] {5, 7, 1, 20});
+        testAssignAssociatesEvenlyHelper(new int[] {20}, new int[] {5, 7, 1, 20});
+        testAssignAssociatesEvenlyHelper(
+            new int[] {20, 20, 19}, new int[] {17, 19, 25, 8});
+        testAssignAssociatesEvenlyHelper(
+            new int[] {14, 8, 11, 5, 0}, new int[] {17, 19, 25, 14, 1, 3, 31, 27});
     }
 
     // ----------
@@ -277,15 +286,71 @@ public class TestManagerBalancerImpl {
         Manager result = managerBalancer.findManagerWithLeast(managerMap);
         int resultAssociates = managerMap.get(result);
 
-        System.out.println(
-            "DEBUG: expected " + leastAssociates + " and found " + resultAssociates);
+        //System.out.println(
+        //    "DEBUG: expected " + leastAssociates + " and found " + resultAssociates);
         assertEquals(leastAssociates, resultAssociates);
     }
     
     // ----------
-    // testFindManagerWithLeast() HELPERS
+    // assignAssociatesEvenly() HELPERS
     // ----------
 
+    /**
+     * Runs a single test case on assignAssociatesEvenly, creating manager and incoming
+     * batch data based on the parameters.
+     * 
+     * To evaluate the even-ness of the assignment, the manager with most and manager
+     * with least are compared; the difference between the two is the "balance score".
+     * The expected balance score will be compared to the actual. Additionally, each
+     * associate will be checked to make sure that it has been assigned to one of the
+     * managers in the managerMap.
+     * 
+     * It is assumed by this test that the findManagerWithLeast method works.
+     * It is assumed that the actual associate objects are assigned according to the
+     * changes made to the map (that is, the updated managerMap will be trusted to be
+     * accurate)
+     * 
+     * @param managerSizes
+     * @param batchSizes
+     */
     private void testAssignAssociatesEvenlyHelper(int[] managerSizes, int[] batchSizes) {
-	}
+        // build the managers and associates
+        Map<Manager, Integer> managerMap = new HashMap<>();
+        buildManagerMap(managerSizes, managerMap);
+
+        Arrays.sort(batchSizes);
+        Collections.reverse(Arrays.asList(batchSizes)); // should affect the actual array?
+        Associate[][] batches = buildTestBatches(batchSizes);
+        // calculate the expected balance score
+        for (int numAssociates : batchSizes){
+            Arrays.sort(managerSizes); // so the smallest one is first
+            managerSizes[0] += numAssociates;
+        }
+        Arrays.sort(managerSizes); // smallest first, biggest last
+        int expectedBalanceScore 
+            = managerSizes[managerSizes.length - 1] - managerSizes[0];
+        // run the actual implementation and verify it
+        managerBalancer.assignAssociatesEvenly(managerMap, batches);
+        // is each associate assigned to a manager?
+        for (Associate[] currentBatch : batches){
+            for (Associate associate : currentBatch){
+                Manager manager = associate.getManager();
+                assertNotNull(manager);
+                assertTrue(managerMap.keySet().contains(manager));
+            } 
+        }
+        // is it correctly balanced?
+        int lowestNumAssociates = -1;
+        int highestNumAssociates = 0;
+        for (int numAssociates : managerMap.values()){
+            if (numAssociates < lowestNumAssociates || lowestNumAssociates == -1)
+                lowestNumAssociates = numAssociates;
+            if (numAssociates > highestNumAssociates) 
+                highestNumAssociates = numAssociates;
+        }
+        int actualBalanceScore = highestNumAssociates - lowestNumAssociates;
+        assertEquals(expectedBalanceScore, actualBalanceScore);
+        //System.out.println(
+        //    "DEBUG: check: " + expectedBalanceScore + " vs " + actualBalanceScore);
+    }
 }

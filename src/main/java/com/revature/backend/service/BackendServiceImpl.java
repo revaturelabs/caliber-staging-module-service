@@ -57,34 +57,34 @@ public class BackendServiceImpl implements BackendService {
 		
 		// no data yet actual implementation below
 		
-//		try {
-//			List<Associate> associates = backendRepo.findAssociatesByManagerId(id);
-//			for (Associate a: associates) {
-//				ApiBatchTemplate batch =batchRetriever.getBatch(a.getBatch().getId());
-//				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
-//				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
-//				if(elapsedDays<= 7) {
-//					ret.add(a);
-//				}
-//			}
-//			
-//		}catch (Exception e) {
-//			return null;
-//		}
+		try {
+			List<Associate> associates = backendRepo.findAssociatesByManagerId(id);
+			for (Associate a: associates) {
+				ApiBatchTemplate batch =batchRetriever.getBatch(a.getBatch().getId());
+				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
+				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
+				if(elapsedDays<= 7) {
+					ret.add(a);
+				}
+			}
+			
+		}catch (Exception e) {
+			return null;
+		}
 		
 		// Test to show it works
 		
-		int batchId = 394;
-		ApiBatchTemplate batch =batchRetriever.getBatch(batchId);
-		
-		
-		LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
-		System.out.println("Batch End "+ bd);
-		System.out.println("Today "+ ld);
-
-		 
-		long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
-		System.out.println("days elapsed "+ elapsedDays); // 58 (correct)
+//		int batchId = 394;
+//		ApiBatchTemplate batch =batchRetriever.getBatch(batchId);
+//		
+//		
+//		LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
+//		System.out.println("Batch End "+ bd);
+//		System.out.println("Today "+ ld);
+//
+//		 
+//		long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
+//		System.out.println("days elapsed "+ elapsedDays); 
 		return ret;
 	}
 

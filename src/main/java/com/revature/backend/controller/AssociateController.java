@@ -46,7 +46,7 @@ public class AssociateController {
 	 * @return
 	 */
 	
-	@GetMapping("/newAssociates")
+	@GetMapping("/associates/new")
 	public ResponseEntity<List<AssociateDTO>> getNewAssociates(@RequestParam int manager){
 		ResponseEntity<List<AssociateDTO>> ret = null;
 		List<AssociateDTO> body = null;

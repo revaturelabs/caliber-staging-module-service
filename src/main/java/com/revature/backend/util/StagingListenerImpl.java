@@ -20,23 +20,41 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.api.ApiBatchTemplate;
+import com.revature.backend.service.ManagerBalancer;
+
+/**
+ * This class checks the API weekly for new batches and then saves them to a list for further processing.
+ * This list will be grabbed by the {@link BatchRetriever} before being sent to the {@link ManagerBalancer}
+ * @author Ben Johnston
+ */
 
 @Component(value = "StagingListener")
 public class StagingListenerImpl implements StagingListener {
+
 	private LocalDateTime nextDateToWaitFor;
+	// Used to pass new batches to the next part of the project to be balanced
+	// between all managers and stored in the DB
 	private List<ApiBatchTemplate> latestBatches = new ArrayList<>();
 	public static Logger log = Logger.getLogger(StagingListenerImpl.class);
-	//Day that the update will occur each week. 
+	// Day that the update will occur each week.
 	private DayOfWeek weeklyUpdateDay = DayOfWeek.SUNDAY;
 	private boolean shouldUpdate;
 
+	public StagingListenerImpl() {
+		// TODO Auto-generated constructor stub
+		super();
+		// Start running the listener when the object is instantiated.
+		startListening();
+	}
+
+	/**
+	 * Method MUST run on server startup & repeat after each batch check Configures
+	 * timer to check for new batches on a specified day of the week every week. If
+	 * this method does not run, the entire sorting system will fail to operate.
+	 */
 	@Override
 	public void startListening() {
-		/*
-		 * Method MUST run on server startup & repeat after each batch check Configures
-		 * timer to check for new batches on a specified day of the week every week. If
-		 * this method does not run, the entire sorting system will fail to operate.
-		 */
+
 		log.info("Restarting stagingListener timer.");
 		nextDateToWaitFor = LocalDateTime.now().with(TemporalAdjusters.next(weeklyUpdateDay));
 		Date d = Date.from(nextDateToWaitFor.atZone((ZoneId.systemDefault())).toInstant());
@@ -46,18 +64,20 @@ public class StagingListenerImpl implements StagingListener {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
+
 				checkForNewBatches();
-				// t.cancel();
 			}
 		}, d);
 
 	}
 
+	/**
+	 * Pulls ALL batches from the last year then filters to see only batches with an
+	 * ending date between two specified parameters. If a new batch is found,
+	 * {@link shouldUpdate} will be set to true;
+	 */
 	@Override
 	public void checkForNewBatches() {
-		// Pulls ALL batches from the last year then filters to see only batches with an
-		// ending date between two specified parameters
 		log.info("Checking for new batches.....");
 		latestBatches = new ArrayList<>();
 		int year = LocalDateTime.now().getYear();
@@ -86,12 +106,14 @@ public class StagingListenerImpl implements StagingListener {
 				LocalDateTime lastDayChecked = LocalDateTime.now().with(TemporalAdjusters.previous(weeklyUpdateDay));
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				for (ApiBatchTemplate batch : myBatches) {
-					//Find the end date of the batch.
+					// Find the end date of the batch.
 					LocalDate ld = LocalDate.parse(batch.getEndDate(), formatter);
 					LocalDateTime batchDate = LocalDateTime.of(ld, LocalDateTime.now().toLocalTime());
-					
-					//If the end date is between the last date the method was run and the current time, it's a new batch.
-					if (batchDate.isAfter(lastDayChecked) && batchDate.isBefore(LocalDateTime.now()) || batchDate.isEqual(LocalDateTime.now())) {
+
+					// If the end date is between the last date the method was run and the current
+					// time, it's a new batch.
+					if (batchDate.isAfter(lastDayChecked) && batchDate.isBefore(LocalDateTime.now())
+							|| batchDate.isEqual(LocalDateTime.now())) {
 						// Batch should be retrieved/id stored for retrieval from another class
 						latestBatches.add(batch);
 						log.info("New batch found, adding to latestBatches list....");
@@ -116,9 +138,13 @@ public class StagingListenerImpl implements StagingListener {
 		}
 	}
 
+	/**
+	 * Should be fed into any if statement that needs to execute when there are new
+	 * batches
+	 * 
+	 */
 	@Override
 	public boolean triggerUpdate() {
-		// TODO Auto-generated method stub
 		return shouldUpdate;
 	}
 

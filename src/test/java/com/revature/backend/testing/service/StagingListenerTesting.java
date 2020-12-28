@@ -21,6 +21,7 @@ public class StagingListenerTesting {
 	@Autowired
 	StagingListenerImpl stagingListener;
 	
+	
 	@Test
 	void testGetNewBatches()
 	{
@@ -29,8 +30,16 @@ public class StagingListenerTesting {
 		for (ApiBatchTemplate apiBatchTemplate : batches) {
 			System.out.println(apiBatchTemplate.toString());
 		}
-		assertTrue(batches.size() >0);
+		if(stagingListener.triggerUpdate())
+		{
+			assertTrue(batches.size() >0);
+		}
+		else {
+			assertTrue(batches.size() == 0);
+		}
 	}
+	
+	
 	
 	
 }

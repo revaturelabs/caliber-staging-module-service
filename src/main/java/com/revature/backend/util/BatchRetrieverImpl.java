@@ -1,16 +1,11 @@
 package com.revature.backend.util;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import org.jboss.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.backend.model.Associate;
-import com.revature.backend.model.Batch;
 import com.revature.backend.model.api.ApiAssociateAssignment;
 import com.revature.backend.model.api.ApiAssociateTemplate;
 import com.revature.backend.model.api.ApiBatchTemplate;

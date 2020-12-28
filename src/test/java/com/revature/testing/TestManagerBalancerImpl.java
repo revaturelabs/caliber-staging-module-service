@@ -26,7 +26,6 @@ import com.revature.backend.service.ManagerBalancerImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -123,9 +122,23 @@ public class TestManagerBalancerImpl {
     }
 
     // ----------
-    // HELPER METHODS
+    // balanceNewBatches() TESTS
     // ----------
 
+    /**
+     * Tests everything all at once, just to make sure it all works
+     */
+    @Test
+    public void testBalanceNewBatches(){
+        //testBalanceNewBatchesHelper(new int[] {20, 30}, new int[] {5, 7, 1});
+        testBalanceNewBatchesHelper(new int[] {20, 30, 15}, new int[] {5, 7, 1, 20});
+        //testBalanceNewBatchesHelper(new int[] {10, 11, 12}, new int[] {15, 17, 11});
+        //testBalanceNewBatchesHelper(new int[] {20, 40}, new int[] {25, 17, 31});
+    }
+    
+    // ----------
+	// HELPER METHODS
+    // ----------
 
 	/**
      * uses the given array of manager sizes to populate the given manager map.
@@ -167,6 +180,35 @@ public class TestManagerBalancerImpl {
         return testBatches;
     }
 
+    /**
+     * Determines the best balance score for managers/associates that will be generated
+     * according to the given parameters in various tests.
+     */
+    private int calculateExpectedBalanceScore(int[] managerSizes, int[] batchSizes){
+        for (int numAssociates : batchSizes){
+            Arrays.sort(managerSizes); // so the smallest one is first
+            managerSizes[0] += numAssociates;
+        }
+        Arrays.sort(managerSizes); // smallest first, biggest last
+        return managerSizes[managerSizes.length - 1] - managerSizes[0];
+    }
+
+    /**
+     * Determines the difference between the manager with the most associates and the
+     * manager with the least associates in the given map.
+     */
+    private int calculateActualBalanceScore(Map<Manager, Integer> managerMap){
+        int lowestNumAssociates = -1;
+        int highestNumAssociates = 0;
+        for (int numAssociates : managerMap.values()){
+            if (numAssociates < lowestNumAssociates || lowestNumAssociates == -1)
+                lowestNumAssociates = numAssociates;
+            if (numAssociates > highestNumAssociates) 
+                highestNumAssociates = numAssociates;
+        }
+        return highestNumAssociates - lowestNumAssociates;
+    }
+
     // ----------
     // groupIntoBatches() HELPERS
     // ----------
@@ -202,6 +244,17 @@ public class TestManagerBalancerImpl {
             }// end inner for loop
         } // end outer for loop
 
+        // checks for debugging
+        /*
+        int totalFromSizes = 0;
+        for (int size : sizes){
+            totalFromSizes += size;
+        }
+        System.out.println(
+            "DEBUG: num associates from list = " + associateList.size() 
+            + ", num associates from int[] sizes = " + totalFromSizes);
+        */
+
         Collections.shuffle(associateList); // randomizes order
         return associateList;
     }
@@ -224,7 +277,7 @@ public class TestManagerBalancerImpl {
             // now make sure every associate in this group is in batch b
             for (int i = 1; i < group.length; i++){
                 Associate a = group[i];
-                assertEquals(a.getBatch().getName(), b.getName());
+                assertEquals(a.getBatch(), b);
             }
         }
 		return true; // no problems found
@@ -320,13 +373,8 @@ public class TestManagerBalancerImpl {
         Collections.reverse(Arrays.asList(batchSizes)); // should affect the actual array?
         Associate[][] batches = buildTestBatches(batchSizes);
         // calculate the expected balance score
-        for (int numAssociates : batchSizes){
-            Arrays.sort(managerSizes); // so the smallest one is first
-            managerSizes[0] += numAssociates;
-        }
-        Arrays.sort(managerSizes); // smallest first, biggest last
         int expectedBalanceScore 
-            = managerSizes[managerSizes.length - 1] - managerSizes[0];
+            = calculateExpectedBalanceScore(managerSizes, batchSizes);
         // run the actual implementation and verify it
         managerBalancer.assignAssociatesEvenly(managerMap, batches);
         // is each associate assigned to a manager?
@@ -338,17 +386,31 @@ public class TestManagerBalancerImpl {
             } 
         }
         // is it correctly balanced?
-        int lowestNumAssociates = -1;
-        int highestNumAssociates = 0;
-        for (int numAssociates : managerMap.values()){
-            if (numAssociates < lowestNumAssociates || lowestNumAssociates == -1)
-                lowestNumAssociates = numAssociates;
-            if (numAssociates > highestNumAssociates) 
-                highestNumAssociates = numAssociates;
-        }
-        int actualBalanceScore = highestNumAssociates - lowestNumAssociates;
+        int actualBalanceScore = calculateActualBalanceScore(managerMap);
         assertEquals(expectedBalanceScore, actualBalanceScore);
         //System.out.println(
         //    "DEBUG: check: " + expectedBalanceScore + " vs " + actualBalanceScore);
     }
+
+    // ----------
+    // balanceNewBatchesHelper() HELPERS
+    // ----------
+
+    /**
+     * Runs a single test case of the entire process, using manager and associate data
+     * generated from the given parameters.
+     */
+    private void testBalanceNewBatchesHelper(int[] managerSizes, int[] batchSizes) {
+        Map<Manager, Integer> managerMap = new HashMap<>();
+        buildManagerMap(managerSizes, managerMap);
+        List<Associate> associates = generateAssociateList(batchSizes);
+        // what's the expected balance score?
+        int expectedBalanceScore 
+            = calculateExpectedBalanceScore(managerSizes, batchSizes);
+        // call the implementation
+        managerBalancer.balanceNewBatches(managerMap, associates);
+        // what's the actual balance score?
+        int actualBalanceScore = calculateActualBalanceScore(managerMap);
+        assertEquals(actualBalanceScore, expectedBalanceScore);
+	}
 }

@@ -11,7 +11,6 @@ import com.revature.backend.model.Associate;
  * 
  * @author Mareo Yapp
  * */
-@SpringBootConfiguration()
 public interface BackendService {
 
 	/**

@@ -70,7 +70,9 @@ class BackendTesting {
 	
 	/*
 	 * Tests logic in BackendServiceImpl.findNewAssociatesByManagerId()
-	 * encompassing testing of GetBatchById logic
+	 * encompassing testing of GetBatchById logic.
+	 * Ensures that only associates whose batch ended within the last 7
+	 * days gets returned.
 	 * 
 	 * At this time, Batch ID 547 must be changed every week in order to
 	 * get a successful test. Change 547 to batch ID that has ended within
@@ -97,6 +99,9 @@ class BackendTesting {
 	
 	
 	/*
+	 * Tests that multiple associates will be returned if from the
+	 * same batch
+	 * 
 	 * Change 547 to Batch ID that has ended within the last week
 	 */
 	@Test
@@ -118,6 +123,11 @@ class BackendTesting {
 		
 	}
 	
+	/*
+	 * Tests that the list returned of associates will be empty
+	 * if they are not apart of batches that ended within the 
+	 * last 7 days.
+	 */
 	@Test
 	public void findNewAssociatesFail() {
 		MockitoAnnotations.initMocks(this);

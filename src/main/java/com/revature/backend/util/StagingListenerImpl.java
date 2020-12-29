@@ -192,6 +192,9 @@ public class StagingListenerImpl implements StagingListener {
 		if(insertValue)
 		{
 			latestBatches.add(new ApiBatchTemplate());
+			latestBatches.add(new ApiBatchTemplate());
+			latestBatches.add(new ApiBatchTemplate());
+
 			shouldUpdate=true;
 
 		}

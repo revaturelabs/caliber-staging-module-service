@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.revature.backend.model.Batch;
 
-public class BatchService {
 
-	public List<Batch> getAllBatches() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+public interface BatchService {
+
+	public List<Batch> getAllBatches();
+	public void saveBatches(List<Batch> bList);
 
 }

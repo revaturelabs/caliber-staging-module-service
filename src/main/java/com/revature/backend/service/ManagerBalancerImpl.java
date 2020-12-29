@@ -17,9 +17,9 @@ import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service("managerBalancer")
 public class ManagerBalancerImpl implements ManagerBalancer {
 
     // ----------
@@ -45,9 +45,9 @@ public class ManagerBalancerImpl implements ManagerBalancer {
         Map<Manager, Integer> managerMap, List<Associate> newAssociates) {
 
         Associate[][] batches = groupIntoBatches(newAssociates);
-        System.out.println("DEBUG: batches before sorting: " + batches.toString());
+        //System.out.println("DEBUG: batches before sorting: " + batchesToString(batches));
         sortBatchesBySize(batches);
-        System.out.println("DEBUG: batches after sorting: " + batches.toString());
+        //System.out.println("DEBUG: batches after sorting: " + batchesToString(batches));
         assignAssociatesEvenly(managerMap, batches);
     }
 
@@ -150,5 +150,23 @@ public class ManagerBalancerImpl implements ManagerBalancer {
         }
 
         return currentManagerWithLeast; 
+    }
+
+    /**
+     * A helper method for debugging that generates a string based on a 2d array of
+     * batches - the string is in the format <a, b,...z> where the values are the lengths
+     * of each sub array, in the order they are in the array.
+     * 
+     * @param batches
+     * @return
+     */
+    @SuppressWarnings(value="unused")
+    private String batchesToString(Associate[][] batches){
+        if (batches.length == 0) return "<>";
+        String result = "<" + batches[0].length;
+        for (int i = 1; i < batches.length; i++){
+            result = result + ", " + batches[i].length;
+        }
+        return result + ">";
     }
 }

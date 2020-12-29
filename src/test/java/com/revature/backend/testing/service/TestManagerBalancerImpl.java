@@ -29,7 +29,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest(classes = { ManagerBalancer.class, ManagerBalancerImpl.class })
+//@SpringBootTest(classes = { ManagerBalancer.class, ManagerBalancerImpl.class })
+@SpringBootTest()
 @RunWith(SpringRunner.class)
 public class TestManagerBalancerImpl {
 
@@ -130,10 +131,12 @@ public class TestManagerBalancerImpl {
      */
     @Test
     public void testBalanceNewBatches(){
-        //testBalanceNewBatchesHelper(new int[] {20, 30}, new int[] {5, 7, 1});
+        testBalanceNewBatchesHelper(new int[] {20, 30}, new int[] {5, 7, 1});
         testBalanceNewBatchesHelper(new int[] {20, 30, 15}, new int[] {5, 7, 1, 20});
-        //testBalanceNewBatchesHelper(new int[] {10, 11, 12}, new int[] {15, 17, 11});
-        //testBalanceNewBatchesHelper(new int[] {20, 40}, new int[] {25, 17, 31});
+        testBalanceNewBatchesHelper(new int[] {10, 11, 12}, new int[] {15, 17, 11});
+        testBalanceNewBatchesHelper(new int[] {20, 40}, new int[] {25, 17, 31});
+        testBalanceNewBatchesHelper(
+            new int[] {20, 40, 10, 15}, new int[] {25, 17, 31, 8, 12, 19, 2, 16, 5, 20});
     }
     
     // ----------
@@ -187,7 +190,7 @@ public class TestManagerBalancerImpl {
     private int calculateExpectedBalanceScore(int[] managerSizes, int[] batchSizes){
         for (int numAssociates : batchSizes){
             Arrays.sort(managerSizes); // so the smallest one is first
-            managerSizes[0] += numAssociates;
+            managerSizes[0] = managerSizes[0] + numAssociates;
         }
         Arrays.sort(managerSizes); // smallest first, biggest last
         return managerSizes[managerSizes.length - 1] - managerSizes[0];
@@ -207,6 +210,25 @@ public class TestManagerBalancerImpl {
                 highestNumAssociates = numAssociates;
         }
         return highestNumAssociates - lowestNumAssociates;
+    }
+
+    /**
+     * Returns a new int[], with the same data as the given array, sorted into descending
+     * order.
+     * Will move things around in the given array.
+     * This is a sloppy way of doing things for tests.
+     */
+    private int[] descendingSortIntArray(int[] given){
+        Arrays.sort(given);
+        int arrayLength = given.length;
+        int[] result = new int[arrayLength];
+        int rIndex = arrayLength - 1;
+        for (int i = 0; i < arrayLength; i++){
+            result[rIndex] = given[i];
+            rIndex -= 1;
+        }
+
+        return result;
     }
 
     // ----------
@@ -369,8 +391,7 @@ public class TestManagerBalancerImpl {
         Map<Manager, Integer> managerMap = new HashMap<>();
         buildManagerMap(managerSizes, managerMap);
 
-        Arrays.sort(batchSizes);
-        Collections.reverse(Arrays.asList(batchSizes)); // should affect the actual array?
+        batchSizes = descendingSortIntArray(batchSizes);
         Associate[][] batches = buildTestBatches(batchSizes);
         // calculate the expected balance score
         int expectedBalanceScore 
@@ -389,7 +410,8 @@ public class TestManagerBalancerImpl {
         int actualBalanceScore = calculateActualBalanceScore(managerMap);
         assertEquals(expectedBalanceScore, actualBalanceScore);
         //System.out.println(
-        //    "DEBUG: check: " + expectedBalanceScore + " vs " + actualBalanceScore);
+        //    "DEBUG: testAssignAssociatesEvenlyHelper balance check: " 
+        //    + expectedBalanceScore + " vs " + actualBalanceScore);
     }
 
     // ----------
@@ -405,12 +427,13 @@ public class TestManagerBalancerImpl {
         buildManagerMap(managerSizes, managerMap);
         List<Associate> associates = generateAssociateList(batchSizes);
         // what's the expected balance score?
+        batchSizes = descendingSortIntArray(batchSizes);
         int expectedBalanceScore 
             = calculateExpectedBalanceScore(managerSizes, batchSizes);
         // call the implementation
         managerBalancer.balanceNewBatches(managerMap, associates);
         // what's the actual balance score?
         int actualBalanceScore = calculateActualBalanceScore(managerMap);
-        assertEquals(actualBalanceScore, expectedBalanceScore);
+        assertEquals(expectedBalanceScore, actualBalanceScore);
 	}
 }

@@ -1,0 +1,28 @@
+package com.revature.backend.service;
+
+import java.util.List;
+
+import com.revature.backend.model.Associate;
+import com.revature.backend.repository.AssociateRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service("associateService")
+public class AssociateServiceImpl implements AssociateService {
+
+    @Autowired
+    AssociateRepository associateRepo;
+
+    @Override
+    public List<Associate> getAllAssociates() {
+        return null;
+    }
+
+    @Override
+    public void saveAssociates(List<Associate> aList) {
+        // call the appropriate Repo method to save (aka insert) associates into DB
+        associateRepo.saveAll(aList);
+    }
+    
+}

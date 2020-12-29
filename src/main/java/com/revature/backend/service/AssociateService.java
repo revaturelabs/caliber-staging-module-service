@@ -4,11 +4,9 @@ import java.util.List;
 
 import com.revature.backend.model.Associate;
 
-public class AssociateService {
 
-	public List<Associate> getAllAssociates() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public interface AssociateService {
 
+	public List<Associate> getAllAssociates();
+	public void saveAssociates(List<Associate> aList);
 }

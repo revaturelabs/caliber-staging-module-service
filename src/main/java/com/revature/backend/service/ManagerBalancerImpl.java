@@ -17,9 +17,9 @@ import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service("managerBalancer")
 public class ManagerBalancerImpl implements ManagerBalancer {
 
     // ----------

@@ -21,15 +21,13 @@ public class SwotService {
 	
 	//create -swot
 	public boolean createNewSwot(Swot swot) {
-		Swot parent = new Swot(swot.getAssociate(), swot.getManager(), swot.getCreatedOn(), swot.getLastModified());
-		parent = swotRepository.save(parent);
-		for (AnalysisItem analysisItem : swot.getAnalysisItems()) {
-			analysisItem.setSwot(parent);
-			analysisItemRepository.save(analysisItem);
+		Swot parent = new Swot(swot.getAssociate(), swot.getManager(), swot.getCreatedOn(), swot.getLastModified()); // jackson creates swot object
+		List<AnalysisItem> items = swot.getAnalysisItems(); // we fetch all items from postman input
+		for (AnalysisItem item : items) { // we add all items to parent object created by jackson
+			item.setSwot(parent);		
 		}
-		
-//		return swotRepository.save(swot) != null;
-		return parent != null; // improve later
+		parent.setAnalysisItems(items); // we add parent object to all items(this time items have parent object inside)
+		return swotRepository.save(parent) != null; // we create parent object in db
 	}
 
 	//get all by associate id -swot

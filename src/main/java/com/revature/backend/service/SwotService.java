@@ -33,8 +33,8 @@ public class SwotService {
 	}
 
 	//get all by associate id -swot
-	public List<Swot> retrieveAllSwotByAssociateID(int associateId) {
-		return swotRepository.findAllByAssociateID(associateId);
+	public List<Swot> retrieveAllSwotByAssociateId(int associateId) {
+		return swotRepository.findAllByAssociateId(associateId);
 	}
 	
 	//create -item
@@ -50,6 +50,12 @@ public class SwotService {
 	//delete -item
 	public boolean deleteItem(AnalysisItem analysisItem) {
 		analysisItemRepository.delete(analysisItem);
+		return true; //TODO: this will always return true, fix the condition.
+	}
+	
+	//delete -item
+	public boolean deleteItem(int analysisItemId) {
+		analysisItemRepository.deleteById(analysisItemId);
 		return true; //TODO: this will always return true, fix the condition.
 	}
 	

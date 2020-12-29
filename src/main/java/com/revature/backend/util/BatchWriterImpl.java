@@ -31,9 +31,9 @@ public class BatchWriterImpl implements BatchWriter {
     public static Logger logger = Logger.getLogger(BatchRetrieverImpl.class);
 
     @Autowired
-    private static BatchService batchService = new BatchServiceImpl();
+    private BatchService batchService;
     @Autowired
-    private static AssociateService associateService = new AssociateServiceImpl();
+    private AssociateService associateService;
 
     public BatchWriterImpl() {
 		logger.info("In BatchWriter no-args constructor");

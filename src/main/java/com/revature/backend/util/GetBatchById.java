@@ -2,38 +2,19 @@ package com.revature.backend.util;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import org.jboss.logging.Logger;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.backend.model.Associate;
-import com.revature.backend.model.Batch;
-import com.revature.backend.model.api.ApiAssociateAssignment;
-import com.revature.backend.model.api.ApiAssociateTemplate;
-import com.revature.backend.model.api.ApiBatchTemplate;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
-
-
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.api.ApiBatchTemplate;
+
+/**
+ * This class will handle retrieving a batch by id from the Caliper
+ * API.
+ * 
+ * getBatch(): returns a batch object associated with the id paramater
+ * 
+ * @author Suva Shahria
+ **/
+
 public class GetBatchById {
 	
 	public GetBatchById() {

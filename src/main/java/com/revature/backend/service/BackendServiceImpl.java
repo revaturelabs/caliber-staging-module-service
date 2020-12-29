@@ -1,6 +1,8 @@
 package com.revature.backend.service;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,24 +51,42 @@ public class BackendServiceImpl implements BackendService {
 	 */
 	@Override
 	public List<Associate> findNewAssociatesByManagerId(int id) {
-		// TODO Auto-generated method stub
+		Set<Integer> hashS = new HashSet<Integer>() ;
 		List<Associate> ret = new ArrayList<>();
 		GetBatchById batchRetriever = new GetBatchById();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate ld  = LocalDate.now();
 		
-		// no data yet actual implementation below
+		
 		
 		try {
 			List<Associate> associates = backendRepo.findAssociatesByManagerId(id);
+			
+			// Make only unique batch id calls to make backend faster
 			for (Associate a: associates) {
-				ApiBatchTemplate batch =batchRetriever.getBatch(a.getBatch().getId());
+				hashS.add(a.getBatch().getId());
+			}
+			for(int x: hashS) {
+				ApiBatchTemplate batch =batchRetriever.getBatch(x);
 				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
 				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
 				if(elapsedDays<= 7) {
-					ret.add(a);
+					for (Associate a: associates) {
+						if(a.getBatch().getId() == x) {
+							ret.add(a);
+						}
+					}
 				}
 			}
+			//Non unique calls
+//			for (Associate a: associates) {
+//				ApiBatchTemplate batch =batchRetriever.getBatch(a.getBatch().getId());
+//				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
+//				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
+//				if(elapsedDays<= 7) {
+//					ret.add(a);
+//				}
+//			}
 			
 		}catch (Exception e) {
 			return null;

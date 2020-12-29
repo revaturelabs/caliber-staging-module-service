@@ -16,9 +16,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.backend.controller.AssignmentController;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.service.ManagerBalancer;
 
@@ -40,6 +42,9 @@ public class StagingListenerImpl implements StagingListener {
 	private DayOfWeek weeklyUpdateDay = DayOfWeek.SUNDAY;
 	private boolean shouldUpdate;
 
+	@Autowired
+	AssignmentController controller;
+	
 	public StagingListenerImpl() {
 		// TODO Auto-generated constructor stub
 		super();
@@ -130,6 +135,9 @@ public class StagingListenerImpl implements StagingListener {
 				} else {
 					log.info("There are batches ready to be assigned to a Staging Manager.");
 					shouldUpdate = true;
+					
+					controller.addNewBatches();
+					
 				}
 
 			}
@@ -149,7 +157,6 @@ public class StagingListenerImpl implements StagingListener {
 	/**
 	 * Should be fed into any if statement that needs to execute when there are new
 	 * batches
-	 * 
 	 */
 	@Override
 	public boolean triggerUpdate() {

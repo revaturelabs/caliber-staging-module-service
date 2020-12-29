@@ -12,6 +12,9 @@ import java.util.Map;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Manager;
 
+import org.springframework.boot.SpringBootConfiguration;
+
+@SpringBootConfiguration()
 public interface ManagerBalancer {
 
     // ----------

@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.revature.backend.model.Associate;
 
-public class AssociateService {
+import org.springframework.boot.SpringBootConfiguration;
 
-	public List<Associate> getAllAssociates() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@SpringBootConfiguration()
+public interface AssociateService {
 
+	public List<Associate> getAllAssociates();
+	public void saveAssociates(List<Associate> aList);
 }

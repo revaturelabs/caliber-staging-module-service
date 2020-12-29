@@ -130,10 +130,12 @@ public class TestManagerBalancerImpl {
      */
     @Test
     public void testBalanceNewBatches(){
-        //testBalanceNewBatchesHelper(new int[] {20, 30}, new int[] {5, 7, 1});
+        testBalanceNewBatchesHelper(new int[] {20, 30}, new int[] {5, 7, 1});
         testBalanceNewBatchesHelper(new int[] {20, 30, 15}, new int[] {5, 7, 1, 20});
-        //testBalanceNewBatchesHelper(new int[] {10, 11, 12}, new int[] {15, 17, 11});
-        //testBalanceNewBatchesHelper(new int[] {20, 40}, new int[] {25, 17, 31});
+        testBalanceNewBatchesHelper(new int[] {10, 11, 12}, new int[] {15, 17, 11});
+        testBalanceNewBatchesHelper(new int[] {20, 40}, new int[] {25, 17, 31});
+        testBalanceNewBatchesHelper(
+            new int[] {20, 40, 10, 15}, new int[] {25, 17, 31, 8, 12, 19, 2, 16, 5, 20});
     }
     
     // ----------

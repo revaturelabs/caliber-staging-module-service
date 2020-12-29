@@ -14,7 +14,7 @@ public class Swot {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)	// IDENTITY was preferred to AUTO.
   private int id;
 
   //Changed this to 'EAGER' to prevent a jackson crash

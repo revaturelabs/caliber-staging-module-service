@@ -48,7 +48,6 @@ public class SwotController {
 	 */
 	@PostMapping(path="/create", consumes= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ClientMessage> createSwot(@RequestBody Swot swot) {
-		System.out.println("\nInside the create controller \n ");
 		ClientMessage body = swotService.createNewSwot(swot) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
 		return ResponseEntity.status(HttpStatus.CREATED).body(body);
 	}

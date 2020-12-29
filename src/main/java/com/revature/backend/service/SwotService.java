@@ -19,7 +19,25 @@ public class SwotService {
 	@Autowired
 	AnalysisItemRepository analysisItemRepository;
 	
-	//create -swot
+	/*
+	 * Creates a new SWOT with initial AnalysisItems.
+	 * 
+	 * The Swot object is the parent object for each
+	 * individual AnalysisItem (Swot > AnalysisItem).
+	 * 
+	 * Each AnalysisItem has a foreign key reference to
+	 * it's owning SWOT.
+	 * 
+	 * The JSON array of AnalysisItems needs to be stored
+	 * in a holder list where it will have the foreign key
+	 * set to the parent SWOT's id.
+	 * 
+	 * After, the List of AnalysisItems is
+	 * properly assigned to it's parent
+	 * Swot object.
+	 * 
+	 * Returns true if successful, false otherwise.
+	 */
 	public boolean createNewSwot(Swot swot) {
 		Swot parent = new Swot(swot.getAssociate(), swot.getManager(), swot.getCreatedOn(), swot.getLastModified()); // jackson creates swot object
 		List<AnalysisItem> items = swot.getAnalysisItems(); // we fetch all items from postman input
@@ -30,33 +48,64 @@ public class SwotService {
 		return swotRepository.save(parent) != null; // we create parent object in db
 	}
 
-	//get all by associate id -swot
+	/*
+	 * Retrieves all SWOTs by the AssociateId.
+	 * Takes in the Associate's id (as an int)
+	 * as a parameter.
+	 * Returns a List of Swots for that Associate.
+	 */
 	public List<Swot> retrieveAllSwotByAssociateId(int associateId) {
 		return swotRepository.findAllByAssociateId(associateId);
 	}
 	
-	//create -item
+	/*
+	 * Creates a new AnalysisItem for a SWOT.
+	 * Accepts the AnalysisItem as a parameter.
+	 * Returns true if successful, false otherwise.
+	 */
 	public boolean createNewItem(AnalysisItem analysisItem) {
 		return analysisItemRepository.save(analysisItem) != null;
 	}
 
-	//update -item
+	/*
+	 * Updates an AnalysisItem.
+	 * Takes the AnalysisItem object that needs to 
+	 * be updated with the changed fields.
+	 * Returns the updated item if successful.
+	 */
 	public AnalysisItem updateItem(AnalysisItem analysisItem) {
 		return analysisItemRepository.save(analysisItem);
 	}
 
-	//delete -item
-	public boolean deleteItem(AnalysisItem analysisItem) {
-		analysisItemRepository.delete(analysisItem);
-		return true; //TODO: this will always return true, fix the condition.
-	}
 	
-	//delete -item
+	/*
+	 * Deletes an AnalysisItem by taking in the full
+	 * object. As of 12-29-2020, this is useless with
+	 * the preferred method below.
+	 */
+//	public boolean deleteItem(AnalysisItem analysisItem) {
+//		analysisItemRepository.delete(analysisItem);
+//		return true; //TODO: this will always return true, fix the condition.
+//	}
+	
+	/*
+	 * Deletes an AnalysisItem from a SWOT by
+	 * its id.
+	 * Only takes in the Id as an integer as a
+	 * parameter.
+	 * Should return true if successful, false
+	 * otherwise. 
+	 */
 	public boolean deleteItem(int analysisItemId) {
 		analysisItemRepository.deleteById(analysisItemId);
 		return true; //TODO: this will always return true, fix the condition.
 	}
 	
+	/*
+	 * Method to retrieve all SWOTs found in the
+	 * database.
+	 * Currently only used for testing purposes.
+	 */
 	public List<Swot> retrieveAllSwot() {
 		return swotRepository.findAll();
 	}

@@ -84,6 +84,8 @@ public class SwotControllerTests {
 	 */
 	@Test
 	public void controllerSuccess() throws Exception {
+		
+		// Create the expected list.
 		List<Swot> swots = new ArrayList<>();
 		swots.add(mockSwot(1));
 		swots.add(mockSwot(2));

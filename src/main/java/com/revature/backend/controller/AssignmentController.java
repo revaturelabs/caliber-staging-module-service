@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import com.revature.backend.model.Associate;
@@ -14,28 +13,26 @@ import com.revature.backend.model.Batch;
 import com.revature.backend.model.api.ApiAssociateAssignment;
 import com.revature.backend.model.api.ApiAssociateTemplate;
 import com.revature.backend.model.api.ApiBatchTemplate;
-import com.revature.backend.service.ManagerBalancerImpl;
-import com.revature.backend.service.ManagerServiceImpl;
+import com.revature.backend.service.ManagerBalancer;
+import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchRetrieverImpl;
-import com.revature.backend.util.StagingListenerImpl;
+import com.revature.backend.util.StagingListener;
 
-@Controller
 public class AssignmentController {
 
 	private static BatchRetriever batchRetriever = new BatchRetrieverImpl();
 	private static Logger log = Logger.getLogger(AssignmentController.class);
 	@Autowired
-	ManagerBalancerImpl balancer;
+	ManagerBalancer balancer;
 	@Autowired
-	ManagerServiceImpl managerService;
+	ManagerService managerService;
 
 	/**
 	 * This method runs after the {@link StagingListener} detects new batches.
 	 * Converts Associates from the raw API object into database ready objects. Sends new
 	 * Associate list to
 	 * 
-	 * @return
 	 */
 	public void addNewBatches() {
 		List<Batch> convertedBatches = new ArrayList<>();
@@ -70,7 +67,7 @@ public class AssignmentController {
 		else 
 		{
 			//Balance out associates to each manager, by batch size.
-			//balancer.balanceNewBatches(/*coming soon*/, convertedAssociates);
+			balancer.balanceNewBatches(managerService.getAllManagersAndAssociates(), convertedAssociates);
 						
 		}
 

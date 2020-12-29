@@ -42,8 +42,8 @@ public class StagingListenerImpl implements StagingListener {
 	private DayOfWeek weeklyUpdateDay = DayOfWeek.SUNDAY;
 	private boolean shouldUpdate;
 
-	@Autowired
-	AssignmentController controller;
+	
+	AssignmentController controller = new AssignmentController();
 	
 	public StagingListenerImpl() {
 		// TODO Auto-generated constructor stub

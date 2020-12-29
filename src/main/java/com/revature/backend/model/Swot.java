@@ -1,6 +1,9 @@
 package com.revature.backend.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +17,15 @@ public class Swot {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
 
-  @ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
+  //Changed this to 'EAGER' to prevent a jackson crash
+  //TODO: is there a better solution than making this EAGER?
+  @ManyToOne(fetch = FetchType.EAGER)	//removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "associate_id")
   private Associate associate;
 
-  @ManyToOne(fetch = FetchType.LAZY)	//removed CascadeType.ALL, this will cause problems with deletion.
+  //Changed this to 'EAGER' to prevent a jackson crash
+  //TODO: is there a better solution than making this EAGER?
+  @ManyToOne(fetch = FetchType.EAGER)	//removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "created_by")
   private Manager manager;
 
@@ -28,6 +35,7 @@ public class Swot {
   @Column(name = "last_modified")
   private Timestamp lastModified;	// TODO: this will need to be updated each time the SWOT is updated.
   
+  @JsonManagedReference //Prevents recursion in retrieve requests
   @OneToMany(mappedBy = "swot", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<AnalysisItem> analysisItems = new ArrayList<>();
 

@@ -55,10 +55,10 @@ public class StagingListenerImpl implements StagingListener {
 	@Override
 	public void startListening() {
 
-		log.info("Restarting stagingListener timer.");
 		nextDateToWaitFor = LocalDateTime.now().with(TemporalAdjusters.next(weeklyUpdateDay));
 		Date d = Date.from(nextDateToWaitFor.atZone((ZoneId.systemDefault())).toInstant());
-		log.info(d);
+		log.info("Restarting timer on StagingListener with next check at " + d +".");
+		
 		Timer t = new Timer();
 		t.schedule(new TimerTask() {
 
@@ -74,19 +74,24 @@ public class StagingListenerImpl implements StagingListener {
 	/**
 	 * Pulls ALL batches from the last year then filters to see only batches with an
 	 * ending date between two specified parameters. If a new batch is found,
-	 * {@link shouldUpdate} will be set to true;
+	 * {@link shouldUpdate} will be set to true & {@link latestBatches} will be populated with the new batches
 	 */
 	@Override
 	public void checkForNewBatches() {
 		log.info("Checking for new batches.....");
+		//Reset the latestBatches list
 		latestBatches = new ArrayList<>();
 		int year = LocalDateTime.now().getYear();
 		try {
+			//Create API GET URL
 			URL url = new URL("https://caliber2-mock.revaturelabs.com/mock/training/batch?year=" + year);
+			//Open connection
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			//Set request headers
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("accept", "application/json");
 			connection.connect();
+			//Read response headers
 			int respCode = connection.getResponseCode();
 			if (respCode != 200) {
 				log.error("Caliber API did not respond with a response code of 200!");
@@ -94,39 +99,42 @@ public class StagingListenerImpl implements StagingListener {
 			} else {
 				String inline = "";
 				Scanner sc = new Scanner(url.openStream());
+				//Convert stream into single String
 				while (sc.hasNext()) {
 					inline += sc.nextLine();
 				}
 				sc.close();
-
-				// Process batch data into a usable object
+				// Parse JSON into Java objects
 				ObjectMapper mapper = new ObjectMapper();
 				ApiBatchTemplate[] myBatches = mapper.readValue(inline, ApiBatchTemplate[].class);
 				// Find the last day that the update should have been run.
 				LocalDateTime lastDayChecked = LocalDateTime.now().with(TemporalAdjusters.previous(weeklyUpdateDay));
+				//Get the correct date format.
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				for (ApiBatchTemplate batch : myBatches) {
 					// Find the end date of the batch.
 					LocalDate ld = LocalDate.parse(batch.getEndDate(), formatter);
 					LocalDateTime batchDate = LocalDateTime.of(ld, LocalDateTime.now().toLocalTime());
-
-					// If the end date is between the last date the method was run and the current
-					// time, it's a new batch.
+					// If the end date is between the last date the method was run and the current time, it's a new batch.
 					if (batchDate.isAfter(lastDayChecked) && batchDate.isBefore(LocalDateTime.now())
 							|| batchDate.isEqual(LocalDateTime.now())) {
-						// Batch should be retrieved/id stored for retrieval from another class
+						// Batch will be added to a list of the latest batches for easy reference across the server.
 						latestBatches.add(batch);
 						log.info("New batch found, adding to latestBatches list....");
 					}
 				}
+				//Set parameter for updating the Batch DB.
 				if (latestBatches.size() == 0) {
 					log.info("No new batches found.");
 					shouldUpdate = false;
 				} else {
+					log.info("There are batches ready to be assigned to a Staging Manager.");
 					shouldUpdate = true;
 				}
 
 			}
+			//Close the connection
+			connection.disconnect();
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -148,16 +156,44 @@ public class StagingListenerImpl implements StagingListener {
 		return shouldUpdate;
 	}
 
+	/**
+	 * Returns {@link latestBatches}, a list of {@link ApiBatchTemplate} 
+	 * This list contains all batches from the latest {@link checkForNewBatches()} execution. 
+	 */
 	@Override
 	public List<ApiBatchTemplate> getLatestBatches() {
+		log.info("Retrieving the latest batches");
 		return latestBatches;
 	}
 
-	// Use this method to set shouldUpdate back to false after updating the
-	// database.
+	/**
+	 * Used to update the {@link shouldUpdate} boolean AFTER the new batches are balanced between managers to prevent duplicate data from being
+	 * submitted to the database.
+	 */
 	@Override
 	public void setShouldUpdate(boolean shouldUpdate) {
+		log.info("shouldUpdate is being updated");
 		this.shouldUpdate = shouldUpdate;
 	}
+
+	/**
+	 * Used to mock a retrieval of batches for testing. Will test if the logic within Staging Listener is working POST retrieving data from the API.
+	 * SHOULD NOT BE CALLED IN PRODUCTION
+	 */
+	@Override
+	public void mockCheckForNewBatches(boolean insertValue) {
+		if(insertValue)
+		{
+			latestBatches.add(new ApiBatchTemplate());
+			shouldUpdate=true;
+
+		}
+		else {
+			latestBatches = new ArrayList<>();
+			shouldUpdate=false;
+		}
+	}
+	
+	
 
 }

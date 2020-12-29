@@ -14,5 +14,5 @@ public interface StagingListener {
 	public boolean triggerUpdate();
 	public List<ApiBatchTemplate> getLatestBatches();
 	public void setShouldUpdate(boolean shouldUpdate);
-
+	public void mockCheckForNewBatches(boolean insertValue);
 }

@@ -2,7 +2,7 @@ package com.revature.backend.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.Objects;
 
@@ -18,8 +18,9 @@ public class AnalysisItem {
 	@Column(name = "content")
 	private String content;
 
-	@JsonIgnore	// Meant to help when trying to create a SWOT.
-	@ManyToOne(fetch = FetchType.LAZY)	// removed CascadeType.ALL, this will cause problems with deletion.
+	//@JsonIgnore	// Meant to help when trying to create a SWOT, this is a bad solution.
+	@JsonBackReference // Meant to help when trying to create a SWOT. - Prevents recursion in retrieve requests, this is the better solution.
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "swot_analysis_id")
 	private Swot swot;
 

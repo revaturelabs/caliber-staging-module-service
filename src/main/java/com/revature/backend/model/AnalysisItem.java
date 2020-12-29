@@ -12,7 +12,7 @@ public class AnalysisItem {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	// IDENTITY was preferred to AUTO.
 	private int id;
 
 	@Column(name = "content")

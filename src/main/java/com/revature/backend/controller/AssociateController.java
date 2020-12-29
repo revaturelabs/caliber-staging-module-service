@@ -40,5 +40,31 @@ public class AssociateController {
 		return ret;		
 	}
 	
+	/**
+	 * Given a manager id, will return associates assigned to that manager and have enter staging in the last 7 days.
+	 * @param manager
+	 * @return
+	 */
+	
+	@GetMapping("/associates/new")
+	public ResponseEntity<List<AssociateDTO>> getNewAssociates(@RequestParam int manager){
+		ResponseEntity<List<AssociateDTO>> ret = null;
+		List<AssociateDTO> body = null;
+		List<Associate> associates = backendService.findNewAssociatesByManagerId(manager);
+		if (associates == null || associates.size() == 0) {
+			ret =  new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+		}else {
+			
+			body = new ArrayList<>();
+			for (Associate a: associates) {
+				body.add(new AssociateDTO(a));
+			}
+			ret = ResponseEntity.ok(body);
+			
+		}
+		return ret;
+		
+	}
+	
 	
 }

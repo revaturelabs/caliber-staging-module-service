@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.revature.backend.model.Batch;
 
-public class BatchService {
+import org.springframework.boot.SpringBootConfiguration;
 
-	public List<Batch> getAllBatches() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+@SpringBootConfiguration()
+public interface BatchService {
+
+	public List<Batch> getAllBatches();
+	public void saveBatches(List<Batch> bList);
 
 }

@@ -30,7 +30,7 @@ import com.revature.backend.service.ManagerBalancer;
  * @author Ben Johnston
  */
 
-@Component(value = "StagingListener")
+@Component
 public class StagingListenerImpl implements StagingListener {
 
 	private LocalDateTime nextDateToWaitFor;
@@ -50,7 +50,6 @@ public class StagingListenerImpl implements StagingListener {
 		// TODO Auto-generated constructor stub
 		super();
 		// Start running the listener when the object is instantiated.
-		startListening();
 	}
 
 	/**

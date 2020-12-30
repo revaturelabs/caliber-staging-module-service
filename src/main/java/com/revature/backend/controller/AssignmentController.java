@@ -23,7 +23,7 @@ import com.revature.backend.util.StagingListener;
 @Component
 public class AssignmentController {
 
-	private static BatchRetriever batchRetriever = new BatchRetrieverImpl();
+	
 	private static Logger log = Logger.getLogger(AssignmentController.class);
 	@Autowired
 	ManagerBalancer balancer;
@@ -31,6 +31,8 @@ public class AssignmentController {
 	ManagerService managerService;
 	@Autowired
 	BatchWriter batchWriter;
+	@Autowired
+	BatchRetriever batchRetriever;
 
 	/**
 	 * This method runs after the {@link StagingListener} detects new batches.
@@ -70,10 +72,7 @@ public class AssignmentController {
 
 		} else {
 			// Balance out associates to each manager, by batch size.
-			if(batchWriter==null)
-			{
-				batchWriter= new BatchWriterImpl();
-			}
+			
 			batchWriter.writeNewlyStagingBatches(convertedBatches);
 			balancer.balanceNewBatches(managerService.getAllManagersAndAssociates(), convertedAssociates);
 

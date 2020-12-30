@@ -33,6 +33,9 @@ public class BatchWriterTesting {
     @MockBean
     AssociateService mockAssociateService;
 
+    @MockBean
+    BatchService mockBatchService;
+
     @Autowired
 	BatchWriter batchWriter;
 	
@@ -76,7 +79,7 @@ public class BatchWriterTesting {
         //run the test method
         batchWriter.writeNewlyStagingBatches(bList);
         //verify that the save occured at least once
-        verify(batchWriter, times(1)).writeNewlyStagingBatches(bList);
+        verify(mockBatchService, times(1)).saveBatches(bList);
 	}
 
 }

@@ -36,7 +36,12 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public List<Manager> saveAll(List<Manager> mList) {
 		// TODO Auto-generated method stub
-		 List<Manager> result = managerRepo.saveAll(mList);
+		List<Manager> result = new ArrayList<>();
+
+		for(Manager m : mList)
+		{
+			result.add(managerRepo.save(m));
+		}
 		 return result;
 		
 	}
@@ -45,8 +50,8 @@ public class ManagerServiceImpl implements ManagerService {
 		List<Manager> managerList = new ArrayList<>();
 		
 		try {
-
-			managerRepo.findAllManagers();
+			log.info("finding managers");
+			managerList = managerRepo.findAllManagers();
 		} catch(Exception e) {
 			
 			if(managerList.size() != 0) {
@@ -57,6 +62,7 @@ public class ManagerServiceImpl implements ManagerService {
 			log.warn("Unable to retrieve managers - Service Layer", e);
 				return null;
 		}
+		log.info("Size of manager list is " + managerList.size());
 		return managerList;
 	}
 	
@@ -64,7 +70,7 @@ public class ManagerServiceImpl implements ManagerService {
 	
 
 	@Override
-	public Map<Manager, Integer> getAllManagersAndAssociates(List<Manager> mList) {
+	public Map<Manager, Integer> getAllManagersAndAssociates() {
 		
 		List<Manager> managers = new ArrayList<>();
 		managers = getAllManagers();

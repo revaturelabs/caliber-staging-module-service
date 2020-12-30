@@ -37,8 +37,8 @@ public class AssignmentController {
 	/**
 	 * This method runs after the {@link StagingListener} detects new batches.
 	 * Converts Associates from the raw API object into database ready objects.
-	 * Sends new Associate list to
-	 * 
+	 * Sends new Associate list to the {@link ManagerBalancer} for assignment.
+	 * {@link Batch} & {@link Associate} are saved to the database using the {@link BatchWriter}
 	 */
 	public void addNewBatches() {
 		log.info("Adding batches");
@@ -78,7 +78,6 @@ public class AssignmentController {
 
 			batchWriter.writeNewlyStagingAssociates(convertedAssociates);
 			
-			log.info("Managers and associates: "+ managerService.getAllManagersAndAssociates().toString());
 		}
 
 	}

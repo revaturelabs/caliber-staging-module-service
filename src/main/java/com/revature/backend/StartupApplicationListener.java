@@ -1,5 +1,7 @@
 package com.revature.backend;
 
+import java.util.Scanner;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -18,6 +20,8 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		int i  = sc.nextInt();
 		sListener.startListening();
 	}
 

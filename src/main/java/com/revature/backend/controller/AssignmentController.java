@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.AssociateStatus;
@@ -16,8 +17,10 @@ import com.revature.backend.service.ManagerBalancer;
 import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchRetrieverImpl;
+import com.revature.backend.util.BatchWriter;
+import com.revature.backend.util.BatchWriterImpl;
 import com.revature.backend.util.StagingListener;
-
+@Component
 public class AssignmentController {
 
 	private static BatchRetriever batchRetriever = new BatchRetrieverImpl();
@@ -26,28 +29,29 @@ public class AssignmentController {
 	ManagerBalancer balancer;
 	@Autowired
 	ManagerService managerService;
+	@Autowired
+	BatchWriter batchWriter;
 
 	/**
 	 * This method runs after the {@link StagingListener} detects new batches.
-	 * Converts Associates from the raw API object into database ready objects. Sends new
-	 * Associate list to
+	 * Converts Associates from the raw API object into database ready objects.
+	 * Sends new Associate list to
 	 * 
 	 */
 	public void addNewBatches() {
+		log.info("Adding batches");
 		List<Batch> convertedBatches = new ArrayList<>();
 		List<Associate> convertedAssociates = new ArrayList<>();
-		//Retrieve batches from BatchRetriever
+		// Retrieve batches from BatchRetriever
 		List<ApiBatchTemplate> batches = batchRetriever.retrieveNewlyStagingBatches();
-		for (ApiBatchTemplate batch : batches) 
-		{
+		for (ApiBatchTemplate batch : batches) {
 			// Convert batch to Batch Object & add to a list
 			Batch b = convertToBatch(batch);
 			convertedBatches.add(b);
 
 			// Convert each Associate to an Associate Object, assign them to the batch, give
 			// them a status, & add them to a list
-			for (ApiAssociateAssignment assignment : batch.getAssociateAssignments())
-			{
+			for (ApiAssociateAssignment assignment : batch.getAssociateAssignments()) {
 				Associate a = convertToAssociate(assignment.getAssociate());
 				a.setBatch(b);
 				a.setStatus(AssociateStatus.STAGING);
@@ -56,18 +60,26 @@ public class AssignmentController {
 			}
 
 		}
-		
-		if(convertedAssociates.size() == 0 || convertedBatches.size() ==0)
-		{
-			//If either size is 0, then the data retrieval failed and should be attempted again.
+		log.info("batches found:" + convertedBatches.size());
+		log.info("associates found:" + convertedAssociates.size());
+
+		if (convertedAssociates.size() == 0 || convertedBatches.size() == 0) {
+			// If either size is 0, then the data retrieval failed and should be attempted
+			// again.
 			log.error("No batches with associates found");
-			
-		}
-		else 
-		{
-			//Balance out associates to each manager, by batch size.
+
+		} else {
+			// Balance out associates to each manager, by batch size.
+			if(batchWriter==null)
+			{
+				batchWriter= new BatchWriterImpl();
+			}
+			batchWriter.writeNewlyStagingBatches(convertedBatches);
 			balancer.balanceNewBatches(managerService.getAllManagersAndAssociates(), convertedAssociates);
-						
+
+			batchWriter.writeNewlyStagingAssociates(convertedAssociates);
+			
+			log.info("Managers and associates: "+ managerService.getAllManagersAndAssociates().toString());
 		}
 
 	}

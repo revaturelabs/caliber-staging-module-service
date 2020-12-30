@@ -31,13 +31,27 @@ public class ManagerServiceImpl implements ManagerService {
 	 * getAllManagers() has been completed. A map that returns Manager and Associate objects has been implemented.
 	 * 
 	 */
+	
+	
+	@Override
+	public List<Manager> saveAll(List<Manager> mList) {
+		// TODO Auto-generated method stub
+		List<Manager> result = new ArrayList<>();
+
+		for(Manager m : mList)
+		{
+			result.add(managerRepo.save(m));
+		}
+		 return result;
+		
+	}
 
 	public List<Manager> getAllManagers() {
 		List<Manager> managerList = new ArrayList<>();
 		
 		try {
-
-			managerRepo.findAllManagers();
+			log.info("finding managers");
+			managerList = managerRepo.findAllManagers();
 		} catch(Exception e) {
 			
 			if(managerList.size() != 0) {
@@ -48,6 +62,7 @@ public class ManagerServiceImpl implements ManagerService {
 			log.warn("Unable to retrieve managers - Service Layer", e);
 				return null;
 		}
+		log.info("Size of manager list is " + managerList.size());
 		return managerList;
 	}
 	
@@ -58,6 +73,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public Map<Manager, Integer> getAllManagersAndAssociates() {
 		
 		List<Manager> managers = new ArrayList<>();
+		managers = getAllManagers();
 		Map <Manager, Integer> map = new HashMap<Manager, Integer>();
 		
 		int id = 0;
@@ -71,6 +87,14 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return map;
 	}
+
+
+
+
+
+	
+	// method to add in managers to the database
+	// Session storage can possibly add managers
 	
 	
 

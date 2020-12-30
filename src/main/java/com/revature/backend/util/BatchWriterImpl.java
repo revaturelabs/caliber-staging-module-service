@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 import com.revature.backend.service.AssociateService;
-import com.revature.backend.service.AssociateServiceImpl;
 import com.revature.backend.service.BatchService;
-import com.revature.backend.service.BatchServiceImpl;
 
 
 /**

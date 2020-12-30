@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.revature.backend.model.Batch;
 
-
-
 public interface BatchService {
 
 	public List<Batch> getAllBatches();

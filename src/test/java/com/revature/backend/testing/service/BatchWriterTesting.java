@@ -16,14 +16,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
-import com.revature.backend.repository.AssociateRepository;
-import com.revature.backend.repository.BatchRepository;
 import com.revature.backend.service.AssociateService;
-import com.revature.backend.service.AssociateServiceImpl;
 import com.revature.backend.service.BatchService;
-import com.revature.backend.service.BatchServiceImpl;
 import com.revature.backend.util.BatchWriter;
-import com.revature.backend.util.BatchWriterImpl;
 
 //@SpringBootTest(classes={BatchWriter.class, BatchWriterImpl.class, AssociateServiceImpl.class, AssociateRepository.class, BatchService.class, BatchServiceImpl.class, BatchRepository.class})
 @SpringBootTest()
@@ -55,7 +50,6 @@ public class BatchWriterTesting {
         //run the test method
         batchWriter.writeNewlyStagingAssociates(aList);
         //verify that the save occured at least once
-        //verify(batchWriter, times(1)).writeNewlyStagingAssociates(aList);
         verify(mockAssociateService, times(1)).saveAssociates(aList);
     }
     

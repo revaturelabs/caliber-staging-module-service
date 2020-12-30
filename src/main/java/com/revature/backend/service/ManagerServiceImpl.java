@@ -31,6 +31,15 @@ public class ManagerServiceImpl implements ManagerService {
 	 * getAllManagers() has been completed. A map that returns Manager and Associate objects has been implemented.
 	 * 
 	 */
+	
+	
+	@Override
+	public List<Manager> saveAll(List<Manager> mList) {
+		// TODO Auto-generated method stub
+		 List<Manager> result = managerRepo.saveAll(mList);
+		 return result;
+		
+	}
 
 	public List<Manager> getAllManagers() {
 		List<Manager> managerList = new ArrayList<>();
@@ -55,9 +64,10 @@ public class ManagerServiceImpl implements ManagerService {
 	
 
 	@Override
-	public Map<Manager, Integer> getAllManagersAndAssociates() {
+	public Map<Manager, Integer> getAllManagersAndAssociates(List<Manager> mList) {
 		
 		List<Manager> managers = new ArrayList<>();
+		managers = getAllManagers();
 		Map <Manager, Integer> map = new HashMap<Manager, Integer>();
 		
 		int id = 0;
@@ -71,6 +81,14 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return map;
 	}
+
+
+
+
+
+	
+	// method to add in managers to the database
+	// Session storage can possibly add managers
 	
 	
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.model.api.ApiAssociateAssignment;
@@ -24,11 +26,13 @@ import com.revature.backend.model.api.ApiBatchTemplate;
  * 
  * @author Azhya Knox
  **/
-
+@Component
 public class BatchRetrieverImpl implements BatchRetriever {
 
 	public static Logger logger = Logger.getLogger(BatchRetrieverImpl.class);
-	public static StagingListener stagingListener = new StagingListenerImpl();
+	
+	@Autowired
+	StagingListener stagingListener;
 
 	// If using Jackson's ObjectMapper, have a static reference here
 	public static ObjectMapper om = new ObjectMapper();
@@ -45,7 +49,7 @@ public class BatchRetrieverImpl implements BatchRetriever {
 		List<ApiAssociateTemplate> associateList = new ArrayList<>();
 
 		List<ApiBatchTemplate> batchList = new ArrayList<>();
-		stagingListener.checkForNewBatches();
+		//stagingListener.checkForNewBatches();
 		try{
 			batchList = stagingListener.getLatestBatches();
 			//from the batchList, extract out the associates into their own separate list
@@ -72,7 +76,9 @@ public class BatchRetrieverImpl implements BatchRetriever {
 		// start logging activity
 		logger.trace("In BatchRetriever: gathering newly staging batches...");
 		List<ApiBatchTemplate> batchList = new ArrayList<>();
-		stagingListener.checkForNewBatches();
+		//stagingListener.checkForNewBatches();
+		logger.info(stagingListener);
+
 		try{
 			batchList = stagingListener.getLatestBatches();
 			for (ApiBatchTemplate apiBatchTemplate : batchList) {

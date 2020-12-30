@@ -20,9 +20,10 @@ public class AssociateServiceImpl implements AssociateService {
     }
 
     @Override
-    public void saveAssociates(List<Associate> aList) {
+    public List<Associate> saveAssociates(List<Associate> aList) {
         // call the appropriate Repo method to save (aka insert) associates into DB
-        associateRepo.saveAll(aList);
+        List<Associate> list = associateRepo.saveAll(aList);
+        return list;
     }
     
 }

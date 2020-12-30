@@ -29,7 +29,9 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
 	ManagerService mServ;
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		// This block is used for testing until we have an official database set up. Allows time to add info to database (like managers) before the system checks for batches
+		// This block is used for testing until we have an official database set up. 
+		//Adds a few test managers to database before the system checks for batches.
+		//NEEDS TO BE REMOVED BEFORE SWAPPING AWAY FROM H2 DB
 		//-------------
 		List<Manager> mList = new ArrayList<>();
 		Manager m = new Manager("Testemail@email.email", "test", "user");
@@ -39,8 +41,7 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
 		mList.add(m1);
 		mList.add(m2);
 		mServ.saveAll(mList);
-		//-------------
-		
+		//-------------		
 		//Starts the periodic checking for new batches. Will run immediately on server start up, then weekly on the specified UpdateDay until the server is restarted.
 		sListener.startListening();
 	}	

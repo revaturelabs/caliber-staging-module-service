@@ -13,5 +13,5 @@ import com.revature.backend.model.Batch;
 public interface BatchRepository extends JpaRepository<Batch, Long>{
     
     //@Query(value = "select * from associate where manager_id =?1", nativeQuery = true)
-    public void saveBatchesIntoDB();
+    //public void saveBatchesIntoDB();
 }

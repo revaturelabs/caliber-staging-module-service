@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
@@ -27,6 +28,7 @@ import com.revature.backend.service.BatchServiceImpl;
  * @author Azhya Knox
  **/
 
+@Service("batchWriter")
 public class BatchWriterImpl implements BatchWriter {
     public static Logger logger = Logger.getLogger(BatchRetrieverImpl.class);
 

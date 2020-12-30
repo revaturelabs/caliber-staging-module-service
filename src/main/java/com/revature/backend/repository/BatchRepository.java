@@ -13,4 +13,5 @@ import com.revature.backend.model.Batch;
 //@Transactional
 @Repository
 public interface BatchRepository extends JpaRepository<Batch, Long>{
+
 }

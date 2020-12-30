@@ -42,22 +42,24 @@ public class BatchWriterImpl implements BatchWriter {
     }
     
     @Override
-    public void writeNewlyStagingBatches(List<Batch> bList){
+    public List<Batch> writeNewlyStagingBatches(List<Batch> bList){
         //start logging
         logger.debug("Beginning to save batches to DB. Calling BatchService now.");
         //call the appropriate service to save into DB
-        batchService.saveBatches(bList);
+        List<Batch> list = batchService.saveBatches(bList);
         //end logging
         logger.debug("Batches have been saved to DB. Leaving BatchWriter.");
+        return list;
     }
 
     @Override
-    public void writeNewlyStagingAssociates(List<Associate> aList){
+    public List<Associate> writeNewlyStagingAssociates(List<Associate> aList){
         //start logging
         logger.debug("Beginning to save associates to DB. Calling BatchService now.");
         //call the appropriate service to save into DB
-        associateService.saveAssociates(aList);
+        List<Associate> list = associateService.saveAssociates(aList);
         //end logging
         logger.debug("Associates have been saved to DB. Leaving BatchWriter.");
+        return list;
     }
 }

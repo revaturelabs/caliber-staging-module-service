@@ -12,6 +12,7 @@ import com.revature.backend.model.Associate;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.repository.BackendRepo;
 import com.revature.backend.util.GetBatchById;
+import com.revature.backend.util.GetBatchByIdImpl;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,6 +24,8 @@ public class BackendServiceImpl implements BackendService {
 
 	@Autowired
 	BackendRepo backendRepo;
+	@Autowired
+	GetBatchById batchRetriever;
 
 	/**
 	 * This method takes the managers id and returns all associates assigned to him.
@@ -53,13 +56,15 @@ public class BackendServiceImpl implements BackendService {
 	public List<Associate> findNewAssociatesByManagerId(int id) {
 		Set<Integer> hashS = new HashSet<Integer>() ;
 		List<Associate> ret = new ArrayList<>();
-		GetBatchById batchRetriever = new GetBatchById();
+		
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate ld  = LocalDate.now();
 		
 		
 		
 		try {
+			System.out.println("test");
 			List<Associate> associates = backendRepo.findAssociatesByManagerId(id);
 			
 			// Make only unique batch id calls to make backend faster
@@ -79,14 +84,14 @@ public class BackendServiceImpl implements BackendService {
 				}
 			}
 			//Non unique calls
-//			for (Associate a: associates) {
-//				ApiBatchTemplate batch =batchRetriever.getBatch(a.getBatch().getId());
-//				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
-//				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
-//				if(elapsedDays<= 7) {
-//					ret.add(a);
-//				}
-//			}
+			for (Associate a: associates) {
+				ApiBatchTemplate batch =batchRetriever.getBatch(a.getBatch().getId());
+				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
+				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
+				if(elapsedDays<= 7) {
+					ret.add(a);
+				}
+			}
 			
 		}catch (Exception e) {
 			return null;
@@ -94,17 +99,17 @@ public class BackendServiceImpl implements BackendService {
 		
 		// Test to show it works
 		
-//		int batchId = 394;
-//		ApiBatchTemplate batch =batchRetriever.getBatch(batchId);
-//		
-//		
-//		LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
-//		System.out.println("Batch End "+ bd);
-//		System.out.println("Today "+ ld);
-//
-//		 
-//		long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
-//		System.out.println("days elapsed "+ elapsedDays); 
+		int batchId = 394;
+		ApiBatchTemplate batch =batchRetriever.getBatch(batchId);
+		
+		
+		LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
+		System.out.println("Batch End "+ bd);
+		System.out.println("Today "+ ld);
+
+		 
+		long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
+		System.out.println("days elapsed "+ elapsedDays); 
 		return ret;
 	}
 

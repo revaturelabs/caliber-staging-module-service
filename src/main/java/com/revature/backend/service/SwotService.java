@@ -71,25 +71,18 @@ public class SwotService {
 	 * Updates an AnalysisItem.
 	 * Takes the AnalysisItem object that needs to 
 	 * be updated with the changed fields.
+	 * 
 	 * Prior to calling the repo, set the respective SWOT's
-	 * lastModified field to System.currentTimeMillis().
+	 * lastModified field to System.currentTimeMillis() and
+	 * then save the object to the database to update.
+	 * 
 	 * Returns the updated item if successful.
 	 */
 	public AnalysisItem updateItem(AnalysisItem analysisItem) {
-		analysisItem.getSwot().setLastModifiedNow();	// TODO: This Swot might need to be saved first.
+		analysisItem.getSwot().setLastModifiedNow();	
+		swotRepository.save(analysisItem.getSwot());
 		return analysisItemRepository.save(analysisItem);
 	}
-
-	
-	/*
-	 * Deletes an AnalysisItem by taking in the full
-	 * object. As of 12-29-2020, this is useless with
-	 * the preferred method below.
-	 */
-//	public boolean deleteItem(AnalysisItem analysisItem) {
-//		analysisItemRepository.delete(analysisItem);
-//		return true; //TODO: this will always return true, fix the condition.
-//	}
 	
 	/*
 	 * Deletes an AnalysisItem from a SWOT by

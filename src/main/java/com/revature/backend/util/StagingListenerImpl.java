@@ -43,18 +43,19 @@ public class StagingListenerImpl implements StagingListener {
 	private boolean shouldUpdate;
 	private boolean startUp =true;
 	
+	private String caliberUrl = "https://caliber2-mock.revaturelabs.com/mock/training/batch?year=";
+	
 	@Autowired
 	AssignmentController controller;
 	
 	public StagingListenerImpl() {
 		// TODO Auto-generated constructor stub
 		super();
-		// Start running the listener when the object is instantiated.
 	}
 
 	/**
-	 * Method MUST run on server startup & repeat after each batch check Configures
-	 * timer to check for new batches on a specified day of the week every week. If
+	 * Method MUST run on server startup & repeat after each batch check.
+	 *  Configures timer to check for new batches on a specified day of the week every week. If
 	 * this method does not run, the entire sorting system will fail to operate.
 	 */
 	@Override

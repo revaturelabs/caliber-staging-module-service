@@ -2,10 +2,13 @@ package com.revature.backend.testing.service;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,9 +23,8 @@ import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchRetrieverImpl;
 import com.revature.backend.util.StagingListener;
-import com.revature.backend.util.StagingListenerImpl;
 
-@SpringBootTest(classes={BatchRetriever.class, BatchRetrieverImpl.class, StagingListener.class})
+@SpringBootTest(classes={BatchRetriever.class, BatchRetrieverImpl.class})
 //@SpringBootTest()
 @RunWith(SpringRunner.class)
 public class BatchRetrieverTesting {
@@ -44,6 +46,7 @@ public class BatchRetrieverTesting {
 	}
 
 	void testRetrieveNewlyStagingAssociatesHelp(int[] batchSizes) {
+		int numBatches = batchSizes.length;
 		int numAssociates = 0;
 		for (int size : batchSizes) numAssociates += size;
 
@@ -57,8 +60,29 @@ public class BatchRetrieverTesting {
 			= batchRetriever.retrieveNewlyStagingAssociates();
 
 		// make sure all of the associates are included
-		// NOTE: trusts that these are the same associates that were passed in
 		assertEquals(numAssociates, associateTemplateList.size());
+		// now check to make sure these are the correct associates
+		// takes advantage of naming format in test generation method
+		boolean[][] foundTracker = new boolean[numBatches][];
+		for (int i = 0; i < batchSizes.length; i++){
+			boolean[] foundBatch = new boolean[batchSizes[i]];
+			foundTracker[i] = foundBatch;
+		}
+
+		for (ApiAssociateTemplate assoc : associateTemplateList){
+			int batchIndex = Integer.parseInt(assoc.getLastName());
+			int assocIndex = Integer.parseInt(assoc.getFirstName());
+
+			assertTrue(batchIndex >= 0 && batchIndex < numBatches); // valid batch index?
+			// valid assoc index?
+			assertTrue(assocIndex >= 0 && assocIndex < batchSizes[batchIndex]);
+			assertFalse(foundTracker[batchIndex][assocIndex]); // should be no duplicates
+			foundTracker[batchIndex][assocIndex] = true; // mark that we found it
+		}
+		// now make sure that all expect associates were found
+		for (boolean[] batch : foundTracker){
+			for (boolean assoc : batch) assertTrue(assoc);
+		}
 	}
 
 	@Test
@@ -66,20 +90,20 @@ public class BatchRetrieverTesting {
 		testRetrieveNewlyStagingBatchesHelp(new int[]{});
 		testRetrieveNewlyStagingBatchesHelp(new int[]{4});
 		testRetrieveNewlyStagingBatchesHelp(new int[]{40});
+		testRetrieveNewlyStagingBatchesHelp(new int[]{14, 8, 19});
 		testRetrieveNewlyStagingBatchesHelp(new int[]{17, 20, 35, 4, 0, 12});
 	}
 
 	void testRetrieveNewlyStagingBatchesHelp(int[] batchSizes){
-		int numBatches = batchSizes.length;
-
 		// technically only need the batches, not their contents
 		List<ApiBatchTemplate> mockBatchList = generateBatchTemplates(batchSizes);
 
 		when(mockStagingListener.getLatestBatches()).thenReturn(mockBatchList);
 		List<ApiBatchTemplate> b = batchRetriever.retrieveNewlyStagingBatches();
 
-		// NOTE: trusts that the batch templates are the same that were returned by the SL
-		assertEquals(numBatches, b.size());
+		// NOTE: could fail if batchRetriever returns a valid list that has been sorted
+		// or re-arranged in some way
+		assertEquals(mockBatchList, b);
 	}
 
 	// ----------
@@ -91,8 +115,10 @@ public class BatchRetrieverTesting {
 	 * corresponding int in batchSizes.
 	 * 
 	 * Currently these templates will not be filled out; they will have 
-	 * ApiAssociateAssignments, which will have ApiAssociateTemplates. Batch and
-	 * Associate templates will have names.
+	 * ApiAssociateAssignments, which will have ApiAssociateTemplates.
+	 * Batch templates have names equal to their index in the list.
+	 * Associates have a first name equal to their index inside their batch, and a last
+	 * name equal to their batch's name.
 	 * 
 	 * @param batchSizes
 	 * @return
@@ -116,10 +142,10 @@ public class BatchRetrieverTesting {
 				ApiAssociateTemplate assoc = new ApiAssociateTemplate();
 				assign.setAssociate(assoc);
 				assoc.setFirstName("" + x);
+				assoc.setLastName("" + i);
 			} // end Assignment for loop
 		} // end Batch for loop
 
 		return batchTemplateList;
 	}
-
 }

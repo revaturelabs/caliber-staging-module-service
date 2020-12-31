@@ -49,8 +49,7 @@ public class BatchRetrieverTesting {
 
 		// this list will be returned by the staging listener - the batchRetriever should
 		// properly unpack the ApiAssociateTemplates from it
-		List<ApiBatchTemplate> mockBatchList 
-			= generateBatchTemplates(batchSizes);
+		List<ApiBatchTemplate> mockBatchList = generateBatchTemplates(batchSizes);
 		
 		when(mockStagingListener.getLatestBatches()).thenReturn(mockBatchList);
 
@@ -58,22 +57,29 @@ public class BatchRetrieverTesting {
 			= batchRetriever.retrieveNewlyStagingAssociates();
 
 		// make sure all of the associates are included
+		// NOTE: trusts that these are the same associates that were passed in
 		assertEquals(numAssociates, associateTemplateList.size());
 	}
 
 	@Test
 	void testRetrieveNewlyStagingBatches() {
-		StagingListenerImpl stagingListener = new StagingListenerImpl();
-		stagingListener.checkForNewBatches();
-        List<ApiBatchTemplate> b = batchRetriever.retrieveNewlyStagingBatches();
-		
-		if(stagingListener.triggerUpdate() == true){
-			System.out.println("batchList size is greater than 0");
-        	assertTrue("batchList size is greater than 0", b.size() > 0);
-		}else{
-			System.out.println("batchList size is 0!");
-			assertTrue("batchList size is 0", b.size() == 0);
-		}
+		testRetrieveNewlyStagingBatchesHelp(new int[]{});
+		testRetrieveNewlyStagingBatchesHelp(new int[]{4});
+		testRetrieveNewlyStagingBatchesHelp(new int[]{40});
+		testRetrieveNewlyStagingBatchesHelp(new int[]{17, 20, 35, 4, 0, 12});
+	}
+
+	void testRetrieveNewlyStagingBatchesHelp(int[] batchSizes){
+		int numBatches = batchSizes.length;
+
+		// technically only need the batches, not their contents
+		List<ApiBatchTemplate> mockBatchList = generateBatchTemplates(batchSizes);
+
+		when(mockStagingListener.getLatestBatches()).thenReturn(mockBatchList);
+		List<ApiBatchTemplate> b = batchRetriever.retrieveNewlyStagingBatches();
+
+		// NOTE: trusts that the batch templates are the same that were returned by the SL
+		assertEquals(numBatches, b.size());
 	}
 
 	// ----------

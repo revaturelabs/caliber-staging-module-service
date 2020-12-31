@@ -31,6 +31,8 @@ public class BackendServiceImpl implements BackendService {
 	 * number.
 	 * 
 	 * @param id : should be a valid id assigned to a manager.
+	 * 
+	 * @author Mareo Yapp
 	 */
 	@Override
 	public List<Associate> findAssociatesByManagerId(int id) {

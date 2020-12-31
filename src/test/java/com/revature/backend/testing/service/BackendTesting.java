@@ -61,7 +61,7 @@ class BackendTesting {
 	 * 
 	 * The test uses assertFalse to test if the list is not empty.
 	 * 
-	 * @author Mareo Yapp
+	 * @author Mareo Yapp 
 	 */
 	@Test
 	public void PASSfindAssociatesByManagerId() {

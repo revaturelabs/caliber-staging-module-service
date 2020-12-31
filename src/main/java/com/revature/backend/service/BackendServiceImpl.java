@@ -1,9 +1,12 @@
 package com.revature.backend.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +15,6 @@ import com.revature.backend.model.Associate;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.repository.BackendRepo;
 import com.revature.backend.util.GetBatchById;
-import com.revature.backend.util.GetBatchByIdImpl;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 @Service("backendService")
 public class BackendServiceImpl implements BackendService {

@@ -2,6 +2,11 @@
  * This file contains unit tests for the ManagerBalancer interface and its implementing 
  * class, ManagerBalancerImpl
  * 
+ * NOTE: currently this test 'manually' instantiates a ManagerBalancerImpl rather than
+ * using spring to auto inject it. This means that this class does not need the
+ * SpringBootTest() annotation, but I have left that (and the related impoorts) commneted
+ * out in case they need to be restored later.
+ * 
  * @author Andrew Curry
  */
 package com.revature.backend.testing.service;
@@ -20,17 +25,16 @@ import java.util.Map;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
-import com.revature.backend.service.ManagerBalancer;
+//import com.revature.backend.service.ManagerBalancer;
 import com.revature.backend.service.ManagerBalancerImpl;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 //@SpringBootTest(classes = { ManagerBalancer.class, ManagerBalancerImpl.class })
-@SpringBootTest()
 @RunWith(SpringRunner.class)
 public class TestManagerBalancerImpl {
 

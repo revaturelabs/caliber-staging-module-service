@@ -30,7 +30,7 @@ import com.revature.backend.service.ManagerBalancer;
  * @author Ben Johnston
  */
 
-@Component(value = "StagingListener")
+@Component
 public class StagingListenerImpl implements StagingListener {
 
 	private LocalDateTime nextDateToWaitFor;
@@ -41,15 +41,15 @@ public class StagingListenerImpl implements StagingListener {
 	// Day that the update will occur each week.
 	private DayOfWeek weeklyUpdateDay = DayOfWeek.SUNDAY;
 	private boolean shouldUpdate;
-
+	private boolean startUp =true;
 	
-	AssignmentController controller = new AssignmentController();
+	@Autowired
+	AssignmentController controller;
 	
 	public StagingListenerImpl() {
 		// TODO Auto-generated constructor stub
 		super();
 		// Start running the listener when the object is instantiated.
-		startListening();
 	}
 
 	/**
@@ -59,20 +59,28 @@ public class StagingListenerImpl implements StagingListener {
 	 */
 	@Override
 	public void startListening() {
+		if(startUp)
+		{
+			log.info("In Startup");
+			startUp=false;
+			checkForNewBatches();
+		}
+		else {
+			nextDateToWaitFor = LocalDateTime.now().with(TemporalAdjusters.next(weeklyUpdateDay));
+			Date d = Date.from(nextDateToWaitFor.atZone((ZoneId.systemDefault())).toInstant());
+			log.info("Restarting timer on StagingListener with next check at " + d +".");
+			
+			Timer t = new Timer();
+			t.schedule(new TimerTask() {
 
-		nextDateToWaitFor = LocalDateTime.now().with(TemporalAdjusters.next(weeklyUpdateDay));
-		Date d = Date.from(nextDateToWaitFor.atZone((ZoneId.systemDefault())).toInstant());
-		log.info("Restarting timer on StagingListener with next check at " + d +".");
+				@Override
+				public void run() {
+					log.info("Timer expired");
+					checkForNewBatches();
+				}
+			}, d);
+		}
 		
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-
-				checkForNewBatches();
-			}
-		}, d);
 
 	}
 
@@ -102,6 +110,7 @@ public class StagingListenerImpl implements StagingListener {
 				log.error("Caliber API did not respond with a response code of 200!");
 				throw new RuntimeException("HttpResonseCode: " + respCode);
 			} else {
+				log.info("Got response!");
 				String inline = "";
 				Scanner sc = new Scanner(url.openStream());
 				//Convert stream into single String
@@ -109,11 +118,12 @@ public class StagingListenerImpl implements StagingListener {
 					inline += sc.nextLine();
 				}
 				sc.close();
+				log.info(inline);
 				// Parse JSON into Java objects
 				ObjectMapper mapper = new ObjectMapper();
 				ApiBatchTemplate[] myBatches = mapper.readValue(inline, ApiBatchTemplate[].class);
 				// Find the last day that the update should have been run.
-				LocalDateTime lastDayChecked = LocalDateTime.now().with(TemporalAdjusters.previous(weeklyUpdateDay));
+				LocalDateTime lastDayChecked = LocalDateTime.now().with(TemporalAdjusters.firstInMonth(weeklyUpdateDay));
 				//Get the correct date format.
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				for (ApiBatchTemplate batch : myBatches) {
@@ -151,6 +161,7 @@ public class StagingListenerImpl implements StagingListener {
 		} finally {
 			// After all code has been executed restart the timer.
 			startListening();
+			startUp=false;
 		}
 	}
 

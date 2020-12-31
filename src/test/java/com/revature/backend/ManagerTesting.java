@@ -35,6 +35,9 @@ public class ManagerTesting {
 	@Mock
 	Manager manager = new Manager();
 	
+//	@Rule 
+//	public MockitoRule mockitoRule = MockitoJUnit.rule();
+	
 	@Test
 	void contextLoads() {
 		
@@ -53,10 +56,7 @@ public class ManagerTesting {
 	}
 	
 	
-	@Rule 
-	public MockitoRule mockitoRule = MockitoJUnit.rule();
-	
-	
+		
 	@Test
 	public void testGetAllManagersAndAssociates() {
 		Map<Manager, Integer> expectedMockMap = new HashMap<>();

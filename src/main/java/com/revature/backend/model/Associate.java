@@ -24,11 +24,11 @@ public class Associate {
 	@Column(name = "lastname")
 	private String lastName;
 
-	@ManyToOne(fetch = FetchType.LAZY) // removed CascadeType.ALL, this will cause problems with deletion.
+	@ManyToOne(fetch = FetchType.EAGER) // removed CascadeType.ALL, this will cause problems with deletion.
 	@JoinColumn(name = "manager_id")
 	private Manager manager;
 
-	@ManyToOne(fetch = FetchType.LAZY) // removed CascadeType.ALL, this will cause problems with deletion.
+	@ManyToOne(fetch = FetchType.EAGER) // removed CascadeType.ALL, this will cause problems with deletion.
 	@JoinColumn(name = "batch_id")
 	private Batch batch;
 

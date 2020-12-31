@@ -8,5 +8,5 @@ import com.revature.backend.model.Associate;
 public interface AssociateService {
 
 	public List<Associate> getAllAssociates();
-	public void saveAssociates(List<Associate> aList);
+	public List<Associate> saveAssociates(List<Associate> aList);
 }

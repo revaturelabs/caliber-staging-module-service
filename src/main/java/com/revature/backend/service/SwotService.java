@@ -71,9 +71,12 @@ public class SwotService {
 	 * Updates an AnalysisItem.
 	 * Takes the AnalysisItem object that needs to 
 	 * be updated with the changed fields.
+	 * Prior to calling the repo, set the respective SWOT's
+	 * lastModified field to System.currentTimeMillis().
 	 * Returns the updated item if successful.
 	 */
 	public AnalysisItem updateItem(AnalysisItem analysisItem) {
+		analysisItem.getSwot().setLastModifiedNow();	// TODO: This Swot might need to be saved first.
 		return analysisItemRepository.save(analysisItem);
 	}
 

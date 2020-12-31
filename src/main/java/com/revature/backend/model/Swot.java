@@ -121,6 +121,11 @@ public class Swot {
   public void setAnalysisItems(List<AnalysisItem> analysisItems) {
 	this.analysisItems = analysisItems;
   }
+  
+  // Set the Last Modified time to the current time.
+  public void setLastModifiedNow() {
+	  this.lastModified = new Timestamp(System.currentTimeMillis());
+  }
 
 	@Override
 	public int hashCode() {

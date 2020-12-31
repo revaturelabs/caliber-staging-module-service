@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +23,6 @@ import com.revature.backend.util.BatchRetrieverImpl;
 import com.revature.backend.util.StagingListener;
 
 @SpringBootTest(classes={BatchRetriever.class, BatchRetrieverImpl.class})
-//@SpringBootTest()
 @RunWith(SpringRunner.class)
 public class BatchRetrieverTesting {
 

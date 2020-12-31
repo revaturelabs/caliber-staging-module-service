@@ -1,16 +1,15 @@
 package com.revature.backend.testing.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -52,18 +51,38 @@ class BackendTesting {
 
 	int managerid=1;
 
-	@Ignore
+	/**
+	 * Tests logic in the BackendServiceImpl.findAssociatesByManagerId()
+	 * 
+	 * Ensures that only associates assigned to the manager's id are returned.
+	 * 
+	 * The test assumes that a manager will always have at least one associate
+	 * assigned to him or her.
+	 * 
+	 * The test uses assertFalse to test if the list is not empty.
+	 * 
+	 * @author Mareo Yapp
+	 */
 	@Test
 	public void PASSfindAssociatesByManagerId() {
 		List<Associate> a = backendService.findAssociatesByManagerId(managerid);
-		assertNotEquals(0, a.size());
-		System.out.println(a);
+		assertFalse(a.isEmpty());
 	}
 
+	/**
+	 * Tests logic in the BackendServiceImpl.findAssociatesByManagerId()
+	 * 
+	 * Ensures that if the manager id does not exists on the database then a empty
+	 * list is return
+	 * 
+	 * The test uses assertTrue to test if the list is empty.
+	 * 
+	 * @author Mareo Yapp
+	 */
 	@Test
 	public void FAILfindAssociatesByManagerId() {
 		List<Associate> a = backendService.findAssociatesByManagerId(0);
-		assertEquals(0, a.size());
+		assertTrue(a.isEmpty());
 	}
 	
 	
@@ -78,6 +97,7 @@ class BackendTesting {
 	 * get a successful test. Change 547 to batch ID that has ended within
 	 * the last week.
 	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void findNewAssociates() {
 		MockitoAnnotations.initMocks(this);
@@ -104,6 +124,7 @@ class BackendTesting {
 	 * 
 	 * Change 547 to Batch ID that has ended within the last week
 	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void findNewAssociatesMultiple() {
 		MockitoAnnotations.initMocks(this);
@@ -128,6 +149,7 @@ class BackendTesting {
 	 * if they are not apart of batches that ended within the 
 	 * last 7 days.
 	 */
+	@SuppressWarnings("deprecation")
 	@Test
 	public void findNewAssociatesFail() {
 		MockitoAnnotations.initMocks(this);

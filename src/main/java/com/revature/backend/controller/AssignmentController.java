@@ -58,7 +58,6 @@ public class AssignmentController {
 				a.setBatch(b);
 				a.setStatus(AssociateStatus.STAGING);
 				convertedAssociates.add(a);
-
 			}
 
 		}

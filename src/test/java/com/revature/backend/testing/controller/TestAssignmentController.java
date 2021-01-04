@@ -9,7 +9,9 @@ package com.revature.backend.testing.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.revature.backend.controller.AssignmentController;
+import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
+import com.revature.backend.model.api.ApiAssociateTemplate;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.service.ManagerBalancer;
 import com.revature.backend.service.ManagerService;
@@ -71,6 +73,30 @@ public class TestAssignmentController {
         // the expected and actual output
         Batch expected = new Batch(salesforceId, name, skill, location);
         Batch actual = assignmentController.convertToBatch(template);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Generate a dummy ApiAssociateTemplate and make sure it is converted properly.
+     */
+    @Test
+    public void testConvertToAssociate(){
+        // the Templates have more fields than this, but we're only checking what
+        // gets converted to an Associate
+        String salesforceId = "salesforceId";
+        String email = "email";
+        String firstName = "firstName";
+        String lastName = "lastName";
+        // the input
+        ApiAssociateTemplate template = new ApiAssociateTemplate();
+        template.setSalesforceId(salesforceId);
+        template.setEmail(email);
+        template.setFirstName(firstName);
+        template.setLastName(lastName);
+        // the expected and actual output
+        Associate expected 
+            = new Associate(salesforceId, email, firstName, lastName, null, null, null);
+        Associate actual = assignmentController.convertToAssociate(template);
         assertEquals(expected, actual);
     }
 }

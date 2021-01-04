@@ -7,10 +7,18 @@
 package com.revature.backend.testing.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.backend.controller.AssignmentController;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
+import com.revature.backend.model.api.ApiAssociateAssignment;
 import com.revature.backend.model.api.ApiAssociateTemplate;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.service.ManagerBalancer;
@@ -53,6 +61,10 @@ public class TestAssignmentController {
     // TESTS
     // ----------
 
+    // ----------
+    // convertToBatch TESTS
+    // ----------
+
     /**
      * Generate a dummy ApiBatchTemplate and make sure it is converted properly.
      */
@@ -76,6 +88,10 @@ public class TestAssignmentController {
         assertEquals(expected, actual);
     }
 
+    // ----------
+    // convertToAssociate TESTS
+    // ----------
+
     /**
      * Generate a dummy ApiAssociateTemplate and make sure it is converted properly.
      */
@@ -98,5 +114,46 @@ public class TestAssignmentController {
             = new Associate(salesforceId, email, firstName, lastName, null, null, null);
         Associate actual = assignmentController.convertToAssociate(template);
         assertEquals(expected, actual);
+    }
+
+    // ----------
+    // addNewBatches TESTS
+    // ----------
+
+    /**
+     * Generates some dummy data and makes sure it is processed correctly.
+     * Assumes the convert methods work (as they are tested separately)
+     */
+    @Test
+    public void testAddNewBatches(){
+        ApiAssociateTemplate assocTemplate = new ApiAssociateTemplate();
+        ApiAssociateAssignment assignment = new ApiAssociateAssignment();
+        assignment.setAssociate(assocTemplate);
+        ApiAssociateAssignment[] assignmentArray 
+            = new ApiAssociateAssignment[]{assignment};
+        ApiBatchTemplate batchTemplate = new ApiBatchTemplate();
+        batchTemplate.setAssociateAssignments(assignmentArray);
+        List<ApiBatchTemplate> batchTemplateList = new ArrayList<>();
+        batchTemplateList.add(batchTemplate);
+        when(mockBatchRetriever.retrieveNewlyStagingBatches())
+            .thenReturn(batchTemplateList);
+        assignmentController.addNewBatches();
+        // could go into more detail to make sure addNewBatches() behaves correctly...
+        verify(mockBatchWriter).writeNewlyStagingBatches(any());
+        verify(mockManagerService).getAllManagersAndAssociates();
+        verify(mockManagerBalancer).balanceNewBatches(any(), any());
+        verify(mockBatchWriter).writeNewlyStagingAssociates(any());
+    }
+
+    /**
+     * Tests that the assignmentController properly detects that there are no new batches.
+     */
+    @Test
+    public void testAddNewBatchesZero(){
+        List<ApiBatchTemplate> batchTemplates = new ArrayList<>();
+        when(mockBatchRetriever.retrieveNewlyStagingBatches()).thenReturn(batchTemplates);
+        assignmentController.addNewBatches();
+        // shouldn't persist anything to the database
+        verifyNoInteractions(mockBatchWriter, mockManagerBalancer, mockManagerService);
     }
 }

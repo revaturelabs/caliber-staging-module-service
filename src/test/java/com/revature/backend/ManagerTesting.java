@@ -1,69 +1,81 @@
 package com.revature.backend;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Manager;
 import com.revature.backend.repository.BackendRepo;
+import com.revature.backend.repository.ManagerRepository;
 import com.revature.backend.service.ManagerService;
+import com.revature.backend.service.ManagerServiceImpl;
 
-@SpringBootTest()
+@SpringBootTest(classes = {ManagerService.class, ManagerServiceImpl.class})
+@RunWith(SpringRunner.class)
 public class ManagerTesting {
 	
+	@MockBean
+	BackendRepo mockBackendRepo;
+	
+	@MockBean
+	ManagerRepository mockManagerRepository;
+
 	@Autowired
 	ManagerService managerService;
 	
-	@Mock
-	BackendRepo backendRepo;
-	
-	@Mock
-	Manager manager = new Manager();
-	
-//	@Rule 
-//	public MockitoRule mockitoRule = MockitoJUnit.rule();
-	
+	/**
+	 * Tests that managerService behaves properly when the repo finds some manager(s)
+	 */
 	@Test
-	void contextLoads() {
-		
+	void findAllManagers() {
+		List<Manager> expected = new ArrayList<>();
+		expected.add(new Manager());
+		when(mockManagerRepository.findAllManagers()).thenReturn(expected);
+		List<Manager> actual = managerService.getAllManagers();
+		assertNotNull(actual);
+		assertEquals(expected, actual);
 	}
 	
+	/**
+	 * Tests that managerService behaves properly when the repo throws an exception
+	 */
 	@Test
-	void PASSfindAllManagers() {
+	void findAllManagerFail() {
+		List<Manager> found = new ArrayList<>(); // none found
+		when(mockManagerRepository.findAllManagers())
+			.thenThrow(new ArrayIndexOutOfBoundsException()); // arbitrary type
 		List<Manager> m = managerService.getAllManagers();
-		assertNotEquals(0, m.size());
+		assertNull(m);
 	}
-	
-	@Test
-	void FAILfindAllManager() {
-		List<Manager> m = managerService.getAllManagers();
-		assertEquals(0, m.size());
-	}
-	
-	
 		
 	@Test
 	public void testGetAllManagersAndAssociates() {
 		Map<Manager, Integer> expectedMockMap = new HashMap<>();
 		
 		int id = 0;
-		List<Associate> associates = backendRepo.findAssociatesByManagerId(id);
+		List<Associate> associates = mockBackendRepo.findAssociatesByManagerId(id);
 		
 		int mockAssociateSize = associates.size();
 		
-		expectedMockMap.put(manager, mockAssociateSize);
+		expectedMockMap.put(new Manager(), mockAssociateSize);
 
-		when(backendRepo.findAssociatesByManagerId(id)).thenReturn(associates);
+		when(mockBackendRepo.findAssociatesByManagerId(id)).thenReturn(associates);
 		
 			
 	

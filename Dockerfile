@@ -1,3 +1,4 @@
-FROM tomcat:8.5-jdk8
-COPY ./target/*.war /usr/local/tomcat/webapps/ROOT.war
-CMD ["catalina.sh", "run"]
+FROM openjdk:8-jdk-alpine
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]

@@ -33,8 +33,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest(classes = { ManagerBalancer.class, ManagerService.class, 
-    BatchWriter.class, BatchRetriever.class, AssignmentController.class})
+@SpringBootTest(classes = {AssignmentController.class})
 @RunWith(SpringRunner.class)
 public class TestAssignmentController {
     

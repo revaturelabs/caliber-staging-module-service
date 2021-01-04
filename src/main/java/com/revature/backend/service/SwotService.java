@@ -79,8 +79,9 @@ public class SwotService {
 	 * Returns the updated item if successful.
 	 */
 	public AnalysisItem updateItem(AnalysisItem analysisItem) {
-		analysisItem.getSwot().setLastModifiedNow();	
-		swotRepository.save(analysisItem.getSwot());
+		Swot updateSwot = swotRepository.findById(analysisItem.getSwot().getId()).get();
+		updateSwot.setLastModifiedNow();	
+		swotRepository.save(updateSwot);
 		return analysisItemRepository.save(analysisItem);
 	}
 	

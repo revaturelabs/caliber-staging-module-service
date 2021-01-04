@@ -92,6 +92,6 @@ public class SwotControllerTests {
 		
 		when(service.retrieveAllSwot()).thenReturn(swots);
 		
-		this.mockMvc.perform(get("/swot/view")).andDo(print()).andExpect(status().isOk());
+		this.mockMvc.perform(get("/swot/view/all")).andDo(print()).andExpect(status().isOk());
 	}
 }

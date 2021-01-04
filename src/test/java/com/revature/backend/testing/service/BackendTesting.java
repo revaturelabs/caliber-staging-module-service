@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +24,11 @@ import com.revature.backend.model.Associate;
 import com.revature.backend.model.AssociateStatus;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
+import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.repository.BackendRepo;
 import com.revature.backend.service.BackendService;
 import com.revature.backend.service.BackendServiceImpl;
+import com.revature.backend.util.GetBatchById;
 
 @SpringBootTest()
 class BackendTesting {
@@ -32,12 +36,17 @@ class BackendTesting {
 	@Mock
 	BackendRepo repo;
 	
+	@Mock
+	GetBatchById getbatch;
+	
 	@Autowired
 	private BackendService backendService;
 
 	@Autowired
 	@InjectMocks
 	private BackendServiceImpl backend;
+	
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	@Before
 	@SuppressWarnings("deprecation")
@@ -100,17 +109,32 @@ class BackendTesting {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void findNewAssociates() {
+		
 		MockitoAnnotations.initMocks(this);
 		List<Associate> associates = new ArrayList<>();
 		associates.add(new Associate(1, "salesID", "email@email.com", "John", "Doe",
 				new Manager(1, "manager@manager.com", "Demo", "Manager"),
-				new Batch(547, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
+				new Batch(1, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
 		associates.add(new Associate(2, "salesID", "email@email.com", "John", "Doe",
 				new Manager(1, "manager@manager.com", "Demo", "Manager"),
-				new Batch(546, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
+				new Batch(2, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
 		
 		Mockito.when(repo.findAssociatesByManagerId(1)).thenReturn((associates));
+		
+		ApiBatchTemplate newBatch = new ApiBatchTemplate();
+		newBatch.setId(1);
+		newBatch.setEndDate(LocalDate.now().toString());
+		
+		ApiBatchTemplate oldBatch = new ApiBatchTemplate();
+		oldBatch.setId(2);
+		oldBatch.setEndDate("2020-10-10");
+		
+		Mockito.when(getbatch.getBatch(1)).thenReturn(newBatch);
+		Mockito.when(getbatch.getBatch(2)).thenReturn(oldBatch);
+		
 		List<Associate> expected = backend.findNewAssociatesByManagerId(1);
+		
+		
 		
 		assertEquals(1, expected.size());
 		verify(repo, times(1)).findAssociatesByManagerId(1);
@@ -131,12 +155,19 @@ class BackendTesting {
 		List<Associate> associates = new ArrayList<>();
 		associates.add(new Associate(1, "salesID", "email@email.com", "John", "Doe",
 				new Manager(1, "manager@manager.com", "Demo", "Manager"),
-				new Batch(547, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
+				new Batch(1, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
 		associates.add(new Associate(2, "salesID", "email@email.com", "John", "Doe",
 				new Manager(1, "manager@manager.com", "Demo", "Manager"),
-				new Batch(547, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
+				new Batch(1, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
 		
 		Mockito.when(repo.findAssociatesByManagerId(1)).thenReturn((associates));
+		
+		ApiBatchTemplate newBatch = new ApiBatchTemplate();
+		newBatch.setId(1);
+		newBatch.setEndDate(LocalDate.now().toString());
+		
+		Mockito.when(getbatch.getBatch(1)).thenReturn(newBatch);
+		
 		List<Associate> expected = backend.findNewAssociatesByManagerId(1);
 		
 		assertEquals(2, expected.size());
@@ -156,12 +187,17 @@ class BackendTesting {
 		List<Associate> associates = new ArrayList<>();
 		associates.add(new Associate(1, "salesID", "email@email.com", "John", "Doe",
 				new Manager(1, "manager@manager.com", "Demo", "Manager"),
-				new Batch(546, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
+				new Batch(2, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
 		associates.add(new Associate(2, "salesID", "email@email.com", "John", "Doe",
 				new Manager(1, "manager@manager.com", "Demo", "Manager"),
-				new Batch(546, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
+				new Batch(2, "salesID", "name", "skill", "location"), AssociateStatus.STAGING));
+		
+		ApiBatchTemplate oldBatch = new ApiBatchTemplate();
+		oldBatch.setId(2);
+		oldBatch.setEndDate("2020-10-10");
 		
 		Mockito.when(repo.findAssociatesByManagerId(1)).thenReturn((associates));
+		Mockito.when(getbatch.getBatch(2)).thenReturn(oldBatch);
 		List<Associate> expected = backend.findNewAssociatesByManagerId(1);
 		
 		assertEquals(0, expected.size());

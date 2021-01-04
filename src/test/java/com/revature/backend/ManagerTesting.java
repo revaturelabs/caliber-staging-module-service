@@ -57,28 +57,65 @@ public class ManagerTesting {
 	 */
 	@Test
 	void findAllManagerFail() {
-		List<Manager> found = new ArrayList<>(); // none found
 		when(mockManagerRepository.findAllManagers())
 			.thenThrow(new ArrayIndexOutOfBoundsException()); // arbitrary type
 		List<Manager> m = managerService.getAllManagers();
 		assertNull(m);
 	}
-		
+	
+	/**
+	 * Tests that managerService correctly builds the map of managers and the count of
+	 * their assigned associates
+	 * 
+	 * Important: relies on getAllManagers working
+	 */
 	@Test
 	public void testGetAllManagersAndAssociates() {
-		Map<Manager, Integer> expectedMockMap = new HashMap<>();
-		
-		int id = 0;
-		List<Associate> associates = mockBackendRepo.findAssociatesByManagerId(id);
-		
-		int mockAssociateSize = associates.size();
-		
-		expectedMockMap.put(new Manager(), mockAssociateSize);
+		// prepare the data to be mapped
+		Map<Manager, Integer> expectedMap = new HashMap<>();
+		List<Manager> managerList = new ArrayList<>();
 
-		when(mockBackendRepo.findAssociatesByManagerId(id)).thenReturn(associates);
+		Manager m1 = new Manager();
+		m1.setId(1);
+		int m1Count = 5;
+		List<Associate> m1Assocs = buildAssocList(m1, m1Count);
+		managerList.add(m1);
+		expectedMap.put(m1, m1Count);
 		
-			
-	
+		Manager m2 = new Manager();
+		m2.setId(2);
+		int m2Count = 7;
+		List<Associate> m2Assocs = buildAssocList(m2, m2Count);
+		managerList.add(m2);
+		expectedMap.put(m2, m2Count);
+		
+		Manager m3 = new Manager();
+		m3.setId(3);
+		int m3Count = 20;
+		List<Associate> m3Assocs = buildAssocList(m3, m3Count);
+		managerList.add(m3);
+		expectedMap.put(m3, m3Count);
+		
+		when(mockManagerRepository.findAllManagers()).thenReturn(managerList);
+		when(mockBackendRepo.findAssociatesByManagerId(1)).thenReturn(m1Assocs);
+		when(mockBackendRepo.findAssociatesByManagerId(2)).thenReturn(m2Assocs);
+		when(mockBackendRepo.findAssociatesByManagerId(3)).thenReturn(m3Assocs);
+		
+		Map<Manager, Integer> actualMap = managerService.getAllManagersAndAssociates();
+		assertEquals(expectedMap, actualMap);
+	}
+
+	/**
+	 * Helper method that builds a list of dummy associates, assigned to the given manager
+	 */
+	private List<Associate> buildAssocList(Manager manager, int numAssocs){
+		List<Associate> m1Associates = new ArrayList<>();
+		for (int i = 0; i < numAssocs; i++){
+			Associate assoc = new Associate();
+			assoc.setManager(manager);
+			m1Associates.add(assoc); // should be ok to have null fields
+		}
+		return m1Associates;
 	}
 	
 	

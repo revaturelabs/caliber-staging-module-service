@@ -72,15 +72,14 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public Map<Manager, Integer> getAllManagersAndAssociates() {
 		
-		List<Manager> managers = new ArrayList<>();
+		List<Manager> managers;
 		managers = getAllManagers();
 		Map <Manager, Integer> map = new HashMap<Manager, Integer>();
 		
-		int id = 0;
-		
 		for(Manager manager : managers) {
 			
-			List<Associate> associates = backendRepo.findAssociatesByManagerId(id);
+			List<Associate> associates 
+				= backendRepo.findAssociatesByManagerId(manager.getId());
 			int associateSize = associates.size();
 			
 			map.put(manager, associateSize);

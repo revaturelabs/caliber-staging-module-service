@@ -7,6 +7,11 @@ Spring Boot Microservice for Caliber Staging Module
 
 ### Summary
 
-#### User Stories
+#### Manager User Stories
+- A manager can view all associates assigned to him
+- A manager can view all associates that are new to staging
+- The system will automatically assign associates to a staging manager
+
+#### SWOT User Stories
 
 ### Technical Requirements

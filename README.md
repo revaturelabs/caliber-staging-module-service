@@ -13,5 +13,13 @@ Spring Boot Microservice for Caliber Staging Module
 - The system will automatically assign associates to a staging manager
 
 #### SWOT User Stories
+- A manager can create a SWOT analysis for an associate in order to decide actions the associate should prioritize
+
+**Architecture Diagram**
+![](./imgs/Staging-Module-AD.png)
+
+**ERD Diagram**
+![](./imgs/Staging-Module-ERD.PNG)
 
 ### Technical Requirements
+

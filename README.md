@@ -3,6 +3,7 @@
 ## Revature Project #3
 
 ### Team Members:
+Andrew Curry - Testing & Assigning Associates to Managers
 
 ### Summary
 

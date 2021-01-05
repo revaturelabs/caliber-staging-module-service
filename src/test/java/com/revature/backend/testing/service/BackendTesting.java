@@ -98,13 +98,12 @@ class BackendTesting {
 	
 	/*
 	 * Tests logic in BackendServiceImpl.findNewAssociatesByManagerId()
-	 * encompassing testing of GetBatchById logic.
+	 * Mocking logic of GetBatchById logic.
 	 * Ensures that only associates whose batch ended within the last 7
 	 * days gets returned.
+	 * Creates a mock batch to be returned that has an end date of 
+	 * LocalDateTime.now()
 	 * 
-	 * At this time, Batch ID 547 must be changed every week in order to
-	 * get a successful test. Change 547 to batch ID that has ended within
-	 * the last week.
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
@@ -121,10 +120,12 @@ class BackendTesting {
 		
 		Mockito.when(repo.findAssociatesByManagerId(1)).thenReturn((associates));
 		
+		// create a mock batch ending within the last 7 days
 		ApiBatchTemplate newBatch = new ApiBatchTemplate();
 		newBatch.setId(1);
 		newBatch.setEndDate(LocalDate.now().toString());
 		
+		// create a mock batch ending beyond the last 7 days
 		ApiBatchTemplate oldBatch = new ApiBatchTemplate();
 		oldBatch.setId(2);
 		oldBatch.setEndDate("2020-10-10");
@@ -135,7 +136,7 @@ class BackendTesting {
 		List<Associate> expected = backend.findNewAssociatesByManagerId(1);
 		
 		
-		
+		// assert that only the 1 associate is returned
 		assertEquals(1, expected.size());
 		verify(repo, times(1)).findAssociatesByManagerId(1);
 		
@@ -144,9 +145,8 @@ class BackendTesting {
 	
 	/*
 	 * Tests that multiple associates will be returned if from the
-	 * same batch
+	 * same batch that ended today
 	 * 
-	 * Change 547 to Batch ID that has ended within the last week
 	 */
 	@SuppressWarnings("deprecation")
 	@Test
@@ -170,6 +170,7 @@ class BackendTesting {
 		
 		List<Associate> expected = backend.findNewAssociatesByManagerId(1);
 		
+		// assert that both associates are returned
 		assertEquals(2, expected.size());
 		verify(repo, times(1)).findAssociatesByManagerId(1);
 		
@@ -200,6 +201,7 @@ class BackendTesting {
 		Mockito.when(getbatch.getBatch(2)).thenReturn(oldBatch);
 		List<Associate> expected = backend.findNewAssociatesByManagerId(1);
 		
+		// assert that no associates are returned
 		assertEquals(0, expected.size());
 		verify(repo, times(1)).findAssociatesByManagerId(1);
 		

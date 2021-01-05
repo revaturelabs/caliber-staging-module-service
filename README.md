@@ -18,9 +18,9 @@
 ![](./imgs/Staging-Module-ERD.PNG)
 **ERD Diagram**
 
-Associate status' are emun staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
+Associate status' are enum staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
 
-### Technical Requirements
+### Technical Used
 - Firebase
 - Springboot
 - Junit and Mockito testing

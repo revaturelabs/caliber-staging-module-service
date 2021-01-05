@@ -27,7 +27,6 @@ import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 import com.revature.backend.service.ManagerBalancerImpl;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +41,10 @@ public class TestManagerBalancerImpl {
     // SETUP
     // ----------
 
+    // This is wiring an Impl because I want to test some of the helper methods which are
+    // defined in the Impl, but are not specified in the interface
     @Autowired
-    private ManagerBalancerImpl managerBalancer;
+    private ManagerBalancerImpl managerBalancerImpl;
 
     // ----------
     // TESTS
@@ -238,7 +239,7 @@ public class TestManagerBalancerImpl {
      */
     public void testGroupIntoBatchesHelper(int[] sizes){
         List<Associate> associateList = generateAssociateList(sizes);
-        Associate[][] groupedAssociates = managerBalancer.groupIntoBatches(associateList);
+        Associate[][] groupedAssociates = managerBalancerImpl.groupIntoBatches(associateList);
         areAssociatesGroupedCorrectly(groupedAssociates, sizes);
     }
 
@@ -311,7 +312,7 @@ public class TestManagerBalancerImpl {
      */
     private void testSortBatchesBySizeHelper(int[] lengths) {
         Associate[][] testBatches = buildTestBatches(lengths);
-        managerBalancer.sortBatchesBySize(testBatches);
+        managerBalancerImpl.sortBatchesBySize(testBatches);
         assertTrue(areBatchesSortedBySize(testBatches));
     }
 
@@ -350,7 +351,7 @@ public class TestManagerBalancerImpl {
         Map<Manager, Integer> managerMap = new HashMap<>();
         int leastAssociates = buildManagerMap(managerSizes, managerMap);
 
-        Manager result = managerBalancer.findManagerWithLeast(managerMap);
+        Manager result = managerBalancerImpl.findManagerWithLeast(managerMap);
         int resultAssociates = managerMap.get(result);
 
         //System.out.println(
@@ -391,7 +392,7 @@ public class TestManagerBalancerImpl {
         int expectedBalanceScore 
             = calculateExpectedBalanceScore(managerSizes, batchSizes);
         // run the actual implementation and verify it
-        managerBalancer.assignAssociatesEvenly(managerMap, batches);
+        managerBalancerImpl.assignAssociatesEvenly(managerMap, batches);
         // is each associate assigned to a manager?
         for (Associate[] currentBatch : batches){
             for (Associate associate : currentBatch){
@@ -425,7 +426,7 @@ public class TestManagerBalancerImpl {
         int expectedBalanceScore 
             = calculateExpectedBalanceScore(managerSizes, batchSizes);
         // call the implementation
-        managerBalancer.balanceNewBatches(managerMap, associates);
+        managerBalancerImpl.balanceNewBatches(managerMap, associates);
         // what's the actual balance score?
         int actualBalanceScore = calculateActualBalanceScore(managerMap);
         assertEquals(expectedBalanceScore, actualBalanceScore);

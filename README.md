@@ -6,6 +6,9 @@
 - Andrew Curry - Testing & Assigning Associates to Managers
 - Mareo Yapp - Viewing all associates assigned to a Manager, Testing and Documentation
 - Saleel Bey - Documentation, Styling, Retrieving Managers and associates
+- Suva Shahria - View recently graduated associates to staging assigned to a Manager, Testing, Modals
+- Ben Johnston - Developed listening service in Java that periodically checks Caliber for new batches.
+- Patrick Warring - Viewing, Creating, and Updating SWOT analysis for associates
 
 ### Executive Summary
 - The Caliber API system will...

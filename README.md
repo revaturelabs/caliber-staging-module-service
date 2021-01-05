@@ -14,11 +14,11 @@
 - The system will automatically assign associates to a staging manager
 - A manager can create a SWOT analysis for an associate in order to decide actions the associate should prioritize
 
-![](./imgs/Staging-Module-AD.png)
 **Architecture Diagram**
+![](./imgs/Staging-Module-AD.png)
 
-![](./imgs/Staging-Module-ERD.PNG)
 **ERD Diagram**
+![](./imgs/Staging-Module-ERD.PNG)
 
 Associate status' are enum staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
 

@@ -92,8 +92,9 @@ public class AnalysisItem {
 		return Objects.hash(getId(), getContent(), swot, getType());
 	}
 
+	//This does not print 'swot' because it causes a stack overflow error when either the AnalysisItem or Swot toString are called
+	//if printing is required, print the id instead of the whole object or otherwise edit the swot toString to prevent recursive printing
 	public String toString() {
-		return "Analysis_Item(id=" + this.getId() + ", content=" + this.getContent() + ", SWOT_analysis_id="
-				+ this.getSwot() + ", type=" + this.getType() + ")";
+		return "Analysis_Item(id=" + this.getId() + ", content=" + this.getContent() + ", type=" + this.getType() + ")";
 	}
 }

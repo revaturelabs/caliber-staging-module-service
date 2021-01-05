@@ -54,7 +54,7 @@ Associate status' are enum staging and project. Analysis type are enum strengths
   - Agile methodologies
 
 
-**Architecture Diagram**![](./imgs/AD.png)
+![](./imgs/AD.png)**Architecture Diagram**
 
 
 ![](./imgs/ERD.PNG)**ERD Diagram**

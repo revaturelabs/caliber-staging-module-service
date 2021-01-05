@@ -43,13 +43,12 @@ public class StagingListenerImpl implements StagingListener {
 	private boolean shouldUpdate;
 	private boolean startUp =true;
 	
-	private String caliberUrl = "https://caliber2-mock.revaturelabs.com/mock/training/batch?year=";
+	//private String caliberUrl = "https://caliber2-mock.revaturelabs.com/mock/training/batch?year=";
 	
 	@Autowired
 	AssignmentController controller;
 	
 	public StagingListenerImpl() {
-		// TODO Auto-generated constructor stub
 		super();
 	}
 

@@ -15,8 +15,8 @@
 **Architecture Diagram**
 ![](./imgs/Staging-Module-AD.png)
 
-**ERD Diagram**
 ![](./imgs/Staging-Module-ERD.PNG)
+**ERD Diagram**
 
 Associate status' are enum staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
 

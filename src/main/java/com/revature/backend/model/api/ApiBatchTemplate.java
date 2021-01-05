@@ -19,7 +19,6 @@ public class ApiBatchTemplate {
 	int currentWeek;
 	public ApiBatchTemplate() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ApiBatchTemplate(int id, String batchId, String name, String startDate, String endDate, String skill,
 			String location, String type, double goodGrade, double passingGrade,

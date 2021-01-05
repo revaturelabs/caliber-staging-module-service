@@ -21,7 +21,6 @@ public class AssociateDTO {
 	private String status;
 
 	public AssociateDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public AssociateDTO(int id, String salesforceId, String email, String firstName, String lastName, int manager,

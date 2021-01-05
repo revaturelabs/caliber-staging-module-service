@@ -1,14 +1,12 @@
 package com.revature.backend;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.revature.backend.model.Manager;
 import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.StagingListener;
 
@@ -29,18 +27,7 @@ public class StartupApplicationListener implements ApplicationListener<ContextRe
 	ManagerService mServ;
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		// This block is used for testing until we have an official database set up. 
-		//Adds a few test managers to database before the system checks for batches.
-		//NEEDS TO BE REMOVED BEFORE SWAPPING AWAY FROM H2 DB
-		//-------------
-		List<Manager> mList = new ArrayList<>();
-		Manager m = new Manager("Testemail@email.email", "test", "user");
-		Manager m1 = new Manager("Testemail2@email.email", "test2", "user2");
-		Manager m2 = new Manager("Testemail3@email.email", "test3", "user3");
-		mList.add(m);
-		mList.add(m1);
-		mList.add(m2);
-		mServ.saveAll(mList);
+	
 		//-------------		
 		//Starts the periodic checking for new batches. Will run immediately on server start up, then weekly on the specified UpdateDay until the server is restarted.
 		sListener.startListening();

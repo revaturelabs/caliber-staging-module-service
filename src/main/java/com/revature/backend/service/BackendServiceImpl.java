@@ -75,6 +75,7 @@ public class BackendServiceImpl implements BackendService {
 				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
 				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
 				if(elapsedDays<= 7) {
+					System.out.println(elapsedDays);
 					for (Associate a: associates) {
 						if(a.getBatch().getId() == x) {
 							ret.add(a);
@@ -83,22 +84,23 @@ public class BackendServiceImpl implements BackendService {
 				}
 			}
 			//Non unique calls
-			for (Associate a: associates) {
+			/*for (Associate a: associates) {
 				ApiBatchTemplate batch =batchRetriever.getBatch(a.getBatch().getId());
 				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
 				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
 				if(elapsedDays<= 7) {
 					ret.add(a);
 				}
-			}
+			}*/
 			
 		}catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		
 		// Test to show it works
 		
-		int batchId = 394;
+		/*int batchId = 394;
 		ApiBatchTemplate batch =batchRetriever.getBatch(batchId);
 		
 		
@@ -108,7 +110,7 @@ public class BackendServiceImpl implements BackendService {
 
 		 
 		long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
-		System.out.println("days elapsed "+ elapsedDays); 
+		System.out.println("days elapsed "+ elapsedDays); */
 		return ret;
 	}
 

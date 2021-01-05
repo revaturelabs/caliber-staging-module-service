@@ -9,7 +9,6 @@ public class ApiAssociateAssignment {
 	boolean active;
 	public ApiAssociateAssignment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ApiAssociateAssignment(String trainingStatus, ApiAssociateTemplate associate, String startDate,
 			String endDate, boolean active) {

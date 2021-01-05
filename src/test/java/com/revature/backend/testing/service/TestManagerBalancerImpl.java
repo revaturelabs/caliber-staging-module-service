@@ -1,11 +1,6 @@
 /**
- * This file contains unit tests for the ManagerBalancer interface and its implementing 
- * class, ManagerBalancerImpl
- * 
- * NOTE: currently this test 'manually' instantiates a ManagerBalancerImpl rather than
- * using spring to auto inject it. This means that this class does not need the
- * SpringBootTest() annotation, but I have left that (and the related impoorts) commneted
- * out in case they need to be restored later.
+ * This file contains unit tests for the class ManagerBalancerImpl, which implements
+ * the ManagerBalancer interface.
  * 
  * @author Andrew Curry
  */
@@ -25,16 +20,15 @@ import java.util.Map;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
-//import com.revature.backend.service.ManagerBalancer;
 import com.revature.backend.service.ManagerBalancerImpl;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-//import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-//@SpringBootTest(classes = { ManagerBalancer.class, ManagerBalancerImpl.class })
+@SpringBootTest(classes = { ManagerBalancerImpl.class })
 @RunWith(SpringRunner.class)
 public class TestManagerBalancerImpl {
 
@@ -42,18 +36,10 @@ public class TestManagerBalancerImpl {
     // SETUP
     // ----------
 
-    // @Autowired
-    // private ManagerBalancer managerBalancer;
-
-    // this isn't the Spring way of doing things, but this seemed like the best compromise
-    // solution to a problem I was having. Let me know if you have objections/answers
-    // - Andrew
-    private ManagerBalancerImpl managerBalancer;
-
-    @Before
-    public void setUp() {
-        managerBalancer = new ManagerBalancerImpl();
-    }
+    // This is wiring an Impl because I want to test some of the helper methods which are
+    // defined in the Impl, but are not specified in the interface
+    @Autowired
+    private ManagerBalancerImpl managerBalancerImpl;
 
     // ----------
     // TESTS
@@ -248,7 +234,7 @@ public class TestManagerBalancerImpl {
      */
     public void testGroupIntoBatchesHelper(int[] sizes){
         List<Associate> associateList = generateAssociateList(sizes);
-        Associate[][] groupedAssociates = managerBalancer.groupIntoBatches(associateList);
+        Associate[][] groupedAssociates = managerBalancerImpl.groupIntoBatches(associateList);
         areAssociatesGroupedCorrectly(groupedAssociates, sizes);
     }
 
@@ -269,17 +255,6 @@ public class TestManagerBalancerImpl {
                 associateList.add(a);
             }// end inner for loop
         } // end outer for loop
-
-        // checks for debugging
-        /*
-        int totalFromSizes = 0;
-        for (int size : sizes){
-            totalFromSizes += size;
-        }
-        System.out.println(
-            "DEBUG: num associates from list = " + associateList.size() 
-            + ", num associates from int[] sizes = " + totalFromSizes);
-        */
 
         Collections.shuffle(associateList); // randomizes order
         return associateList;
@@ -321,7 +296,7 @@ public class TestManagerBalancerImpl {
      */
     private void testSortBatchesBySizeHelper(int[] lengths) {
         Associate[][] testBatches = buildTestBatches(lengths);
-        managerBalancer.sortBatchesBySize(testBatches);
+        managerBalancerImpl.sortBatchesBySize(testBatches);
         assertTrue(areBatchesSortedBySize(testBatches));
     }
 
@@ -360,11 +335,8 @@ public class TestManagerBalancerImpl {
         Map<Manager, Integer> managerMap = new HashMap<>();
         int leastAssociates = buildManagerMap(managerSizes, managerMap);
 
-        Manager result = managerBalancer.findManagerWithLeast(managerMap);
+        Manager result = managerBalancerImpl.findManagerWithLeast(managerMap);
         int resultAssociates = managerMap.get(result);
-
-        //System.out.println(
-        //    "DEBUG: expected " + leastAssociates + " and found " + resultAssociates);
         assertEquals(leastAssociates, resultAssociates);
     }
     
@@ -401,7 +373,7 @@ public class TestManagerBalancerImpl {
         int expectedBalanceScore 
             = calculateExpectedBalanceScore(managerSizes, batchSizes);
         // run the actual implementation and verify it
-        managerBalancer.assignAssociatesEvenly(managerMap, batches);
+        managerBalancerImpl.assignAssociatesEvenly(managerMap, batches);
         // is each associate assigned to a manager?
         for (Associate[] currentBatch : batches){
             for (Associate associate : currentBatch){
@@ -413,9 +385,6 @@ public class TestManagerBalancerImpl {
         // is it correctly balanced?
         int actualBalanceScore = calculateActualBalanceScore(managerMap);
         assertEquals(expectedBalanceScore, actualBalanceScore);
-        //System.out.println(
-        //    "DEBUG: testAssignAssociatesEvenlyHelper balance check: " 
-        //    + expectedBalanceScore + " vs " + actualBalanceScore);
     }
 
     // ----------
@@ -435,7 +404,7 @@ public class TestManagerBalancerImpl {
         int expectedBalanceScore 
             = calculateExpectedBalanceScore(managerSizes, batchSizes);
         // call the implementation
-        managerBalancer.balanceNewBatches(managerMap, associates);
+        managerBalancerImpl.balanceNewBatches(managerMap, associates);
         // what's the actual balance score?
         int actualBalanceScore = calculateActualBalanceScore(managerMap);
         assertEquals(expectedBalanceScore, actualBalanceScore);

@@ -43,13 +43,12 @@ public class StagingListenerImpl implements StagingListener {
 	private boolean shouldUpdate;
 	private boolean startUp =true;
 	
-	private String caliberUrl = "https://caliber2-mock.revaturelabs.com/mock/training/batch?year=";
+	//private String caliberUrl = "https://caliber2-mock.revaturelabs.com/mock/training/batch?year=";
 	
 	@Autowired
 	AssignmentController controller;
 	
 	public StagingListenerImpl() {
-		// TODO Auto-generated constructor stub
 		super();
 	}
 
@@ -156,7 +155,6 @@ public class StagingListenerImpl implements StagingListener {
 			connection.disconnect();
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			log.error("Failed to retrieve info from Caliber API", e);
 		} finally {

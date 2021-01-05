@@ -7,7 +7,6 @@ public class ApiEmployeeAssignment {
 
 	public ApiEmployeeAssignment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ApiEmployeeAssignment(String role, ApiEmployeeTemplate employee, String deletedAt) {

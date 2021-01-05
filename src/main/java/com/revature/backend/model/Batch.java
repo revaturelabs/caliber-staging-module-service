@@ -25,7 +25,6 @@ public class Batch {
 	private String location;
 
 	public Batch() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Batch(int id, String salesforceID, String name, String skill, String location) {

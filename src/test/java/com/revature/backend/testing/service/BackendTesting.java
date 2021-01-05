@@ -7,7 +7,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +44,6 @@ class BackendTesting {
 	@Autowired
 	@InjectMocks
 	private BackendServiceImpl backend;
-	
-	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	@Before
 	@SuppressWarnings("deprecation")

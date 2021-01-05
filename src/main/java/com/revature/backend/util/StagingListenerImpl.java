@@ -155,7 +155,6 @@ public class StagingListenerImpl implements StagingListener {
 			connection.disconnect();
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			log.error("Failed to retrieve info from Caliber API", e);
 		} finally {

@@ -7,7 +7,6 @@ public class ApiEmployeeTemplate {
 	String lastName;
 	public ApiEmployeeTemplate() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ApiEmployeeTemplate(String email, String firstName, String lastName) {
 		super();

@@ -6,7 +6,6 @@ public class ApiFlagTemplate {
 	String type;
 	public ApiFlagTemplate() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ApiFlagTemplate(String content, int id, String type) {
 		super();

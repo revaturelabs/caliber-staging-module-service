@@ -7,6 +7,7 @@
 - Mareo Yapp - Viewing all associates assigned to a Manager, Testing and Documentation
 - Saleel Bey - Documentation, Styling, Retrieving Managers and associates
 - Suva Shahria - View recently graduated associates to staging assign to a Manager, Testing, Work on Modals, Angular Components
+- Ben Johnston - Developed listening service in Java that periodically checks Caliber for new batches.
 
 ### Executive Summary
 - The Caliber API system will...

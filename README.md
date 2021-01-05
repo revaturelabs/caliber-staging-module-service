@@ -15,10 +15,10 @@
 - A manager can create a SWOT analysis for an associate in order to decide actions the associate should prioritize
 
 **Architecture Diagram**
-![](./imgs/Staging-Module-AD.png)
+![](./imgs/AD.png)
 
 **ERD Diagram**
-![](./imgs/Staging-Module-ERD.PNG)
+![](./imgs/ERD.PNG)
 
 Associate status' are enum staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
 

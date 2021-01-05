@@ -16,7 +16,6 @@
 
 ![](./imgs/AD.png)
 
-
 **Architecture Diagram**
 
 **ERD Diagram**

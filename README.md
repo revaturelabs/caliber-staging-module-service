@@ -6,7 +6,7 @@
 - Andrew Curry - Testing & Assigning Associates to Managers
 - Mareo Yapp - Viewing all associates assigned to a Manager, Testing and Documentation
 - Saleel Bey - Documentation, Styling, Retrieving Managers and associates
-- Suva Shahria - View recently graduated associates to staging assign to a Manager, Testing, Work on Modals, Angular views and logic
+- Suva Shahria - View recently graduated associates to staging assign to a Manager, Testing, Work on Modals, Angular Components
 
 ### Executive Summary
 - The Caliber API system will...

@@ -3,7 +3,7 @@
 ## Revature Project #3
 
 ### Team Members:
-Andrew Curry - Testing & Assigning Associates to Managers
+- Andrew Curry - Testing & Assigning Associates to Managers
 
 ### Summary
 
@@ -22,7 +22,31 @@ Andrew Curry - Testing & Assigning Associates to Managers
 Associate status' are enum staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
 
 ### Technical Used
-- Firebase
-- Springboot
-- Junit and Mockito testing
-- Front end Controller design pattern
+- Frontend:
+  - Angular11
+  - AngularFire/Firebase
+  - Animate.css Library
+  - Jasmine
+  - Karma
+  - Bootstrap
+  - HTML5
+  - CSS3
+  - Caliber API
+- Backend:
+  - Spring Boot
+  - Spring Data
+  - Java8
+  - Maven
+  - JUnit
+  - Mockito
+  - PostgreSQL
+  - Log4j
+  - Lombok
+- Devops:
+  - Jenkins
+  - AWS EC2
+  - AWS RDS
+  - Docker
+- Other
+  - Git
+  - Agile methodologies

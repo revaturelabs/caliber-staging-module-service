@@ -11,7 +11,7 @@
 - Patrick Warring - Viewing, Creating, and Updating SWOT analysis for associates
 - Quincy Roman -  Team Lead, Docker containerization, Jenkins pipeline creation and maintenance, creation and viewing of SWOT analyses and their items.
 - Connor Ryan - Testing, Devops, Project structuring / reformating and Working on SWOT Analysis 
-
+- Jeremy Critchley - Team Lead, Created Controller, Controller and Service Testing, Modal
 
 ### Executive Summary
 - The Caliber API system will...

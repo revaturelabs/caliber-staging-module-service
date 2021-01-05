@@ -15,6 +15,7 @@
 - A manager can create a SWOT analysis for an associate in order to decide actions the associate should prioritize
 
 ![](./imgs/AD.png)
+
 **Architecture Diagram**
 
 **ERD Diagram**

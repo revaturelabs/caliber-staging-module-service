@@ -7,7 +7,10 @@
 - Mareo Yapp - Viewing all associates assigned to a Manager, Testing and Documentation
 - Saleel Bey - Documentation, Styling, Retrieving Managers and associates
 
-### Summary
+### Executive Summary
+- The Caliber API system will...
+- A manager can login and view all associates automatically assigned to them by the system.
+- A SWOT analysis can be created for an associate.
 
 #### Manager User Stories
 - A manager can view all associates assigned to him.

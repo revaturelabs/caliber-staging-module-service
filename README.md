@@ -14,8 +14,10 @@
 - The system will automatically assign associates to a staging manager
 - A manager can create a SWOT analysis for an associate in order to decide actions the associate should prioritize
 
-**Architecture Diagram**
 ![](./imgs/AD.png)
+
+
+**Architecture Diagram**
 
 **ERD Diagram**
 ![](./imgs/ERD.PNG)

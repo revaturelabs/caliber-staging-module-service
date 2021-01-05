@@ -5,6 +5,7 @@
 ### Team Members:
 - Andrew Curry - Testing & Assigning Associates to Managers
 - Mareo Yapp - Viewing all associates assigned to a Manager, Testing and Documentation
+- Saleel Bey - Documentation, Styling, Retrieving Managers and associates
 
 ### Summary
 

@@ -25,16 +25,16 @@ import java.util.Map;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
-//import com.revature.backend.service.ManagerBalancer;
 import com.revature.backend.service.ManagerBalancerImpl;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-//import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-//@SpringBootTest(classes = { ManagerBalancer.class, ManagerBalancerImpl.class })
+@SpringBootTest(classes = { ManagerBalancerImpl.class })
 @RunWith(SpringRunner.class)
 public class TestManagerBalancerImpl {
 
@@ -42,18 +42,8 @@ public class TestManagerBalancerImpl {
     // SETUP
     // ----------
 
-    // @Autowired
-    // private ManagerBalancer managerBalancer;
-
-    // this isn't the Spring way of doing things, but this seemed like the best compromise
-    // solution to a problem I was having. Let me know if you have objections/answers
-    // - Andrew
+    @Autowired
     private ManagerBalancerImpl managerBalancer;
-
-    @Before
-    public void setUp() {
-        managerBalancer = new ManagerBalancerImpl();
-    }
 
     // ----------
     // TESTS

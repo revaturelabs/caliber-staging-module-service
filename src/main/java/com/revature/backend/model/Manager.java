@@ -22,7 +22,6 @@ public class Manager {
 	private String lastName;
 
 	public Manager() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Manager(int id, String email, String firstName, String lastName) {

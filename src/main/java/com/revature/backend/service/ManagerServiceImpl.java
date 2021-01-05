@@ -35,7 +35,6 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Override
 	public List<Manager> saveAll(List<Manager> mList) {
-		// TODO Auto-generated method stub
 		List<Manager> result = new ArrayList<>();
 
 		for(Manager m : mList)

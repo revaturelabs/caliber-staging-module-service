@@ -8,7 +8,6 @@ public class ApiAssociateTemplate {
 	ApiFlagTemplate flag;
 	public ApiAssociateTemplate() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ApiAssociateTemplate(String email, String salesforceId, String firstName, String lastName, ApiFlagTemplate flag) {
 		super();

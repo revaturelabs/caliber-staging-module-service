@@ -1,11 +1,6 @@
 /**
- * This file contains unit tests for the ManagerBalancer interface and its implementing 
- * class, ManagerBalancerImpl
- * 
- * NOTE: currently this test 'manually' instantiates a ManagerBalancerImpl rather than
- * using spring to auto inject it. This means that this class does not need the
- * SpringBootTest() annotation, but I have left that (and the related impoorts) commneted
- * out in case they need to be restored later.
+ * This file contains unit tests for the class ManagerBalancerImpl, which implements
+ * the ManagerBalancer interface.
  * 
  * @author Andrew Curry
  */
@@ -261,17 +256,6 @@ public class TestManagerBalancerImpl {
             }// end inner for loop
         } // end outer for loop
 
-        // checks for debugging
-        /*
-        int totalFromSizes = 0;
-        for (int size : sizes){
-            totalFromSizes += size;
-        }
-        System.out.println(
-            "DEBUG: num associates from list = " + associateList.size() 
-            + ", num associates from int[] sizes = " + totalFromSizes);
-        */
-
         Collections.shuffle(associateList); // randomizes order
         return associateList;
     }
@@ -353,9 +337,6 @@ public class TestManagerBalancerImpl {
 
         Manager result = managerBalancerImpl.findManagerWithLeast(managerMap);
         int resultAssociates = managerMap.get(result);
-
-        //System.out.println(
-        //    "DEBUG: expected " + leastAssociates + " and found " + resultAssociates);
         assertEquals(leastAssociates, resultAssociates);
     }
     
@@ -404,9 +385,6 @@ public class TestManagerBalancerImpl {
         // is it correctly balanced?
         int actualBalanceScore = calculateActualBalanceScore(managerMap);
         assertEquals(expectedBalanceScore, actualBalanceScore);
-        //System.out.println(
-        //    "DEBUG: testAssignAssociatesEvenlyHelper balance check: " 
-        //    + expectedBalanceScore + " vs " + actualBalanceScore);
     }
 
     // ----------

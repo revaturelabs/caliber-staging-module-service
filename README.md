@@ -6,7 +6,7 @@
 - Andrew Curry - Testing & Assigning Associates to Managers
 - Mareo Yapp - Viewing all associates assigned to a Manager, Testing and Documentation
 - Saleel Bey - Documentation, Styling, Retrieving Managers and associates
-- Suva Shahria - View recently graduated associates to staging assigned to a Manager, Testing, Modals
+- Suva Shahria - View recently graduated associates, Testing, Modal Popup
 - Ben Johnston - Team Lead, Developed listening service in Java that periodically checks Caliber for new batches.
 - Patrick Warring - Viewing, Creating, and Updating SWOT analysis for associates
 - Quincy Roman -  Team Lead, Docker containerization, Jenkins pipeline creation and maintenance, creation and viewing of SWOT analyses and their items.

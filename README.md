@@ -3,7 +3,7 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 
 ### Team Members:
 - Ben Johnston - Scrum Master, Team Lead, Staging Listener
-- Jeremy Critchley - Team Lead, Created Associate Contrtoller, Controller and Service Testing, Modal Popup
+- Jeremy Critchley - Team Lead, Created Associate Controller, Controller and Service Testing, Modal Popup
 - Quincy Roman - Team Lead, Devops, SWOT analyses functionalities
 - Connor Ryan - Team Lead, Devops, Docker/Jenkins configurations
 - Azhya Knox - Team Lead, BatchRetriever, BatchWriter, Firebase Authentication, User UI/UX

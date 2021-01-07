@@ -3,9 +3,24 @@
 ## Revature Project #3
 
 ### Team Members:
+- Ben Johnston - Scrum Master, Team Lead, Staging Listener
+- Jeremy Critchley - Team Lead, Created Associate Contrtoller, Controller and Service Testing, Modal Popup
+- Quincy Roman - Team Lead, Devops, SWOT analyses functionalities
+- Connor Ryan - Team Lead, Devops, Docker/Jenkins configurations
+- Azhya Knox - Team Lead, BatchRetriever, BatchWriter, Firebase Authentication, User UI/UX
+
 - Andrew Curry - Testing & Assigning Associates to Managers
 - Mareo Yapp - Viewing all associates assigned to a Manager, Testing and Documentation
 - Saleel Bey - Documentation, Styling, Retrieving Managers and associates
+- Thomas Morgan - create, view, and modify SWOTs
+- Isa Reinert - Create, view, and modify SWOTs
+- Patrick Warring - Create, view, and modify SWOTs
+- Grayson McClellan - Create, view, and modify SWOTS and CSS development
+- Suva Shahria - View recently graduated associates, Testing, Modal Popup
+- Young Ha Shin - view component and testing view component
+- Saleel Bey - Documentation, Styling, Retrieving Managers and associates
+- Max Goncharov - Retrieving managers, dividing associates, styling, and documentation
+- Alejandro Garza - Paired Programming, troubleshooting.
 
 ### Executive Summary
 - The Caliber API system will...
@@ -51,7 +66,6 @@ Associate status' are enum staging and project. Analysis type are enum strengths
   - Mockito
   - PostgreSQL
   - Log4j
-  - Lombok
 - Devops:
   - Jenkins
   - AWS EC2

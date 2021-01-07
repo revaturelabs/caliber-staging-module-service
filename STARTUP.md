@@ -26,7 +26,7 @@ This document should serve as guide to setting up the project on your own machin
 
 ## Angular Layer
 1. Install the latest version of Node.js & the Node Package Manager (NPM)
-2. Run npm install @angular/cli to install the latest version of Angular from the terminal.
+2. Run ```npm install @angular/cli``` to install the latest version of Angular from the terminal.
 3. Open project in your preferred IDE, we used Visual Studio Code, and open the terminal.
 4. Run npm install to install all dependencies needed for the project.
 5. Look over the README.md & codebase to gain an understanding of the project.

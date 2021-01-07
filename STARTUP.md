@@ -36,7 +36,7 @@ This document should serve as guide to setting up the project on your own machin
 1. Get Center of Excellence to provision you an EC2 with Jenkins & Docker installed.
 2. Docker files are already included, just attach to a Jenkins pipeline.
 
-## After completing all tasks above, your project is ready to use.
+### ***After completing all tasks above, your project is ready to use.***
 
 
 

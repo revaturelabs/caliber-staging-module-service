@@ -1,6 +1,5 @@
 # Spring Boot Microservice for Caliber Staging Module
-
-## Revature Project #3
+Due to the remote nature work amidst the COVID pandemic, Revature Staging Mnagers are no longer delegated to managing associates in specific geographical region, as these associates span the entirety of the US. The Caliber Staging Module is an application that manages the assignment of associates to particular Staging Mangers, in order to balance workload and also provide information on those particular associates in the form of a SWOT analysis.  The app's SWOT cabability provides a centralized resource for Staging managers across Revature's national locations to manage and review associates as they prepare for client interviews.
 
 ### Team Members:
 - Ben Johnston - Scrum Master, Team Lead, Staging Listener
@@ -21,11 +20,6 @@
 - Saleel Bey - Documentation, Styling, Retrieving Managers and associates
 - Max Goncharov - Retrieving managers, dividing associates, styling, and documentation
 - Alejandro Garza - Paired Programming, troubleshooting.
-
-### Executive Summary
-- The Caliber API system provides us with information on associates.
-- A manager can login and view all associates automatically assigned to them by the system.
-- A SWOT analysis can be created for an associate.
 
 #### Manager User Stories
 - A manager can view all associates assigned to him.

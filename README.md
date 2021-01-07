@@ -23,7 +23,7 @@
 - Alejandro Garza - Paired Programming, troubleshooting.
 
 ### Executive Summary
-- The Caliber API system will...
+- The Caliber API system provides us with information on associates.
 - A manager can login and view all associates automatically assigned to them by the system.
 - A SWOT analysis can be created for an associate.
 

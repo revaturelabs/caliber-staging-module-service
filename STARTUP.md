@@ -31,6 +31,6 @@ This document should serve as guide to setting up the project on your own machin
 4. Run npm install to install all dependencies needed for the project.
 5. Look over the README.md & codebase to gain an understanding of the project.
 
-## Deployment
+
 
        

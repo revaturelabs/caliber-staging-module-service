@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.backend.controller.AssignmentController;
 import com.revature.backend.model.api.ApiBatchTemplate;
-import com.revature.backend.util.StagingListener;
 import com.revature.backend.util.StagingListenerImpl;
 
 @SpringBootTest()

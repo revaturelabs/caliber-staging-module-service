@@ -7,7 +7,6 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 - Quincy Roman - Team Lead, Devops, SWOT analyses functionalities
 - Connor Ryan - Team Lead, Devops, Docker/Jenkins configurations
 - Azhya Knox - Team Lead, BatchRetriever, BatchWriter, Firebase Authentication, User UI/UX
-
 - Andrew Curry - Testing & Assigning Associates to Managers
 - Mareo Yapp - Viewing all associates assigned to a Manager, Testing and Documentation
 - Saleel Bey - Documentation, Styling, Retrieving Managers and associates

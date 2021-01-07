@@ -3,7 +3,8 @@ pipeline {
 	stages {
 		stage('Test') {
 			steps {
-				sh  'echo 'backend''
+				sh 'mvn package'
+				sh  'echo "backend"'
 			}
 		}
 	}

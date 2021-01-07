@@ -45,9 +45,7 @@ public class ManagerBalancerImpl implements ManagerBalancer {
         Map<Manager, Integer> managerMap, List<Associate> newAssociates) {
 
         Associate[][] batches = groupIntoBatches(newAssociates);
-        //System.out.println("DEBUG: batches before sorting: " + batchesToString(batches));
         sortBatchesBySize(batches);
-        //System.out.println("DEBUG: batches after sorting: " + batchesToString(batches));
         assignAssociatesEvenly(managerMap, batches);
     }
 

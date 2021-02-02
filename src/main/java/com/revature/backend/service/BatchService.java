@@ -6,7 +6,8 @@ import com.revature.backend.model.Batch;
 
 public interface BatchService {
 
-	public List<Batch> getAllBatches();
-	public List<Batch> saveBatches(List<Batch> bList);
+  public List<Batch> getAllBatches();
+
+  public List<Batch> saveBatches(List<Batch> bList);
 
 }

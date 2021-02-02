@@ -19,36 +19,36 @@ import com.revature.backend.util.ClientMessage;
 //@CrossOrigin("http://ec2-54-237-27-253.compute-1.amazonaws.com")
 public class ManagerController {
 
-	private static Logger log = Logger.getLogger(ManagerController.class);
+  private static Logger log = Logger.getLogger(ManagerController.class);
 
-	@Autowired
-	ManagerService managerService;
+  @Autowired
+  ManagerService managerService;
 
-	@PostMapping("/getmanager")
-	public ResponseEntity<ClientMessage> getLoggedInManager(@RequestBody ClientMessage email) {
+  @PostMapping("/getmanager")
+  public ResponseEntity<ClientMessage> getLoggedInManager(@RequestBody ClientMessage email) {
 
-		List<Manager> allManager = managerService.getAllManagers();
-		ResponseEntity<ClientMessage> ret;
-		for (Manager m : allManager) {
-			if (m.getEmail().equals(email.getMessage())) {
-				log.info("Found matching manager!");
-				ClientMessage message = new ClientMessage();
-				message.setMessage(Integer.toString(m.getId()));
-				ret = ResponseEntity.ok(message);
-				return ret;
-			}
-		}
-		log.info("No manager found in DB with that email, creating new manager");
-		// If here, no manager with email exists in DB, automatically add manager to DB
-		Manager m = new Manager(email.getMessage(), "No Data", "No Data");
-		allManager.clear();
-		allManager.add(m);
-		List<Manager> mList = managerService.saveAll(allManager);
-		ClientMessage message = new ClientMessage();
-		message.setMessage(Integer.toString(mList.get(0).getId()));
-		ret = ResponseEntity.ok(message);
-		return ret;
+    List<Manager> allManager = managerService.getAllManagers();
+    ResponseEntity<ClientMessage> ret;
+    for (Manager m : allManager) {
+      if (m.getEmail().equals(email.getMessage())) {
+        log.info("Found matching manager!");
+        ClientMessage message = new ClientMessage();
+        message.setMessage(Integer.toString(m.getId()));
+        ret = ResponseEntity.ok(message);
+        return ret;
+      }
+    }
+    log.info("No manager found in DB with that email, creating new manager");
+    // If here, no manager with email exists in DB, automatically add manager to DB
+    Manager m = new Manager(email.getMessage(), "No Data", "No Data");
+    allManager.clear();
+    allManager.add(m);
+    List<Manager> mList = managerService.saveAll(allManager);
+    ClientMessage message = new ClientMessage();
+    message.setMessage(Integer.toString(mList.get(0).getId()));
+    ret = ResponseEntity.ok(message);
+    return ret;
 
-	}
+  }
 
 }

@@ -25,55 +25,55 @@ import com.revature.backend.util.BatchWriter;
 @RunWith(SpringRunner.class)
 public class BatchWriterTesting {
 
-    @MockBean
-    AssociateService mockAssociateService;
+  @MockBean
+  AssociateService mockAssociateService;
 
-    @MockBean
-    BatchService mockBatchService;
+  @MockBean
+  BatchService mockBatchService;
 
-    @Autowired
-	BatchWriter batchWriter;
-	
-	@Test
-	void testWriteNewlyStagingAssociates() {
-        //set up the mock list
-        List<Associate> aList = new ArrayList<Associate>();
+  @Autowired
+  BatchWriter batchWriter;
 
-        //add some dummy entities (use Mockito here)
-        Associate associateA = mock(Associate.class);
-        Associate associateB = mock(Associate.class);
-        Associate associateC = mock(Associate.class);
-        aList.add(associateA);
-        aList.add(associateB);
-        aList.add(associateC);
+  @Test
+  void testWriteNewlyStagingAssociates() {
+    // set up the mock list
+    List<Associate> aList = new ArrayList<Associate>();
 
-        //run the test method
-        batchWriter.writeNewlyStagingAssociates(aList);
-        //verify that the save occured at least once
-        verify(mockAssociateService, times(1)).saveAssociates(aList);
-    }
-    
-    @Test
-	void testWriteNewlyStagingBatches() {
-        
-        //add some dummy entities (use Mockito here)
-        
-        //verify that the save occured at least once
-        //set up the mock list
-        List<Batch> bList = new ArrayList<Batch>();
-        
-        //add some dummy entities (use Mockito here)
-        Batch batchA = mock(Batch.class);
-        Batch batchB = mock(Batch.class);
-        Batch batchC = mock(Batch.class);
-        bList.add(batchA);
-        bList.add(batchB);
-        bList.add(batchC);
+    // add some dummy entities (use Mockito here)
+    Associate associateA = mock(Associate.class);
+    Associate associateB = mock(Associate.class);
+    Associate associateC = mock(Associate.class);
+    aList.add(associateA);
+    aList.add(associateB);
+    aList.add(associateC);
 
-        //run the test method
-        batchWriter.writeNewlyStagingBatches(bList);
-        //verify that the save occured at least once
-        verify(mockBatchService, times(1)).saveBatches(bList);
-	}
+    // run the test method
+    batchWriter.writeNewlyStagingAssociates(aList);
+    // verify that the save occured at least once
+    verify(mockAssociateService, times(1)).saveAssociates(aList);
+  }
+
+  @Test
+  void testWriteNewlyStagingBatches() {
+
+    // add some dummy entities (use Mockito here)
+
+    // verify that the save occured at least once
+    // set up the mock list
+    List<Batch> bList = new ArrayList<Batch>();
+
+    // add some dummy entities (use Mockito here)
+    Batch batchA = mock(Batch.class);
+    Batch batchB = mock(Batch.class);
+    Batch batchC = mock(Batch.class);
+    bList.add(batchA);
+    bList.add(batchB);
+    bList.add(batchC);
+
+    // run the test method
+    batchWriter.writeNewlyStagingBatches(bList);
+    // verify that the save occured at least once
+    verify(mockBatchService, times(1)).saveBatches(bList);
+  }
 
 }

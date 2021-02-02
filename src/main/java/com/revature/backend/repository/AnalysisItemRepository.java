@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.backend.model.AnalysisItem;
 
 @Repository
-public interface AnalysisItemRepository extends JpaRepository<AnalysisItem, Integer>{
+public interface AnalysisItemRepository extends JpaRepository<AnalysisItem, Integer> {
 
 }

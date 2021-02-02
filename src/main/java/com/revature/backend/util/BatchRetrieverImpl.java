@@ -12,7 +12,6 @@ import com.revature.backend.model.api.ApiAssociateAssignment;
 import com.revature.backend.model.api.ApiAssociateTemplate;
 import com.revature.backend.model.api.ApiBatchTemplate;
 
-
 /**
  * This class will handle retrieving associates and batches from the Caliper
  * API.
@@ -29,68 +28,68 @@ import com.revature.backend.model.api.ApiBatchTemplate;
 @Component
 public class BatchRetrieverImpl implements BatchRetriever {
 
-	public static Logger logger = Logger.getLogger(BatchRetrieverImpl.class);
-	
-	@Autowired
-	StagingListener stagingListener;
+  public static Logger logger = Logger.getLogger(BatchRetrieverImpl.class);
 
-	// If using Jackson's ObjectMapper, have a static reference here
-	public static ObjectMapper om = new ObjectMapper();
+  @Autowired
+  StagingListener stagingListener;
 
-	public BatchRetrieverImpl() {
-		logger.info("In BatchRetriever no-args constructor");
-	}
+  // If using Jackson's ObjectMapper, have a static reference here
+  public static ObjectMapper om = new ObjectMapper();
 
-	@Override
-	public List<ApiAssociateTemplate> retrieveNewlyStagingAssociates() {
-		// start logging activity
-		logger.trace("In BatchRetriever: gathering newly staging associates...");
+  public BatchRetrieverImpl() {
+    logger.info("In BatchRetriever no-args constructor");
+  }
 
-		List<ApiAssociateTemplate> associateList = new ArrayList<>();
+  @Override
+  public List<ApiAssociateTemplate> retrieveNewlyStagingAssociates() {
+    // start logging activity
+    logger.trace("In BatchRetriever: gathering newly staging associates...");
 
-		List<ApiBatchTemplate> batchList = new ArrayList<>();
-		//stagingListener.checkForNewBatches();
-		try{
-			batchList = stagingListener.getLatestBatches();
-			//from the batchList, extract out the associates into their own separate list
-			for (ApiBatchTemplate apiBatchTemplate : batchList) {
-				System.out.println(apiBatchTemplate);
-				ApiAssociateAssignment[] arr = apiBatchTemplate.getAssociateAssignments();
-				for (ApiAssociateAssignment assignment : arr) {
-					ApiAssociateTemplate associate = assignment.getAssociate();
-					associateList.add(associate);
-				}
-			}
-		} catch (Exception e) {
-			logger.warn("Error getting info from Staging Listener", e);
-		}
-		// ending logging activity
-		logger.trace("Gathering associate list is complete. Leaving BatchRetriever...");
+    List<ApiAssociateTemplate> associateList = new ArrayList<>();
 
-		// send found information back to the controller
-		return associateList;
-	}
+    List<ApiBatchTemplate> batchList = new ArrayList<>();
+    // stagingListener.checkForNewBatches();
+    try {
+      batchList = stagingListener.getLatestBatches();
+      // from the batchList, extract out the associates into their own separate list
+      for (ApiBatchTemplate apiBatchTemplate : batchList) {
+        System.out.println(apiBatchTemplate);
+        ApiAssociateAssignment[] arr = apiBatchTemplate.getAssociateAssignments();
+        for (ApiAssociateAssignment assignment : arr) {
+          ApiAssociateTemplate associate = assignment.getAssociate();
+          associateList.add(associate);
+        }
+      }
+    } catch (Exception e) {
+      logger.warn("Error getting info from Staging Listener", e);
+    }
+    // ending logging activity
+    logger.trace("Gathering associate list is complete. Leaving BatchRetriever...");
 
-	@Override
-	public List<ApiBatchTemplate> retrieveNewlyStagingBatches() {
-		// start logging activity
-		logger.trace("In BatchRetriever: gathering newly staging batches...");
-		List<ApiBatchTemplate> batchList = new ArrayList<>();
-		//stagingListener.checkForNewBatches();
-		logger.info(stagingListener);
+    // send found information back to the controller
+    return associateList;
+  }
 
-		try{
-			batchList = stagingListener.getLatestBatches();
-			for (ApiBatchTemplate apiBatchTemplate : batchList) {
-				System.out.println(apiBatchTemplate);
-			}
-		} catch (Exception e) {
-			logger.warn("Error getting info from Staging Listener", e);
-		}
-		// ending logging activity
-		logger.trace("Gathering batch list is complete. Leaving BatchRetriever...");
+  @Override
+  public List<ApiBatchTemplate> retrieveNewlyStagingBatches() {
+    // start logging activity
+    logger.trace("In BatchRetriever: gathering newly staging batches...");
+    List<ApiBatchTemplate> batchList = new ArrayList<>();
+    // stagingListener.checkForNewBatches();
+    logger.info(stagingListener);
 
-		// send found information back to the controller
-		return batchList;
-	}
+    try {
+      batchList = stagingListener.getLatestBatches();
+      for (ApiBatchTemplate apiBatchTemplate : batchList) {
+        System.out.println(apiBatchTemplate);
+      }
+    } catch (Exception e) {
+      logger.warn("Error getting info from Staging Listener", e);
+    }
+    // ending logging activity
+    logger.trace("Gathering batch list is complete. Leaving BatchRetriever...");
+
+    // send found information back to the controller
+    return batchList;
+  }
 }

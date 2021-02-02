@@ -11,19 +11,19 @@ import org.springframework.stereotype.Service;
 @Service("associateService")
 public class AssociateServiceImpl implements AssociateService {
 
-    @Autowired
-    AssociateRepository associateRepo;
+  @Autowired
+  AssociateRepository associateRepo;
 
-    @Override
-    public List<Associate> getAllAssociates() {
-        return null;
-    }
+  @Override
+  public List<Associate> getAllAssociates() {
+    return null;
+  }
 
-    @Override
-    public List<Associate> saveAssociates(List<Associate> aList) {
-        // call the appropriate Repo method to save (aka insert) associates into DB
-        List<Associate> list = associateRepo.saveAll(aList);
-        return list;
-    }
-    
+  @Override
+  public List<Associate> saveAssociates(List<Associate> aList) {
+    // call the appropriate Repo method to save (aka insert) associates into DB
+    List<Associate> list = associateRepo.saveAll(aList);
+    return list;
+  }
+
 }

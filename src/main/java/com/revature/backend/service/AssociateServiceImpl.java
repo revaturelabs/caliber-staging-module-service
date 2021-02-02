@@ -1,7 +1,6 @@
 package com.revature.backend.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.repository.AssociateRepository;
@@ -35,7 +34,6 @@ public class AssociateServiceImpl implements AssociateService {
     
     public void updateAssociate(Associate associate) {
     	// TODO call the appropriate Repo method to update an associate into DB
-    	System.out.println("hi");
     	associateRepo.save(associate);
     }
     

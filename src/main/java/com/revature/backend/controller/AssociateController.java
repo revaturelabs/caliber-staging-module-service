@@ -16,8 +16,7 @@ import com.revature.backend.model.dto.AssociateDTO;
 import com.revature.backend.service.BackendService;
 
 @RestController
-@CrossOrigin("*")
-//@CrossOrigin("http://ec2-54-237-27-253.compute-1.amazonaws.com")
+@CrossOrigin("http://ec2-54-237-27-253.compute-1.amazonaws.com")
 public class AssociateController {
 	
 	@Autowired

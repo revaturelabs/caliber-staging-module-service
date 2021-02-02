@@ -28,7 +28,7 @@ import com.revature.backend.util.ClientMessage;
 
 @RestController("swotController")
 @RequestMapping("/swot")
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 // @CrossOrigin(origins = "http://ec2-54-237-27-253.compute-1.amazonaws.com")
 public class SwotController {
 

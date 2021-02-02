@@ -59,11 +59,12 @@ public class SwotControllerTests {
 		mockAnalysisItems.add(mockAI3);
 		mockAnalysisItems.add(mockAI4);
 		
-		Swot mockSwot =  new Swot(id, 
+		Swot mockSwot = new Swot(id, 
 						new Associate(1, null, null, null, null, null, null, null), 
 						new Manager(1, null, null, null), 
 						new Timestamp(System.currentTimeMillis()), 
-						new Timestamp(System.currentTimeMillis()));
+						new Timestamp(System.currentTimeMillis()),
+						"");
 		mockSwot.setAnalysisItems(mockAnalysisItems);
 		
 		return mockSwot;

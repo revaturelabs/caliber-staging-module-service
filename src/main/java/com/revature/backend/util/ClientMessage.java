@@ -1,20 +1,21 @@
 package com.revature.backend.util;
 
 public class ClientMessage {
-	private String message;
-	
-	public ClientMessage() {}
-	
-	public ClientMessage(String message) {
-		super();
-		this.message = message;
-	}
+  private String message;
 
-	public String getMessage() {
-		return message;
-	}
+  public ClientMessage() {
+  }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+  public ClientMessage(String message) {
+    super();
+    this.message = message;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }

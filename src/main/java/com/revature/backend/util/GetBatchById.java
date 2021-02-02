@@ -4,6 +4,6 @@ import com.revature.backend.model.api.ApiBatchTemplate;
 
 public interface GetBatchById {
 
-	ApiBatchTemplate getBatch(int id);
+  ApiBatchTemplate getBatch(int id);
 
 }

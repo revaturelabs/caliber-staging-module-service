@@ -22,127 +22,129 @@ import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchRetrieverImpl;
 import com.revature.backend.util.StagingListener;
 
-@SpringBootTest(classes={BatchRetriever.class, BatchRetrieverImpl.class})
+@SpringBootTest(classes = { BatchRetriever.class, BatchRetrieverImpl.class })
 @RunWith(SpringRunner.class)
 public class BatchRetrieverTesting {
 
-	@MockBean
-	StagingListener mockStagingListener;
+  @MockBean
+  StagingListener mockStagingListener;
 
-    @Autowired
-	BatchRetrieverImpl batchRetriever;
+  @Autowired
+  BatchRetrieverImpl batchRetriever;
 
-	@Test
-	void testRetrieveNewlyStagingAssociates() {
-		testRetrieveNewlyStagingAssociatesHelp(new int[]{});
-		testRetrieveNewlyStagingAssociatesHelp(new int[]{0});
-		testRetrieveNewlyStagingAssociatesHelp(new int[]{4});
-		testRetrieveNewlyStagingAssociatesHelp(new int[]{4, 5});
-		testRetrieveNewlyStagingAssociatesHelp(new int[]{2, 7, 15});
-		testRetrieveNewlyStagingAssociatesHelp(new int[]{25, 17, 15, 30, 45, 11, 0});
-	}
+  @Test
+  void testRetrieveNewlyStagingAssociates() {
+    testRetrieveNewlyStagingAssociatesHelp(new int[] {});
+    testRetrieveNewlyStagingAssociatesHelp(new int[] { 0 });
+    testRetrieveNewlyStagingAssociatesHelp(new int[] { 4 });
+    testRetrieveNewlyStagingAssociatesHelp(new int[] { 4, 5 });
+    testRetrieveNewlyStagingAssociatesHelp(new int[] { 2, 7, 15 });
+    testRetrieveNewlyStagingAssociatesHelp(new int[] { 25, 17, 15, 30, 45, 11, 0 });
+  }
 
-	void testRetrieveNewlyStagingAssociatesHelp(int[] batchSizes) {
-		int numBatches = batchSizes.length;
-		int numAssociates = 0;
-		for (int size : batchSizes) numAssociates += size;
+  void testRetrieveNewlyStagingAssociatesHelp(int[] batchSizes) {
+    int numBatches = batchSizes.length;
+    int numAssociates = 0;
+    for (int size : batchSizes)
+      numAssociates += size;
 
-		// this list will be returned by the staging listener - the batchRetriever should
-		// properly unpack the ApiAssociateTemplates from it
-		List<ApiBatchTemplate> mockBatchList = generateBatchTemplates(batchSizes);
-		
-		when(mockStagingListener.getLatestBatches()).thenReturn(mockBatchList);
+    // this list will be returned by the staging listener - the batchRetriever
+    // should
+    // properly unpack the ApiAssociateTemplates from it
+    List<ApiBatchTemplate> mockBatchList = generateBatchTemplates(batchSizes);
 
-		List<ApiAssociateTemplate> associateTemplateList
-			= batchRetriever.retrieveNewlyStagingAssociates();
+    when(mockStagingListener.getLatestBatches()).thenReturn(mockBatchList);
 
-		// make sure all of the associates are included
-		assertEquals(numAssociates, associateTemplateList.size());
-		// now check to make sure these are the correct associates
-		// takes advantage of naming format in test generation method
-		boolean[][] foundTracker = new boolean[numBatches][];
-		for (int i = 0; i < batchSizes.length; i++){
-			boolean[] foundBatch = new boolean[batchSizes[i]];
-			foundTracker[i] = foundBatch;
-		}
+    List<ApiAssociateTemplate> associateTemplateList = batchRetriever.retrieveNewlyStagingAssociates();
 
-		for (ApiAssociateTemplate assoc : associateTemplateList){
-			int batchIndex = Integer.parseInt(assoc.getLastName());
-			int assocIndex = Integer.parseInt(assoc.getFirstName());
+    // make sure all of the associates are included
+    assertEquals(numAssociates, associateTemplateList.size());
+    // now check to make sure these are the correct associates
+    // takes advantage of naming format in test generation method
+    boolean[][] foundTracker = new boolean[numBatches][];
+    for (int i = 0; i < batchSizes.length; i++) {
+      boolean[] foundBatch = new boolean[batchSizes[i]];
+      foundTracker[i] = foundBatch;
+    }
 
-			assertTrue(batchIndex >= 0 && batchIndex < numBatches); // valid batch index?
-			// valid assoc index?
-			assertTrue(assocIndex >= 0 && assocIndex < batchSizes[batchIndex]);
-			assertFalse(foundTracker[batchIndex][assocIndex]); // should be no duplicates
-			foundTracker[batchIndex][assocIndex] = true; // mark that we found it
-		}
-		// now make sure that all expect associates were found
-		for (boolean[] batch : foundTracker){
-			for (boolean assoc : batch) assertTrue(assoc);
-		}
-	}
+    for (ApiAssociateTemplate assoc : associateTemplateList) {
+      int batchIndex = Integer.parseInt(assoc.getLastName());
+      int assocIndex = Integer.parseInt(assoc.getFirstName());
 
-	@Test
-	void testRetrieveNewlyStagingBatches() {
-		testRetrieveNewlyStagingBatchesHelp(new int[]{});
-		testRetrieveNewlyStagingBatchesHelp(new int[]{4});
-		testRetrieveNewlyStagingBatchesHelp(new int[]{40});
-		testRetrieveNewlyStagingBatchesHelp(new int[]{14, 8, 19});
-		testRetrieveNewlyStagingBatchesHelp(new int[]{17, 20, 35, 4, 0, 12});
-	}
+      assertTrue(batchIndex >= 0 && batchIndex < numBatches); // valid batch index?
+      // valid assoc index?
+      assertTrue(assocIndex >= 0 && assocIndex < batchSizes[batchIndex]);
+      assertFalse(foundTracker[batchIndex][assocIndex]); // should be no duplicates
+      foundTracker[batchIndex][assocIndex] = true; // mark that we found it
+    }
+    // now make sure that all expect associates were found
+    for (boolean[] batch : foundTracker) {
+      for (boolean assoc : batch)
+        assertTrue(assoc);
+    }
+  }
 
-	void testRetrieveNewlyStagingBatchesHelp(int[] batchSizes){
-		// technically only need the batches, not their contents
-		List<ApiBatchTemplate> mockBatchList = generateBatchTemplates(batchSizes);
+  @Test
+  void testRetrieveNewlyStagingBatches() {
+    testRetrieveNewlyStagingBatchesHelp(new int[] {});
+    testRetrieveNewlyStagingBatchesHelp(new int[] { 4 });
+    testRetrieveNewlyStagingBatchesHelp(new int[] { 40 });
+    testRetrieveNewlyStagingBatchesHelp(new int[] { 14, 8, 19 });
+    testRetrieveNewlyStagingBatchesHelp(new int[] { 17, 20, 35, 4, 0, 12 });
+  }
 
-		when(mockStagingListener.getLatestBatches()).thenReturn(mockBatchList);
-		List<ApiBatchTemplate> b = batchRetriever.retrieveNewlyStagingBatches();
+  void testRetrieveNewlyStagingBatchesHelp(int[] batchSizes) {
+    // technically only need the batches, not their contents
+    List<ApiBatchTemplate> mockBatchList = generateBatchTemplates(batchSizes);
 
-		// NOTE: could fail if batchRetriever returns a valid list that has been sorted
-		// or re-arranged in some way
-		assertEquals(mockBatchList, b);
-	}
+    when(mockStagingListener.getLatestBatches()).thenReturn(mockBatchList);
+    List<ApiBatchTemplate> b = batchRetriever.retrieveNewlyStagingBatches();
 
-	// ----------
-	// SHARED HELPER METHODS
-	// ----------
+    // NOTE: could fail if batchRetriever returns a valid list that has been sorted
+    // or re-arranged in some way
+    assertEquals(mockBatchList, b);
+  }
 
-	/**
-	 * Generates a list of ApiBatchTemplates, where each batch is the size of the
-	 * corresponding int in batchSizes.
-	 * 
-	 * Currently these templates will not be filled out; they will have 
-	 * ApiAssociateAssignments, which will have ApiAssociateTemplates.
-	 * Batch templates have names equal to their index in the list.
-	 * Associates have a first name equal to their index inside their batch, and a last
-	 * name equal to their batch's name.
-	 * 
-	 * @param batchSizes
-	 * @return
-	 */
-	private List<ApiBatchTemplate> generateBatchTemplates(int[] batchSizes) {
-		List<ApiBatchTemplate> batchTemplateList = new ArrayList<>();
+  // ----------
+  // SHARED HELPER METHODS
+  // ----------
 
-		// make each Batch
-		for (int i = 0; i < batchSizes.length; i++){
-			ApiBatchTemplate batch = new ApiBatchTemplate();
-			batch.setName("" + i);
-			batchTemplateList.add(batch);
-			int batchSize = batchSizes[i];
-			ApiAssociateAssignment[] assignments = new ApiAssociateAssignment[batchSize];
-			batch.setAssociateAssignments(assignments);
-			// make each Assignment
-			for (int x = 0; x < batchSize; x++){
-				ApiAssociateAssignment assign = new ApiAssociateAssignment();
-				assignments[x] = assign;
-				// make the Associate
-				ApiAssociateTemplate assoc = new ApiAssociateTemplate();
-				assign.setAssociate(assoc);
-				assoc.setFirstName("" + x);
-				assoc.setLastName("" + i);
-			} // end Assignment for loop
-		} // end Batch for loop
+  /**
+   * Generates a list of ApiBatchTemplates, where each batch is the size of the
+   * corresponding int in batchSizes.
+   * 
+   * Currently these templates will not be filled out; they will have
+   * ApiAssociateAssignments, which will have ApiAssociateTemplates. Batch
+   * templates have names equal to their index in the list. Associates have a
+   * first name equal to their index inside their batch, and a last name equal to
+   * their batch's name.
+   * 
+   * @param batchSizes
+   * @return
+   */
+  private List<ApiBatchTemplate> generateBatchTemplates(int[] batchSizes) {
+    List<ApiBatchTemplate> batchTemplateList = new ArrayList<>();
 
-		return batchTemplateList;
-	}
+    // make each Batch
+    for (int i = 0; i < batchSizes.length; i++) {
+      ApiBatchTemplate batch = new ApiBatchTemplate();
+      batch.setName("" + i);
+      batchTemplateList.add(batch);
+      int batchSize = batchSizes[i];
+      ApiAssociateAssignment[] assignments = new ApiAssociateAssignment[batchSize];
+      batch.setAssociateAssignments(assignments);
+      // make each Assignment
+      for (int x = 0; x < batchSize; x++) {
+        ApiAssociateAssignment assign = new ApiAssociateAssignment();
+        assignments[x] = assign;
+        // make the Associate
+        ApiAssociateTemplate assoc = new ApiAssociateTemplate();
+        assign.setAssociate(assoc);
+        assoc.setFirstName("" + x);
+        assoc.setLastName("" + i);
+      } // end Assignment for loop
+    } // end Batch for loop
+
+    return batchTemplateList;
+  }
 }

@@ -17,6 +17,9 @@ public class AnalysisItem {
 
 	@Column(name = "content")
 	private String content;
+	
+	@Column(name = "description")
+	private String description;
 
 	//@JsonIgnore	// Meant to help when trying to create a SWOT, this is a bad solution.
 	@JsonBackReference // Meant to help when trying to create a SWOT. - Prevents recursion in retrieve requests, this is the better solution.
@@ -36,10 +39,11 @@ public class AnalysisItem {
 		this.type = type;
 	}
 
-	public AnalysisItem(int id, String content, Swot swot, AnalysisType type) {
+	public AnalysisItem(int id, String content, String description, Swot swot, AnalysisType type) {
 		super();
 		this.id = id;
 		this.content = content;
+		this.description = description;
 		this.swot = swot;
 		this.type = type;
 	}
@@ -59,6 +63,11 @@ public class AnalysisItem {
 	public String getContent() {
 		return this.content;
 	}
+	
+	public String getDescription() {
+		return this.description;
+	}
+	
 
 	public AnalysisType getType() {
 		return this.type;
@@ -70,6 +79,10 @@ public class AnalysisItem {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void setType(AnalysisType type) {
@@ -83,18 +96,18 @@ public class AnalysisItem {
 		if (!(o instanceof AnalysisItem))
 			return false;
 		AnalysisItem that = (AnalysisItem) o;
-		return getId() == that.getId() && Objects.equals(getContent(), that.getContent())
+		return getId() == that.getId() && Objects.equals(getContent(), that.getContent()) && Objects.equals(getDescription(), that.getDescription())
 				&& Objects.equals(swot, that.swot) && getType() == that.getType();
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getId(), getContent(), swot, getType());
+		return Objects.hash(getId(), getContent(), getDescription(), swot, getType());
 	}
 
 	//This does not print 'swot' because it causes a stack overflow error when either the AnalysisItem or Swot toString are called
 	//if printing is required, print the id instead of the whole object or otherwise edit the swot toString to prevent recursive printing
 	public String toString() {
-		return "Analysis_Item(id=" + this.getId() + ", content=" + this.getContent() + ", type=" + this.getType() + ")";
+		return "Analysis_Item(id=" + this.getId() + ", content=" + this.getContent() + ", description=" + this.getDescription() + ", type=" + this.getType() + ")";
 	}
 }

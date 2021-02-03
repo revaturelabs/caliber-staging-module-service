@@ -98,11 +98,11 @@
             <version>3.7.04</version>
         </dependency>
 
-        <!-- <dependency>
+        <dependency>
           <groupId>com.google.firebase</groupId>
           <artifactId>firebase-admin</artifactId>
           <version>7.1.0</version>
-        </dependency> -->
+        </dependency>
 
     </dependencies>
 

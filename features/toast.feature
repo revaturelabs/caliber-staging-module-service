@@ -1,6 +1,6 @@
 Feature: Toast Message
-	#As a user I wish to interact with the page without first clicking on the message
 	
+	#As a user I wish to interact with the page without first clicking on the message
 	Scenario Outline: Interacting with the page with active message
 	Given User is at the login page
 	When user inputs their email <"email">
@@ -45,8 +45,9 @@ Feature: Toast Message
 	# (create swot on home page; add new item, update, and delete on view page)
 	
 	# Could also "then" this by having the user return to the home page and asserting
-	# That they reached there safely alerts would not allow the page to page navigation 
-	Scenario Outline:
+	# That they reached there safely alerts would not allow the page to page navigation
+	# As a user I don't want my page frozen by a javascript alert 
+	Scenario Outline: Test ensuring page contains no javascript alerts
 	Given User is at the login page
 	When user inputs their email <"email">
 	And user inputs their password <"password">

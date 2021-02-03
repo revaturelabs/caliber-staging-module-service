@@ -15,8 +15,7 @@ import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.ClientMessage;
 
 @RestController
-@CrossOrigin("*")
-//@CrossOrigin("http://ec2-54-237-27-253.compute-1.amazonaws.com")
+@CrossOrigin("http://ec2-54-237-27-253.compute-1.amazonaws.com")
 public class ManagerController {
 
 	private static Logger log = Logger.getLogger(ManagerController.class);

@@ -3,6 +3,7 @@ package com.revature.backend.endtoend.gluecode;
 import static org.junit.Assert.assertEquals;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.revature.backend.endtoend.page.HomePage;
 import com.revature.backend.endtoend.page.LoginPage;
@@ -25,7 +26,8 @@ public class ToastLocationTest {
 		this.loginPage.setPassword("password");
 		this.loginPage.clickLogin();
 		WebDriverWait wait = new WebDriverWait(RevatureDriverUtility.driver, 2);
-		wait.until(ExpectedConditions.urlContains("home"));
+//		wait.until(true);
+		wait.until(ExpectedConditions.titleContains("home"));
 		this.loginPage = new LoginPage(RevatureDriverUtility.driver);
 		assertEquals(this.homePage.url, RevatureDriverUtility.driver.getCurrentUrl());
 	}
@@ -132,5 +134,15 @@ public class ToastLocationTest {
 	public void the_toast_should_not_obstruct_any_other_text() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
+	}
+	
+	@Then("the user is redirected to the successful login page")
+	public void the_user_is_redirected_to_the_successful_login_page() {
+		//explicitly wait 2 seconds before timeout
+		WebDriverWait wait = new WebDriverWait(MercuryDriverUtility.driver, 2);
+		wait.until(ExpectedConditions.titleContains("Login"));
+	    this.ml = new MercuryLogin(MercuryDriverUtility.driver);
+	    //should reach page with login successful before 2 seconds
+	    assertEquals(MercuryLogin.title, MercuryDriverUtility.driver.getTitle());
 	}
 }

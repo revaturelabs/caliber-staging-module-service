@@ -26,7 +26,7 @@ public class ToastLocationTest {
 		this.loginPage.setPassword("password");
 		this.loginPage.clickLogin();
 		WebDriverWait wait = new WebDriverWait(RevatureDriverUtility.driver, 2);
-//		wait.until(true);
+		//Talk to Chris about this v 
 		wait.until(ExpectedConditions.titleContains("home"));
 		this.loginPage = new LoginPage(RevatureDriverUtility.driver);
 		assertEquals(this.homePage.url, RevatureDriverUtility.driver.getCurrentUrl());

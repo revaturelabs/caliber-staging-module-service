@@ -1,4 +1,4 @@
-package com.revature.backend.testing.page;
+package com.revature.backend.endtoend.page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

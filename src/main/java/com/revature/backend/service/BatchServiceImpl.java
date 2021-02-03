@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service("batchService")
 public class BatchServiceImpl implements BatchService {
 
-    @Autowired
+	@Autowired
     BatchRepository batchRepo;
 
     @Override

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service("associateService")
 public class AssociateServiceImpl implements AssociateService {
 
-    @Autowired
+	@Autowired
     AssociateRepository associateRepo;
 
     @Override

@@ -39,7 +39,7 @@ public class SwotService {
 	 * Returns true if successful, false otherwise.
 	 */
 	public boolean createNewSwot(Swot swot) {
-		Swot parent = new Swot(swot.getAssociate(), swot.getManager(), swot.getCreatedOn(), swot.getLastModified()); // jackson creates swot object
+		Swot parent = new Swot(swot.getAssociate(), swot.getManager(), swot.getCreatedOn(), swot.getLastModified(), swot.getDescription()); // jackson creates swot object
 		List<AnalysisItem> items = swot.getAnalysisItems(); // we fetch all items from postman input
 		for (AnalysisItem item : items) { // we add all items to parent object created by jackson
 			item.setSwot(parent);		

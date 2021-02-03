@@ -20,7 +20,7 @@ public class LoginPage {
 	public LoginPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public void setEmail(String email) {
 		this.email.clear();
 		this.email.sendKeys(email);

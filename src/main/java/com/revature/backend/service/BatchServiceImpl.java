@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service("batchService")
 public class BatchServiceImpl implements BatchService {
 
-    @Autowired
+	@Autowired
     BatchRepository batchRepo;
 
     @Override
@@ -24,6 +24,11 @@ public class BatchServiceImpl implements BatchService {
         // call the appropriate Repo method to save (aka insert) batches into DB
         List<Batch> list = batchRepo.saveAll(bList);
         return list;
+    }
+    
+    public Batch getBatchById(int id) {
+    	// TODO call the appropriate Repo method to save (aka insert) batches into DB
+    	return batchRepo.findById(id);
     }
     
 }

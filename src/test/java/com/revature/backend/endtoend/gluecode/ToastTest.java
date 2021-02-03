@@ -10,7 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class ToastTestOne {
+public class ToastTest {
 	public HomePage homePage;
 	public LoginPage loginPage;
 	public ViewPage viewPage;

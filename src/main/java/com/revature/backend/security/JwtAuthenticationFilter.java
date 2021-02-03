@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.backend.config.FirebaseConfig;
 import com.revature.backend.model.Manager;
 
 import org.slf4j.Logger;
@@ -29,11 +30,15 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private final Logger logger = LoggerFactory.getLogger(getClass());
-  // private final AuthenticationManager authenticationManager;
+  private final AuthenticationManager authenticationManager;
 
-  // public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
-  //   this.authenticationManager = authenticationManager;
-  // }
+  public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    this.authenticationManager = authenticationManager;
+  }
+  public JwtAuthenticationFilter(){
+    FirebaseConfig temp=new FirebaseConfig();
+    this.authenticationManager=temp.firebaseAuthenticationManager();
+  }
 
   /**
    * Checks if the incoming request contains actuator and if it does

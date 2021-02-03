@@ -1,5 +1,9 @@
 package com.revature.backend.endtoend.gluecode;
 
+import static org.junit.Assert.assertEquals;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.revature.backend.endtoend.page.HomePage;
 import com.revature.backend.endtoend.page.LoginPage;
 import com.revature.backend.endtoend.page.ViewPage;
@@ -16,7 +20,14 @@ public class ToastLocationTest {
 	//Scenario 1: Creating and submitting new SWOT item
 	@Given("a user is logged into the welcome page of Revature Staging Module")
 	public void a_user_is_logged_into_the_welcome_page_of_revature_staging_module() {
-		this.homePage = new HomePage(RevatureStagingDriverUtility.driver);
+		this.homePage = new HomePage(RevatureDriverUtility.driver);
+		this.loginPage.setEmail("test@revature.com");
+		this.loginPage.setPassword("password");
+		this.loginPage.clickLogin();
+		WebDriverWait wait = new WebDriverWait(RevatureDriverUtility.driver, 2);
+		wait.until(ExpectedConditions.urlContains("home"));
+		this.loginPage = new LoginPage(RevatureDriverUtility.driver);
+		assertEquals(this.homePage.url, RevatureDriverUtility.driver.getCurrentUrl());
 	}
 
 	@When("a user clicks Create SWOT for associate {string}")

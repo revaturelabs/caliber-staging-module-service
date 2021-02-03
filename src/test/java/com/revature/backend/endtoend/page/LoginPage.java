@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
+	public final String url = "http://localhost:4200/login";
 	private WebDriver driver;
 	
 	@FindBy(xpath = "//*[@id='email']")

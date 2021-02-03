@@ -90,9 +90,13 @@ public class AssociateController {
 			return new ResponseEntity<>("Could not find associate", HttpStatus.NO_CONTENT);
 		}else {
 			Batch batch = batchService.getBatchById(assocMap.get("batch_id"));
+			if (batch == null ) {
+				return new ResponseEntity<>("Could not find batch", HttpStatus.NO_CONTENT);
+			}else {
 			associate.setBatch(batch);
 			assocService.updateAssociate(associate);
 			return new ResponseEntity<>("Associate updated successfully", HttpStatus.OK);
+			}
 		}
 	}
 }

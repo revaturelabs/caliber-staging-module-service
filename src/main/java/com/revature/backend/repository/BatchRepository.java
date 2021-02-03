@@ -8,5 +8,5 @@ import com.revature.backend.model.Batch;
 
 @Repository
 public interface BatchRepository extends JpaRepository<Batch, Integer>{
-
+	public Batch findById(int id);
 }

@@ -3,77 +3,76 @@ package com.revature.backend.model.dto;
 import java.sql.Timestamp;
 
 public class SwotDto {
+	
+	private int id;
+	
+	// Primary key for Associate object.
+	private int associateId;
+	
+	// Primary key for Manager object.
+	private int managerId;
+	
+	// Timestamp for creation of SWOT.
+	private Timestamp createdOn;
+	
+	// Timestamp for most recent modification of SWOT.
+	private Timestamp lastModified;
+	
+	public SwotDto() {}
 
-  private int id;
+	public SwotDto(int id, int associateId, int managerId, Timestamp createdOn, Timestamp lastModified) {
+		super();
+		this.id = id;
+		this.associateId = associateId;
+		this.managerId = managerId;
+		this.createdOn = createdOn;
+		this.lastModified = lastModified;
+	}
 
-  // Primary key for Associate object.
-  private int associateId;
+	public int getId() {
+		return id;
+	}
 
-  // Primary key for Manager object.
-  private int managerId;
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  // Timestamp for creation of SWOT.
-  private Timestamp createdOn;
+	public int getAssociateId() {
+		return associateId;
+	}
 
-  // Timestamp for most recent modification of SWOT.
-  private Timestamp lastModified;
+	public void setAssociateId(int associateId) {
+		this.associateId = associateId;
+	}
 
-  public SwotDto() {
-  }
+	public int getManagerId() {
+		return managerId;
+	}
 
-  public SwotDto(int id, int associateId, int managerId, Timestamp createdOn, Timestamp lastModified) {
-    super();
-    this.id = id;
-    this.associateId = associateId;
-    this.managerId = managerId;
-    this.createdOn = createdOn;
-    this.lastModified = lastModified;
-  }
+	public void setManagerId(int managerId) {
+		this.managerId = managerId;
+	}
 
-  public int getId() {
-    return id;
-  }
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
 
-  public void setId(int id) {
-    this.id = id;
-  }
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
 
-  public int getAssociateId() {
-    return associateId;
-  }
+	public Timestamp getLastModified() {
+		return lastModified;
+	}
 
-  public void setAssociateId(int associateId) {
-    this.associateId = associateId;
-  }
+	public void setLastModified(Timestamp lastModified) {
+		this.lastModified = lastModified;
+	}
 
-  public int getManagerId() {
-    return managerId;
-  }
-
-  public void setManagerId(int managerId) {
-    this.managerId = managerId;
-  }
-
-  public Timestamp getCreatedOn() {
-    return createdOn;
-  }
-
-  public void setCreatedOn(Timestamp createdOn) {
-    this.createdOn = createdOn;
-  }
-
-  public Timestamp getLastModified() {
-    return lastModified;
-  }
-
-  public void setLastModified(Timestamp lastModified) {
-    this.lastModified = lastModified;
-  }
-
-  @Override
-  public String toString() {
-    return "SwotDto [id=" + id + ", associateId=" + associateId + ", managerId=" + managerId + ", createdOn="
-        + createdOn + ", lastModified=" + lastModified + "]";
-  }
-
+	@Override
+	public String toString() {
+		return "SwotDto [id=" + id + ", associateId=" + associateId + ", managerId=" + managerId + ", createdOn="
+				+ createdOn + ", lastModified=" + lastModified + "]";
+	}
+	
 }

@@ -25,7 +25,6 @@ import com.revature.backend.service.BatchServiceImpl;
 @CrossOrigin("*")
 //@CrossOrigin("http://ec2-54-237-27-253.compute-1.amazonaws.com")
 public class AssociateController {
-<<<<<<< HEAD
 	
 	@Autowired
 	BackendService backendService;
@@ -96,56 +95,4 @@ public class AssociateController {
 			return new ResponseEntity<>("Associate updated successfully", HttpStatus.OK);
 		}
 	}
-=======
-
-  @Autowired
-  BackendService backendService;
-
-  @GetMapping("/associates")
-  public ResponseEntity<List<AssociateDTO>> getAssociates(@RequestParam int manager) {
-    ResponseEntity<List<AssociateDTO>> ret;
-    List<AssociateDTO> body = null;
-    List<Associate> associates = backendService.findAssociatesByManagerId(manager);
-
-    if (associates == null || associates.size() == 0) {
-      ret = new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-    } else {
-      body = new ArrayList<>();
-      for (Associate a : associates) {
-        body.add(new AssociateDTO(a));
-      }
-      ret = ResponseEntity.ok(body);
-    }
-    return ret;
-  }
-
-  /**
-   * Given a manager id, will return associates assigned to that manager and have
-   * enter staging in the last 7 days.
-   * 
-   * @param manager
-   * @return
-   */
-
-  @GetMapping("/associates/new")
-  public ResponseEntity<List<AssociateDTO>> getNewAssociates(@RequestParam int manager) {
-    ResponseEntity<List<AssociateDTO>> ret = null;
-    List<AssociateDTO> body = null;
-    List<Associate> associates = backendService.findNewAssociatesByManagerId(manager);
-    if (associates == null || associates.size() == 0) {
-      ret = new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-    } else {
-
-      body = new ArrayList<>();
-      for (Associate a : associates) {
-        body.add(new AssociateDTO(a));
-      }
-      ret = ResponseEntity.ok(body);
-
-    }
-    return ret;
-
-  }
-
->>>>>>> c375196aafda135eefaa4552dc6c892d4c8f3182
 }

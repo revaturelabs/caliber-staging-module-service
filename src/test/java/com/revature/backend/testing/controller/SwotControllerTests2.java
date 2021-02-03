@@ -77,13 +77,15 @@ public class SwotControllerTests2 {
 					new Associate(1, null, null, null, null, null, null, null), 
 					new Manager(1, null, null, null), 
 					new Timestamp(System.currentTimeMillis()), 
-					new Timestamp(System.currentTimeMillis()));
+					new Timestamp(System.currentTimeMillis()),
+					"description");
 		mockSwot1.setAnalysisItems(mockAnalysisItems);
 		mockSwot2 = new Swot(2, 
 					new Associate(1, null, null, null, null, null, null, null), 
 					new Manager(1, null, null, null), 
 					new Timestamp(System.currentTimeMillis()), 
-					new Timestamp(System.currentTimeMillis()));
+					new Timestamp(System.currentTimeMillis()),
+					"description");
 		mockSwot2.setAnalysisItems(mockAnalysisItems);
 		
 		swots = new ArrayList<>();

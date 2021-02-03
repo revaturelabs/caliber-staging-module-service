@@ -1,5 +1,9 @@
 package com.revature.backend.config;
 
+import com.revature.backend.security.JwtAuthenticationFilter;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -9,6 +13,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+  private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+  public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+    this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+  }
 
   @Override
   public void configure(HttpSecurity httpSecurity) throws Exception {

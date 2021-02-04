@@ -21,6 +21,7 @@ public class ToastTest {
 	// Scenario 1
 	@Given("User is at the login page")
 	public void user_is_at_the_login_page() {
+		DriverUtility.driver.manage().window().maximize();
 		this.loginPage = new LoginPage(DriverUtility.driver);
 		assertEquals(DriverUtility.driver.getCurrentUrl(), "http://localhost:4200/login");
 	}
@@ -36,7 +37,8 @@ public class ToastTest {
 	}
 
 	@When("user clicks log in")
-	public void user_clicks_log_in() {	
+	public void user_clicks_log_in() throws InterruptedException{	
+		TimeUnit.SECONDS.sleep(3);
 		loginPage.clickLogin();
 	}
 

@@ -44,12 +44,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     final String header = request.getHeader("authorization");
     String token = null;
     Authentication authentication = null;
-    logger.info("JWT: " + header);
     if (header != null && header.startsWith("Bearer ")) {
       token = header.replace("Bearer ", "");
       authentication = authenticationManager.authenticate(new UnauthenticatedManager(token));
-    } else {
-      logger.info("No JWT Token present. Ignoring header");
     }
 
     if (authentication instanceof AuthenticatedManager) {

@@ -164,7 +164,7 @@ public class AssociateControllerTests {
 	@Test
 	public void associatePutMappingTest() throws Exception {
 		this.mockMvc.perform(put("/associates").contentType(MediaType.APPLICATION_JSON).content(
-			"{"
+			"{ "
 			+ "\"associate_id\": 1,"
 			+ "\"batch_id\" : 2"
 			+ " }"

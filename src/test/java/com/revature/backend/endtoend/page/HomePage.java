@@ -44,6 +44,18 @@ public class HomePage {
 	
 	@FindBy(xpath = "//button[text()='View SWOTs']")
 	private WebElement viewSwots;
+	
+	@FindBy(xpath = "//*[@id=\"data-row\"]/td[8]/button")
+	private WebElement updateBatchButton;
+	
+	@FindBy(xpath = "//*[@id=\"newBatch\"]")
+	private WebElement updateBatchInput;
+	
+	@FindBy(xpath = "//*[@id=\"data-row\"]/td[6]")
+	private WebElement assocBatchId;
+	
+	@FindBy(xpath = "/html/body/ngb-modal-window/div/div/app-update-associate/div/div/div/form/div[4]/div/button")
+	private WebElement submitUpdateChangesButton;
 
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -72,6 +84,11 @@ public class HomePage {
 	public void enterDescriptionField(String description) {
 		this.descriptionField.clear();
 		this.descriptionField.sendKeys(description);
+  }
+  
+	public void enterNewBatchNum(String id) {
+		this.updateBatchInput.clear();
+		this.updateBatchInput.sendKeys(id);
 	}
 	
 	public void addSwotItem() {
@@ -84,6 +101,22 @@ public class HomePage {
 	
 	public void clickViewSwots() {
 		this.viewSwots.click();
+	}
+	
+	public void clickChangeBatchBttn() {
+		this.updateBatchButton.click();
+	}
+	
+	public void clickSubmitUpdateChangesButton() {
+		this.submitUpdateChangesButton.click();
+	}
+	
+	public WebElement getUpdateBatchInput() {
+		return updateBatchInput;
+	}
+	
+	public WebElement getAssocBatchId() {
+		return assocBatchId;
 	}
 	
 	

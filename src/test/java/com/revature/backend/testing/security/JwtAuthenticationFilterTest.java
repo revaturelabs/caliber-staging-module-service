@@ -33,9 +33,7 @@ public class JwtAuthenticationFilterTest {
 
   @Test
   public void notNullTest(){
-    int i=7;
     jwtAuth=new JwtAuthenticationFilter(mockAuthMan);
-    String s=null;
     assertThat(jwtAuth).isNotNull();;
   }
   

@@ -27,8 +27,6 @@ public class AnalysisItem {
 	@Column(name = "type")
 	private AnalysisType type;
 	
-	@Column(name = "note")
-	private String note;
 
 	public AnalysisItem() {}
 

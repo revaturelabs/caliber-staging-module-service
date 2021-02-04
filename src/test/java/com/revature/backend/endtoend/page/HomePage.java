@@ -17,10 +17,15 @@ public class HomePage {
 	private WebElement logoutButton;
 	
 	@FindAll({
-		@FindBy(className = "rev-btn"),
-		@FindBy(linkText = "Create SWOT")
+		@FindBy(xpath = "//button[text()='Create SWOT']"),
+//		@FindBy(linkText = "Create SWOT")
 	})
 	private List<WebElement> createSwotButtons;
+	
+	@FindAll({
+		@FindBy(xpath = "//button[text()='View SWOTs']")
+	})
+	private List<WebElement> viewSwotButtons;
 	
 	@FindBy(id = "type")
 	private WebElement SwotTypeDropdown;
@@ -28,13 +33,16 @@ public class HomePage {
 	@FindBy(id = "content")
 	private WebElement contentField;
 	
-	@FindBy(xpath = "//button[@text()='ADD ITEM']")
+	@FindBy(xpath = "//button[text()='ADD ITEM']")
 	private WebElement addItem;
 	
-	@FindBy(xpath = "//button[@text()='SUBMIT']")
+	@FindBy(id = "description")
+	private WebElement descriptionField;
+	
+	@FindBy(xpath = "//button[text()='SUBMIT']")
 	private WebElement submitSwots;
 	
-	@FindBy(xpath = "//button[@text()='View SWOTs']")
+	@FindBy(xpath = "//button[text()='View SWOTs']")
 	private WebElement viewSwots;
 
 	public HomePage(WebDriver driver) {
@@ -46,6 +54,11 @@ public class HomePage {
 		createButton.click();
 	}
 	
+	public void clickViewSwotForAssociate(int rowId) {
+		WebElement viewButton = this.viewSwotButtons.get(rowId);
+		viewButton.click();
+	}
+	
 	public void selectSwotType(String type) {
 		Select swotOption = new Select(SwotTypeDropdown);
 		swotOption.selectByValue(type);
@@ -54,6 +67,11 @@ public class HomePage {
 	public void enterContentField(String content) {
 		this.contentField.clear();
 		this.contentField.sendKeys(content);
+	}
+	
+	public void enterDescriptionField(String description) {
+		this.descriptionField.clear();
+		this.descriptionField.sendKeys(description);
 	}
 	
 	public void addSwotItem() {

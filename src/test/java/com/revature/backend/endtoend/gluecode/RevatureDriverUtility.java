@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
-public class RevatureStagingDriverUtility {
+public class RevatureDriverUtility {
 	public static WebDriver driver;
 	public static final String url = "http://localhost:4200/login";
 	

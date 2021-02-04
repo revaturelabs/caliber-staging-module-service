@@ -11,8 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 
 public class HomePage {
-	
-//	private WebDriver driver;
+	public final String url = "http://localhost:4200/home";
 	
 	@FindBy(xpath = "//*[@class='btn btn-primary logout-btn']")
 	private WebElement logoutButton;

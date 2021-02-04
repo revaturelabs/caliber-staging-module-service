@@ -43,13 +43,15 @@ public class ToastTest {
 	@When("user clicks view swots")
 	public void user_clicks_view_swots() throws InterruptedException {
 		this.homePage = new HomePage(DriverUtility.driver);
-		TimeUnit.SECONDS.sleep(3);
-		assertEquals(DriverUtility.driver.getCurrentUrl(), "http://localhost:4200/view/*");
+		TimeUnit.SECONDS.sleep(5);
+		assertEquals(DriverUtility.driver.getCurrentUrl(), "http://localhost:4200/home");
 	}
 
 	@When("user clicks add new item")
 	public void user_clicks_add_new_item() throws InterruptedException {
 		this.viewPage = new ViewPage(DriverUtility.driver);
+		TimeUnit.SECONDS.sleep(5);
+		assertEquals(DriverUtility.driver.getCurrentUrl(), "http://localhost:4200/view/*");
 		this.viewPage.clickAddNewItem();
 		
 	}

@@ -17,13 +17,13 @@ public class HomePage {
 	private WebElement logoutButton;
 	
 	@FindAll({
-		@FindBy(className = "rev-btn"),
-		@FindBy(linkText = "Create SWOT")
+		@FindBy(xpath = "//button[text()='Create SWOT']"),
+//		@FindBy(linkText = "Create SWOT")
 	})
 	private List<WebElement> createSwotButtons;
 	
 	@FindAll({
-		@FindBy(linkText = "View SWOTs")
+		@FindBy(xpath = "//button[text()='View SWOTs']")
 	})
 	private List<WebElement> viewSwotButtons;
 	
@@ -33,16 +33,16 @@ public class HomePage {
 	@FindBy(id = "content")
 	private WebElement contentField;
 	
-	@FindBy(xpath = "//button[@text()='ADD ITEM']")
+	@FindBy(xpath = "//button[text()='ADD ITEM']")
 	private WebElement addItem;
 	
 	@FindBy(id = "description")
 	private WebElement descriptionField;
 	
-	@FindBy(xpath = "//button[@text()='SUBMIT']")
+	@FindBy(xpath = "//button[text()='SUBMIT']")
 	private WebElement submitSwots;
 	
-	@FindBy(xpath = "//button[@text()='View SWOTs']")
+	@FindBy(xpath = "//button[text()='View SWOTs']")
 	private WebElement viewSwots;
 
 	public HomePage(WebDriver driver) {

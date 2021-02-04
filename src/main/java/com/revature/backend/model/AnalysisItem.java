@@ -27,8 +27,10 @@ public class AnalysisItem {
 	@Column(name = "type")
 	private AnalysisType type;
 	
+
 	@Column(name = "comment")
 	private String comment;
+
 
 	public AnalysisItem() {}
 

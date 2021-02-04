@@ -3,27 +3,25 @@ Feature: Unobstrusive Toast Location
 
   Scenario Outline: Creating and submitting new SWOT item
     Given a user is logged into the welcome page of Revature Staging Module
-    When a user clicks Create SWOT for associate "<assoiateName>"
-    And clicks Select SWOT type
-    And selects their "<SwotType>"
+    When a user clicks Create SWOT for associate in table row "<rowId>"
+    And selects their SWOT type "<SwotType>"
     And types into Enter Item field "<content>"
+    And clicks add item
     And clicks submit
     Then a toast notification should appear in the lower left
-    But the toast should not obstruct any other text
 
     Examples:
-      | assoiateName | SwotType    | content |
-      | testA        | STRENGTH    | toast   |
-      | testA        | WEAKNESS    | toast   |
-      | testB        | OPPORTUNITY | toast   |
-      | testB        | THREATS     | toast   |
+      | rowId | SwotType    | content |
+      | 1     | STRENGTH    | toast   |
+      | 1     | WEAKNESS    | toast   |
+      | 2     | OPPORTUNITY | toast   |
+      | 2     | THREAT      | toast   |
 
 
   Scenario Outline: Deleting a submitted SWOT item
-    Given a user is logged in and viewing a SWOT page for associate id "<associateId>"
+    Given a user is logged in and viewing a SWOT page for associate id"<associateId>"
     When a user clicks a SWOT delete button for "<itemID>"
     Then a toast notification should appear in the lower left
-    But the toast should not obstruct any other text
 
     Examples:
       | associateId | itemID |
@@ -41,7 +39,6 @@ Feature: Unobstrusive Toast Location
     But adds text "<SwotContentNew>"
     And clicks Update SWOT
     Then a toast notification should appear in the lower left
-    But the toast should not obstruct any other text
 
     Examples:
       | associateId | itemID | SwotContentOld  | SwotContentNew |

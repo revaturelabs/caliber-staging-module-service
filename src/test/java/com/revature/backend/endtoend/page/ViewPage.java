@@ -1,5 +1,7 @@
 package com.revature.backend.endtoend.page;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,7 +43,7 @@ public class ViewPage {
 
 	// Delete button
 	@FindBy(xpath = "//button[contains(.,'Delete')]")
-	private WebElement deleteButton;
+	private List<WebElement> deleteButton;
 
 	// Back to home page link
 	@FindBy(xpath = "//*[@id='homeLink']")
@@ -87,12 +89,53 @@ public class ViewPage {
 		this.updateItemButtonInsideUpdateModal.click();
 	}
 
-	public void clickDeleteItem() {
-		this.deleteButton.click();
+	public void clickDeleteItem(int id) {
+		this.deleteButton.get(id).click();
 	}
 
 	public void clickReturnToHomepage() {
 		this.homePageButton.click();
 	}
 
+	public WebElement getAddNewButton() {
+		return addNewButton;
+	}
+
+	public WebElement getAddNewButtonItemType() {
+		return addNewButtonItemType;
+	}
+
+	public WebElement getAddNewButtonItemText() {
+		return addNewButtonItemText;
+	}
+
+	public WebElement getAddItemButtonInsideAddNewModal() {
+		return addItemButtonInsideAddNewModal;
+	}
+
+	public WebElement getUpdateButton() {
+		return updateButton;
+	}
+
+	public WebElement getUpdateButtonItemType() {
+		return updateButtonItemType;
+	}
+
+	public WebElement getUpdateButtonItemText() {
+		return updateButtonItemText;
+	}
+
+	public WebElement getUpdateItemButtonInsideUpdateModal() {
+		return updateItemButtonInsideUpdateModal;
+	}
+
+	public List<WebElement> getDeleteButton() {
+		return deleteButton;
+	}
+
+	public WebElement getHomePageButton() {
+		return homePageButton;
+	}
+
+	
 }

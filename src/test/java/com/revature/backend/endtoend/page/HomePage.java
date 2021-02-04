@@ -21,16 +21,17 @@ public class HomePage {
 	})
 	private List<WebElement> createSwotButtons;
 	
-	@FindBy(id = "type")
+//	@FindBy(id = "type")
+	@FindBy(name = "type")
 	private WebElement SwotTypeDropdown;
 	
 	@FindBy(id = "content")
 	private WebElement contentField;
 	
-	@FindBy(xpath = "//button[@text()='ADD ITEM']")
+	@FindBy(xpath = "//button[text()='ADD ITEM']")
 	private WebElement addItem;
 	
-	@FindBy(xpath = "//button[@text()='SUBMIT']")
+	@FindBy(xpath = "//button[text()='SUBMIT']")
 	private WebElement submitSwots;
 
 	public HomePage(WebDriver driver) {
@@ -44,6 +45,7 @@ public class HomePage {
 	
 	public void selectSwotType(String type) {
 		Select swotOption = new Select(SwotTypeDropdown);
+		System.out.println(type);
 		swotOption.selectByValue(type);
 	}
 	

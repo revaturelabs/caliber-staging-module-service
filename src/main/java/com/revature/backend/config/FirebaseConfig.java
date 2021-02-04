@@ -43,18 +43,16 @@ public class FirebaseConfig {
    * @throws FirebaseException
    */
   public FirebaseConfig() throws FirebaseException {
-	  System.out.println("\n");
-	  System.out.println(System.getenv("GOOGLE_APPLICATION_CREDENTIALS"));
-	  System.out.println("\n");
-	  try (FileInputStream fis = new FileInputStream(
+    System.out.println("\n This should not be null: " + System.getenv("GOOGLE_APPLICATION_CREDENTIALS") + "\n"); //TODO if null check STARTUP.md
+    try (FileInputStream fileInputStream = new FileInputStream(
           System.getenv("GOOGLE_APPLICATION_CREDENTIALS"))) {
-      FirebaseOptions options = FirebaseOptions.builder()
-          .setCredentials(GoogleCredentials.fromStream(fis))
-          .build();
       try {
         FirebaseApp firebaseApp = FirebaseApp.getInstance();
         this.firebaseAuth = FirebaseAuth.getInstance(firebaseApp);
       } catch (IllegalStateException e) {
+        FirebaseOptions options = FirebaseOptions.builder()
+            .setCredentials(GoogleCredentials.fromStream(fileInputStream))
+            .build();
         this.firebaseAuth = FirebaseAuth.getInstance(FirebaseApp.initializeApp(options));
       }
       logger.info("Successfully initialized Firebase and FirebaseAuth!");

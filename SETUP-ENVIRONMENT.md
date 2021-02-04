@@ -36,7 +36,7 @@ If it does not you will need to use the other method.
 
 ## Linux / MacOS
 
-In your .bashrc, .bash_profile, or .profile add
+To set an environment variable In your .bashrc, .bash_profile, or .profile add
 `export GOOGLE_APPLICATION_CREDENTIALS="/absolute/path/to/service-account-file.json"`
 
 ### Spring Tool Suite
@@ -65,13 +65,14 @@ In your .bashrc, .bash_profile, or .profile add
 
 1. Open Terminal
 
-2. Run `run~/.bash_profile`
+2. Run `run ~/.bash_profile`
 
 3. Run `open ~/.bash_profile`
 
 4. Type `export + env variable name=PATH`
 
-5. `Export GOOGLE_APPLICATION_CREDENTIALS= "path/filename"`
+5. `Export GOOGLE_APPLICATION_CREDENTIALS= "/absolute/path/filename.json"`
+
    where “path” is the absolute path to the service account credentials json file and file name is the name of the file.
 
 6. Save it (cmd+s) and Quit (cmd+q)

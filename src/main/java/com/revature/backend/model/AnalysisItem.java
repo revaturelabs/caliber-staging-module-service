@@ -26,22 +26,29 @@ public class AnalysisItem {
 
 	@Column(name = "type")
 	private AnalysisType type;
+	
+
+	@Column(name = "comment")
+	private String comment;
+
 
 	public AnalysisItem() {}
 
-	public AnalysisItem(String content, Swot swot, AnalysisType type) {
+	public AnalysisItem(String content, Swot swot, AnalysisType type, String comment) {
 		super();
 		this.content = content;
 		this.swot = swot;
 		this.type = type;
+		this.comment = comment;
 	}
 
-	public AnalysisItem(int id, String content, Swot swot, AnalysisType type) {
+	public AnalysisItem(int id, String content, Swot swot, AnalysisType type, String comment) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.swot = swot;
 		this.type = type;
+		this.comment = comment;
 	}
 
 	public Swot getSwot() {
@@ -76,6 +83,14 @@ public class AnalysisItem {
 		this.type = type;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -84,17 +99,17 @@ public class AnalysisItem {
 			return false;
 		AnalysisItem that = (AnalysisItem) o;
 		return getId() == that.getId() && Objects.equals(getContent(), that.getContent())
-				&& Objects.equals(swot, that.swot) && getType() == that.getType();
+				&& Objects.equals(swot, that.swot) && getType() == that.getType() && getComment().equals(that.getComment());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getId(), getContent(), swot, getType());
+		return Objects.hash(getId(), getContent(), swot, getType(), getComment());
 	}
 
 	//This does not print 'swot' because it causes a stack overflow error when either the AnalysisItem or Swot toString are called
 	//if printing is required, print the id instead of the whole object or otherwise edit the swot toString to prevent recursive printing
 	public String toString() {
-		return "Analysis_Item(id=" + this.getId() + ", content=" + this.getContent() + ", type=" + this.getType() + ")";
+		return "Analysis_Item(id=" + this.getId() + ", content=" + this.getContent() + ", type=" + this.getType() + "," + this.getComment() + ")";
 	}
 }

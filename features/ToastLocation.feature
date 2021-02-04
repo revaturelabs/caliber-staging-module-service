@@ -4,8 +4,7 @@ Feature: Unobstrusive Toast Location
   Scenario Outline: Creating and submitting new SWOT item
     Given a user is logged into the welcome page of Revature Staging Module
     When a user clicks Create SWOT for associate in table row "<rowId>"
-    #And clicks Select SWOT type
-    And selects their SWOT type"<SwotType>"
+    And selects their SWOT type "<SwotType>"
     And types into Enter Item field "<content>"
     And clicks add item
     And clicks submit
@@ -16,11 +15,11 @@ Feature: Unobstrusive Toast Location
       | 1     | STRENGTH    | toast   |
       | 1     | WEAKNESS    | toast   |
       | 2     | OPPORTUNITY | toast   |
-      | 2     | THREATS     | toast   |
+      | 2     | THREAT      | toast   |
 
 
   Scenario Outline: Deleting a submitted SWOT item
-    Given a user is logged in and viewing a SWOT page for associate id "<associateId>"
+    Given a user is logged in and viewing a SWOT page for associate id"<associateId>"
     When a user clicks a SWOT delete button for "<itemID>"
     Then a toast notification should appear in the lower left
 

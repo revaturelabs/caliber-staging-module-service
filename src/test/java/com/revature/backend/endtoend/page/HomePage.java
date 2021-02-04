@@ -16,13 +16,9 @@ public class HomePage {
 	@FindBy(xpath = "//*[@class='btn btn-primary logout-btn']")
 	private WebElement logoutButton;
 	
-	@FindAll({
-		@FindBy(className = "rev-btn"),
-		@FindBy(linkText = "Create SWOT")
-	})
+	@FindBy(xpath = "//button[text()='Create SWOT']")
 	private List<WebElement> createSwotButtons;
 	
-//	@FindBy(id = "type")
 	@FindBy(name = "type")
 	private WebElement SwotTypeDropdown;
 	
@@ -35,8 +31,8 @@ public class HomePage {
 	@FindBy(xpath = "//button[text()='SUBMIT']")
 	private WebElement submitSwots;
 	
-	@FindBy(xpath = "//button[@text()='View SWOTs']")
-	private WebElement viewSwots;
+	@FindBy(xpath = "//button[text()='View SWOTs']")
+	private List<WebElement> viewSwots;
 
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -49,7 +45,6 @@ public class HomePage {
 	
 	public void selectSwotType(String type) {
 		Select swotOption = new Select(SwotTypeDropdown);
-		System.out.println(type);
 		swotOption.selectByValue(type);
 	}
 	
@@ -66,10 +61,36 @@ public class HomePage {
 		this.submitSwots.click();
 	}
 	
-	public void clickViewSwots() {
-		this.viewSwots.click();
+	public void clickViewSwots(int index) {
+		this.viewSwots.get(index).click();
 	}
-	
-	
+
+	public WebElement getLogoutButton() {
+		return logoutButton;
+	}
+
+	public List<WebElement> getCreateSwotButtons() {
+		return createSwotButtons;
+	}
+
+	public WebElement getSwotTypeDropdown() {
+		return SwotTypeDropdown;
+	}
+
+	public WebElement getContentField() {
+		return contentField;
+	}
+
+	public WebElement getAddItem() {
+		return addItem;
+	}
+
+	public WebElement getSubmitSwots() {
+		return submitSwots;
+	}
+
+	public List<WebElement> getViewSwots() {
+		return viewSwots;
+	}
 	
 }

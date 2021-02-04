@@ -9,7 +9,7 @@ import io.cucumber.java.Before;
 public class DriverUtility {
 	
 	public static WebDriver driver;
-	public static final String url = "";
+	public static final String url = "http://localhost:4200/login";
 	
 	@Before
 	public void setUp() {

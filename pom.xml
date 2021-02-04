@@ -125,6 +125,17 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>
+  </build>
 
+  <profiles>
+      <profile>
+          <id>firebase</id>
+          <activation>
+              <activeByDefault>true</activeByDefault>
+          </activation>
+          <properties>
+              <spring.profiles.active>firebase</spring.profiles.active>
+          </properties>
+      </profile>
+  </profiles>
 </project>

@@ -34,6 +34,9 @@ public class HomePage {
 	
 	@FindBy(xpath = "//button[@text()='SUBMIT']")
 	private WebElement submitSwots;
+	
+	@FindBy(xpath = "//button[@text()='View SWOTs']")
+	private WebElement viewSwots;
 
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -60,6 +63,10 @@ public class HomePage {
 	
 	public void submitSwotItems() {
 		this.submitSwots.click();
+	}
+	
+	public void clickViewSwots() {
+		this.viewSwots.click();
 	}
 	
 	

@@ -1,4 +1,4 @@
-// package com.revature.backend.endtoend.gluecode;
+package com.revature.backend.endtoend.gluecode;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -8,13 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-// import com.revature.backend.endtoend.page.HomePage;
-// import com.revature.backend.endtoend.page.LoginPage;
-// import com.revature.backend.endtoend.page.ViewPage;
+ import com.revature.backend.endtoend.page.HomePage;
+ import com.revature.backend.endtoend.page.LoginPage;
+ import com.revature.backend.endtoend.page.ViewPage;
 
-// import io.cucumber.java.en.Given;
-// import io.cucumber.java.en.Then;
-// import io.cucumber.java.en.When;
+ import io.cucumber.java.en.Given;
+ import io.cucumber.java.en.Then;
+ import io.cucumber.java.en.When;
 
 public class ToastLocationTest {
 	public HomePage homePage;

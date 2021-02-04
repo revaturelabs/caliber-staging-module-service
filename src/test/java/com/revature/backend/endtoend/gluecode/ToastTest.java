@@ -96,7 +96,7 @@ public class ToastTest {
 	@When("user clicks delete for the same item")
 	public void user_clicks_delete_for_the_same_item() {
 		// Write code here that turns the phrase above into concrete actions
-		this.viewPage.clickDeleteItem();
+//		this.viewPage.clickDeleteItem();
 	}
 
 	@Then("the three messages should occupy separate locations on the screen")

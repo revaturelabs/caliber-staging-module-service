@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+
 public class HomePage {
 	public final String url = "http://localhost:4200/home";
 	
@@ -40,11 +41,14 @@ public class HomePage {
 	
 	@FindBy(xpath = "//button[@text()='SUBMIT']")
 	private WebElement submitSwots;
+	
+	@FindBy(xpath = "//button[@text()='View SWOTs']")
+	private WebElement viewSwots;
 
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public void clickCreateSwotForAssociate(int rowId) {
 		WebElement createButton = this.createSwotButtons.get(rowId);
 		createButton.click();
@@ -78,6 +82,9 @@ public class HomePage {
 		this.submitSwots.click();
 	}
 	
+	public void clickViewSwots() {
+		this.viewSwots.click();
+	}
 	
 	
 	

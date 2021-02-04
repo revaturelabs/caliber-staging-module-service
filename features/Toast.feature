@@ -8,16 +8,16 @@ Feature: Toast Message
 	And user clicks log in
 	And user clicks view swots
 	And user clicks add new item
-	And user selects type opportunity
+	And user selects type <"type">
 	And user submits item name <"text">
 	And user clicks add item
 	Then user can click add new item again without clearing the message
 	
 	Examples:
-	| email             | password | text          |
-	| test@revature.com | password | just checking |
-	| test@revature.com | password | checking again|
-	| test@revature.com | password | last time     |
+	| email             | password | type        | text          |
+	| test@revature.com | password | Opportunity | just checking |
+	| test@revature.com | password | Opportunity | checking again|
+	| test@revature.com | password | Opportunity | last time     |
 	
 	#As a user I wish to see all toasts clearly if there are more than one
 	Scenario Outline: Ensuring toasts are clearly visible
@@ -27,19 +27,19 @@ Feature: Toast Message
 	And user clicks log in
 	And user clicks view swots
 	And user clicks add new item
-	And user selects type opportunity
+	And user selects type <"type">
 	And user submits item name <"text">
 	And user clicks add item
 	And user clicks update for recently created item
-	And user changes type to strength
+	And user changes item type <"typetwo">
 	And user clicks delete for the same item
 	Then the three messages should occupy separate locations on the screen
 	
 	Examples:
-	| email             | password | text          |
-	| test@revature.com | password | just checking |
-	| test@revature.com | password | checking again|
-	| test@revature.com | password | last time     |
+	| email             | password | type        | text          | typetwo  |
+	| test@revature.com | password | Opportunity | just checking | Strength |
+	| test@revature.com | password | Opportunity | checking again| Strength |
+	| test@revature.com | password | Opportunity | last time     | Strength |
 	
 	# Test ensuring nothing that used to cause alerts brings up alerts
 	# (create swot on home page; add new item, update, and delete on view page)
@@ -53,22 +53,22 @@ Feature: Toast Message
 	And user inputs their password <"password">
 	And user clicks log in
 	And user clicks create swot
-	And user selects type threat
+	And user selects type one <"type">
 	And user submits item name <"text">
 	And user clicks view swots
 	And user clicks add new item
-	And user selects type weakness
-	And user submits item name <"textTwo">
+	And user selects type two <"typetwo">
+	And user submits item name three <"texttwo">
 	And user clicks add item
 	And user clicks update for recently created item
-	And user changes type to strength
+	And user changes item type <"typethree">
 	And user clicks delete for the same item
 	Then the user should have four toast messages
 	
 	Examples:
-	| email             | password | text          | textTwo     |
-	| test@revature.com | password | just checking | more checks |
-	| test@revature.com | password | checking again| testing     |
-	| test@revature.com | password | better safe   | than sorry  |
+	| email             | password | type   | text          | typetwo  | texttwo     | typethree |
+	| test@revature.com | password | Threat | just checking | Weakness | more checks | Strength  |
+	| test@revature.com | password | Threat | checking again| Weakness | testing     | Strength  |
+	| test@revature.com | password | Threat | better safe   | Weakness | than sorry  | Strength  |
 	
 	

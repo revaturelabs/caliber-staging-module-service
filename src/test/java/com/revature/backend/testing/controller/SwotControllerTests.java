@@ -68,11 +68,10 @@ public class SwotControllerTests {
 		mockAnalysisItems.add(mockAI3);
 		mockAnalysisItems.add(mockAI4);
 		
-		Swot mockSwot1 =  new Swot(1, associate, manager, timestamp, timestamp);
-		Swot mockSwot2 =  new Swot(2, associate, manager, timestamp, timestamp);
+		Swot mockSwot1 =  new Swot(1, associate, manager, timestamp, timestamp, "");
+		Swot mockSwot2 =  new Swot(2, associate, manager, timestamp, timestamp, "");
 		mockSwot1.setAnalysisItems(mockAnalysisItems);
 		mockSwot2.setAnalysisItems(mockAnalysisItems);
-		
 		swots.add(mockSwot1);
 		swots.add(mockSwot2);
 		

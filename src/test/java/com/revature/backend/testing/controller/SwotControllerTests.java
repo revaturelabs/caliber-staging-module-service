@@ -1,22 +1,10 @@
 package com.revature.backend.testing.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.controller.SwotController;
@@ -27,57 +15,64 @@ import com.revature.backend.model.Manager;
 import com.revature.backend.model.Swot;
 import com.revature.backend.service.SwotService;
 
-@SpringBootTest
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+@WebMvcTest(SwotController.class)
 public class SwotControllerTests {
 
 	ObjectMapper objectMapper = new ObjectMapper();
 	
-	@InjectMocks
+	@Autowired
 	SwotController swotController;
 	
+	@Autowired
 	private MockMvc mockMvc;
 	
-	@Mock
+	@MockBean
 	private SwotService service;
 	
 	/*
 	 * Create a Swot object with an ID.
 	 * This is obviously a lot of data and is more going
 	 * to be a template, fit to change in the future.
+	 * 2/3/2021 - changed method to include new analysis item comment field
 	 */
 	
-	//initalizing global variables for easy access
-	List<AnalysisItem> mockAnalysisItems = new ArrayList<>();
-	List<Swot> swots = new ArrayList<>();
-	Associate associate = new Associate(1, null, null, null, null, null, null, null);
-	Manager manager = new Manager(1, null, null, null);
-	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-	
-	
-	//seting up a mock swot with an id of 1
-	@BeforeEach
-	public void setUp() {
-		mockMvc = MockMvcBuilders.standaloneSetup(swotController).build();
-		AnalysisItem mockAI1 = new AnalysisItem(1, "Strength", null, AnalysisType.STRENGTH);
-		AnalysisItem mockAI2 = new AnalysisItem(2, "Weakness", null, AnalysisType.WEAKNESS);
-		AnalysisItem mockAI3 = new AnalysisItem(3, "Opportunity", null, AnalysisType.OPPORTUNITY);
-		AnalysisItem mockAI4 = new AnalysisItem(4, "Threat", null, AnalysisType.THREAT);
+	private Swot mockSwot(int id) {
+		
+		List<AnalysisItem> mockAnalysisItems = new ArrayList<>();
+		
+		AnalysisItem mockAI1 = new AnalysisItem(1, "Strength", null, AnalysisType.STRENGTH, "Strength comment");
+		AnalysisItem mockAI2 = new AnalysisItem(2, "Weakness", null, AnalysisType.WEAKNESS, "Weakness comment");
+		AnalysisItem mockAI3 = new AnalysisItem(3, "Opportunity", null, AnalysisType.OPPORTUNITY, "Opportunity comment");
+		AnalysisItem mockAI4 = new AnalysisItem(4, "Threat", null, AnalysisType.THREAT, "Threat comment");
 		
 		mockAnalysisItems.add(mockAI1);
 		mockAnalysisItems.add(mockAI2);
 		mockAnalysisItems.add(mockAI3);
 		mockAnalysisItems.add(mockAI4);
 		
-		Swot mockSwot1 =  new Swot(1, associate, manager, timestamp, timestamp, "");
-		Swot mockSwot2 =  new Swot(2, associate, manager, timestamp, timestamp, "");
-		mockSwot1.setAnalysisItems(mockAnalysisItems);
-		mockSwot2.setAnalysisItems(mockAnalysisItems);
-		swots.add(mockSwot1);
-		swots.add(mockSwot2);
+		Swot mockSwot = new Swot(id, 
+						new Associate(1, null, null, null, null, null, null, null), 
+						new Manager(1, null, null, null), 
+						new Timestamp(System.currentTimeMillis()), 
+						new Timestamp(System.currentTimeMillis()),
+						"");
+		mockSwot.setAnalysisItems(mockAnalysisItems);
 		
-		when(service.retrieveAllSwot()).thenReturn(swots);
+		return mockSwot;
 	}
-
+	
 	/*
 	 * Sanity Check - Ensure the application context
 	 * is loaded before moving on to the other tests.
@@ -92,7 +87,16 @@ public class SwotControllerTests {
 	 * for a basic GET request with no parameters. 
 	 */
 	@Test
-	public void controllerSuccess() throws Exception {	
+	public void controllerSuccess() throws Exception {
+		
+		// Create the expected list.
+		List<Swot> swots = new ArrayList<>();
+		swots.add(mockSwot(1));
+		swots.add(mockSwot(2));
+		
+		when(service.retrieveAllSwot()).thenReturn(swots);
+		
 		this.mockMvc.perform(get("/swot/view/all")).andDo(print()).andExpect(status().isOk());
 	}
+	
 }

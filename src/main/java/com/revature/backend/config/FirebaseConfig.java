@@ -43,7 +43,10 @@ public class FirebaseConfig {
    * @throws FirebaseException
    */
   public FirebaseConfig() throws FirebaseException {
-    try (FileInputStream fis = new FileInputStream(
+	  System.out.println("\n");
+	  System.out.println(System.getenv("GOOGLE_APPLICATION_CREDENTIALS"));
+	  System.out.println("\n");
+	  try (FileInputStream fis = new FileInputStream(
           System.getenv("GOOGLE_APPLICATION_CREDENTIALS"))) {
       FirebaseOptions options = FirebaseOptions.builder()
           .setCredentials(GoogleCredentials.fromStream(fis))

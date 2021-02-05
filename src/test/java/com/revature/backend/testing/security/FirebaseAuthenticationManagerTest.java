@@ -1,17 +1,17 @@
 package com.revature.backend.testing.security;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 import com.revature.backend.security.FirebaseAuthenticationManager;
-import com.revature.backend.testing.security.SecurityMockedClasses.MockAuthentication;
+import com.revature.backend.security.UnauthenticatedManager;
 
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,14 +25,19 @@ public class FirebaseAuthenticationManagerTest {
   @Mock
   FirebaseAuth mockFireAuth;
 
-  private Authentication mockAuth;
+  private Authentication mockVerifiedAuth;
+  private Authentication mockUnverifiedAuth;
+  private Authentication mockNullCredAuth;
   private String credentials;
   private FirebaseToken token;
 
   @BeforeEach
   public void before()throws Exception {
-    mockAuth = new MockAuthentication();//Implementation of this mock was moved to its own class to reduce length and help with readability
-    when(mockFireAuth.verifyIdToken((String)mockAuth.getCredentials())).thenReturn(null);
+    mockVerifiedAuth = new UnauthenticatedManager("username:JugemuJugemu,password:verified");
+    mockUnverifiedAuth=new UnauthenticatedManager("username:Pirate,password:booty");
+    mockNullCredAuth=new UnauthenticatedManager(null);
+    token=null;
+    when(mockFireAuth.verifyIdToken(credentials)).thenReturn(token);
   }
 
   @AfterEach
@@ -40,14 +45,14 @@ public class FirebaseAuthenticationManagerTest {
 
   }
   @Test
-  public void notNullTest(){
-    fireAuthMan=new FirebaseAuthenticationManager(mockFireAuth);
+  public void notNullTest(){   
     assertThat(fireAuthMan).isNotNull();
   }
 
   @Test
   public void userIsVerifiedTest() throws Exception{
-    fireAuthMan=new FirebaseAuthenticationManager(mockFireAuth);
+    Assertions.assertThrows(NullPointerException.class,()->{
+      fireAuthMan.authenticate(mockVerifiedAuth);});
   }
   
 }

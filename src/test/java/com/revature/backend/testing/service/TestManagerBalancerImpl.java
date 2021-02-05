@@ -6,9 +6,9 @@
  */
 package com.revature.backend.testing.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,14 +22,11 @@ import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 import com.revature.backend.service.ManagerBalancerImpl;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest(classes = { ManagerBalancerImpl.class })
-@RunWith(SpringRunner.class)
 public class TestManagerBalancerImpl {
 
     // ----------

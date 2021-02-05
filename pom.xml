@@ -31,6 +31,12 @@
 		</dependency>
 
 		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>25.0-jre</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
@@ -162,4 +168,15 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>firebase</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>firebase</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
 </project>

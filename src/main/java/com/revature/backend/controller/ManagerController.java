@@ -2,22 +2,19 @@ package com.revature.backend.controller;
 
 import java.util.List;
 
-import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.revature.backend.model.Manager;
 import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.ClientMessage;
 
+import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
-@CrossOrigin("*")
-// @CrossOrigin("http://ec2-54-237-27-253.compute-1.amazonaws.com")
 public class ManagerController {
 
 	private static Logger log = Logger.getLogger(ManagerController.class);

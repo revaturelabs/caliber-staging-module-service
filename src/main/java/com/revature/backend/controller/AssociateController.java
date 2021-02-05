@@ -75,11 +75,11 @@ public class AssociateController {
 	
 	/**
 	 * Given a LinkedHashMap, gets the associate's id and tries to look them up. If
-	 * They exist, gets the batch's id and tries to find it. If it exists, assigns
+	 * they exist, gets the batch's id and tries to find it. If it exists, assigns
 	 * that batch to the associate given.
 	 * 
 	 * @param assocMap a LinkedHashMap holding the info we need to update
-	 * @return
+	 * @return returns a response string indicating whether the update was a success or not
 	 */
 	@PutMapping("/associates")
 	public ResponseEntity<String> updateAssociate(@RequestBody LinkedHashMap<String, Integer> assocMap){

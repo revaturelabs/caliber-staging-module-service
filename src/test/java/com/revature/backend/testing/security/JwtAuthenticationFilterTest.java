@@ -33,7 +33,6 @@ public class JwtAuthenticationFilterTest {
 
   @Test
   public void notNullTest(){
-    jwtAuth=new JwtAuthenticationFilter(mockAuthMan);
     assertThat(jwtAuth).isNotNull();;
   }
   

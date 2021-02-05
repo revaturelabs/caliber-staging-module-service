@@ -19,14 +19,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 /**
- * 
+ * This is a set of tests for the FirebaseAuthenticationManager class.It contains 4 tests related to this class<p>
+ * test 1: Tests whether it is possible to instantiate an instance of the tested class<p>
+ * test 2: Tests if given presumed valid credentials will return appropriate result. Issue with test:unable to create firebaseToken so throws nullpointer exception instead<p>
+ * test 3: Tests if given invalid credentials the method handles appropriatly<p>
+ * test 4: Tests if given null credentials that the method handles appropriately<p>
  * @throws Exception
  * @author Matthew Sheldon
- * This is a set of tests for the FirebaseAuthenticationManager class.It contains 4 tests related to this class
- * test 1: Tests whether it is possible to instantiate an instance of the tested class
- * test 2: Tests if given presumed valid credentials will return appropriate result. Issue with test:unable to create firebaseToken so throws nullpointer exception instead
- * test 3: Tests if given invalid credentials the method handles appropriatly
- * test 4: tests if given null credentials that the method handles appropriately
+ * 
  * 
  */
 

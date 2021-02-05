@@ -9,16 +9,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+
 public class HomePage {
 	public final String url = "http://localhost:4200/home";
 	
 	@FindBy(xpath = "//*[@class='btn btn-primary logout-btn']")
 	private WebElement logoutButton;
 	
-	@FindAll({
-		@FindBy(className = "rev-btn"),
-		@FindBy(linkText = "Create SWOT")
-	})
+	@FindBy(xpath = "//button[text()='Create SWOT']")
 	private List<WebElement> createSwotButtons;
 	
 	@FindBy(id = "type")
@@ -27,19 +25,42 @@ public class HomePage {
 	@FindBy(id = "content")
 	private WebElement contentField;
 	
-	@FindBy(xpath = "//button[@text()='ADD ITEM']")
+	@FindBy(xpath = "//button[text()='ADD ITEM']")
 	private WebElement addItem;
 	
-	@FindBy(xpath = "//button[@text()='SUBMIT']")
+	@FindBy(id = "description")
+	private WebElement descriptionField;
+	
+	@FindBy(xpath = "//button[text()='SUBMIT']")
 	private WebElement submitSwots;
+	
+	@FindBy(xpath = "//button[text()='View SWOTs']")
+	private List<WebElement> viewSwots;
+	
+	@FindBy(xpath = "//*[@id=\"data-row\"]/td[8]/button")
+	private WebElement updateBatchButton;
+	
+	@FindBy(xpath = "//*[@id=\"newBatch\"]")
+	private WebElement updateBatchInput;
+	
+	@FindBy(xpath = "//*[@id=\"data-row\"]/td[6]")
+	private WebElement assocBatchId;
+	
+	@FindBy(xpath = "/html/body/ngb-modal-window/div/div/app-update-associate/div/div/div/form/div[4]/div/button")
+	private WebElement submitUpdateChangesButton;
 
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public void clickCreateSwotForAssociate(int rowId) {
 		WebElement createButton = this.createSwotButtons.get(rowId);
 		createButton.click();
+	}
+	
+	public void clickViewSwotForAssociate(int rowId) {
+		WebElement viewButton = this.viewSwotButtons.get(rowId);
+		viewButton.click();
 	}
 	
 	public void selectSwotType(String type) {
@@ -52,6 +73,16 @@ public class HomePage {
 		this.contentField.sendKeys(content);
 	}
 	
+	public void enterDescriptionField(String description) {
+		this.descriptionField.clear();
+		this.descriptionField.sendKeys(description);
+  }
+  
+	public void enterNewBatchNum(String id) {
+		this.updateBatchInput.clear();
+		this.updateBatchInput.sendKeys(id);
+	}
+	
 	public void addSwotItem() {
 		this.addItem.click();
 	}
@@ -60,6 +91,53 @@ public class HomePage {
 		this.submitSwots.click();
 	}
 	
+	public void clickViewSwots(int index) {
+		this.viewSwots.get(index).click();
+	}
+
+	public WebElement getLogoutButton() {
+		return logoutButton;
+	}
+
+	public List<WebElement> getCreateSwotButtons() {
+		return createSwotButtons;
+	}
+
+	public WebElement getSwotTypeDropdown() {
+		return SwotTypeDropdown;
+	}
+
+	public WebElement getContentField() {
+		return contentField;
+	}
+
+	public WebElement getAddItem() {
+		return addItem;
+	}
+
+	public WebElement getSubmitSwots() {
+		return submitSwots;
+	}
+
+	public List<WebElement> getViewSwots() {
+		return viewSwots;
+	}
+	
+	public void clickChangeBatchBttn() {
+		this.updateBatchButton.click();
+	}
+	
+	public void clickSubmitUpdateChangesButton() {
+		this.submitUpdateChangesButton.click();
+	}
+	
+	public WebElement getUpdateBatchInput() {
+		return updateBatchInput;
+	}
+	
+	public WebElement getAssocBatchId() {
+		return assocBatchId;
+	}
 	
 	
 	

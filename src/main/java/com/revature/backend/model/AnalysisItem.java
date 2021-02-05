@@ -30,6 +30,8 @@ public class AnalysisItem {
 	@Column(name = "note")
 	private String note;
 
+
+
 	public AnalysisItem() {}
 
 	public AnalysisItem(String name, Swot swot, AnalysisType type, String note) {

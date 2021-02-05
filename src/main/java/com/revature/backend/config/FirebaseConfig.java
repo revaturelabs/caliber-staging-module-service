@@ -20,7 +20,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 
 /**
  * This configuration class is used to start the Firebase API Admin SDK in order
- * for this configuration to work in the application.properties you must set
+ * for this configuration to work you must set in the application.properties
  * spring.profiles.active=firebase or else the security configuration will not
  * find a bean for the AuthenticationManager interface. And since it is an
  * interface we must make a concrete class for the bean to be initialized.

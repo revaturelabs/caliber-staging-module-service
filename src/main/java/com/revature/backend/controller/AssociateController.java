@@ -22,8 +22,6 @@ import com.revature.backend.service.BackendService;
 import com.revature.backend.service.BatchServiceImpl;
 
 @RestController
-@CrossOrigin("*")
-// @CrossOrigin("http://ec2-54-237-27-253.compute-1.amazonaws.com")
 public class AssociateController {
 
 	@Autowired
@@ -38,20 +36,18 @@ public class AssociateController {
 	
 	@GetMapping("/associates")
 	public ResponseEntity<List<AssociateDTO>> getAssociates(@RequestParam int manager) {
-		ResponseEntity<List<AssociateDTO>> ret;
 		List<AssociateDTO> body = null;
 		List<Associate> associates = backendService.findAssociatesByManagerId(manager);
 
 		if (associates == null || associates.size() == 0) {
-			ret = new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 		} else {
 			body = new ArrayList<>();
 			for (Associate a : associates) {
 				body.add(new AssociateDTO(a));
 			}
-			ret = ResponseEntity.ok(body);
+			return new ResponseEntity<>(body, HttpStatus.OK);
 		}
-		return ret;
 	}
 
 	/**
@@ -64,22 +60,17 @@ public class AssociateController {
 
 	@GetMapping("/associates/new")
 	public ResponseEntity<List<AssociateDTO>> getNewAssociates(@RequestParam int manager) {
-		ResponseEntity<List<AssociateDTO>> ret = null;
 		List<AssociateDTO> body = null;
 		List<Associate> associates = backendService.findNewAssociatesByManagerId(manager);
 		if (associates == null || associates.size() == 0) {
-			ret = new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 		} else {
-
 			body = new ArrayList<>();
 			for (Associate a : associates) {
 				body.add(new AssociateDTO(a));
 			}
-			ret = ResponseEntity.ok(body);
-
+			return new ResponseEntity<>(body, HttpStatus.OK);
 		}
-		return ret;
-
 	}
 	
 	/**

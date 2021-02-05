@@ -19,7 +19,7 @@ public class HomePage {
 	@FindBy(xpath = "//button[text()='Create SWOT']")
 	private List<WebElement> createSwotButtons;
 	
-	@FindBy(name = "type")
+	@FindBy(id = "type")
 	private WebElement SwotTypeDropdown;
 	
 	@FindBy(id = "content")
@@ -28,11 +28,26 @@ public class HomePage {
 	@FindBy(xpath = "//button[text()='ADD ITEM']")
 	private WebElement addItem;
 	
+	@FindBy(id = "description")
+	private WebElement descriptionField;
+	
 	@FindBy(xpath = "//button[text()='SUBMIT']")
 	private WebElement submitSwots;
 	
 	@FindBy(xpath = "//button[text()='View SWOTs']")
 	private List<WebElement> viewSwots;
+	
+	@FindBy(xpath = "//*[@id=\"data-row\"]/td[8]/button")
+	private WebElement updateBatchButton;
+	
+	@FindBy(xpath = "//*[@id=\"newBatch\"]")
+	private WebElement updateBatchInput;
+	
+	@FindBy(xpath = "//*[@id=\"data-row\"]/td[6]")
+	private WebElement assocBatchId;
+	
+	@FindBy(xpath = "/html/body/ngb-modal-window/div/div/app-update-associate/div/div/div/form/div[4]/div/button")
+	private WebElement submitUpdateChangesButton;
 
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -43,6 +58,11 @@ public class HomePage {
 		createButton.click();
 	}
 	
+	public void clickViewSwotForAssociate(int rowId) {
+		WebElement viewButton = this.viewSwotButtons.get(rowId);
+		viewButton.click();
+	}
+	
 	public void selectSwotType(String type) {
 		Select swotOption = new Select(SwotTypeDropdown);
 		swotOption.selectByValue(type);
@@ -51,6 +71,16 @@ public class HomePage {
 	public void enterContentField(String content) {
 		this.contentField.clear();
 		this.contentField.sendKeys(content);
+	}
+	
+	public void enterDescriptionField(String description) {
+		this.descriptionField.clear();
+		this.descriptionField.sendKeys(description);
+  }
+  
+	public void enterNewBatchNum(String id) {
+		this.updateBatchInput.clear();
+		this.updateBatchInput.sendKeys(id);
 	}
 	
 	public void addSwotItem() {
@@ -92,5 +122,23 @@ public class HomePage {
 	public List<WebElement> getViewSwots() {
 		return viewSwots;
 	}
+	
+	public void clickChangeBatchBttn() {
+		this.updateBatchButton.click();
+	}
+	
+	public void clickSubmitUpdateChangesButton() {
+		this.submitUpdateChangesButton.click();
+	}
+	
+	public WebElement getUpdateBatchInput() {
+		return updateBatchInput;
+	}
+	
+	public WebElement getAssocBatchId() {
+		return assocBatchId;
+	}
+	
+	
 	
 }

@@ -13,7 +13,7 @@ public class DriverUtility {
 	
 	@Before
 	public void setUp() {
-		String filePath = "src/test/resources/chromedriver.exe";
+		String filePath = "src/main/resources/chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", filePath);
 		driver = new ChromeDriver();
 		driver.get(url);

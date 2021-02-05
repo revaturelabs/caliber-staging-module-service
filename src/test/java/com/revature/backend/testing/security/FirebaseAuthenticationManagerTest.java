@@ -39,29 +39,29 @@ public class FirebaseAuthenticationManagerTest {
   @Mock
   FirebaseAuth mockFireAuth;
 
-  private Authentication mockVerifiedAuth;
-  private Authentication mockUnverifiedAuth;
+  private Authentication mockValidAuth;
+  private Authentication mockInvalidAuth;
   private Authentication mockNullCredAuth;
 
-  private String verifiedCredentials;
-  private String unverifiedCredentials;
-  
+  private String validCredentials;
+  private String invalidCredentials;
+
   private FirebaseToken token;
 
   @BeforeEach
   public void before()throws Exception {
-    mockVerifiedAuth = new UnauthenticatedManager("username:JugemuJugemu,password:verified");
-    verifiedCredentials=(String)mockVerifiedAuth.getCredentials();
+    mockValidAuth = new UnauthenticatedManager("username:JugemuJugemu,password:verified");
+    validCredentials=(String)mockValidAuth.getCredentials();
 
-    mockUnverifiedAuth=new UnauthenticatedManager("username:Pirate,password:booty");
-    unverifiedCredentials=(String)mockUnverifiedAuth.getCredentials();
+    mockInvalidAuth=new UnauthenticatedManager("username:Pirate,password:booty");
+    invalidCredentials=(String)mockInvalidAuth.getCredentials();
 
     mockNullCredAuth=new UnauthenticatedManager(null);
 
     token=null;
 
-    when(mockFireAuth.verifyIdToken(verifiedCredentials)).thenReturn(token);
-    when(mockFireAuth.verifyIdToken(unverifiedCredentials)).thenThrow(FirebaseAuthException.class);
+    when(mockFireAuth.verifyIdToken(validCredentials)).thenReturn(token);
+    when(mockFireAuth.verifyIdToken(invalidCredentials)).thenThrow(FirebaseAuthException.class);
   }
 
   @AfterEach
@@ -76,14 +76,14 @@ public class FirebaseAuthenticationManagerTest {
   @Test
   public void userIsVerifiedTest() throws Exception{
     Assertions.assertThrows(NullPointerException.class,()->{
-      fireAuthMan.authenticate(mockVerifiedAuth);
+      fireAuthMan.authenticate(mockValidAuth);
     });
   }
 
   @Test
   public void userIsNotVerifiedTest() throws Exception{
     Assertions.assertThrows(BadCredentialsException.class,()->{
-      fireAuthMan.authenticate(mockUnverifiedAuth);
+      fireAuthMan.authenticate(mockInvalidAuth);
     });
   }
 

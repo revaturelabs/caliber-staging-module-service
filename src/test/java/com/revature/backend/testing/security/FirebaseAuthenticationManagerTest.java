@@ -42,18 +42,24 @@ public class FirebaseAuthenticationManagerTest {
   private Authentication mockVerifiedAuth;
   private Authentication mockUnverifiedAuth;
   private Authentication mockNullCredAuth;
+
   private String verifiedCredentials;
   private String unverifiedCredentials;
+  
   private FirebaseToken token;
 
   @BeforeEach
   public void before()throws Exception {
     mockVerifiedAuth = new UnauthenticatedManager("username:JugemuJugemu,password:verified");
     verifiedCredentials=(String)mockVerifiedAuth.getCredentials();
+
     mockUnverifiedAuth=new UnauthenticatedManager("username:Pirate,password:booty");
     unverifiedCredentials=(String)mockUnverifiedAuth.getCredentials();
+
     mockNullCredAuth=new UnauthenticatedManager(null);
+
     token=null;
+
     when(mockFireAuth.verifyIdToken(verifiedCredentials)).thenReturn(token);
     when(mockFireAuth.verifyIdToken(unverifiedCredentials)).thenThrow(FirebaseAuthException.class);
   }

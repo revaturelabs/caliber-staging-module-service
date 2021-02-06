@@ -14,13 +14,18 @@
 
 ![alt-text](./env-md-images/windows-envvar.jpg)
 
-4. From here click on new under the section for user variables. And fill out the fields as shown filling in the second field with your file path information
+4. From here click on new under the section for user variables. And fill out the fields as shown filling in the second field with your file path, the file path will be the absolute path to where you downloaded the service-account.json e.g.
+   + C:\Users\username\Downloads\service-account.json
+   + C:\Users\Jay\Desktop\my-private-keys\service-account.json
+   + "C:\Users\Chris\projects\Folder with Spaces\service-account.json"
 
 ![alt-text](./env-md-images/windows-new-var.jpg)
 
-5. Click OK and you should be good to go
+5. Click OK and restart your IDE of choice and run the server.
 
-#### Temporary variable with Powershell
+### This is optional
+
+### Temporary variable with Powershell
 
 1. First open windows PowerShell.
 
@@ -34,10 +39,9 @@ where “path” is the absolute path to the service account credentials json fi
 
 If it does not you will need to use the other method.
 
-## Linux / MacOS
+## MacOS
 
-To set an environment variable In your .bashrc, .bash_profile, or .profile add
-`export GOOGLE_APPLICATION_CREDENTIALS="/absolute/path/to/service-account-file.json"`
+# Add Troubleshooting section for STS
 
 ### Spring Tool Suite
 
@@ -71,7 +75,7 @@ To set an environment variable In your .bashrc, .bash_profile, or .profile add
 
 4. Type `export + env variable name=PATH`
 
-5. `Export GOOGLE_APPLICATION_CREDENTIALS= "/absolute/path/filename.json"`
+5. `export GOOGLE_APPLICATION_CREDENTIALS= "/absolute/path/filename.json"`
 
    where “path” is the absolute path to the service account credentials json file and file name is the name of the file.
 
@@ -81,7 +85,27 @@ To set an environment variable In your .bashrc, .bash_profile, or .profile add
 
 8. To verify that it has been added, run `printenv` and check to see if you see the new path and with that you should be good to go.
 
-##### Other Resources
+## Linux
+
+In order of preference you will open **one** of the following:
+   1. .bashrc
+   2. .bash_profile
+   3. .profile
+
+with your editor of choice:
+   * vim
+   * nano
+   * emacs
+   * sublime
+   * atom
+
+add `export GOOGLE_APPLICATION_CREDENTIALS=/absolute/path/to/service-account.json`
+
+### Spring Tool Suite
+
+See MacOS with Spring Tool Suite
+
+#### Other Resources
 
 ---
 

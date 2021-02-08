@@ -86,27 +86,36 @@ public class AssociateController {
 		Associate associate = assocService.getAssociateById(assocMap.get("associate_id"));
 		if (associate == null ) {
 			return new ResponseEntity<>("Could not find associate", HttpStatus.NO_CONTENT);
-		}else {
-			Batch batch = batchService.getBatchById(assocMap.get("batch_id"));
-			if (batch == null ) {
-				return new ResponseEntity<>("Could not find batch", HttpStatus.NO_CONTENT);
-			}else {
+		} else {
+			if (assocMap.get("status_id") != null ) {
 				switch(assocMap.get("status_id")) {
-					case 0:
-						associate.setStatus(AssociateStatus.STAGING);
-						break;
-					case 1:
-						associate.setStatus(AssociateStatus.PROJECT);
-						break;
-					case 2:
-						associate.setStatus(AssociateStatus.RELEASED);
-						break;
-					default:
-						associate.setStatus(associate.getStatus());
+				case 0:
+					associate.setStatus(AssociateStatus.STAGING);
+					break;
+				case 1:
+					associate.setStatus(AssociateStatus.PROJECT);
+					break;
+				case 2:
+					associate.setStatus(AssociateStatus.RELEASED);
+					break;
+				default:
+					associate.setStatus(associate.getStatus());
+					break;
 				}
-				associate.setBatch(batch);
 				assocService.updateAssociate(associate);
-				return new ResponseEntity<>("Associate updated successfully", HttpStatus.OK);
+			}
+			
+			if(assocMap.get("batch_id") != null) {
+				Batch batch = batchService.getBatchById(assocMap.get("batch_id"));
+				if (batch == null ) {
+					return new ResponseEntity<>("Could not find batch", HttpStatus.NO_CONTENT);
+				} else {
+					associate.setBatch(batch);
+					assocService.updateAssociate(associate);
+					return new ResponseEntity<>("Associate updated successfully", HttpStatus.OK);
+				}
+			} else {
+				return new ResponseEntity<>("Could not find batch", HttpStatus.NO_CONTENT);
 			}
 		}
 	}

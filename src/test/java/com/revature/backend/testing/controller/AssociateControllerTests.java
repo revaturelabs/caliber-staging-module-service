@@ -163,12 +163,20 @@ public class AssociateControllerTests {
 //		this.mockMvc.perform(get("/associates").param("manager", "1")).andExpect(status().isOk()).andExpect(jsonPath("$.firstName", is("John")));
 //	}
 	
+	/**
+	 * Testing the PutMapping by updating associate's batch_id and or status, 
+	 * using status_id to accessing AssociateStatus Enum. Updated this test to
+	 * handle the status_id changes as well
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void associatePutMappingTest() throws Exception {
 		this.mockMvc.perform(put("/associates").contentType(MediaType.APPLICATION_JSON).content(
 			"{ "
 			+ "\"associate_id\": 1,"
-			+ "\"batch_id\" : 2"
+			+ "\"batch_id\" : 2, "
+			+ "\"status_id\": 2"
 			+ " }"
 		)).andExpect(status().isOk()).andExpect(jsonPath("$").value("Associate updated successfully"));
 	}

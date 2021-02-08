@@ -71,49 +71,72 @@ public class TestSwotService {
         TESTS
     */
 
+	/**
+	 * Tests that the SwotRepository returns true when a new swot is created
+	 */
 	@Test
 	public void testCreateNewSwotSuccess() {
 		assertEquals(sServ.createNewSwot(swot), true);
 		
 	}
     
+	/**
+	 * Tests that the retrieveAllSwot() function returns a List of Swots
+	 */
 	@Test
 	public void testRetrieveAllSwotSuccess() {
 		assertEquals(sServ.retrieveAllSwot(), swotList);
 	}
 	
+	/**
+	 * Tests that the retrieveAllSwotByAssociateId(id) function returns a List of Swots
+	 */
 	@Test
     public void testRetrieveAllSwotByAssociateIdSuccess() {
     	assertEquals(sServ.retrieveAllSwotByAssociateId(1), swotList);
     }
 	
+	/**
+	 * Tests that the retrieveAllSwotByAssociateId(id) function returns null if the 
+	 * associate with the given ID has no Swots
+	 */
 	@Test
 	public void testRetrieveAllSwotByAssociateIdFailure() {
 		assertEquals(sServ.retrieveAllSwotByAssociateId(2), null);
 	}
 	
+	/**
+	 * Tests that the AnalysisItemRepository returns true when a new AnalysisItem is saved
+	 */
 	@Test
 	public void testCreateNewItemSuccess() {
 		assertEquals(sServ.createNewItem(aItem), true);
 	}
 	
+	/**
+	 * Tests that the AnalysisItemRepository returns false when attempting to save a null value
+	 */
 	@Test
 	public void testCreateNewItemFailure() {
 		assertEquals(sServ.createNewItem(null), false);
 	}
 	
+	/**
+	 * Tests that the AnalysisItemRepository returns a copy of the updated item when updating 
+	 */
 	@Test 
 	public void testUpdateItemSuccess() { 
 		assertEquals(sServ.updateItem(aItem), aItem); 
 	}
 
+	/**
+	 * Tests that the deleteItem(AnalysisItem) function calls the deleteById(id) function in 
+	 * the AnalysisItemRepository
+	 */
 	@Test 
 	public void testDeleteItemSuccess() {
 		sServ.deleteItem(1);
 		verify(aiRepo).deleteById(1);
 	}
 	 
-	 
-	
-
 }

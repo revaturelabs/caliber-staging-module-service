@@ -61,7 +61,8 @@ public class CreateSWOTWithNameTest {
 	}
 
 	@When("manager inputs content {string}")
-	public void manager_inputs_content(String string) {
+	public void manager_inputs_content(String string) throws Exception {
+		TimeUnit.SECONDS.sleep(1);
 	    homePage.enterContentField(string);
 	}
 
@@ -87,7 +88,7 @@ public class CreateSWOTWithNameTest {
 
 	@When("manager clicks ok in window alert")
 	public void manager_clicks_ok_in_window_alert() throws InterruptedException {
-//		TimeUnit.SECONDS.sleep(1);
+		TimeUnit.SECONDS.sleep(1);
 	    DriverUtility.driver.switchTo().alert().accept();
 	}
 
@@ -97,9 +98,10 @@ public class CreateSWOTWithNameTest {
 	}
 	
 	@Then("manager is redirect to view swots page")
-	public void manager_is_redirected_to_view_swots_page() {
+	public void manager_is_redirected_to_view_swots_page() throws Exception {
+		TimeUnit.SECONDS.sleep(1);
 		this.viewSwotPage = new ViewSwotPage(DriverUtility.driver);
-		assertEquals(viewSwotPage.getTitleText(), "View SWOTs");
+		assertEquals(viewSwotPage.getTitleText(), "SWOT Analysis Info:");
 	}
 	
 	@Then("manager can view created SWOT")

@@ -22,7 +22,7 @@ public class HomePage {
 	@FindBy(id = "type")
 	private WebElement SwotTypeDropdown;
 	
-	@FindBy(id = "content")
+	@FindBy(id = "name")
 	private WebElement contentField;
 	
 	@FindBy(xpath = "//button[text()='ADD ITEM']")
@@ -59,7 +59,7 @@ public class HomePage {
 	}
 	
 	public void clickViewSwotForAssociate(int rowId) {
-		WebElement viewButton = this.viewSwotButtons.get(rowId);
+		WebElement viewButton = this.viewSwots.get(rowId);
 		viewButton.click();
 	}
 	

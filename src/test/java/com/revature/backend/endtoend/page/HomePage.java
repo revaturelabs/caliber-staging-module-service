@@ -46,8 +46,14 @@ public class HomePage {
 	@FindBy(xpath = "//*[@id=\"data-row\"]/td[6]")
 	private WebElement assocBatchId;
 	
+	@FindBy(xpath = "//*[@id=\"data-row\"]/td[7]")
+	private WebElement assocStatus;
+	
 	@FindBy(xpath = "/html/body/ngb-modal-window/div/div/app-update-associate/div/div/div/form/div[4]/div/button")
 	private WebElement submitUpdateChangesButton;
+	
+	@FindBy(xpath = "//*[@id=\"status\"]")
+	private WebElement selectStatus;
 
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -127,6 +133,10 @@ public class HomePage {
 		this.updateBatchButton.click();
 	}
 	
+	public Select getSelectOptions() {
+        return new Select(selectStatus);
+    }
+	
 	public void clickSubmitUpdateChangesButton() {
 		this.submitUpdateChangesButton.click();
 	}
@@ -137,6 +147,14 @@ public class HomePage {
 	
 	public WebElement getAssocBatchId() {
 		return assocBatchId;
+	}
+	
+	public WebElement getAssocStatus() {
+		return assocStatus;
+	}
+	
+	public WebElement getselectStatus() {
+		return selectStatus;
 	}
 	
 	

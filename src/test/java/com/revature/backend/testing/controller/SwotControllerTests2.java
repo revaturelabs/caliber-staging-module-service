@@ -63,10 +63,10 @@ public class SwotControllerTests2 {
 		mock = MockMvcBuilders.standaloneSetup(swotCon).build();
 		mockAnalysisItems = new ArrayList<AnalysisItem>();
 		
-		mockAI1 = new AnalysisItem(1, "Strength", null, AnalysisType.STRENGTH, "Strength comment");
-		mockAI2 = new AnalysisItem(2, "Weakness", null, AnalysisType.WEAKNESS, "Weakness comment");
-		mockAI3 = new AnalysisItem(3, "Opportunity", null, AnalysisType.OPPORTUNITY, "Opportunity comment");
-		mockAI4 = new AnalysisItem(4, "Threat", null, AnalysisType.THREAT, "Threat comment");
+		mockAI1 = new AnalysisItem(1, "Strength", null, AnalysisType.STRENGTH, "Strength note");
+		mockAI2 = new AnalysisItem(2, "Weakness", null, AnalysisType.WEAKNESS, "Weakness note");
+		mockAI3 = new AnalysisItem(3, "Opportunity", null, AnalysisType.OPPORTUNITY, "Opportunity note");
+		mockAI4 = new AnalysisItem(4, "Threat", null, AnalysisType.THREAT, "Threat note");
 		
 		mockAnalysisItems.add(mockAI1);
 		mockAnalysisItems.add(mockAI2);
@@ -101,17 +101,17 @@ public class SwotControllerTests2 {
 	 */
 	
 	@Test
-	public void getSwotItemCommentSuccess() throws Exception {
+	public void getSwotItemNoteSuccess() throws Exception {
 		this.mock.perform(get("/swot/view/{associateId}", swots.get(1).getAssociate().getId()))
 		.andExpect(status().isOk()).andDo(print())
-		.andExpect(jsonPath("$[0].analysisItems[0].comment", is(mockAI1.getComment())))
-		.andExpect(jsonPath("$[0].analysisItems[1].comment", is(mockAI2.getComment())))
-		.andExpect(jsonPath("$[0].analysisItems[2].comment", is(mockAI3.getComment())))
-		.andExpect(jsonPath("$[0].analysisItems[3].comment", is(mockAI4.getComment())))
-		.andExpect(jsonPath("$[1].analysisItems[0].comment", is(mockAI1.getComment())))
-		.andExpect(jsonPath("$[1].analysisItems[1].comment", is(mockAI2.getComment())))
-		.andExpect(jsonPath("$[1].analysisItems[2].comment", is(mockAI3.getComment())))
-		.andExpect(jsonPath("$[1].analysisItems[3].comment", is(mockAI4.getComment())));
+		.andExpect(jsonPath("$[0].analysisItems[0].note", is(mockAI1.getNote())))
+		.andExpect(jsonPath("$[0].analysisItems[1].note", is(mockAI2.getNote())))
+		.andExpect(jsonPath("$[0].analysisItems[2].note", is(mockAI3.getNote())))
+		.andExpect(jsonPath("$[0].analysisItems[3].note", is(mockAI4.getNote())))
+		.andExpect(jsonPath("$[1].analysisItems[0].note", is(mockAI1.getNote())))
+		.andExpect(jsonPath("$[1].analysisItems[1].note", is(mockAI2.getNote())))
+		.andExpect(jsonPath("$[1].analysisItems[2].note", is(mockAI3.getNote())))
+		.andExpect(jsonPath("$[1].analysisItems[3].note", is(mockAI4.getNote())));
 
 	}
 }

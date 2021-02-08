@@ -80,6 +80,12 @@ public class SwotController {
 		List<Swot> swotList = swotService.retrieveAllSwot();
 		return ResponseEntity.ok(swotList);
 	}
+	
+	@DeleteMapping(path = "/delete/{swotId}")
+	public ResponseEntity<ClientMessage> deleteSwot(@PathVariable("swotId") int swotId) {
+		ClientMessage body = swotService.deleteItem(swotId) ? SUCCESSFULLY_DELETED : DELETION_FAILED;
+		return ResponseEntity.ok(body);
+	}
 
 	/*
 	 * POST request to create a new AnalysisItem for a particular SWOT.

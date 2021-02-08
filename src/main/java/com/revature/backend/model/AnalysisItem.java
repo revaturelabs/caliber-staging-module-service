@@ -15,8 +15,8 @@ public class AnalysisItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	// IDENTITY was preferred to AUTO.
 	private int id;
 
-	@Column(name = "content")
-	private String content;
+	@Column(name = "name")
+	private String name;
 
 	//@JsonIgnore	// Meant to help when trying to create a SWOT, this is a bad solution.
 	@JsonBackReference // Meant to help when trying to create a SWOT. - Prevents recursion in retrieve requests, this is the better solution.
@@ -27,28 +27,28 @@ public class AnalysisItem {
 	@Column(name = "type")
 	private AnalysisType type;
 	
+	@Column(name = "note")
+	private String note;
 
-	@Column(name = "comment")
-	private String comment;
 
 
 	public AnalysisItem() {}
 
-	public AnalysisItem(String content, Swot swot, AnalysisType type, String comment) {
+	public AnalysisItem(String name, Swot swot, AnalysisType type, String note) {
 		super();
-		this.content = content;
+		this.name = name;
 		this.swot = swot;
 		this.type = type;
-		this.comment = comment;
+		this.note = note;
 	}
 
-	public AnalysisItem(int id, String content, Swot swot, AnalysisType type, String comment) {
+	public AnalysisItem(int id, String name, Swot swot, AnalysisType type, String note) {
 		super();
 		this.id = id;
-		this.content = content;
+		this.name = name;
 		this.swot = swot;
 		this.type = type;
-		this.comment = comment;
+		this.note = note;
 	}
 
 	public Swot getSwot() {
@@ -63,8 +63,8 @@ public class AnalysisItem {
 		return this.id;
 	}
 
-	public String getContent() {
-		return this.content;
+	public String getName() {
+		return this.name;
 	}
 
 	public AnalysisType getType() {
@@ -75,20 +75,20 @@ public class AnalysisItem {
 		this.id = id;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setType(AnalysisType type) {
 		this.type = type;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getNote() {
+		return note;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 	@Override
@@ -98,18 +98,18 @@ public class AnalysisItem {
 		if (!(o instanceof AnalysisItem))
 			return false;
 		AnalysisItem that = (AnalysisItem) o;
-		return getId() == that.getId() && Objects.equals(getContent(), that.getContent())
-				&& Objects.equals(swot, that.swot) && getType() == that.getType() && getComment().equals(that.getComment());
+		return getId() == that.getId() && Objects.equals(getName(), that.getName())
+				&& Objects.equals(swot, that.swot) && getType() == that.getType() && getNote().equals(that.getNote());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getId(), getContent(), swot, getType(), getComment());
+		return Objects.hash(getId(), getName(), swot, getType(), getNote());
 	}
 
 	//This does not print 'swot' because it causes a stack overflow error when either the AnalysisItem or Swot toString are called
 	//if printing is required, print the id instead of the whole object or otherwise edit the swot toString to prevent recursive printing
 	public String toString() {
-		return "Analysis_Item(id=" + this.getId() + ", content=" + this.getContent() + ", type=" + this.getType() + "," + this.getComment() + ")";
+		return "Analysis_Item(id=" + this.getId() + ", name=" + this.getName() + ", type=" + this.getType() + ", note=" + this.getNote() + ")";
 	}
 }

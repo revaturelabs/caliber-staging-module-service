@@ -13,10 +13,11 @@ public class ViewPage {
 
 	private WebDriver driver;
 
+	// View SWOT component
+	/** Old page 
 	// Add new item button
 	@FindBy(xpath = "//button[contains(.,'Add new item')]")
 	private WebElement addNewButton;
-
 	// inside "add new item" button
 	@FindBy(xpath = "//*[@id='type']")
 	private WebElement addNewButtonItemType;
@@ -48,7 +49,35 @@ public class ViewPage {
 	// Back to home page link
 	@FindBy(xpath = "//*[@id='homeLink']")
 	private WebElement homePageButton;
+	**/
+	
+	@FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*[@type='submit']")
+	private WebElement addItemStrengthButton;
+	
+	@FindBy(xpath = "//*[@id='swot-table']/tr/td[2]//*[@type='submit']")
+	private WebElement addItemWeaknessButton;
+	
+	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[1]//*[@type='submit']")
+	private WebElement addItemOpportunityButton;
+	
+	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[2]//*[@type='submit']")
+	private WebElement addItemThreatButton;
+	
+	@FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*[@class='btn toggle-btn']")
+	private WebElement specificItemAddItemStrength;
+	
+	@FindBy(xpath = "//*[@id='swot-table']/tr/td[2]//*[@class='btn toggle-btn']")
+	private WebElement specificItemAddItemWeaknessButton;
+	
+	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[1]//*[@class='btn toggle-btn']")
+	private WebElement specificItemAddItemOpportunityButton;
+	
+	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[2]//*[@class='btn toggle-btn']")
+	private WebElement specificItemAddItemThreatButton;
 
+	//Update Item component
+	
+	
 	public ViewPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}

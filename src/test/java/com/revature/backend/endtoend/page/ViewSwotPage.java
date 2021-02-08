@@ -9,7 +9,7 @@ public class ViewSwotPage {
 	
 	private WebDriver driver;
 	
-	@FindBy(className = "swot-title")
+	@FindBy(xpath = "//h5")
 	private WebElement title;
 	
 	public String getTitleText() {

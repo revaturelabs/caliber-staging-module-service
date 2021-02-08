@@ -117,7 +117,7 @@ where “path” is the absolute path to the service account credentials json fi
 
 1. Open IntelliJ IDEA
 
-2. Go to Run-> Edit Configurations... 
+2. Go to Run-> Edit Configurations...
 
 ![alt-text](./env-md-images/intellijRunMenu.jpg)
 

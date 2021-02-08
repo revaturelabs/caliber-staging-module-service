@@ -22,12 +22,19 @@ import com.revature.backend.service.AssociateServiceImpl;
 @SpringBootTest
 public class AssociateServiceTesting {
 
+	/**
+	 * The @Mock annotation will be placed above the dependencies that you need to mock in order to test your code. In this case,
+	 * I need to mock the Repository layer in order for the service I am testing to work
+	 */
 	@Mock
 	private AssociateRepository associateRepo;
 	
 	@Mock
 	private BatchRepository batchRepo;
-	
+	/**
+	 * The @InjectMocks will mark which field the injection should be performed on. In this specific case, 
+	 * this will make sure that the mocked repositories above will be injected into the AssociateServiceImpl. 
+	 */
 	@InjectMocks
 	private AssociateServiceImpl associateServ = mock(AssociateServiceImpl.class);
 	
@@ -37,6 +44,11 @@ public class AssociateServiceTesting {
 	Manager manager;
 	Batch batch1;
 	Batch batch2;
+	/**
+	 *  The Setup method will setup all necessary pieces for the tests. The @BeforeEach will make the setup method run before each test.
+	 * @throws Exception
+	 */
+	
 	@BeforeEach 
 	public void Setup() throws Exception {
 		batch1 = new Batch(1,"Reston","Sophia","1","Java Full Stack");
@@ -44,7 +56,9 @@ public class AssociateServiceTesting {
 		associate = new Associate(1, "testemail@email.com", "test", "associate","1A", manager, batch1, AssociateStatus.STAGING);
 		doNothing().when(associateServ).updateAssociate(associate);
 	}
-	
+	/**
+	 *  This test method will test to see if the associate gets updated properly. The @Test annotation will be placed above each and every test
+	 */
 	@Test
 	public void TestUpdateSuccess() {
 		associateServ.updateAssociate(associate);

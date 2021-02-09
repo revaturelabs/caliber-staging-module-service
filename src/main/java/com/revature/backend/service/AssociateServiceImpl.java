@@ -28,7 +28,7 @@ public class AssociateServiceImpl implements AssociateService {
     
     public Associate getAssociateById(int id) {
     	// TODO call the appropriate Repo method to update an associate into DB
-    	return associateRepo.findById(id).get();
+    	return associateRepo.findById(id);
     }
     
     

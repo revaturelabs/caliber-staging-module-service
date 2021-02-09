@@ -127,7 +127,7 @@ public class InterviewFeedbackController {
 		
 		InterviewFeedback feedback = new InterviewFeedback(associate, manager, content, date);
 		ifServ.insertFeedback(feedback);
-		return new ResponseEntity<>("Feedback successfully added", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Feedback successfully added", HttpStatus.OK);
 	}
 	
 	/**

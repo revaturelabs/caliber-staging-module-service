@@ -10,7 +10,7 @@ import com.revature.backend.endtoend.page.LoginPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class UpdateBatch {
+public class UpdateAssociate {
 	
 	public HomePage homePage;
 	public LoginPage loginPage;
@@ -40,6 +40,10 @@ public class UpdateBatch {
 	public void inputs_the_new(String string) throws InterruptedException {
 	    homePage.enterNewBatchNum(string);
 	}
+	@Then("selects the project option for status")
+	public void selects_the_project_option_for_status() throws InterruptedException {
+	    homePage.getSelectOptions().selectByValue("0");
+	}
 	@Then("submits the changes")
 	public void submits_the_changes() throws InterruptedException {
 		homePage.clickSubmitUpdateChangesButton();
@@ -48,6 +52,10 @@ public class UpdateBatch {
 	@Then("the user should see the updated batch id")
 	public void the_user_should_see_the_updated_batch_id() {
 		assertEquals("2", homePage.getAssocBatchId().getText());
+	}
+	@Then("the user should see the updated associate status")
+	public void the_user_should_see_the_updated_associate_status() throws InterruptedException {
+		assertEquals("STAGING", homePage.getAssocStatus().getText());
 	}
 
 }

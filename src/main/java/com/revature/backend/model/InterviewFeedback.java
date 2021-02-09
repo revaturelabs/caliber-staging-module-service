@@ -1,5 +1,7 @@
 package com.revature.backend.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.google.api.client.util.DateTime;
-
 @Entity
 @Table(name = "interview_feedback")
 public class InterviewFeedback {
@@ -21,6 +21,12 @@ public class InterviewFeedback {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	// IDENTITY was preferred to AUTO.
 	private int id;
 	
+	@Column(name = "content", length=512)
+	private String content;
+	
+	@Column(name = "date")
+	private Timestamp date; 
+	
 	@ManyToOne(fetch = FetchType.EAGER) // removed CascadeType.ALL, this will cause problems with deletion.
 	@JoinColumn(name = "associate_id")
 	private Associate associate;
@@ -28,17 +34,11 @@ public class InterviewFeedback {
 	@ManyToOne(fetch = FetchType.EAGER) // removed CascadeType.ALL, this will cause problems with deletion.
 	@JoinColumn(name = "manager_id")
 	private Manager manager;
-	
-	@Column(name = "content")
-	private String content;
-	
-	@Column(name = "date")
-	private DateTime date; 
 
 	public InterviewFeedback() {
 	}
 	
-	public InterviewFeedback(Associate associate, Manager manager, String content, DateTime date) {
+	public InterviewFeedback(Associate associate, Manager manager, String content, Timestamp date) {
 		super();
 		this.associate = associate;
 		this.manager = manager;
@@ -46,7 +46,7 @@ public class InterviewFeedback {
 		this.date = date;
 	}
 
-	public InterviewFeedback(int id, Associate associate, Manager manager, String content, DateTime date) {
+	public InterviewFeedback(int id, Associate associate, Manager manager, String content, Timestamp date) {
 		super();
 		this.id = id;
 		this.associate = associate;
@@ -87,11 +87,11 @@ public class InterviewFeedback {
 		this.content = content;
 	}
 
-	public DateTime getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(DateTime date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 

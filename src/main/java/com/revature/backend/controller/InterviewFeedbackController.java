@@ -110,14 +110,14 @@ public class InterviewFeedbackController {
 	 * @param feedbackMap Map of the information to input into the feedback
 	 * @return Success or failure statement
 	 */
-	@PostMapping("")
+	@PostMapping("/{id}")
 	public ResponseEntity<String> postFeedback(@RequestBody LinkedHashMap feedbackMap) {
-		Associate associate = assocServ.getAssociateById((Integer)feedbackMap.get("associate_id"));
+		Associate associate = assocServ.getAssociateById((Integer)feedbackMap.get("associateId"));
 		if(associate == null) {
 			return new ResponseEntity<>("Associate id is invalid", HttpStatus.NOT_FOUND);
 		} 
 		
-		Manager manager = managerServ.getManagerById((Integer)feedbackMap.get("manager_id"));
+		Manager manager = managerServ.getManagerById((Integer)feedbackMap.get("managerId"));
 		if(manager == null) {
 			return new ResponseEntity<>("Manager id is invalid", HttpStatus.NOT_FOUND);
 		}

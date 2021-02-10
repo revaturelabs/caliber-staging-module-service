@@ -7,3 +7,7 @@ INSERT INTO associate VALUES (1, 'testemail@email.com', 'testA', 'associate','1A
 INSERT INTO associate VALUES (2, 'testemail@email.com', 'testB', 'associate','1B', 1, 1, 2);
 INSERT INTO associate VALUES (3, 'testemail@email.com', 'testC', 'associate','1C', 1, 1, 2);
 INSERT INTO associate VALUES (4, 'testemail@email.com', 'testD','associate','1D', 1, 1, 2);
+INSERT INTO interview_feedback VALUES  (1,'Great speaker',SYSDATE(),1,1);
+INSERT INTO interview_feedback VALUES  (2,'Great programmer',SYSDATE(),2,1);
+INSERT INTO interview_feedback VALUES  (3,'Great everything',SYSDATE(),1,2);
+INSERT INTO interview_feedback VALUES  (4,'Who hired this guy?',SYSDATE(),2,2);

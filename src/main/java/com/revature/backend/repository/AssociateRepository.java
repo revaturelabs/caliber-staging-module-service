@@ -7,4 +7,5 @@ import com.revature.backend.model.Associate;
 
 @Repository
 public interface AssociateRepository extends JpaRepository<Associate, Integer>{
+	public Associate findById(int id);
 }

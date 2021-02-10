@@ -14,7 +14,7 @@ public class ViewPage {
 	private WebDriver driver;
 
 	// View SWOT component
-	/** Old page 
+	/** Old page **/
 	// Add new item button
 	@FindBy(xpath = "//button[contains(.,'Add new item')]")
 	private WebElement addNewButton;
@@ -49,8 +49,9 @@ public class ViewPage {
 	// Back to home page link
 	@FindBy(xpath = "//*[@id='homeLink']")
 	private WebElement homePageButton;
-	**/
 	
+
+	/** New xpaths
 	@FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*[@type='submit']")
 	private WebElement addItemStrengthButton;
 	
@@ -74,7 +75,7 @@ public class ViewPage {
 	
 	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[2]//*[@class='btn toggle-btn']")
 	private WebElement specificItemAddItemThreatButton;
-
+	**/
 	//Update Item component
 	
 	

@@ -127,7 +127,7 @@ public class InterviewFeedbackController {
 		
 		InterviewFeedback feedback = new InterviewFeedback(associate, manager, content, date);
 		ifServ.insertFeedback(feedback);
-		return new ResponseEntity<>("Feedback successfully added", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Feedback successfully added", HttpStatus.OK);
 	}
 	
 	/**
@@ -138,12 +138,14 @@ public class InterviewFeedbackController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<String> updateFeedback(@RequestBody LinkedHashMap feedbackMap, @PathVariable("id") int id) {
-		Associate associate = assocServ.getAssociateById((Integer)feedbackMap.get("associate_id"));
+		System.out.println("Feedback Map: " + feedbackMap);
+		System.out.println("Manager Id: " + feedbackMap.get("managerId"));
+		Associate associate = assocServ.getAssociateById((Integer)feedbackMap.get("associateId"));
 		if(associate == null) {
 			return new ResponseEntity<>("Associate id is invalid", HttpStatus.NOT_FOUND);
 		} 
 		
-		Manager manager = managerServ.getManagerById((Integer)feedbackMap.get("manager_id"));
+		Manager manager = managerServ.getManagerById((Integer)feedbackMap.get("managerId"));
 		if(manager == null) {
 			return new ResponseEntity<>("Manager id is invalid", HttpStatus.NOT_FOUND);
 		} 

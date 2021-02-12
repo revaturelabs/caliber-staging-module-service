@@ -1,20 +1,5 @@
 package com.revature.backend.testing.controller;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.backend.controller.SwotController;
-import com.revature.backend.model.AnalysisItem;
-import com.revature.backend.model.AnalysisType;
-import com.revature.backend.model.Associate;
-import com.revature.backend.model.Manager;
-import com.revature.backend.model.Swot;
-import com.revature.backend.service.SwotService;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,19 +10,40 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebMvcTest(SwotController.class)
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.backend.controller.SwotController;
+import com.revature.backend.model.AnalysisItem;
+import com.revature.backend.model.AnalysisType;
+import com.revature.backend.model.Associate;
+import com.revature.backend.model.Manager;
+import com.revature.backend.model.Swot;
+import com.revature.backend.service.SwotService;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+@SpringBootTest
 public class SwotControllerTests {
 
 	ObjectMapper objectMapper = new ObjectMapper();
 	
-	@Autowired
+	@InjectMocks
 	SwotController swotController;
 	
-	@Autowired
 	private MockMvc mockMvc;
 	
-	@MockBean
+	@Mock
 	private SwotService service;
+
+  @BeforeEach
+  public void before(){
+    mockMvc=MockMvcBuilders.standaloneSetup(swotController).build();
+  }
 	
 	/*
 	 * Create a Swot object with an ID.

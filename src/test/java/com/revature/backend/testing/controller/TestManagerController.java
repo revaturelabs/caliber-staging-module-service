@@ -9,31 +9,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.controller.ManagerController;
 import com.revature.backend.model.Manager;
 import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.ClientMessage;
 
-@WebMvcTest(ManagerController.class)
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+@SpringBootTest
 public class TestManagerController {
 	
 	ObjectMapper objectMapper = new ObjectMapper();
 
-	@MockBean
+	@Mock
 	ManagerService service;
 	
-	@Autowired
+	
 	private MockMvc mockmvc;
 	
 	@Autowired
+  @InjectMocks
 	private ManagerController controller;
 	
 	
@@ -41,6 +45,11 @@ public class TestManagerController {
 	 * Sanity Check - if this fails, application context is not loaded and all other
 	 * tests should fail
 	 */
+
+   @BeforeEach
+   public void before(){
+     mockmvc=MockMvcBuilders.standaloneSetup(controller).build();
+   }
 	@Test
 	public void contextLoads() throws Exception {
 		assertThat(controller).isNotNull();
@@ -67,7 +76,7 @@ public class TestManagerController {
 		
 		when(service.getAllManagers()).thenReturn(managers);
 		
-		ClientMessage expectedResponse = new ClientMessage("1");
+		ClientMessage expectedResponse = new ClientMessage("4");
 		
 		MvcResult mvcResult = this.mockmvc.perform(post("/getmanager").
 							  contentType("application/json")

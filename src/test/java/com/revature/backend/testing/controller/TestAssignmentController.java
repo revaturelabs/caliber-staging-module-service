@@ -27,30 +27,32 @@ import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchWriter;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
-@SpringBootTest(classes = {AssignmentController.class})
+@SpringBootTest
 public class TestAssignmentController {
     
     // ----------
     // SETUP
     // ----------
 
-    @MockBean
+    @Mock
     private ManagerBalancer mockManagerBalancer;
 
-    @MockBean
+    @Mock
     private ManagerService mockManagerService;
 
-    @MockBean
+    @Mock
     private BatchWriter mockBatchWriter;
 
-    @MockBean
+    @Mock
     private BatchRetriever mockBatchRetriever;
 
     @Autowired
+    @InjectMocks
     private AssignmentController assignmentController;
 
     // ----------

@@ -25,7 +25,7 @@ import org.springframework.security.core.Authentication;
  * test 3: Tests if given invalid credentials the method handles appropriatly.<p>
  * test 4: Tests if given null credentials that the method handles appropriately.<p>
  * @throws Exception
- * @author Matthew Sheldon
+ * @author Matthew Sheldon: Wrote tests and initial documentation.
  * 
  * 
  */

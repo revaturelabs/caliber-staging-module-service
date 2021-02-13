@@ -52,30 +52,56 @@ public class ViewPage {
 	
 
 	/** New xpaths
-	@FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*[@type='submit']")
-	private WebElement addItemStrengthButton;
-	
-	@FindBy(xpath = "//*[@id='swot-table']/tr/td[2]//*[@type='submit']")
-	private WebElement addItemWeaknessButton;
-	
-	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[1]//*[@type='submit']")
-	private WebElement addItemOpportunityButton;
-	
-	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[2]//*[@type='submit']")
-	private WebElement addItemThreatButton;
-	
-	@FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*[@class='btn toggle-btn']")
-	private WebElement specificItemAddItemStrength;
-	
-	@FindBy(xpath = "//*[@id='swot-table']/tr/td[2]//*[@class='btn toggle-btn']")
-	private WebElement specificItemAddItemWeaknessButton;
-	
-	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[1]//*[@class='btn toggle-btn']")
-	private WebElement specificItemAddItemOpportunityButton;
-	
-	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[2]//*[@class='btn toggle-btn']")
-	private WebElement specificItemAddItemThreatButton;
+	* // Locators for the "+" buttons inside the four toast cards
+	* @FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*[@type='submit']")
+	* private WebElement addItemStrengthButton;
+	* 
+	* @FindBy(xpath = "//*[@id='swot-table']/tr/td[2]//*[@type='submit']")
+	* private WebElement addItemWeaknessButton;
+	* 
+	* @FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[1]//*[@type='submit']")
+	* private WebElement addItemOpportunityButton;
+	* 
+	* @FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[2]//*[@type='submit']")
+	* private WebElement addItemThreatButton;
+	* 
+	* //Buttons to find specific swots inside each of the four cards (Strength, Weakness, Opportunity, and Threat)
+	* @FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*[@class='btn toggle-btn']")
+	* private WebElement specificItemAddItemStrength;
+	* 
+	* @FindBy(xpath = "//*[@id='swot-table']/tr/td[2]//*[@class='btn toggle-btn']")
+	* private WebElement specificItemAddItemWeaknessButton;
+	* 
+	* @FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[1]//*[@class='btn toggle-btn']")
+	* private WebElement specificItemAddItemOpportunityButton;
+	* 
+	* @FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[2]//*[@class='btn toggle-btn']")
+	* private WebElement specificItemAddItemThreatButton;
+	* 
+	* //Locate a toast message after an action displays it on the page
+	@FindBy(xpath = "//*[@class="toast-box"])
+	* private WebElement toastMessage;
+	* 
+	* //Buttons available when an individual swot has been clicked
+	* @FindBy(name="Update SWOT")
+	* private WebElement updateButtonIndividualSwot;
+	* 
+	* @FindBy(name="Delete Swot Item")
+	* private WebElement deleteButtonIndividualSwot;
+	* 
+	* // Locator for button to change the description for a swot
+	* @FindBy(name="Change SWOT Description"
+	* private WebElement changeSwotDescriptionButton;
+	*
+	* //Update Description Textbox and Update Description Button
+	* @FindBy(xpath = "//*[@id='content'])
+	* private WebElement updateDescriptionTextbox;
+	* 
+	* @FindBy(xpath = "//button[contains(.,'Update Description')]")
+	* private WebElement updateDescriptionSubmitButton;
+	*
 	**/
+	
 	//Update Item component
 	
 	

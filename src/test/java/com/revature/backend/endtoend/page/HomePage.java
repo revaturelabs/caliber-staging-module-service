@@ -65,13 +65,8 @@ public class HomePage {
 	}
 	
 	public void clickViewSwotForAssociate(int rowId) {
-<<<<<<< HEAD
-		// WebElement viewButton = this.viewSwotButtons.get(rowId);
-		// viewButton.click();
-=======
 		WebElement viewButton = this.viewSwots.get(rowId);
 		viewButton.click();
->>>>>>> 9e12191733a9b0e6ac81b7795f4070b057774939
 	}
 	
 	public void selectSwotType(String type) {

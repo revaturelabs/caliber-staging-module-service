@@ -26,12 +26,11 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 /**
  * This is a test for the ManagerController class. It contains 4 tests.
- * Test 1:<p>
+ * Test 1: Tests if the application loads<p>
  * Test 2:<p>
  * Test 3:<p>
  * Test 4:<p>
  * @author ?: wrote tests and initial documentation.
- * @author Matthew Sheldon: Updated tests to work with Junit 5 and updated documentation.
  */
 @SpringBootTest
 public class TestManagerController {

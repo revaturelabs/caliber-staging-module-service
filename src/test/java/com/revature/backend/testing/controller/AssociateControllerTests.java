@@ -12,7 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,8 +23,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-=======
->>>>>>> 7934f341667952f92e711203a3166ad3a8dbba87
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.controller.AssociateController;
 import com.revature.backend.model.Associate;
@@ -39,9 +36,6 @@ import com.revature.backend.service.BatchServiceImpl;
 
 //@WebMvcTest(AssociateController.class)
 
-<<<<<<< HEAD
-//I am converting this test front JUnit4 to JUnit5
-=======
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -62,13 +56,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
  * @author ?: wrote tests and initial documentation.
  * @author Matthew Sheldon: Updated tests to work with Junit 5 and updated documentation.
  */
->>>>>>> 7934f341667952f92e711203a3166ad3a8dbba87
 @SpringBootTest
 public class AssociateControllerTests {
 
 	ObjectMapper objectMapper = new ObjectMapper();
 
-<<<<<<< HEAD
 //	@Autowired
 	@InjectMocks
 	AssociateController associateController;
@@ -79,10 +71,10 @@ public class AssociateControllerTests {
 //	@MockBean
 	@Mock
 	private BackendService service;
-	
+
 	@Mock
 	private AssociateServiceImpl assoServImpl;
-	
+
 	@Mock
 	private BatchServiceImpl batchServImpl;
 
@@ -90,7 +82,7 @@ public class AssociateControllerTests {
 	Batch batch = new Batch(1, "salesID", "name", "skill", "location");
 	List<Associate> associates = new ArrayList<>();
 	List<AssociateDTO> associateDTOs = new ArrayList<>();
-	
+
 	@BeforeEach
 	public void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(associateController).build();
@@ -109,43 +101,8 @@ public class AssociateControllerTests {
 		when(batchServImpl.getBatchById(2)).thenReturn(batchTwo);
 		when(service.findAssociatesByManagerId(1)).thenReturn(associates);
 		when(service.findAssociatesByManagerId(2)).thenReturn(null);
-=======
-	@InjectMocks
-	AssociateController associateController;
-
-
-	private MockMvc mockmvc;
-
-	@Mock
-	private BackendService service;
-
-  @BeforeEach
-  public void before(){
-    mockmvc=MockMvcBuilders.standaloneSetup(associateController).build();
   }
 
-	/*
-	 * create an Associate object with a unique ID
-	 */
-	private Associate mockAssociate(int id) {
-		return new Associate(id, "salesID", "email@email.com", "John", "Doe",
-				new Manager(1, "manager@manager.com", "Demo", "Manager"),
-				new Batch(1, "salesID", "name", "skill", "location"), AssociateStatus.STAGING);
->>>>>>> 7934f341667952f92e711203a3166ad3a8dbba87
-	}
-	
-//	Remove this in the next iteration it is just here for guide on what not to do or to do in BeforeEach
-//	I am removing this method because I am doing the mocking/creating a mockassociate in @BeforeEach
-//	private Associate mockAssociate(int id) {
-//		return new Associate(id, "salesID", "email@email.com", "John", "Doe", manager, batch, AssociateStatus.STAGING);
-//	}
-
-//	Same as mockAssocaite I am taking this off because I mock an associateDTO in @BeforeEach
-//	private AssociateDTO mockDTO(int id) {
-//		return new AssociateDTO(id, "salesID", "email@email.com", "John", "Doe", 1, 1,AssociateStatus.STAGING.toString());
-//	}
-
-	
 	/**
 	 * Sanity Check - if this fails, application context is not loaded and all other
 	 * tests should fail
@@ -212,12 +169,12 @@ public class AssociateControllerTests {
 //	public void associateGetMappingTest() throws Exception {
 //		this.mockMvc.perform(get("/associates").param("manager", "1")).andExpect(status().isOk()).andExpect(jsonPath("$.firstName", is("John")));
 //	}
-	
+
 	/**
-	 * Testing the PutMapping by updating associate's batch_id and or status, 
+	 * Testing the PutMapping by updating associate's batch_id and or status,
 	 * using status_id to accessing AssociateStatus Enum. Updated this test to
 	 * handle the status_id changes as well
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

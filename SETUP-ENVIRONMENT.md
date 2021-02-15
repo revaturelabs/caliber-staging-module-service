@@ -140,8 +140,33 @@ where “path” is the absolute path to the service account credentials json fi
 ![alt-text](./env-md-images/intellijEnvVarSet.jpg)
 
 
-### Other Resources
+### IntelliJ IDEA
 
+1. Open IntelliJ IDEA
+
+2. Go to Run-> Edit Configurations... 
+
+![alt-text](./env-md-images/intellijRunMenu.jpg)
+
+![alt-text](env-md-images/intellijEditConfig.jpg)
+
+3. Select Your Run Configuration.  This should be Spring Boot - CaliberApplication.
+
+![alt-text](./env-md-images/intellijSelectConfig.jpg)
+
+4. Click the Edit Environment Variables button.
+
+![alt-text](./env-md-images/intellijEditEnvVarButton.jpg)
+
+4. Click the plus button to add a new environment variable.
+
+![alt-text](./env-md-images/intellijEnvVarPlus.jpg)
+
+5. Enter the appropriate values.  The path may contain spaces.  Do not surround the path with quotes.
+
+![alt-text](./env-md-images/intellijEnvVarSet.jpg)
+
+##### Other Resources
 ---
 
 [Firebase Admin SDK setup](https://firebase.google.com/docs/admin/setup)

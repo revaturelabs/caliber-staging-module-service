@@ -1,6 +1,10 @@
 package com.revature.backend.testing.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+<<<<<<< HEAD
+=======
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+>>>>>>> 7934f341667952f92e711203a3166ad3a8dbba87
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
@@ -26,7 +30,16 @@ import com.revature.backend.repository.AnalysisItemRepository;
 import com.revature.backend.repository.SwotRepository;
 import com.revature.backend.service.SwotService;
 
+<<<<<<< HEAD
 @SpringBootTest
+=======
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+@SpringBootTest(classes = {SwotService.class})
+>>>>>>> 7934f341667952f92e711203a3166ad3a8dbba87
 public class TestSwotService {
 	
 	@Mock

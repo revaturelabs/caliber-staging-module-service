@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -23,6 +24,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+=======
+>>>>>>> 7934f341667952f92e711203a3166ad3a8dbba87
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.controller.AssociateController;
 import com.revature.backend.model.Associate;
@@ -36,12 +39,36 @@ import com.revature.backend.service.BatchServiceImpl;
 
 //@WebMvcTest(AssociateController.class)
 
+<<<<<<< HEAD
 //I am converting this test front JUnit4 to JUnit5
+=======
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+/**
+ * This is a set of tests for the AssociateController class. It contains 7 tests related to this class.<p>
+ * test 1:Tests whether the application loads properly.<p>
+ * test 2:Tests the HTTP status of a successful response.<p>
+ * test 3:Tests the response body of a successful response.<p>
+ * test 4:Tests the HTTP status for when the Service layer has a null return value.<p>
+ * test 5:Tests the HTTP status for an empty list being returned from the service layer.<p>
+ * test 6:Tests the HTTP status for a non integer value.<p>
+ * test 7:Tests the HTTP status when a parameter name is not a Manager.<p>
+ * @author ?: wrote tests and initial documentation.
+ * @author Matthew Sheldon: Updated tests to work with Junit 5 and updated documentation.
+ */
+>>>>>>> 7934f341667952f92e711203a3166ad3a8dbba87
 @SpringBootTest
 public class AssociateControllerTests {
 
 	ObjectMapper objectMapper = new ObjectMapper();
 
+<<<<<<< HEAD
 //	@Autowired
 	@InjectMocks
 	AssociateController associateController;
@@ -82,6 +109,29 @@ public class AssociateControllerTests {
 		when(batchServImpl.getBatchById(2)).thenReturn(batchTwo);
 		when(service.findAssociatesByManagerId(1)).thenReturn(associates);
 		when(service.findAssociatesByManagerId(2)).thenReturn(null);
+=======
+	@InjectMocks
+	AssociateController associateController;
+
+
+	private MockMvc mockmvc;
+
+	@Mock
+	private BackendService service;
+
+  @BeforeEach
+  public void before(){
+    mockmvc=MockMvcBuilders.standaloneSetup(associateController).build();
+  }
+
+	/*
+	 * create an Associate object with a unique ID
+	 */
+	private Associate mockAssociate(int id) {
+		return new Associate(id, "salesID", "email@email.com", "John", "Doe",
+				new Manager(1, "manager@manager.com", "Demo", "Manager"),
+				new Batch(1, "salesID", "name", "skill", "location"), AssociateStatus.STAGING);
+>>>>>>> 7934f341667952f92e711203a3166ad3a8dbba87
 	}
 	
 //	Remove this in the next iteration it is just here for guide on what not to do or to do in BeforeEach

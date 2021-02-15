@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,6 +31,15 @@ import com.revature.backend.repository.BackendRepo;
 import com.revature.backend.service.BackendServiceImpl;
 import com.revature.backend.util.GetBatchById;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
 @SpringBootTest()
 class BackendTesting {
 
@@ -41,8 +55,15 @@ class BackendTesting {
 
 	List<Associate> expected;
 
+	@BeforeEach
+	@SuppressWarnings("deprecation")
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+	}
+
 	@Test
 	void contextLoads() {
+    assertTrue(true);
 	}
 	Batch batch = new Batch(1, "salesID", "name", "skill", "location");
 	Batch batch1 = new Batch(2, "salesID", "name", "skill", "location");

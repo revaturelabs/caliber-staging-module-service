@@ -58,6 +58,12 @@ public class SwotService {
 		return swotRepository.findAllByAssociateId(associateId);
 	}
 	
+	public boolean deleteSwot(int swotId) {
+		Swot swot = swotRepository.findById(swotId);
+		swotRepository.delete(swot);
+		return true;
+	}
+	
 	/*
 	 * Creates a new AnalysisItem for a SWOT.
 	 * Accepts the AnalysisItem as a parameter.
@@ -79,7 +85,7 @@ public class SwotService {
 	 * Returns the updated item if successful.
 	 */
 	public AnalysisItem updateItem(AnalysisItem analysisItem) {
-		Swot updateSwot = swotRepository.findById(analysisItem.getSwot().getId()).get();
+		Swot updateSwot = swotRepository.findById(analysisItem.getSwot().getId());
 		updateSwot.setLastModifiedNow();	
 		swotRepository.save(updateSwot);
 		return analysisItemRepository.save(analysisItem);

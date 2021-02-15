@@ -82,7 +82,6 @@ public class SwotController {
 	
 	@DeleteMapping(path = "/delete/{swotId}")
 	public ResponseEntity<ClientMessage> deleteSwot(@PathVariable("swotId") int swotId) {
-		System.out.println("hit delete swot");
 		ClientMessage body = swotService.deleteSwot(swotId) ? SUCCESSFULLY_DELETED : DELETION_FAILED;
 		return ResponseEntity.ok(body);
 	}

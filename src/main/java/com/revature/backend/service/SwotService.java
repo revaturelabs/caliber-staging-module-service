@@ -19,7 +19,11 @@ public class SwotService {
 	@Autowired
 	AnalysisItemRepository analysisItemRepository;
 	
-	/*
+	/**
+	 * 
+	 * @param swot
+	 * @return boolean indicating whether save was successful or not
+	 * 
 	 * Creates a new SWOT with initial AnalysisItems.
 	 * 
 	 * The Swot object is the parent object for each
@@ -42,23 +46,41 @@ public class SwotService {
 		return swotRepository.save(swot) != null; // we create parent object in db
 	}
 
-	/*
-	 * Retrieves all SWOTs by the AssociateId.
-	 * Takes in the Associate's id (as an int)
-	 * as a parameter.
-	 * Returns a List of Swots for that Associate.
-	 */
+	/**
+	* 
+	* @param associateId
+	* @return a list of the corresponding associate's swots
+	*
+	* Retrieves all SWOTs by the AssociateId.
+	* Takes in the Associate's id (as an int)
+	* as a parameter.
+	* Returns a List of Swots for that Associate.
+	*/
 	public List<Swot> retrieveAllSwotByAssociateId(int associateId) {
 		return swotRepository.findAllByAssociateId(associateId);
 	}
 	
+	/**
+	 * 
+	 * @param swotId
+	 * @return true if swot was deleted successfully, false otherwise
+	 * 
+	 * Given a swot ID, finds the corresponding swot and
+	 * deletes it from the database.
+	 * 
+	 * Returns true if successful, false otherwise
+	 */
 	public boolean deleteSwot(int swotId) {
 		Swot swot = swotRepository.findById(swotId);
 		swotRepository.delete(swot);
 		return true;
 	}
-	
-	/*
+
+	/**
+	 * 
+	 * @param analysisItem
+	 * @return true if successfully saved in database, false otherwise
+	 * 
 	 * Creates a new AnalysisItem for a SWOT.
 	 * Accepts the AnalysisItem as a parameter.
 	 * Returns true if successful, false otherwise.
@@ -67,7 +89,11 @@ public class SwotService {
 		return analysisItemRepository.save(analysisItem) != null;
 	}
 
-	/*
+	/**
+	 * 
+	 * @param analysisItem
+	 * @return true if successfully updated in database, false if not
+	 *
 	 * Updates an AnalysisItem.
 	 * Takes the AnalysisItem object that needs to 
 	 * be updated with the changed fields.
@@ -84,8 +110,12 @@ public class SwotService {
 		swotRepository.save(updateSwot);
 		return analysisItemRepository.save(analysisItem);
 	}
-	
-	/*
+
+	/**
+	 * 
+	 * @param analysisItemId
+	 * @return true if successfully deleted, false otherwise
+	 * 
 	 * Deletes an AnalysisItem from a SWOT by
 	 * its id.
 	 * Only takes in the Id as an integer as a
@@ -97,8 +127,11 @@ public class SwotService {
 		analysisItemRepository.deleteById(analysisItemId);
 		return true; //TODO: this will always return true, fix the condition.
 	}
-	
-	/*
+
+	/**
+	 * 
+	 * @return a list of all swots in the database
+	 *
 	 * Method to retrieve all SWOTs found in the
 	 * database.
 	 * Currently only used for testing purposes.

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -16,14 +15,17 @@ public class HomePage {
 	@FindBy(xpath = "//*[@class='btn btn-primary logout-btn']")
 	private WebElement logoutButton;
 	
-	@FindBy(xpath = "//button[text()='Create SWOT']")
-	private List<WebElement> createSwotButtons;
+	@FindBy(xpath = "//*[@id=\"data-row\"]/td[9]/button")
+	private WebElement createSwotButton;
 	
 	@FindBy(id = "type")
 	private WebElement SwotTypeDropdown;
 	
 	@FindBy(id = "name")
 	private WebElement contentField;
+	
+	@FindBy(id = "note")
+	private WebElement swotNote;
 	
 	@FindBy(xpath = "//button[text()='ADD ITEM']")
 	private WebElement addItem;
@@ -59,9 +61,8 @@ public class HomePage {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void clickCreateSwotForAssociate(int rowId) {
-		WebElement createButton = this.createSwotButtons.get(rowId);
-		createButton.click();
+	public void clickCreateSwotForAssociate() {
+		createSwotButton.click();
 	}
 	
 	public void clickViewSwotForAssociate(int rowId) {
@@ -79,6 +80,11 @@ public class HomePage {
 	public void enterContentField(String content) {
 		this.contentField.clear();
 		this.contentField.sendKeys(content);
+	}
+	
+	public void enterSwotNote(String note) {
+		this.swotNote.clear();
+		this.swotNote.sendKeys(note);
 	}
 	
 	public void enterDescriptionField(String description) {
@@ -107,8 +113,8 @@ public class HomePage {
 		return logoutButton;
 	}
 
-	public List<WebElement> getCreateSwotButtons() {
-		return createSwotButtons;
+	public WebElement getCreateSwotButton() {
+		return createSwotButton;
 	}
 
 	public WebElement getSwotTypeDropdown() {
@@ -117,6 +123,10 @@ public class HomePage {
 
 	public WebElement getContentField() {
 		return contentField;
+	}
+//	
+	public WebElement getSwotNote() {
+		return swotNote;
 	}
 
 	public WebElement getAddItem() {

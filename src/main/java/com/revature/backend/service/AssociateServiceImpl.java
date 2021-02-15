@@ -19,6 +19,12 @@ public class AssociateServiceImpl implements AssociateService {
         return null;
     }
 
+    /**
+     * Inserts a group of associates into the DB
+     * @param aList - list of associate objects
+     * @return - shouldn't actually return anything, previous batch wrote it and it's too late to refactor
+     * 			for this batch, please consider removing the return statement
+     */
     @Override
     public List<Associate> saveAssociates(List<Associate> aList) {
         // call the appropriate Repo method to save (aka insert) associates into DB
@@ -26,14 +32,20 @@ public class AssociateServiceImpl implements AssociateService {
         return list;
     }
     
+    /**
+     * Gets associate by given ID
+     * @param id - Associate ID
+     * @return - Associate with given ID
+     */
     public Associate getAssociateById(int id) {
-    	// TODO call the appropriate Repo method to update an associate into DB
     	return associateRepo.findById(id);
     }
     
-    
+    /**
+     * Updates an associate in DB
+     * @param associate - updated associate object with ID of existing associate
+     */
     public void updateAssociate(Associate associate) {
-    	// TODO call the appropriate Repo method to update an associate into DB
     	associateRepo.save(associate);
     }
     

@@ -66,6 +66,7 @@ public class HomePage {
 	}
 	
 	public void clickViewSwotForAssociate(int rowId) {
+
 		WebElement viewButton = this.viewSwots.get(rowId);
 		viewButton.click();
 

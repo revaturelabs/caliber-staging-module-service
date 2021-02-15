@@ -10,12 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Manager;
@@ -34,7 +33,17 @@ public class ManagerTesting {
 	ManagerRepository mockManagerRepository;
 
 	@Autowired
-	ManagerService managerService;
+	ManagerServiceImpl managerService;
+	
+	Manager manager;
+	List<Manager> lManager = new ArrayList<>();
+	@BeforeEach
+	public void setUp() {
+		manager = new Manager(2,"test@revature.com","REAL_TEST_EMAIL","usery");
+		when(mockManagerRepository.findById(1)).thenReturn(manager);
+		lManager.add(manager);
+		when(managerService.saveAll(lManager)).thenReturn(lManager);
+	}
 	
 	/**
 	 * Tests that managerService behaves properly when the repo finds some manager(s)
@@ -97,11 +106,24 @@ public class ManagerTesting {
 		when(mockBackendRepo.findAssociatesByManagerId(1)).thenReturn(m1Assocs);
 		when(mockBackendRepo.findAssociatesByManagerId(2)).thenReturn(m2Assocs);
 		when(mockBackendRepo.findAssociatesByManagerId(3)).thenReturn(m3Assocs);
-		
+	
 		Map<Manager, Integer> actualMap = managerService.getAllManagersAndAssociates();
 		assertEquals(expectedMap, actualMap);
 	}
-
+	/**
+	 * This will test that we can get a manager by the manager id
+	 */
+	@Test
+	public void getManagerById() {
+		assertEquals(managerService.getManagerById(1), manager);
+	}
+	/**
+	 * For future batches implement a test for
+	*/
+	@Test
+	public void saveAllManagersSuccess() {
+		
+	}
 	/**
 	 * Helper method that builds a list of dummy associates, assigned to the given manager
 	 */

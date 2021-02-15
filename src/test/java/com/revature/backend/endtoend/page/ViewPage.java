@@ -14,44 +14,6 @@ public class ViewPage {
 	private WebDriver driver;
 
 	// View SWOT component
-	/**
-	 * //Old page 
-	 * 
-	 * // Add new item button
-	 * @FindBy(xpath = "//button[contains(.,'Add new item')]") 
-	 * private WebElement addNewButton;
-	 * 
-	 * // inside "add new item" button
-	 * @FindBy(xpath = "//*[@id='type']") 
-	 * private WebElement addNewButtonItemType;
-	 * 
-	 * @FindBy(xpath = "//*[@id='content']")
-	 * private WebElement addNewButtonItemText;
-	 * 
-	 * @FindBy(xpath = "//*[@type='submit']")
-	 * private WebElement addItemButtonInsideAddNewModal;
-	 * 
-	 * // Update button
-	 * @FindBy(xpath = "//button[contains(.,'Update')]")
-	 * private WebElement updateButton;
-	 * 
-	 * // Path same as addItem, if conflicts emerge look for more ways
-	 * // to differentiate
-	 * @FindBy(xpath = "//*[@id='type']")
-	 * private WebElement updateButtonItemType;
-	 * 
-	 * @FindBy(xpath = "//*[@id='content']") 
-	 * private WebElement updateButtonItemText;
-	 * 
-	 * @FindBy(xpath = "//*[@type='submit'") 
-	 * private WebElement updateItemButtonInsideUpdateModal;
-	 * 
-	 * 
-	 * // Back to home page link
-	 * @FindBy(xpath = "//*[@id='homeLink']")
-	 * private WebElement homePageLink;
-	 **/
-//	New xpaths 
 
 	// Locators for the "+" buttons inside the four toast cards
 	@FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*[@type='submit']")
@@ -150,19 +112,6 @@ public class ViewPage {
 		this.addItemThreatButton.click();
 	}
 
-	// archive select statement
-//	public void addItemSelectType(String string) {
-//		Select drpType = new Select(driver.findElement(By.name("type")));
-//		drpType.selectByValue(string);
-//	}
-
-	// archive select method
-//	public void updateItemSelectType(String type) {
-//		Select drpType = new Select(driver.findElement(By.name("type")));
-//		drpType.selectByValue(type);
-//	}	
-	
-	
 	public void clickSpecificItemAddItemStrengthButton(int index) {
 		this.specificItemAddItemStrength.get(index).click();
 	}

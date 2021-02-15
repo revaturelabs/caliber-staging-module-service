@@ -81,6 +81,32 @@ To set an environment variable In your .bashrc, .bash_profile, or .profile add
 
 8. To verify that it has been added, run `printenv` and check to see if you see the new path and with that you should be good to go.
 
+### IntelliJ IDEA
+
+1. Open IntelliJ IDEA
+
+2. Go to Run-> Edit Configurations... 
+
+![alt-text](./env-md-images/intellijRunMenu.jpg)
+
+![alt-text](env-md-images/intellijEditConfig.jpg)
+
+3. Select Your Run Configuration.  This should be Spring Boot - CaliberApplication.
+
+![alt-text](./env-md-images/intellijSelectConfig.jpg)
+
+4. Click the Edit Environment Variables button.
+
+![alt-text](./env-md-images/intellijEditEnvVarButton.jpg)
+
+4. Click the plus button to add a new environment variable.
+
+![alt-text](./env-md-images/intellijEnvVarPlus.jpg)
+
+5. Enter the appropriate values.  The path may contain spaces.  Do not surround the path with quotes.
+
+![alt-text](./env-md-images/intellijEnvVarSet.jpg)
+
 ##### Other Resources
 
 ---

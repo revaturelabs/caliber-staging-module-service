@@ -141,7 +141,12 @@ public class ToastTest {
 		// wait condition
 		this.viewPage.clickDeleteButtonIndividualSwot();
 	}
-
+	
+	/** THEN CONDITION NOTE
+	 This test was supposed to reflect 3 messages occupying the screen
+	 at the same time. This condition can be changed if that is 
+	 something Selenium can't do
+	 **/
 	@Then("the three messages should occupy separate locations on the screen")
 	public void the_three_messages_should_occupy_separate_locations_on_the_screen() {
 		// Write code here that turns the phrase above into concrete actions
@@ -161,7 +166,12 @@ public class ToastTest {
 	public void user_submits_item_name_three(String string) {
 		this.viewPage.selectUpdateButtonSwotItemType(string);
 	}
-
+	/** THEN CONDITION NOTE
+	 This condition should find 4 swot messages on the screen by returning
+	 Whether or not the Toast Message array contains 4 elements. The messages
+	 might disappear too quickly for this condition to be tested, so the 
+	 number can be deceased from 4 to 2
+	**/
 	@Then("the user should have four toast messages")
 	public void the_user_should_have_four_toast_messages() {
 		// Write code here that turns the phrase above into concrete actions

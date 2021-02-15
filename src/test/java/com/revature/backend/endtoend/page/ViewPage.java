@@ -28,7 +28,7 @@ public class ViewPage {
 	@FindBy(xpath = "//*[@id='swot-table']/tr[2]/td[2]//*[@type='submit']")
 	private WebElement addItemThreatButton;
 
-	// Buttons to find specific swots inside each of the four cards (Strength,Weakness,Opportunity, and Threat) 
+	// Buttons to find specific swots inside each of the four cards (Strength, Weakness, Opportunity, and Threat) 
 	// Need a way to select a specific item if there are multiple 
 	@FindBy(xpath = "//*[@id='swot-table']/tr/td[1]//*button[@class='btntoggle-btn']")
 	private List<WebElement> specificItemAddItemStrength;

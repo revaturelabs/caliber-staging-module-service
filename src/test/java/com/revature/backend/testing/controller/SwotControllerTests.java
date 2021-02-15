@@ -33,8 +33,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
  * test 1:Tests if the Application Loads.<p>
  * test 2:Tests that you can hit the /swot/view/all endpoint and get the expected results.<p>
  * 
- * @author ? wrote initial tests and individual test documentation.
- * @author Matthew Sheldon: Updated tests to work with Junit 5, updated documentation.
+ * @author ? :wrote initial tests and individual test documentation.
+ * @author Matthew Sheldon: Updated tests to work with Junit 5 and updated documentation.
  */
 @SpringBootTest
 public class SwotControllerTests {

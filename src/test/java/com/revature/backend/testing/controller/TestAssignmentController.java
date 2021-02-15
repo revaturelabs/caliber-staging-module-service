@@ -1,8 +1,4 @@
-/**
- * This class contains unit tests for the AssignmentController class
- * 
- * @author Andrew Curry
- */
+
 
 package com.revature.backend.testing.controller;
 
@@ -31,14 +27,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+/**
+ * This is a set of tests for the AssignmentController class. It contains 4 tests.<p>
+ * Test 1:Tests if dummy data will be converted to batch properly.<p>
+ * Test 2:Tests if dummy data will be converted to associates properly.<p>
+ * Test 3:Tests if dummy data will be added properly.<p>
+ * Test 4:Tests that the assignmentController properly detects that there are no new batches.<p>
+ * @author Andrew Curry: wrote tests and initial documentation.
+ * @author Matthew Sheldon: updated tests to work with Junit 5 and updated documentation.
+ */
 
 @SpringBootTest
 public class TestAssignmentController {
-    
     // ----------
     // SETUP
     // ----------
-
     @Mock
     private ManagerBalancer mockManagerBalancer;
 

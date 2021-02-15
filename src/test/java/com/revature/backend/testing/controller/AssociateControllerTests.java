@@ -26,7 +26,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
+/**
+ * This is a set of tests for the AssociateController class. It contains 7 tests related to this class.<p>
+ * test 1:Tests whether the application loads properly.<p>
+ * test 2:Tests the HTTP status of a successful response.<p>
+ * test 3:Tests the response body of a successful response.<p>
+ * test 4:Tests the HTTP status for when the Service layer has a null return value.<p>
+ * test 5:Tests the HTTP status for an empty list being returned from the service layer.<p>
+ * test 6:Tests the HTTP status for a non integer value.<p>
+ * test 7:Tests the HTTP status when a parameter name is not a Manager.<p>
+ * @author ?: wrote tests and initial documentation.
+ * @author Matthew Sheldon: Updated tests to work with Junit 5 and updated documentation.
+ */
 @SpringBootTest
 public class AssociateControllerTests {
 

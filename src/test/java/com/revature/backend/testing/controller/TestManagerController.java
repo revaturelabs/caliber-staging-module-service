@@ -24,7 +24,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
+/**
+ * This is a test for the ManagerController class. It contains 4 tests.
+ * Test 1:<p>
+ * Test 2:<p>
+ * Test 3:<p>
+ * Test 4:<p>
+ * @author ?: wrote tests and initial documentation.
+ * @author Matthew Sheldon: Updated tests to work with Junit 5 and updated documentation.
+ */
 @SpringBootTest
 public class TestManagerController {
 	
@@ -40,16 +48,16 @@ public class TestManagerController {
   @InjectMocks
 	private ManagerController controller;
 	
+  @BeforeEach
+  public void before(){
+    mockmvc=MockMvcBuilders.standaloneSetup(controller).build();
+  }
 	
 	/*
 	 * Sanity Check - if this fails, application context is not loaded and all other
 	 * tests should fail
 	 */
 
-   @BeforeEach
-   public void before(){
-     mockmvc=MockMvcBuilders.standaloneSetup(controller).build();
-   }
 	@Test
 	public void contextLoads() throws Exception {
 		assertThat(controller).isNotNull();

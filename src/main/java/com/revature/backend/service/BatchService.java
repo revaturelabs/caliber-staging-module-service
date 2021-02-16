@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BatchService {
+    private final BatchRepository batchRepo;
 
-	@Autowired
-    BatchRepository batchRepo;
+    public BatchService(BatchRepository batchRepo) {
+      this.batchRepo = batchRepo;
+    }
 
     public List<Batch> getAllBatches() {
         return null;
@@ -28,5 +30,4 @@ public class BatchService {
     	// TODO call the appropriate Repo method to save (aka insert) batches into DB
     	return batchRepo.findById(id);
     }
-
 }

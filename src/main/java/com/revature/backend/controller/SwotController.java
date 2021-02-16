@@ -29,9 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/swot")
 public class SwotController {
 
-	@Autowired
-	private SwotService swotService;
+	private final SwotService swotService;
 
+  public SwotController(SwotService swotService) {
+    this.swotService = swotService;
+  }
 	/*
 	 * POST request to create a new SWOT for an Associate with AnalysisItems within
 	 * it as a collection.

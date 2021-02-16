@@ -41,8 +41,8 @@ public class InterviewFeedbackController {
 
 	/**
 	 * Return all feedback in the database
-	 *
-	 * @return
+	 * @param all The list of feedback should be returned 
+	 * @return Returns the all possible list of feedback if found, and null if not found
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<InterviewFeedback>> getAllFeedback() {

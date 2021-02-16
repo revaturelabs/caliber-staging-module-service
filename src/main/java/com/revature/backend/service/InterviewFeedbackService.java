@@ -2,7 +2,6 @@ package com.revature.backend.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.backend.model.Associate;
@@ -12,6 +11,11 @@ import com.revature.backend.repository.InterviewFeedbackRepository;
 
 @Service("interviewFeedbackService")
 public class InterviewFeedbackService {
+	private final InterviewFeedbackRepository ifRepo;
+
+  public InterviewFeedbackService(InterviewFeedbackRepository ifRepo) {
+    this.ifRepo = ifRepo;
+  }
 
 	@Autowired
 	InterviewFeedbackRepository ifRepo;

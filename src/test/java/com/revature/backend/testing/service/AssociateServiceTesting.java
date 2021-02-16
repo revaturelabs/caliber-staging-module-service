@@ -17,7 +17,7 @@ import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 import com.revature.backend.repository.AssociateRepository;
 import com.revature.backend.repository.BatchRepository;
-import com.revature.backend.service.AssociateServiceImpl;
+import com.revature.backend.service.AssociateService;
 
 @SpringBootTest
 public class AssociateServiceTesting {
@@ -28,17 +28,17 @@ public class AssociateServiceTesting {
 	 */
 	@Mock
 	private AssociateRepository associateRepo;
-	
+
 	@Mock
 	private BatchRepository batchRepo;
 	/**
-	 * The @InjectMocks will mark which field the injection should be performed on. In this specific case, 
-	 * this will make sure that the mocked repositories above will be injected into the AssociateServiceImpl. 
+	 * The @InjectMocks will mark which field the injection should be performed on. In this specific case,
+	 * this will make sure that the mocked repositories above will be injected into the AssociateServiceImpl.
 	 */
 	@InjectMocks
-	private AssociateServiceImpl associateServ = mock(AssociateServiceImpl.class);
-	
-	
+	private AssociateService associateServ = mock(AssociateService.class);
+
+
 	Associate associate;
 	Associate associate1;
 	Manager manager;
@@ -48,8 +48,8 @@ public class AssociateServiceTesting {
 	 *  The Setup method will setup all necessary pieces for the tests. The @BeforeEach will make the setup method run before each test.
 	 * @throws Exception
 	 */
-	
-	@BeforeEach 
+
+	@BeforeEach
 	public void Setup() throws Exception {
 		batch1 = new Batch(1,"Reston","Sophia","1","Java Full Stack");
 		manager = new Manager(2,"test@revature.com","REAL_TEST_EMAIL","usery");

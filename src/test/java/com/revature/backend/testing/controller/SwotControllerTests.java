@@ -1,10 +1,14 @@
 package com.revature.backend.testing.controller;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.backend.controller.SwotController;
@@ -23,23 +27,40 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@WebMvcTest(SwotController.class)
+/**
+ * This is a set of test for the SwotController class. It contaons 2 tests.<p>
+ * These tests make use of Junit 5.<p>
+ * test 1:Tests if the Application Loads.<p>
+ * test 2:Tests that you can hit the /swot/view/all endpoint and get the expected results.<p>
+ * 
+ * @author ? :wrote initial tests and individual test documentation.
+ * @author Matthew Sheldon: Updated tests to work with Junit 5 and updated documentation.
+ */
+@SpringBootTest
 public class SwotControllerTests {
 
 	ObjectMapper objectMapper = new ObjectMapper();
 	
-	@Autowired
+	@InjectMocks
 	SwotController swotController;
 	
-	@Autowired
 	private MockMvc mockMvc;
 	
-	@MockBean
+	@Mock
 	private SwotService service;
+
+  @BeforeEach
+  public void before(){
+    mockMvc=MockMvcBuilders.standaloneSetup(swotController).build();
+  }
 	
 	/*
 	 * Create a Swot object with an ID.

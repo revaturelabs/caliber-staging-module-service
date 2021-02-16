@@ -7,11 +7,15 @@ import static com.revature.backend.util.ClientMessageUtil.SUCCESSFULLY_DELETED;
 
 import java.util.List;
 
+import com.revature.backend.model.AnalysisItem;
+import com.revature.backend.model.Swot;
+import com.revature.backend.service.SwotService;
+import com.revature.backend.util.ClientMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,17 +25,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.backend.model.AnalysisItem;
-import com.revature.backend.model.Swot;
-import com.revature.backend.service.SwotService;
-import com.revature.backend.util.ClientMessage;
-
 @RestController("swotController")
 @RequestMapping("/swot")
 public class SwotController {
 
-	@Autowired
-	private SwotService swotService;
+	private final SwotService swotService;
 
 	/**
 	 * 
@@ -40,10 +38,10 @@ public class SwotController {
 	 * 
 	 * POST request to create a new SWOT for an Associate with AnalysisItems within
 	 * it as a collection.
-	 * 
+	 *
 	 * Takes in a Swot as a nested JSON object: the AnalysisItems will be found
 	 * within a JSON array.
-	 * 
+	 *
 	 * Returns a 201 status with a message for the client within the HTTP body as a
 	 * JSON object if successful.
 	 */
@@ -61,7 +59,7 @@ public class SwotController {
 	 * 
 	 * GET request for fetching all SWOTs based on an Associate's id as found in the
 	 * RESTful URL.
-	 * 
+	 *
 	 * Returns the List of SWOTs as a JSON array with a 200 code if successful.
 	 */
 	@GetMapping(path = "/view/{associateId}", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -76,7 +74,7 @@ public class SwotController {
 	 * 
 	 * GET request for fetching all existing SWOTs in the system. Returns the List
 	 * as a JSON array.
-	 * 
+	 *
 	 * This will more than likely be removed in the future and was only used for
 	 * proof of concept.
 	 */
@@ -106,9 +104,9 @@ public class SwotController {
 	 * @return ResponseEntity with 201 HTTP status indicating whether or not creation was successful
 	 * 
 	 * POST request to create a new AnalysisItem for a particular SWOT.
-	 * 
+	 *
 	 * Takes in an AnalysisItem from a JSON object.
-	 * 
+	 *
 	 * Returns a 201 HTTP status with an informative client message in the body.
 	 */
 	@PostMapping(path = "/item/new", consumes = { MediaType.APPLICATION_JSON_VALUE })
@@ -123,11 +121,11 @@ public class SwotController {
 	 * @return ResponseEntity<AnalysisItem> containing the updated analysis item or a 204 status code in event of failure
 	 * 
 	 * PUT request to update an AnalysisItem.
-	 * 
+	 *
 	 * Takes in an AnalysisItem *with* altered fields from a JSON object.
-	 * 
+	 *
 	 * If the update failed, returns a 204 status code.
-	 * 
+	 *
 	 * If successful, returns a 200 status code and the updated object.
 	 */
 	@PutMapping(path = "/item/update/{analysisItemId}", consumes = { MediaType.APPLICATION_JSON_VALUE })
@@ -146,9 +144,9 @@ public class SwotController {
 	 * @return ResponseEntity<ClientMessage> indicating whether the delete was successful
 	 * 
 	 * DELETE request to delete an AnalysisItem from a particular SWOT.
-	 * 
+	 *
 	 * Takes in the id of the AnalysisItem as a variable from the URL.
-	 * 
+	 *
 	 * Returns an informative client message and a 200 status code.
 	 */
 	@DeleteMapping(path = "/item/delete/{analysisItemId}")

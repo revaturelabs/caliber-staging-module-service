@@ -2,7 +2,6 @@ package com.revature.backend.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.backend.model.AnalysisItem;
@@ -10,8 +9,16 @@ import com.revature.backend.model.Swot;
 import com.revature.backend.repository.AnalysisItemRepository;
 import com.revature.backend.repository.SwotRepository;
 
-@Service("swotService")
+@Service
 public class SwotService {
+	private final SwotRepository swotRepository;
+	private final AnalysisItemRepository analysisItemRepository;
+
+  public SwotService(SwotRepository swotRepository,
+        AnalysisItemRepository analysisItemRepository) {
+    this.swotRepository = swotRepository;
+    this.analysisItemRepository = analysisItemRepository;
+  }
 
 	@Autowired
 	SwotRepository swotRepository;
@@ -25,21 +32,21 @@ public class SwotService {
 	 * @return boolean indicating whether save was successful or not
 	 * 
 	 * Creates a new SWOT with initial AnalysisItems.
-	 * 
+	 *
 	 * The Swot object is the parent object for each
 	 * individual AnalysisItem (Swot > AnalysisItem).
-	 * 
+	 *
 	 * Each AnalysisItem has a foreign key reference to
 	 * it's owning SWOT.
-	 * 
+	 *
 	 * The JSON array of AnalysisItems needs to be stored
 	 * in a holder list where it will have the foreign key
 	 * set to the parent SWOT's id.
-	 * 
+	 *
 	 * After, the List of AnalysisItems is
 	 * properly assigned to it's parent
 	 * Swot object.
-	 * 
+	 *
 	 * Returns true if successful, false otherwise.
 	 */
 	public boolean createNewSwot(Swot swot) {
@@ -95,18 +102,18 @@ public class SwotService {
 	 * @return true if successfully updated in database, false if not
 	 *
 	 * Updates an AnalysisItem.
-	 * Takes the AnalysisItem object that needs to 
+	 * Takes the AnalysisItem object that needs to
 	 * be updated with the changed fields.
-	 * 
+	 *
 	 * Prior to calling the repo, set the respective SWOT's
 	 * lastModified field to System.currentTimeMillis() and
 	 * then save the object to the database to update.
-	 * 
+	 *
 	 * Returns the updated item if successful.
 	 */
 	public AnalysisItem updateItem(AnalysisItem analysisItem) {
 		Swot updateSwot = swotRepository.findById(analysisItem.getSwot().getId());
-		updateSwot.setLastModifiedNow();	
+		updateSwot.setLastModifiedNow();
 		swotRepository.save(updateSwot);
 		return analysisItemRepository.save(analysisItem);
 	}
@@ -121,7 +128,7 @@ public class SwotService {
 	 * Only takes in the Id as an integer as a
 	 * parameter.
 	 * Should return true if successful, false
-	 * otherwise. 
+	 * otherwise.
 	 */
 	public boolean deleteItem(int analysisItemId) {
 		analysisItemRepository.deleteById(analysisItemId);
@@ -139,5 +146,4 @@ public class SwotService {
 	public List<Swot> retrieveAllSwot() {
 		return swotRepository.findAll();
 	}
-	
 }

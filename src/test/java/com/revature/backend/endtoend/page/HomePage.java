@@ -25,6 +25,9 @@ public class HomePage {
 	@FindBy(id = "name")
 	private WebElement contentField;
 	
+	@FindBy(id = "note")
+	private WebElement swotNote;
+	
 	@FindBy(xpath = "//button[text()='ADD ITEM']")
 	private WebElement addItem;
 	
@@ -65,10 +68,8 @@ public class HomePage {
 	}
 	
 	public void clickViewSwotForAssociate(int rowId) {
-
 		WebElement viewButton = this.viewSwots.get(rowId);
 		viewButton.click();
-
 	}
 	
 	public void selectSwotType(String type) {
@@ -79,6 +80,11 @@ public class HomePage {
 	public void enterContentField(String content) {
 		this.contentField.clear();
 		this.contentField.sendKeys(content);
+	}
+	
+	public void enterSwotNote(String note) {
+		this.swotNote.clear();
+		this.swotNote.sendKeys(note);
 	}
 	
 	public void enterDescriptionField(String description) {
@@ -117,6 +123,10 @@ public class HomePage {
 
 	public WebElement getContentField() {
 		return contentField;
+	}
+//	
+	public WebElement getSwotNote() {
+		return swotNote;
 	}
 
 	public WebElement getAddItem() {

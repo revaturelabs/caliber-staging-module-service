@@ -31,6 +31,7 @@ public class AssignmentController {
 	BatchWriter batchWriter;
 	@Autowired
 	BatchRetriever batchRetriever;
+	
 
 	/**
 	 * This method runs after the {@link StagingListener} detects new batches.

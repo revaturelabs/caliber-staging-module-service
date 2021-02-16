@@ -110,7 +110,8 @@ public class InterviewFeedbackController {
 	 * @param feedbackMap Map of the information to input into the feedback
 	 * @return Success or failure statement
 	 */
-	@PostMapping
+
+  @PostMapping("")
 	public ResponseEntity<String> postFeedback(@RequestBody LinkedHashMap feedbackMap) {
 		Associate associate = assocServ.getAssociateById((Integer)feedbackMap.get("associateId"));
 		if(associate == null) {

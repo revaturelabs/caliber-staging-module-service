@@ -1,8 +1,8 @@
 package com.revature.backend.testing.service;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -20,7 +20,12 @@ import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchRetrieverImpl;
 import com.revature.backend.util.StagingListener;
 
-@SpringBootTest(classes={BatchRetriever.class, BatchRetrieverImpl.class})
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+@SpringBootTest
 public class BatchRetrieverTesting {
 
 	@MockBean

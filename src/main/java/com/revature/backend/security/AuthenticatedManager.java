@@ -8,8 +8,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 /**
  * @author Jay Monari
  */
-public class AuthenticatedManager extends
-      AbstractAuthenticationToken {
+public class AuthenticatedManager extends AbstractAuthenticationToken {
   private static final long serialVersionUID = 6559911895414362557L;
   private final Map<String, Object> claims;
 

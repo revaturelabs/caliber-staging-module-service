@@ -1,9 +1,9 @@
 package com.revature.backend.testing.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.repository.BackendRepo;
-import com.revature.backend.service.BackendServiceImpl;
+import com.revature.backend.service.BackendService;
 import com.revature.backend.util.GetBatchById;
 
 @SpringBootTest()
@@ -37,12 +37,19 @@ class BackendTesting {
 
 	@Autowired
 	@InjectMocks
-	private BackendServiceImpl backend;
+	private BackendService backend;
 
 	List<Associate> expected;
 
+	@BeforeEach
+	@SuppressWarnings("deprecation")
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+	}
+
 	@Test
 	void contextLoads() {
+    assertTrue(true);
 	}
 	Batch batch = new Batch(1, "salesID", "name", "skill", "location");
 	Batch batch1 = new Batch(2, "salesID", "name", "skill", "location");

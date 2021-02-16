@@ -1,14 +1,14 @@
 /**
  * This file contains unit tests for the class ManagerBalancerImpl, which implements
  * the ManagerBalancer interface.
- * 
+ *
  * @author Andrew Curry
  */
 package com.revature.backend.testing.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,9 +25,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
-import com.revature.backend.service.ManagerBalancerImpl;
+import com.revature.backend.service.ManagerBalancer;
 
-@SpringBootTest()
+@SpringBootTest
 public class TestManagerBalancerImpl {
 
     // ----------
@@ -36,14 +36,14 @@ public class TestManagerBalancerImpl {
 
     // This is wiring an Impl because I want to test some of the helper methods which are
     // defined in the Impl, but are not specified in the interface
-	
-	
+
+
 	@InjectMocks
-    private ManagerBalancerImpl managerBalancerImpl;
-    @BeforeEach    
+    private ManagerBalancer managerBalancerImpl;
+    @BeforeEach
     public void setUp()
     {
-    	
+
     }
     // ----------
     // TESTS
@@ -85,7 +85,7 @@ public class TestManagerBalancerImpl {
     // ----------
     // findManagerWithLeast() TESTS
     // ----------
-    
+
     /**
      * Tests a few different possibilities, expecting success in all of them
      */
@@ -132,7 +132,7 @@ public class TestManagerBalancerImpl {
         testBalanceNewBatchesHelper(
             new int[] {20, 40, 10, 15}, new int[] {25, 17, 31, 8, 12, 19, 2, 16, 5, 20});
     }
-    
+
     // ----------
 	// HELPER METHODS
     // ----------
@@ -157,7 +157,7 @@ public class TestManagerBalancerImpl {
     /**
      * Builds a 2D-array of test/mock associates, where the length of each child
      * array is equal to the corresponding int in lengths.
-     * 
+     *
      * The associates will be assigned to mock batches, but all other fields will be
      * left blank.
      */
@@ -200,7 +200,7 @@ public class TestManagerBalancerImpl {
         for (int numAssociates : managerMap.values()){
             if (numAssociates < lowestNumAssociates || lowestNumAssociates == -1)
                 lowestNumAssociates = numAssociates;
-            if (numAssociates > highestNumAssociates) 
+            if (numAssociates > highestNumAssociates)
                 highestNumAssociates = numAssociates;
         }
         return highestNumAssociates - lowestNumAssociates;
@@ -233,7 +233,7 @@ public class TestManagerBalancerImpl {
      * Builds a List of mock associates (which are placed in batches, each batch sized
      * according to a size from sizes), and then verifies that groupIntoBatches splits
      * them up correctly. The order of the mock list will be random.
-     * 
+     *
      * @param lengths
      */
     public void testGroupIntoBatchesHelper(int[] sizes){
@@ -272,7 +272,7 @@ public class TestManagerBalancerImpl {
      */
     private boolean areAssociatesGroupedCorrectly(
         Associate[][] groupedAssociates, int[] sizes) {
-        
+
         assertEquals(sizes.length, groupedAssociates.length);
         for (Associate[] group : groupedAssociates){
             if (group.length == 0) continue; // shouldn't happen?
@@ -293,9 +293,9 @@ public class TestManagerBalancerImpl {
     // ----------
 
     /**
-     * Builds a mock group of batches (each batch sized according to a length from 
+     * Builds a mock group of batches (each batch sized according to a length from
      * lengths), and then tests to make sure the managerBalancerImpl sorts it correctly.
-     * 
+     *
      * @param lengths
      */
     private void testSortBatchesBySizeHelper(int[] lengths) {
@@ -307,7 +307,7 @@ public class TestManagerBalancerImpl {
     /**
      * Determines if the given 2-d array of associates is sorted in decreasing order of
      * size (largest batches first, smallest last)
-     * 
+     *
      * @param batches
      * @return
      */
@@ -330,10 +330,10 @@ public class TestManagerBalancerImpl {
      * Runs a single test case, where each int in managerSizes corresponds to a manager
      * who has that many associates already assigned to them. It will generate a map of
      * managers accordingly, and verify that the correct one is selected.
-     * 
+     *
      * NOTE: does not care how the implementation breaks ties for manager with least.
-     * 
-     * @param managerSizes 
+     *
+     * @param managerSizes
      */
     private void testFindManagerWithLeastHelper(int[] managerSizes) {
         Map<Manager, Integer> managerMap = new HashMap<>();
@@ -343,7 +343,7 @@ public class TestManagerBalancerImpl {
         int resultAssociates = managerMap.get(result);
         assertEquals(leastAssociates, resultAssociates);
     }
-    
+
     // ----------
     // assignAssociatesEvenly() HELPERS
     // ----------
@@ -351,18 +351,18 @@ public class TestManagerBalancerImpl {
     /**
      * Runs a single test case on assignAssociatesEvenly, creating manager and incoming
      * batch data based on the parameters.
-     * 
+     *
      * To evaluate the even-ness of the assignment, the manager with most and manager
      * with least are compared; the difference between the two is the "balance score".
      * The expected balance score will be compared to the actual. Additionally, each
      * associate will be checked to make sure that it has been assigned to one of the
      * managers in the managerMap.
-     * 
+     *
      * It is assumed by this test that the findManagerWithLeast method works.
      * It is assumed that the actual associate objects are assigned according to the
      * changes made to the map (that is, the updated managerMap will be trusted to be
      * accurate)
-     * 
+     *
      * @param managerSizes
      * @param batchSizes
      */
@@ -374,7 +374,7 @@ public class TestManagerBalancerImpl {
         batchSizes = descendingSortIntArray(batchSizes);
         Associate[][] batches = buildTestBatches(batchSizes);
         // calculate the expected balance score
-        int expectedBalanceScore 
+        int expectedBalanceScore
             = calculateExpectedBalanceScore(managerSizes, batchSizes);
         // run the actual implementation and verify it
         managerBalancerImpl.assignAssociatesEvenly(managerMap, batches);
@@ -384,7 +384,7 @@ public class TestManagerBalancerImpl {
                 Manager manager = associate.getManager();
                 assertNotNull(manager);
                 assertTrue(managerMap.keySet().contains(manager));
-            } 
+            }
         }
         // is it correctly balanced?
         int actualBalanceScore = calculateActualBalanceScore(managerMap);
@@ -405,7 +405,7 @@ public class TestManagerBalancerImpl {
         List<Associate> associates = generateAssociateList(batchSizes);
         // what's the expected balance score?
         batchSizes = descendingSortIntArray(batchSizes);
-        int expectedBalanceScore 
+        int expectedBalanceScore
             = calculateExpectedBalanceScore(managerSizes, batchSizes);
         // call the implementation
         managerBalancerImpl.balanceNewBatches(managerMap, associates);

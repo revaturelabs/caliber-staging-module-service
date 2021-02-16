@@ -28,9 +28,9 @@ import com.revature.backend.model.AssociateStatus;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.InterviewFeedback;
 import com.revature.backend.model.Manager;
-import com.revature.backend.service.AssociateServiceImpl;
+import com.revature.backend.service.AssociateService;
 import com.revature.backend.service.InterviewFeedbackService;
-import com.revature.backend.service.ManagerServiceImpl;
+import com.revature.backend.service.ManagerService;
 
 @SpringBootTest
 public class InterviewFeedbackControllerTest {
@@ -39,10 +39,10 @@ public class InterviewFeedbackControllerTest {
 	private InterviewFeedbackService ifServ;
 	
 	@Mock
-	private AssociateServiceImpl aServ;
+	private AssociateService aServ;
 	
 	@Mock
-	private ManagerServiceImpl mServ;
+	private ManagerService mServ;
 	
 	@InjectMocks
 	private InterviewFeedbackController ifCon;

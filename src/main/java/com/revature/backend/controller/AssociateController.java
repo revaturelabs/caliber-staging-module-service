@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.revature.backend.model.Associate;
+import com.revature.backend.model.Batch;
+import com.revature.backend.model.dto.AssociateDTO;
+import com.revature.backend.service.AssociateService;
+import com.revature.backend.service.BackendService;
+import com.revature.backend.service.BatchService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,27 +19,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.backend.model.Associate;
 import com.revature.backend.model.AssociateStatus;
-import com.revature.backend.model.Batch;
-import com.revature.backend.model.dto.AssociateDTO;
-import com.revature.backend.service.AssociateServiceImpl;
-import com.revature.backend.service.BackendService;
-import com.revature.backend.service.BatchServiceImpl;
 
 @RestController
 public class AssociateController {
+	private final BackendService backendService;
+	private final AssociateService assocService;
+	private final BatchService batchService;
 
-	@Autowired
-	BackendService backendService;
-	
-	@Autowired
-	AssociateServiceImpl assocService;
-	
-	@Autowired
-	BatchServiceImpl batchService;
+  public AssociateController(BackendService backendService, AssociateService
+        assocService, BatchService batchService) {
+    this.backendService = backendService;
+    this.assocService = assocService;
+    this.batchService = batchService;
+  }
 
-	
 	@GetMapping("/associates")
 	public ResponseEntity<List<AssociateDTO>> getAssociates(@RequestParam int manager) {
 		List<AssociateDTO> body = null;
@@ -53,7 +53,7 @@ public class AssociateController {
 	/**
 	 * Given a manager id, will return associates assigned to that manager and have
 	 * enter staging in the last 7 days.
-	 * 
+	 *
 	 * @param manager
 	 * @return
 	 */
@@ -72,12 +72,12 @@ public class AssociateController {
 			return new ResponseEntity<>(body, HttpStatus.OK);
 		}
 	}
-	
+
 	/**
 	 * Given a LinkedHashMap, gets the associate's id and tries to look them up. If
 	 * they exist, gets the batch's id and tries to find it. If it exists, assigns
 	 * that batch to the associate given. Also sets the status of the associate.
-	 * 
+	 *
 	 * @param assocMap a LinkedHashMap holding the info we need to update
 	 * @return returns a response string indicating whether the update was a success or not
 	 */
@@ -104,7 +104,7 @@ public class AssociateController {
 				}
 				assocService.updateAssociate(associate);
 			}
-			
+
 			if(assocMap.get("batch_id") != null) {
 				Batch batch = batchService.getBatchById(assocMap.get("batch_id"));
 				if (batch == null ) {

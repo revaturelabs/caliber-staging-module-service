@@ -20,8 +20,13 @@ import com.revature.backend.service.AssociateService;
 import com.revature.backend.service.BatchService;
 import com.revature.backend.util.BatchWriterImpl;
 
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
 //@SpringBootTest(classes={BatchWriter.class, BatchWriterImpl.class, AssociateServiceImpl.class, AssociateRepository.class, BatchService.class, BatchServiceImpl.class, BatchRepository.class})
-@SpringBootTest()
+@SpringBootTest
 public class BatchWriterTesting {
 
     @Mock
@@ -32,7 +37,7 @@ public class BatchWriterTesting {
 
     @InjectMocks
 	BatchWriterImpl batchWriter;
-	
+
 	@Test
 	void testWriteNewlyStagingAssociates() {
         //set up the mock list
@@ -51,16 +56,16 @@ public class BatchWriterTesting {
         //verify that the save occured at least once
         verify(mockAssociateService, times(1)).saveAssociates(aList);
     }
-    
+
     @Test
 	void testWriteNewlyStagingBatches() {
-        
+
         //add some dummy entities (use Mockito here)
-        
+
         //verify that the save occured at least once
         //set up the mock list
         List<Batch> bList = new ArrayList<Batch>();
-        
+
         //add some dummy entities (use Mockito here)
         Batch batchA = mock(Batch.class);
         Batch batchB = mock(Batch.class);

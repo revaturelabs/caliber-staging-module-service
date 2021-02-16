@@ -4,14 +4,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.revature.backend.security.JwtAuthenticationFilter;
 
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.AuthenticationManager;
-
+/**
+ * Tests the JwtAuthenticaitionFilter Class. It contains 1 test.<p>
+ * Test 1: Tests that JwtAuthenticaitionFilter can be instantiated<p>
+ * Unable to test further as class has 1 method that has no returns or clear ways to indicate success or failure of the method<p>
+ * @author Matthew Sheldon
+ */
 @SpringBootTest
 public class JwtAuthenticationFilterTest {
   @Mock
@@ -33,7 +38,6 @@ public class JwtAuthenticationFilterTest {
 
   @Test
   public void notNullTest(){
-    jwtAuth=new JwtAuthenticationFilter(mockAuthMan);
     assertThat(jwtAuth).isNotNull();;
   }
   

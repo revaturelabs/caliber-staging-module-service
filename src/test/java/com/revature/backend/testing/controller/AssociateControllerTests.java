@@ -36,7 +36,26 @@ import com.revature.backend.service.BatchServiceImpl;
 
 //@WebMvcTest(AssociateController.class)
 
-//I am converting this test front JUnit4 to JUnit5
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+/**
+ * This is a set of tests for the AssociateController class. It contains 7 tests related to this class.<p>
+ * test 1:Tests whether the application loads properly.<p>
+ * test 2:Tests the HTTP status of a successful response.<p>
+ * test 3:Tests the response body of a successful response.<p>
+ * test 4:Tests the HTTP status for when the Service layer has a null return value.<p>
+ * test 5:Tests the HTTP status for an empty list being returned from the service layer.<p>
+ * test 6:Tests the HTTP status for a non integer value.<p>
+ * test 7:Tests the HTTP status when a parameter name is not a Manager.<p>
+ * @author ?: wrote tests and initial documentation.
+ * @author Matthew Sheldon: Updated tests to work with Junit 5 and updated documentation.
+ */
 @SpringBootTest
 public class AssociateControllerTests {
 
@@ -52,10 +71,10 @@ public class AssociateControllerTests {
 //	@MockBean
 	@Mock
 	private BackendService service;
-	
+
 	@Mock
 	private AssociateServiceImpl assoServImpl;
-	
+
 	@Mock
 	private BatchServiceImpl batchServImpl;
 
@@ -63,7 +82,7 @@ public class AssociateControllerTests {
 	Batch batch = new Batch(1, "salesID", "name", "skill", "location");
 	List<Associate> associates = new ArrayList<>();
 	List<AssociateDTO> associateDTOs = new ArrayList<>();
-	
+
 	@BeforeEach
 	public void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(associateController).build();
@@ -82,20 +101,8 @@ public class AssociateControllerTests {
 		when(batchServImpl.getBatchById(2)).thenReturn(batchTwo);
 		when(service.findAssociatesByManagerId(1)).thenReturn(associates);
 		when(service.findAssociatesByManagerId(2)).thenReturn(null);
-	}
-	
-//	Remove this in the next iteration it is just here for guide on what not to do or to do in BeforeEach
-//	I am removing this method because I am doing the mocking/creating a mockassociate in @BeforeEach
-//	private Associate mockAssociate(int id) {
-//		return new Associate(id, "salesID", "email@email.com", "John", "Doe", manager, batch, AssociateStatus.STAGING);
-//	}
+  }
 
-//	Same as mockAssocaite I am taking this off because I mock an associateDTO in @BeforeEach
-//	private AssociateDTO mockDTO(int id) {
-//		return new AssociateDTO(id, "salesID", "email@email.com", "John", "Doe", 1, 1,AssociateStatus.STAGING.toString());
-//	}
-
-	
 	/**
 	 * Sanity Check - if this fails, application context is not loaded and all other
 	 * tests should fail
@@ -162,12 +169,12 @@ public class AssociateControllerTests {
 //	public void associateGetMappingTest() throws Exception {
 //		this.mockMvc.perform(get("/associates").param("manager", "1")).andExpect(status().isOk()).andExpect(jsonPath("$.firstName", is("John")));
 //	}
-	
+
 	/**
-	 * Testing the PutMapping by updating associate's batch_id and or status, 
+	 * Testing the PutMapping by updating associate's batch_id and or status,
 	 * using status_id to accessing AssociateStatus Enum. Updated this test to
 	 * handle the status_id changes as well
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

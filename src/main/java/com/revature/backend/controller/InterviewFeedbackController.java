@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.backend.model.Associate;
@@ -23,7 +22,7 @@ import com.revature.backend.model.InterviewFeedback;
 import com.revature.backend.model.Manager;
 import com.revature.backend.service.AssociateServiceImpl;
 import com.revature.backend.service.InterviewFeedbackService;
-import com.revature.backend.service.ManagerServiceImpl;
+import com.revature.backend.service.ManagerService;
 
 @RestController
 @RequestMapping(value = "/feedback")
@@ -37,7 +36,7 @@ public class InterviewFeedbackController {
 	private AssociateServiceImpl assocServ;
 	
 	@Autowired
-	private ManagerServiceImpl managerServ;
+	private ManagerService managerServ;
 
 	/**
 	 * Return all feedback in the database

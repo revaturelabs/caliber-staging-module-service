@@ -1,8 +1,4 @@
-/**
- * This class contains unit tests for the AssignmentController class
- * 
- * @author Andrew Curry
- */
+
 
 package com.revature.backend.testing.controller;
 
@@ -26,33 +22,40 @@ import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchWriter;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+/**
+ * This is a set of tests for the AssignmentController class. It contains 4 tests.<p>
+ * Test 1:Tests if dummy data will be converted to batch properly.<p>
+ * Test 2:Tests if dummy data will be converted to associates properly.<p>
+ * Test 3:Tests if dummy data will be added properly.<p>
+ * Test 4:Tests that the assignmentController properly detects that there are no new batches.<p>
+ * @author Andrew Curry: wrote tests and initial documentation.
+ * @author Matthew Sheldon: updated tests to work with Junit 5 and updated documentation.
+ */
 
-@SpringBootTest(classes = {AssignmentController.class})
+@SpringBootTest
 public class TestAssignmentController {
-    
     // ----------
     // SETUP
     // ----------
-
-    @MockBean
+    @Mock
     private ManagerBalancer mockManagerBalancer;
 
-    @MockBean
+    @Mock
     private ManagerService mockManagerService;
 
-    @MockBean
+    @Mock
     private BatchWriter mockBatchWriter;
 
-    @MockBean
+    @Mock
     private BatchRetriever mockBatchRetriever;
 
     @Autowired
+    @InjectMocks
     private AssignmentController assignmentController;
 
     // ----------

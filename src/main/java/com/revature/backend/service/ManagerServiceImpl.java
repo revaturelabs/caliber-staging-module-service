@@ -25,14 +25,13 @@ public class ManagerServiceImpl implements ManagerService {
 	@Autowired
 	BackendRepo backendRepo;
 
-	/* 
-	 * This class will return a list of Manager objects as well as Manager - Associate mappings.
-	 * 
-	 * getAllManagers() has been completed. A map that returns Manager and Associate objects has been implemented.
-	 * 
+	/**
+	 * This class will take a list of managers, save them in the database,
+	 * then return the same list back with changes made by the
+	 * JpaRepository during save().
+	 * @param mList is a list of managers
+	 * @return result is a modified mList
 	 */
-	
-	
 	@Override
 	public List<Manager> saveAll(List<Manager> mList) {
 		List<Manager> result = new ArrayList<>();
@@ -45,6 +44,9 @@ public class ManagerServiceImpl implements ManagerService {
 		
 	}
 
+	/**
+	 * @return List of all Managers from the database.
+	 */
 	public List<Manager> getAllManagers() {
 		List<Manager> managerList = new ArrayList<>();
 		
@@ -69,7 +71,15 @@ public class ManagerServiceImpl implements ManagerService {
 		return managerRepo.findById(id);
 	}
 	
-
+	/* It would be better if getAllManagersAndAssociates() used
+	 * countAssociatesByManager in the AssociateRepository rather creating
+	 * entire lists of Associates, counting them, then throwing away the list.
+	 */
+	/**
+	 * This method returns a map of managers matched with the number of
+	 * associates assigned to each.
+	 * @return Map of managers and a count of their associates
+	 */
 	@Override
 	public Map<Manager, Integer> getAllManagersAndAssociates() {
 		

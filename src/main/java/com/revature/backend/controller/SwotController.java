@@ -35,13 +35,13 @@ public class SwotController {
 	/*
 	 * POST request to create a new SWOT for an Associate with AnalysisItems within
 	 * it as a collection.
-	 * 
+	 *
 	 * Takes in a Swot as a nested JSON object: the AnalysisItems will be found
 	 * within a JSON array.
-	 * 
+	 *
 	 * Returns a 201 status with a message for the client within the HTTP body as a
 	 * JSON object if successful.
-	 * 
+	 *
 	 * *COMPLETED*
 	 */
 	@PostMapping(path = "/create", consumes = { MediaType.APPLICATION_JSON_VALUE })
@@ -53,9 +53,9 @@ public class SwotController {
 	/*
 	 * GET request for fetching all SWOTs based on an Associate's id as found in the
 	 * RESTful URL.
-	 * 
+	 *
 	 * Returns the List of SWOTs as a JSON array with a 200 code if successful.
-	 * 
+	 *
 	 * *COMPLETED*
 	 */
 	@GetMapping(path = "/view/{associateId}", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -67,10 +67,10 @@ public class SwotController {
 	/*
 	 * GET request for fetching all existing SWOTs in the system. Returns the List
 	 * as a JSON array.
-	 * 
+	 *
 	 * This will more than likely be removed in the future and was only used for
 	 * proof of concept.
-	 * 
+	 *
 	 * *COMPLETED BUT FIT FOR REMOVAL*
 	 */
 	@GetMapping(path = "/view/all", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -78,7 +78,7 @@ public class SwotController {
 		List<Swot> swotList = swotService.retrieveAllSwot();
 		return ResponseEntity.ok(swotList);
 	}
-	
+
 	@DeleteMapping(path = "/delete/{swotId}")
 	public ResponseEntity<ClientMessage> deleteSwot(@PathVariable("swotId") int swotId) {
 		ClientMessage body = swotService.deleteSwot(swotId) ? SUCCESSFULLY_DELETED : DELETION_FAILED;
@@ -87,11 +87,11 @@ public class SwotController {
 
 	/*
 	 * POST request to create a new AnalysisItem for a particular SWOT.
-	 * 
+	 *
 	 * Takes in an AnalysisItem from a JSON object.
-	 * 
+	 *
 	 * Returns a 201 HTTP status with an informative client message in the body.
-	 * 
+	 *
 	 * *COMPLETED*
 	 */
 	@PostMapping(path = "/item/new", consumes = { MediaType.APPLICATION_JSON_VALUE })
@@ -102,13 +102,13 @@ public class SwotController {
 
 	/*
 	 * PUT request to update an AnalysisItem.
-	 * 
+	 *
 	 * Takes in an AnalysisItem *with* altered fields from a JSON object.
-	 * 
+	 *
 	 * If the update failed, returns a 204 status code.
-	 * 
+	 *
 	 * If successful, returns a 200 status code and the updated object.
-	 * 
+	 *
 	 * *COMPLETED*
 	 */
 	@PutMapping(path = "/item/update/{analysisItemId}", consumes = { MediaType.APPLICATION_JSON_VALUE })
@@ -123,11 +123,11 @@ public class SwotController {
 
 	/*
 	 * DELETE request to delete an AnalysisItem from a particular SWOT.
-	 * 
+	 *
 	 * Takes in the id of the AnalysisItem as a variable from the URL.
-	 * 
+	 *
 	 * Returns an informative client message and a 200 status code.
-	 * 
+	 *
 	 * *COMPLETED*
 	 */
 	@DeleteMapping(path = "/item/delete/{analysisItemId}")

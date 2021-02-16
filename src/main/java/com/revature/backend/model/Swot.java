@@ -55,6 +55,15 @@ public class Swot {
   }
 
   public Swot(
+      Associate associate_id, Manager manager, Timestamp createdOn, Timestamp lastModified) {
+    super();
+    this.associate = associate_id;
+    this.manager = manager;
+    this.createdOn = createdOn;
+    this.lastModified = lastModified;
+  }
+
+  public Swot(
       Associate associate_id, Manager manager, Timestamp createdOn, Timestamp lastModified, String description) {
     super();
     this.associate = associate_id;
@@ -63,7 +72,7 @@ public class Swot {
     this.lastModified = lastModified;
     this.description = description;
   }
-  
+
   public Swot(Associate associate, Manager manager, Timestamp createdOn, Timestamp lastModified, String description,
 		List<AnalysisItem> analysisItems) {
 	super();

@@ -23,7 +23,7 @@ import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.repository.BackendRepo;
-import com.revature.backend.service.BackendServiceImpl;
+import com.revature.backend.service.BackendService;
 import com.revature.backend.util.GetBatchById;
 
 @SpringBootTest()
@@ -37,7 +37,7 @@ class BackendTesting {
 
 	@Autowired
 	@InjectMocks
-	private BackendServiceImpl backend;
+	private BackendService backend;
 
 	List<Associate> expected;
 

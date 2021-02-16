@@ -30,9 +30,9 @@ import com.revature.backend.model.AssociateStatus;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
 import com.revature.backend.model.dto.AssociateDTO;
-import com.revature.backend.service.AssociateServiceImpl;
+import com.revature.backend.service.AssociateService;
 import com.revature.backend.service.BackendService;
-import com.revature.backend.service.BatchServiceImpl;
+import com.revature.backend.service.BatchService;
 
 //@WebMvcTest(AssociateController.class)
 
@@ -73,10 +73,10 @@ public class AssociateControllerTests {
 	private BackendService service;
 
 	@Mock
-	private AssociateServiceImpl assoServImpl;
+	private AssociateService assoServImpl;
 
 	@Mock
-	private BatchServiceImpl batchServImpl;
+	private BatchService batchServImpl;
 
 	Manager manager = new Manager(1, "manager@manager.com", "Demo", "Manager");
 	Batch batch = new Batch(1, "salesID", "name", "skill", "location");

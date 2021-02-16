@@ -25,7 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.Batch;
 import com.revature.backend.model.Manager;
-import com.revature.backend.service.ManagerBalancerImpl;
+import com.revature.backend.service.ManagerBalancer;
 
 @SpringBootTest
 public class TestManagerBalancerImpl {
@@ -39,7 +39,7 @@ public class TestManagerBalancerImpl {
 
 
 	@InjectMocks
-    private ManagerBalancerImpl managerBalancerImpl;
+    private ManagerBalancer managerBalancerImpl;
     @BeforeEach
     public void setUp()
     {

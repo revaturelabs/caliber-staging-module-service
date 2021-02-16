@@ -2,6 +2,7 @@ package com.revature.backend.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.backend.model.AnalysisItem;
@@ -11,20 +12,14 @@ import com.revature.backend.repository.SwotRepository;
 
 @Service
 public class SwotService {
-	private final SwotRepository swotRepository;
-	private final AnalysisItemRepository analysisItemRepository;
+private final SwotRepository swotRepository;
+private final AnalysisItemRepository analysisItemRepository;
 
   public SwotService(SwotRepository swotRepository,
         AnalysisItemRepository analysisItemRepository) {
     this.swotRepository = swotRepository;
     this.analysisItemRepository = analysisItemRepository;
   }
-
-	@Autowired
-	SwotRepository swotRepository;
-	
-	@Autowired
-	AnalysisItemRepository analysisItemRepository;
 	
 	/**
 	 * 

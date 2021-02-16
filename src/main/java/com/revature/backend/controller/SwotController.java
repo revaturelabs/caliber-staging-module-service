@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("swotController")
 @RequestMapping("/swot")
 public class SwotController {
-
-	private final SwotService swotService;
+	
+	private SwotService swotService;
 
 	/**
 	 * 

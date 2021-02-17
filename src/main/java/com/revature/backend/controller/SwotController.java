@@ -28,18 +28,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("swotController")
 @RequestMapping("/swot")
 public class SwotController {
-	
+
 	private final SwotService swotService;
-	
+
 	public SwotController(SwotService swotService) {
 		this.swotService = swotService;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param swot
 	 * @return a 201 HTTP status with a message indicating whether or not creation was successful
-	 * 
+	 *
 	 * POST request to create a new SWOT for an Associate with AnalysisItems within
 	 * it as a collection.
 	 *
@@ -57,10 +57,10 @@ public class SwotController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param associateId
 	 * @return a list of all SWOTs for the corresponding associate
-	 * 
+	 *
 	 * GET request for fetching all SWOTs based on an Associate's id as found in the
 	 * RESTful URL.
 	 *
@@ -73,9 +73,9 @@ public class SwotController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return List of all SWOTs in the database with a 200 HTTP status.
-	 * 
+	 *
 	 * GET request for fetching all existing SWOTs in the system. Returns the List
 	 * as a JSON array.
 	 *
@@ -87,12 +87,12 @@ public class SwotController {
 		List<Swot> swotList = swotService.retrieveAllSwot();
 		return ResponseEntity.ok(swotList);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param swotId
 	 * @return ResponseEntity with a 200 HTTP status indicating whether or not deletion was successful
-	 * 
+	 *
 	 * DELETE request for deleting a SWOT. Returns ResponseEntity with a message indicating whether
 	 * or not deletion was successful.
 	 */
@@ -103,10 +103,10 @@ public class SwotController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param analysisItem
 	 * @return ResponseEntity with 201 HTTP status indicating whether or not creation was successful
-	 * 
+	 *
 	 * POST request to create a new AnalysisItem for a particular SWOT.
 	 *
 	 * Takes in an AnalysisItem from a JSON object.
@@ -120,10 +120,10 @@ public class SwotController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param analysisItem
 	 * @return ResponseEntity<AnalysisItem> containing the updated analysis item or a 204 status code in event of failure
-	 * 
+	 *
 	 * PUT request to update an AnalysisItem.
 	 *
 	 * Takes in an AnalysisItem *with* altered fields from a JSON object.
@@ -143,10 +143,10 @@ public class SwotController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param analysisItemId
 	 * @return ResponseEntity<ClientMessage> indicating whether the delete was successful
-	 * 
+	 *
 	 * DELETE request to delete an AnalysisItem from a particular SWOT.
 	 *
 	 * Takes in the id of the AnalysisItem as a variable from the URL.

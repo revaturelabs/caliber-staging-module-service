@@ -37,8 +37,8 @@ public class FirebaseConfig {
 
   /**
    * Here we instantiate our {@link FirebaseApp} and {@link FirebaseAuth}. If
-   * the {@link FirebaseApp} is already instantiated we set the Auth to the 
-   * current DEFAULT {@link FirebaseApp} else the server has started up for the 
+   * the {@link FirebaseApp} is already instantiated we set the Auth to the
+   * current DEFAULT {@link FirebaseApp} else the server has started up for the
    * first time and we need to initialize it.
    * @throws FirebaseException
    */

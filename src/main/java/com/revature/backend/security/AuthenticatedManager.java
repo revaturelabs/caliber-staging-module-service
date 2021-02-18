@@ -6,6 +6,12 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 /**
+ * A generalized token for the backend to manipulate and manage, it should be
+ * used as an extension of other more specific tokens that may pop up with the
+ * oncoming sprints.
+ *
+ * @see FirebaseManager
+ *
  * @author Jay Monari
  */
 public class AuthenticatedManager extends AbstractAuthenticationToken {

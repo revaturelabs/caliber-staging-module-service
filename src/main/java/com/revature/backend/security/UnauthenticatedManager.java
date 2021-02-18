@@ -3,6 +3,9 @@ package com.revature.backend.security;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 /**
+ * Inside of the {@link JwtAuthenticationFilter} we begin filtering our request
+ * and if their is an Authorization header we can pass this specialized token
+ * into our {@link FirebaseAuthenticationManager} to verify.
  * @author Jay Monari
  */
 public class UnauthenticatedManager

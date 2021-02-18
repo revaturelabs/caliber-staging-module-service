@@ -13,6 +13,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.util.StringUtils;
 
 /**
+ * Processes an {@link Authentication} request specifically for the integrated
+ * {@link FirebaseAuth} API. We require a concrete class in order for Spring
+ * to know what {@link AuthenticationManager} to choose since it is an interface
+ *
  * @author Jay Monari
  */
 public class FirebaseAuthenticationManager implements AuthenticationManager {
@@ -32,7 +36,6 @@ public class FirebaseAuthenticationManager implements AuthenticationManager {
           FirebaseToken token = firebaseAuth.verifyIdToken(credentials);
           return new FirebaseManager(token);
         } catch (FirebaseAuthException e) {
-          logger.error("Failed to authenticate user", e);
           throw new BadCredentialsException("Invalid Credentials");
         }
       }

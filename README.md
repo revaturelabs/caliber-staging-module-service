@@ -77,14 +77,16 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 - As a User, I should be able to add a note to SWOT items.
 
 **Architecture Diagram**
+
 ![](./imgs/AD.png)
 
 
 **ERD Diagram**
+
 ![](./imgs/Sprint2ERD.png)
 
 
-Associate status' are enum staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
+Associate status' are enum staging, released, and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
 
 ### Technologies Used
 - Frontend:

@@ -70,6 +70,7 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 - As a Staging Manager, I should be able to sort and/or filter the list of associates I am managing.
 - Implement testing for previous sprint components.
 - As a User, while creating, editing, or viewing a SWOT Analysis I should see the analysis in a format similiar to the attached wireframe.
+![](./imgs/Wireframe.PNG)
 - As a User, if I receive notifications from the UI, they should be non-blocking.  ie I should be able to continue to interact with the webpage if I wish not to address the alter.
 - Fix the the create SWOT functionality so that refresh does not cause the session information to be lost.
 - Create :root css variables to allow standardization of a color scheme across the application.

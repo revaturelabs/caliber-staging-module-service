@@ -42,7 +42,7 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 - Alexander Nelson - Team Member - Back end testing
 - Carlos Guerrero - Team Member - View SWOT page, documentation
 - Chirenjeebi Parajuli - Team Member - End to end testing
-- Daniel Butcher - Team Member - Added note field, input validation, testing
+- Daniel Butcher - Team Member - Added note field, input validation, testing, documentation
 - Ian Real - Team Member - Update SWOT, front end testing
 - James Barlowe - Team Member - Input validation, page styling
 - John Matthew Lao - Team Member - Added SWOT name field, input validation, front end testing

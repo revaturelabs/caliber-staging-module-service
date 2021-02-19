@@ -88,7 +88,6 @@ Associate status' are enum staging and project. Analysis type are enum strengths
 - Frontend:
   - Angular11
   - AngularFire/Firebase
-  - Animate.css Library
   - Jasmine
   - Karma
   - Bootstrap

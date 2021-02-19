@@ -113,4 +113,4 @@ Associate status' are enum staging and project. Analysis type are enum strengths
   - Git
   - Agile methodologies
 
-Frontend repository: https://github.com/Samuel-Curtis/caliber-staging-module-front
+Frontend repository: https://github.com/JacobHayhurst-Batch-878/caliber-staging-module-front/tree/staging

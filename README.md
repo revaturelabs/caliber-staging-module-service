@@ -28,7 +28,7 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 - A manager can view previous SWOT.
 - A manager can add items to a SWOT.
 
-#### Sprint 2 Team Members
+### Sprint 2 Team Members
 - Darien Sosa - Project Leader, Scrum Master - Removed animations, feedback, debugging
 - Jay Monari - Project Leader - Firebase, technical troubleshooter
 - Olga Melnikova - Project Leader - Add feedback, front end testing

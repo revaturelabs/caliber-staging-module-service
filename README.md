@@ -77,10 +77,12 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 - As a User, I should be able to add a note to SWOT items.
 
 **Architecture Diagram**
+
 ![](./imgs/AD.png)
 
 
 **ERD Diagram**
+
 ![](./imgs/Sprint2ERD.png)
 
 

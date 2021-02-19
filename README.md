@@ -80,7 +80,7 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 
 **Architecture Diagram**
 
-![](./imgs/ERD.PNG)
+![](./imgs/Sprint2ERD.png)
 **ERD Diagram**
 
 Associate status' are enum staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.

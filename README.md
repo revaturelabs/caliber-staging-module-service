@@ -76,12 +76,13 @@ Due to the remote nature work amidst the COVID pandemic, Revature Staging Manage
 - Create :root css variables to allow standardization of a color scheme across the application.
 - As a User, I should be able to add a note to SWOT items.
 
+**Architecture Diagram**
 ![](./imgs/AD.png)
 
-**Architecture Diagram**
 
-![](./imgs/Sprint2ERD.png)
 **ERD Diagram**
+![](./imgs/Sprint2ERD.png)
+
 
 Associate status' are enum staging and project. Analysis type are enum strengths, weaknesses, opportunities and threats.
 

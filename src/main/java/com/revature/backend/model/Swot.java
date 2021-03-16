@@ -31,6 +31,9 @@ public class Swot {
 
   @Column(name = "created_on")
   private Timestamp createdOn;
+  
+  @Column(name="description")
+  private String description;
 
   @Column(name = "last_modified")
   private Timestamp lastModified;	// TODO: this will need to be updated each time the SWOT is updated.
@@ -41,18 +44,14 @@ public class Swot {
 
   public Swot() {}
 
-  public Swot(
-      int id,
-      Associate associate_id,
-      Manager manager,
-      Timestamp createdOn,
-      Timestamp lastModified) {
+  public Swot(int id, Associate associate_id, Manager manager, Timestamp createdOn, Timestamp lastModified, String description) {
     super();
     this.id = id;
     this.associate = associate_id;
     this.manager = manager;
     this.createdOn = createdOn;
     this.lastModified = lastModified;
+    this.description = description;
   }
 
   public Swot(
@@ -63,14 +62,25 @@ public class Swot {
     this.createdOn = createdOn;
     this.lastModified = lastModified;
   }
-  
-  public Swot(Associate associate, Manager manager, Timestamp createdOn, Timestamp lastModified,
+
+  public Swot(
+      Associate associate_id, Manager manager, Timestamp createdOn, Timestamp lastModified, String description) {
+    super();
+    this.associate = associate_id;
+    this.manager = manager;
+    this.createdOn = createdOn;
+    this.lastModified = lastModified;
+    this.description = description;
+  }
+
+  public Swot(Associate associate, Manager manager, Timestamp createdOn, Timestamp lastModified, String description,
 		List<AnalysisItem> analysisItems) {
 	super();
 	this.associate = associate;
 	this.manager = manager;
 	this.createdOn = createdOn;
 	this.lastModified = lastModified;
+	this.description = description;
 	this.analysisItems = analysisItems;
   }
 
@@ -84,6 +94,10 @@ public class Swot {
 
   public Manager getManager() {
     return this.manager;
+  }
+  
+  public String getDescription() {
+	  return this.description;
   }
 
   public Timestamp getCreatedOn() {
@@ -104,6 +118,10 @@ public class Swot {
 
   public void setManager(Manager created_by) {
     this.manager = created_by;
+  }
+  
+  public void setDescription(String description) {
+	  this.description = description;
   }
 
   public void setCreatedOn(Timestamp created_on) {
@@ -126,6 +144,7 @@ public class Swot {
   public void setLastModifiedNow() {
 	  this.lastModified = new Timestamp(System.currentTimeMillis());
   }
+  
 
 	@Override
 	public int hashCode() {
@@ -137,6 +156,7 @@ public class Swot {
 		result = prime * result + id;
 		result = prime * result + ((lastModified == null) ? 0 : lastModified.hashCode());
 		result = prime * result + ((manager == null) ? 0 : manager.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		return result;
 	}
 	
@@ -176,13 +196,22 @@ public class Swot {
 				return false;
 		} else if (!manager.equals(other.manager))
 			return false;
+		if(description == null) {
+			if(other.description != null) {
+				return false;
+			}
+		} else if(!description.equals(other.description)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Swot [id=" + id + ", associate=" + associate + ", manager=" + manager + ", createdOn=" + createdOn
-				+ ", lastModified=" + lastModified + ", analysisItems=" + analysisItems + "]";
+				+ ", description=" + description + ", lastModified=" + lastModified + ", analysisItems=" + analysisItems
+				+ "]";
 	}
   
+	
 }

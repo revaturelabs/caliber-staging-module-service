@@ -23,14 +23,24 @@ public class AssignmentController {
 
 	
 	private static Logger log = Logger.getLogger(AssignmentController.class);
-	@Autowired
-	ManagerBalancer balancer;
-	@Autowired
-	ManagerService managerService;
-	@Autowired
-	BatchWriter batchWriter;
-	@Autowired
-	BatchRetriever batchRetriever;
+	
+	private ManagerBalancer balancer;
+	
+	private ManagerService managerService;
+	
+	private BatchWriter batchWriter;
+	
+	private BatchRetriever batchRetriever;
+	
+	public AssignmentController(ManagerBalancer balancer, 
+								ManagerService managerService, 
+								BatchWriter batchWriter, 
+								BatchRetriever batchRetriever) {
+		this.balancer = balancer;
+		this.batchRetriever = batchRetriever;
+		this.batchWriter = batchWriter;
+		this.batchRetriever = batchRetriever;
+	}
 
 	/**
 	 * This method runs after the {@link StagingListener} detects new batches.

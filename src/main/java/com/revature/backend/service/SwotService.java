@@ -64,22 +64,6 @@ public class SwotService {
 
 	/**
 	 *
-	 * @param swotId
-	 * @return true if swot was deleted successfully, false otherwise
-	 *
-	 * Given a swot ID, finds the corresponding swot and
-	 * deletes it from the database.
-	 *
-	 * Returns true if successful, false otherwise
-	 */
-	public boolean deleteSwot(int swotId) {
-		Swot swot = swotRepository.findById(swotId);
-		swotRepository.delete(swot);
-		return true;
-	}
-
-	/**
-	 *
 	 * @param analysisItem
 	 * @return true if successfully saved in database, false otherwise
 	 *

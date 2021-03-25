@@ -57,7 +57,6 @@ public class BackendService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate ld  = LocalDate.now();
 		try {
-			System.out.println("test");
 			List<Associate> associates = backendRepo.findAssociatesByManagerId(id);
 
 			// Make only unique batch id calls to make backend faster
@@ -69,7 +68,6 @@ public class BackendService {
 				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
 				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
 				if(elapsedDays<= 7) {
-					System.out.println(elapsedDays);
 					for (Associate a: associates) {
 						if(a.getBatch().getId() == x) {
 							ret.add(a);

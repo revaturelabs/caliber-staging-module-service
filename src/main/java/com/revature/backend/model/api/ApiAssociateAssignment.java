@@ -87,11 +87,8 @@ public class ApiAssociateAssignment {
 		} else if (!startDate.equals(other.startDate))
 			return false;
 		if (trainingStatus == null) {
-			if (other.trainingStatus != null)
-				return false;
-		} else if (!trainingStatus.equals(other.trainingStatus))
-			return false;
-		return true;
+			return other.trainingStatus == null;
+		} else return trainingStatus.equals(other.trainingStatus);
 	}
 	@Override
 	public String toString() {

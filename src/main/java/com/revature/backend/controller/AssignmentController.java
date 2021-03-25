@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.logging.Logger;
+<<<<<<< HEAD
 import org.springframework.stereotype.Component;
+=======
+import org.springframework.stereotype.Controller;
+>>>>>>> 4cf359afca22221ae50e109d6bd35a43cc2dbcde
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.AssociateStatus;
@@ -17,18 +21,15 @@ import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchWriter;
 import com.revature.backend.util.StagingListener;
-@Component
+
+@Controller
 public class AssignmentController {
 
-	
 	private static Logger log = Logger.getLogger(AssignmentController.class);
 	
 	private ManagerBalancer balancer;
-	
 	private ManagerService managerService;
-	
 	private BatchWriter batchWriter;
-	
 	private BatchRetriever batchRetriever;
 	
 	public AssignmentController(ManagerBalancer balancer, 
@@ -38,7 +39,7 @@ public class AssignmentController {
 		this.balancer = balancer;
 		this.batchRetriever = batchRetriever;
 		this.batchWriter = batchWriter;
-		this.batchRetriever = batchRetriever;
+		this.managerService = managerService;
 	}
 
 	/**

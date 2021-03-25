@@ -9,6 +9,7 @@ public class LoginPage {
 
 	public final String url = "http://localhost:4200/login";
 
+	@SuppressWarnings("unused")
 	private WebDriver driver;
 
 	@FindBy(xpath = "//*[@id='email']")

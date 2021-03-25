@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.AssociateStatus;
@@ -18,18 +17,15 @@ import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.BatchRetriever;
 import com.revature.backend.util.BatchWriter;
 import com.revature.backend.util.StagingListener;
-@Component
+
+@Controller
 public class AssignmentController {
 
-	
 	private static Logger log = Logger.getLogger(AssignmentController.class);
 	
 	private ManagerBalancer balancer;
-	
 	private ManagerService managerService;
-	
 	private BatchWriter batchWriter;
-	
 	private BatchRetriever batchRetriever;
 	
 	public AssignmentController(ManagerBalancer balancer, 

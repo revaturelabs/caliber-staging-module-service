@@ -3,7 +3,7 @@ Feature: Unobstrusive Toast Location
 
   Scenario Outline: Creating and submitting new SWOT item
     Given a user is logged into the welcome page of Revature Staging Module
-    When a user clicks Create SWOT for associate in table row "<rowId>"
+    When a user clicks Create SWOT for associate in table row
     And selects their SWOT type "<SwotType>"
     And types into Enter Item field "<content>"
     And clicks add item
@@ -11,11 +11,11 @@ Feature: Unobstrusive Toast Location
     Then a toast notification should appear in the lower left
 
     Examples:
-      | rowId | SwotType    | content |
-      | 1     | STRENGTH    | toast   |
-      | 1     | WEAKNESS    | toast   |
-      | 2     | OPPORTUNITY | toast   |
-      | 2     | THREAT      | toast   |
+			| SwotType    | content |
+			| STRENGTH    | toast   |
+			| WEAKNESS    | toast   |
+			| OPPORTUNITY | toast   |
+      | THREAT      | toast   |
 
 
   Scenario Outline: Deleting a submitted SWOT item

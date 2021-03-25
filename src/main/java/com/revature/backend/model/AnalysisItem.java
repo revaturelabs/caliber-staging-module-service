@@ -12,14 +12,13 @@ public class AnalysisItem {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)	// IDENTITY was preferred to AUTO.
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "name")
 	private String name;
 
-	//@JsonIgnore	// Meant to help when trying to create a SWOT, this is a bad solution.
-	@JsonBackReference // Meant to help when trying to create a SWOT. - Prevents recursion in retrieve requests, this is the better solution.
+	@JsonBackReference // Meant to help when trying to create a SWOT. - Prevents recursion in retrieve requests, this is the better solution vs @JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "swot_analysis_id")
 	private Swot swot;
@@ -107,8 +106,6 @@ public class AnalysisItem {
 		return Objects.hash(getId(), getName(), swot, getType(), getNote());
 	}
 
-	//This does not print 'swot' because it causes a stack overflow error when either the AnalysisItem or Swot toString are called
-	//if printing is required, print the id instead of the whole object or otherwise edit the swot toString to prevent recursive printing
 	public String toString() {
 		return "Analysis_Item(id=" + this.getId() + ", name=" + this.getName() + ", type=" + this.getType() + ", note=" + this.getNote() + ")";
 	}

@@ -14,17 +14,15 @@ public class Swot {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)	// IDENTITY was preferred to AUTO.
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
   //Changed this to 'EAGER' to prevent a jackson crash
-  //TODO: is there a better solution than making this EAGER?
   @ManyToOne(fetch = FetchType.EAGER)	//removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "associate_id")
   private Associate associate;
 
   //Changed this to 'EAGER' to prevent a jackson crash
-  //TODO: is there a better solution than making this EAGER?
   @ManyToOne(fetch = FetchType.EAGER)	//removed CascadeType.ALL, this will cause problems with deletion.
   @JoinColumn(name = "created_by")
   private Manager manager;
@@ -36,7 +34,7 @@ public class Swot {
   private String description;
 
   @Column(name = "last_modified")
-  private Timestamp lastModified;	// TODO: this will need to be updated each time the SWOT is updated.
+  private Timestamp lastModified;
   
   @JsonManagedReference //Prevents recursion in retrieve requests
   @OneToMany(mappedBy = "swot", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

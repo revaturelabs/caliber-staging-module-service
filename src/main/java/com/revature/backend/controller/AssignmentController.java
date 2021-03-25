@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.logging.Logger;
-<<<<<<< HEAD
-import org.springframework.stereotype.Component;
-=======
 import org.springframework.stereotype.Controller;
->>>>>>> 4cf359afca22221ae50e109d6bd35a43cc2dbcde
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.AssociateStatus;

@@ -101,20 +101,11 @@ public class InterviewFeedbackController {
 	 */
   @PostMapping
 	public ResponseEntity<String> postFeedback(@RequestBody LinkedHashMap<String, String> feedbackMap) {
-<<<<<<< HEAD
-		Associate associate = assocServ.getAssociateById((Integer.parseInt(feedbackMap.get("associateId"))));
-=======
 		Associate associate = assocServ.getAssociateById(Integer.parseInt(feedbackMap.get("associateId")));
->>>>>>> 4cf359afca22221ae50e109d6bd35a43cc2dbcde
 		if(associate == null) {
 			return new ResponseEntity<>("Associate id is invalid", HttpStatus.NOT_FOUND);
 		}
-
-<<<<<<< HEAD
-		Manager manager = managerServ.getManagerById((Integer.parseInt(feedbackMap.get("managerId"))));
-=======
 		Manager manager = managerServ.getManagerById(Integer.parseInt(feedbackMap.get("managerId")));
->>>>>>> 4cf359afca22221ae50e109d6bd35a43cc2dbcde
 		if(manager == null) {
 			return new ResponseEntity<>("Manager id is invalid", HttpStatus.NOT_FOUND);
 		}
@@ -135,20 +126,12 @@ public class InterviewFeedbackController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<String> updateFeedback(@RequestBody LinkedHashMap<String, String> feedbackMap, @PathVariable("id") int id) {
-<<<<<<< HEAD
-		Associate associate = assocServ.getAssociateById((Integer.parseInt(feedbackMap.get("associateId"))));
-=======
 		Associate associate = assocServ.getAssociateById(Integer.parseInt(feedbackMap.get("associateId")));
->>>>>>> 4cf359afca22221ae50e109d6bd35a43cc2dbcde
 		if(associate == null) {
 			return new ResponseEntity<>("Associate id is invalid", HttpStatus.NOT_FOUND);
 		}
 
-<<<<<<< HEAD
-		Manager manager = managerServ.getManagerById((Integer.parseInt(feedbackMap.get("managerId"))));
-=======
 		Manager manager = managerServ.getManagerById(Integer.parseInt(feedbackMap.get("managerId")));
->>>>>>> 4cf359afca22221ae50e109d6bd35a43cc2dbcde
 		if(manager == null) {
 			return new ResponseEntity<>("Manager id is invalid", HttpStatus.NOT_FOUND);
 		}

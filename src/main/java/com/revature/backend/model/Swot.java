@@ -197,14 +197,9 @@ public class Swot {
 		} else if (!manager.equals(other.manager))
 			return false;
 		if(description == null) {
-			if(other.description != null) {
-				return false;
-			}
-		} else if(!description.equals(other.description)) {
-			return false;
-		}
-		return true;
-	}
+            return other.description == null;
+		} else return description.equals(other.description);
+    }
 
 	@Override
 	public String toString() {

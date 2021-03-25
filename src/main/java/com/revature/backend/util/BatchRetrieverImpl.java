@@ -48,13 +48,12 @@ public class BatchRetrieverImpl implements BatchRetriever {
 
 		List<ApiAssociateTemplate> associateList = new ArrayList<>();
 
-		List<ApiBatchTemplate> batchList = new ArrayList<>();
+		List<ApiBatchTemplate> batchList;
 		//stagingListener.checkForNewBatches();
 		try{
 			batchList = stagingListener.getLatestBatches();
 			//from the batchList, extract out the associates into their own separate list
 			for (ApiBatchTemplate apiBatchTemplate : batchList) {
-				System.out.println(apiBatchTemplate);
 				ApiAssociateAssignment[] arr = apiBatchTemplate.getAssociateAssignments();
 				for (ApiAssociateAssignment assignment : arr) {
 					ApiAssociateTemplate associate = assignment.getAssociate();
@@ -81,9 +80,6 @@ public class BatchRetrieverImpl implements BatchRetriever {
 
 		try{
 			batchList = stagingListener.getLatestBatches();
-			for (ApiBatchTemplate apiBatchTemplate : batchList) {
-				System.out.println(apiBatchTemplate);
-			}
 		} catch (Exception e) {
 			logger.warn("Error getting info from Staging Listener", e);
 		}

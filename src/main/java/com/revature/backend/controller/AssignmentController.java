@@ -39,7 +39,7 @@ public class AssignmentController {
 		this.balancer = balancer;
 		this.batchRetriever = batchRetriever;
 		this.batchWriter = batchWriter;
-		this.batchRetriever = batchRetriever;
+		this.managerService = managerService;
 	}
 
 	/**

@@ -48,7 +48,7 @@ public class BatchRetrieverImpl implements BatchRetriever {
 
 		List<ApiAssociateTemplate> associateList = new ArrayList<>();
 
-		List<ApiBatchTemplate> batchList = new ArrayList<>();
+		List<ApiBatchTemplate> batchList;
 		//stagingListener.checkForNewBatches();
 		try{
 			batchList = stagingListener.getLatestBatches();

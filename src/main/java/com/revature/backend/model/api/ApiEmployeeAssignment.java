@@ -64,11 +64,8 @@ public class ApiEmployeeAssignment {
 		} else if (!employee.equals(other.employee))
 			return false;
 		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
-			return false;
-		return true;
+			return other.role == null;
+		} else return role.equals(other.role);
 	}
 
 	@Override

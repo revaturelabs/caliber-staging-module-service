@@ -75,7 +75,6 @@ public class BatchRetrieverImpl implements BatchRetriever {
 		// start logging activity
 		logger.trace("In BatchRetriever: gathering newly staging batches...");
 		List<ApiBatchTemplate> batchList = new ArrayList<>();
-		//stagingListener.checkForNewBatches();
 		logger.info(stagingListener);
 
 		try{

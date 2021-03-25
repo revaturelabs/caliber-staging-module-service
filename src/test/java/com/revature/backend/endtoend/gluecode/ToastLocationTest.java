@@ -35,7 +35,6 @@ public class ToastLocationTest {
 	}
 	@When("a user clicks Create SWOT for associate in table row {string}")
 	public void a_user_clicks_create_swot_for_associate_in_table_row(String string) {
-		int associateId = Integer.parseInt(string);
 		WebElement createSwot = this.homePage.getCreateSwotButton();
 		wait.until(ExpectedConditions.elementToBeClickable(createSwot));
 		this.homePage.clickCreateSwotForAssociate();

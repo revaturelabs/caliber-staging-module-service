@@ -146,7 +146,7 @@ public class InterviewFeedbackController {
 			feedback.setManager(manager);
 			feedback.setContent(content);
 			ifServ.updateFeedback(feedback);
-			return new ResponseEntity<>("Feedback sucessfully updated", HttpStatus.OK);
+			return new ResponseEntity<>("Feedback successfully updated", HttpStatus.OK);
 		}
 	}
 
@@ -163,7 +163,7 @@ public class InterviewFeedbackController {
 			return new ResponseEntity<>("Feedback failed to be deleted", HttpStatus.NOT_FOUND);
 		} else {
 			ifServ.deleteFeedback(feedback);
-			return new ResponseEntity<>("Feedback sucessfully deleted", HttpStatus.OK);
+			return new ResponseEntity<>("Feedback successfully deleted", HttpStatus.OK);
 		}
 	}
 }

@@ -21,8 +21,7 @@ public class BatchService {
 
     public List<Batch> saveBatches(List<Batch> bList) {
         // call the appropriate Repo method to save (aka insert) batches into DB
-        List<Batch> list = batchRepo.saveAll(bList);
-        return list;
+        return batchRepo.saveAll(bList);
     }
 
     public Batch getBatchById(int id) {

@@ -41,13 +41,12 @@ public class AssociateController {
 	 */
 	@GetMapping("/associates")
 	public ResponseEntity<List<AssociateDTO>> getAssociates(@RequestParam int manager) {
-		List<AssociateDTO> body = null;
 		List<Associate> associates = backendService.findAssociatesByManagerId(manager);
 
 		if (associates == null || associates.size() == 0) {
 			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 		} else {
-			body = new ArrayList<>();
+			List<AssociateDTO> body = new ArrayList<>();
 			for (Associate a : associates) {
 				body.add(new AssociateDTO(a));
 			}
@@ -65,12 +64,11 @@ public class AssociateController {
 
 	@GetMapping("/associates/new")
 	public ResponseEntity<List<AssociateDTO>> getNewAssociates(@RequestParam int manager) {
-		List<AssociateDTO> body = null;
 		List<Associate> associates = backendService.findNewAssociatesByManagerId(manager);
 		if (associates == null || associates.size() == 0) {
 			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 		} else {
-			body = new ArrayList<>();
+			List<AssociateDTO> body = new ArrayList<>();
 			for (Associate a : associates) {
 				body.add(new AssociateDTO(a));
 			}

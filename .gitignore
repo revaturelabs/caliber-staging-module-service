@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 pom.xml.tag
+application.properties
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next

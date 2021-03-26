@@ -105,7 +105,6 @@ public class InterviewFeedbackController {
 		if(associate == null) {
 			return new ResponseEntity<>("Associate id is invalid", HttpStatus.NOT_FOUND);
 		}
-
 		Manager manager = managerServ.getManagerById(Integer.parseInt(feedbackMap.get("managerId")));
 		if(manager == null) {
 			return new ResponseEntity<>("Manager id is invalid", HttpStatus.NOT_FOUND);

@@ -1,6 +1,10 @@
 package com.revature.backend.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +76,9 @@ public class SwotService {
 	 * Returns true if successful, false otherwise.
 	 */
 	public boolean createNewItem(AnalysisItem analysisItem) {
+		Swot updateSwot = swotRepository.findById(analysisItem.getSwot().getId());
+		updateSwot.setLastModifiedNow();
+		swotRepository.save(updateSwot);
 		return analysisItemRepository.save(analysisItem) != null;
 	}
 
@@ -110,8 +117,16 @@ public class SwotService {
 	 * otherwise.
 	 */
 	public boolean deleteItem(int analysisItemId) {
-		analysisItemRepository.deleteById(analysisItemId);
-		return true; //TODO: this will always return true, fix the condition.
+		Optional<AnalysisItem> optionalAnalysisItem = analysisItemRepository.findById(analysisItemId);
+		AnalysisItem analysisItem = optionalAnalysisItem.orElse(null);
+		if(analysisItem!=null) {
+			Swot updateSwot = swotRepository.findById(analysisItem.getSwot().getId());
+			updateSwot.setLastModifiedNow();
+			swotRepository.save(updateSwot);
+			analysisItemRepository.deleteById(analysisItemId);
+			return true; //TODO: this will always return true, fix the condition.
+		}
+		return false; 
 	}
 
 	/**

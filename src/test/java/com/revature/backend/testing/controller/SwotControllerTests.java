@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.backend.config.SecurityConfig;
 import com.revature.backend.controller.SwotController;
 import com.revature.backend.model.AnalysisItem;
 import com.revature.backend.model.AnalysisType;
@@ -21,25 +20,16 @@ import com.revature.backend.model.Swot;
 import com.revature.backend.security.JwtAuthenticationFilter;
 import com.revature.backend.service.SwotService;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
- * This is a set of test for the SwotController class. It contaons 2 tests.<p>
+ * This is a set of test for the SwotController class. It contains 2 tests.<p>
  * These tests make use of Junit 5.<p>
  * test 1:Tests if the Application Loads.<p>
  * test 2:Tests that you can hit the /swot/view/all endpoint and get the expected results.<p>

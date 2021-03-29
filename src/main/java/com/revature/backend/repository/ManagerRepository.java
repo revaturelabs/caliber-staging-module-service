@@ -16,7 +16,7 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 	@Query(value = "SELECT * FROM manager", nativeQuery = true)
 	List<Manager> findAllManagers();
 
-	public Manager findById(int id);
+	Manager findById(int id);
 
-  public Manager findByEmail(String email);
+    Manager findByEmail(String email);
 }

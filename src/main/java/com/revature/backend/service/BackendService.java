@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.repository.BackendRepo;
-import com.revature.backend.util.GetBatchById;
+import com.revature.backend.util.CaliberClient;
 
 @Service
 public class BackendService {
 	BackendRepo backendRepo;
-	GetBatchById batchRetriever;
+	CaliberClient batchRetriever;
 
-  public BackendService(BackendRepo backendRepo, GetBatchById batchRetriever) {
+  public BackendService(BackendRepo backendRepo, CaliberClient batchRetriever) {
     this.backendRepo = backendRepo;
     this.batchRetriever = batchRetriever;
   }

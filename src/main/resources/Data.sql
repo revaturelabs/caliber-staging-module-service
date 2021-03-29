@@ -1,7 +1,7 @@
 INSERT INTO manager VALUES  (1,'Testemail@email.email','test','user');
-INSERT INTO manager VALUES  (2,'test@revature.com','REAL_TEST_EMAIL','usery');
+INSERT INTO manager VALUES  (4,'test@revature.com','REAL_TEST_EMAIL','usery');
 INSERT INTO manager VALUES  (3,'test@email.mail','isa','cat');
-INSERT INTO manager VALUES  (4,'test@test.com','testing','tester');
+INSERT INTO manager VALUES  (2,'roger.moore@revature.net','REAL_TEST_EMAIL','usery');
 INSERT INTO batch VALUES(1,'Reston','Sophia','1','Java Full Stack');
 INSERT INTO batch VALUES(2,'WVU','Jacob','1','JWA Full Stack');
 INSERT INTO associate VALUES (1, 'testemail@email.com', 'testA', 'associate','1A', 1, 1, 4);

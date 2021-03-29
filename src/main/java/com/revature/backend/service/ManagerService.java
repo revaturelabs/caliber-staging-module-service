@@ -37,8 +37,6 @@ public class ManagerService {
 	}
 
   public Manager getManagerByEmail(String email) {
-	  //System.out.println(email);
-	  //System.out.println(managerRepo.findAll().toString());
     return managerRepo.findByEmail(email);
   }
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ViewSwotPage {
 	
+	@SuppressWarnings("unused")
 	private WebDriver driver;
 	
 	@FindBy(xpath = "//h5")

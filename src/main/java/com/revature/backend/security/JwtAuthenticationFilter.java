@@ -19,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /**
  * One of the first filters that a request must pass in order to reach our
  * actual controller layer. The filter is specifically for Firebase JSON Web
- * Tokens and the authorization of them through the instanstiated
+ * Tokens and the authorization of them through the instantiated
  * {@link com.google.firebase.auth.FirebaseAuth}
  * @author Jay Monari
  */

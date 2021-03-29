@@ -108,7 +108,7 @@ public class StagingListenerImpl implements StagingListener {
 			int respCode = connection.getResponseCode();
 			if (respCode != 200) {
 				log.error("Caliber API did not respond with a response code of 200!");
-				throw new RuntimeException("HttpResonseCode: " + respCode);
+				throw new RuntimeException("HttpResponseCode: " + respCode);
 			} else {
 				log.info("Got response!");
 				String inline = "";

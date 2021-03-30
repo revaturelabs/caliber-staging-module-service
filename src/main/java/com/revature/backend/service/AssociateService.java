@@ -33,4 +33,8 @@ public class AssociateService {
     // TODO call the appropriate Repo method to update an associate into DB
     associateRepo.save(associate);
   }
+  public Associate getAssociateByEmail(String email) {
+	    // TODO call the appropriate Repo method to update an associate into DB
+	    return associateRepo.findByEmail(email);
+	  }
 }

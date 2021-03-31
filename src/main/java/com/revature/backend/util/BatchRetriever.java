@@ -7,7 +7,7 @@ import com.revature.backend.model.api.ApiBatchTemplate;
 
 public interface BatchRetriever {
 
-	public List<ApiAssociateTemplate> retrieveNewlyStagingAssociates();
+	List<ApiAssociateTemplate> retrieveNewlyStagingAssociates();
 	
-	public List<ApiBatchTemplate> retrieveNewlyStagingBatches();
+	List<ApiBatchTemplate> retrieveNewlyStagingBatches();
 }

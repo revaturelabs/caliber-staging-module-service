@@ -24,15 +24,8 @@ import com.revature.backend.model.Manager;
 import com.revature.backend.service.ManagerService;
 import com.revature.backend.util.ClientMessage;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 /**
  * This is a test for the ManagerController class. It contains 4 tests.
  * Test 1: Tests if the application loads<p>
@@ -68,13 +61,13 @@ public class TestManagerController {
 	private MockMvc mockmvc;
 
 	@Autowired
-  @InjectMocks
+    @InjectMocks
 	private ManagerController controller;
 
-  @BeforeEach
-  public void before(){
-    mockmvc=MockMvcBuilders.standaloneSetup(controller).build();
-  }
+    @BeforeEach
+    public void before(){
+      mockmvc=MockMvcBuilders.standaloneSetup(controller).build();
+    }
 
 	/*
 	 * Sanity Check - if this fails, application context is not loaded and all other

@@ -88,11 +88,8 @@ public class ApiAssociateTemplate {
 		} else if (!lastName.equals(other.lastName))
 			return false;
 		if (salesforceId == null) {
-			if (other.salesforceId != null)
-				return false;
-		} else if (!salesforceId.equals(other.salesforceId))
-			return false;
-		return true;
+			return other.salesforceId == null;
+		} else return salesforceId.equals(other.salesforceId);
 	}
 	@Override
 	public String toString() {

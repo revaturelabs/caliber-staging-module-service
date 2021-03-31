@@ -1,9 +1,9 @@
 package com.revature.backend.testing.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,17 +33,9 @@ import com.revature.backend.model.dto.AssociateDTO;
 import com.revature.backend.service.AssociateService;
 import com.revature.backend.service.BackendService;
 import com.revature.backend.service.BatchService;
+import com.revature.backend.util.ClientMessage;
 
-//@WebMvcTest(AssociateController.class)
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 /**
  * This is a set of tests for the AssociateController class. It contains 7 tests related to this class.<p>
  * test 1:Tests whether the application loads properly.<p>
@@ -87,8 +79,8 @@ public class AssociateControllerTests {
 	public void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(associateController).build();
 		Associate associate1 = new  Associate(1, "salesID", "email@email.com", "John", "Doe", manager, batch, AssociateStatus.STAGING);
-		Associate associate2 = new  Associate(2, "salesID", "email@email.com", "John", "Doe", manager, batch, AssociateStatus.STAGING);
-		AssociateDTO associateDTO1 = new AssociateDTO(1, "salesID", "email@email.com", "John", "Doe", 1, 1,AssociateStatus.STAGING.toString());
+		Associate associate2 = new  Associate(2, "salesID", "email1@email.com", "John", "Doe", manager, batch, AssociateStatus.STAGING);
+		AssociateDTO associateDTO1 = new AssociateDTO(1, "salesID", "email1@email.com", "John", "Doe", 1, 1,AssociateStatus.STAGING.toString());
 		AssociateDTO associateDTO2 = new AssociateDTO(2, "salesID", "email@email.com", "John", "Doe", 1, 1,AssociateStatus.STAGING.toString());
 		associates.add(associate1);
 		associates.add(associate2);
@@ -187,4 +179,20 @@ public class AssociateControllerTests {
 			+ " }"
 		)).andExpect(status().isOk()).andExpect(jsonPath("$").value("Associate updated successfully"));
 	}
+	
+
+	@Test
+	public void associateLogin() throws Exception {
+		//checks if email and id match
+		ClientMessage expectedResponse = new ClientMessage("2");
+
+		MvcResult mvcResult = this.mockMvc.perform(post("/associate").contentType("application/json")
+							  .content(objectMapper.writeValueAsString(new ClientMessage("email1@email.com"))))
+							  .andReturn();
+
+		String actualResponse = mvcResult.getResponse().getContentAsString();
+
+		assertThat(actualResponse).isNotEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expectedResponse));
+	}
+
 }

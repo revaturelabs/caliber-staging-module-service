@@ -42,14 +42,14 @@ public class AssociateController {
   
   
   	@PostMapping("/associate")
-	public ResponseEntity<String> getLoggedInManager(@RequestBody String email) {
-		String associateId = "";
+	public ResponseEntity<Associate> getLoggedInManager(@RequestBody String email) {
+		Associate associate = new Associate();
 		try {
-			associateId = Integer.toString(assocService.getAssociateByEmail(email).getId());
+			associate = assocService.getAssociateByEmail(email);
 		} catch(Exception e) {
-			logger.debug("Associate id is: "+ associateId + " | Error thrown my manager controller.");
+			logger.debug("Associate is: "+ associate + " | Error thrown my manager controller.");
 		}
-		return new ResponseEntity<>(associateId, HttpStatus.OK);
+		return new ResponseEntity<>(associate, HttpStatus.OK);
 	}
 
 	/**

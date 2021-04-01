@@ -12,7 +12,6 @@ import com.revature.backend.model.Swot;
 import com.revature.backend.service.SwotService;
 import com.revature.backend.util.ClientMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +51,6 @@ public class SwotController {
 	@PostMapping(path = "/create", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ClientMessage> createSwot(@RequestBody Swot swot) {
 		ClientMessage body = swotService.createNewSwot(swot) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
-		System.out.println(swot);
 		return ResponseEntity.status(HttpStatus.CREATED).body(body);
 	}
 

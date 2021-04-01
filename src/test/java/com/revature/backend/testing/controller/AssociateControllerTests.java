@@ -1,7 +1,6 @@
 package com.revature.backend.testing.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -34,16 +33,7 @@ import com.revature.backend.service.AssociateService;
 import com.revature.backend.service.BackendService;
 import com.revature.backend.service.BatchService;
 
-//@WebMvcTest(AssociateController.class)
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 /**
  * This is a set of tests for the AssociateController class. It contains 7 tests related to this class.<p>
  * test 1:Tests whether the application loads properly.<p>

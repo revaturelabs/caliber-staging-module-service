@@ -21,7 +21,6 @@ import org.mockito.InjectMocks;
 
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -54,7 +53,6 @@ public class SwotControllerTests2 {
 	
 	List<AnalysisItem> mockAnalysisItems;
 	
-	private AnalysisItem item;
 	
 	private MockMvc mock;
 	

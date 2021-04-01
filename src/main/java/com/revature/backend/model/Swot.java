@@ -42,8 +42,8 @@ public class Swot {
   @OneToMany(mappedBy = "swot", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<AnalysisItem> analysisItems = new ArrayList<>();
   
-  @JsonManagedReference //Prevents recursion in retrieve requests
-  @OneToMany(mappedBy = "swot", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JoinColumn(name="swot_id")
   private Set<ProgressReport> progressReports = new HashSet<>();
 
   public Swot() {}

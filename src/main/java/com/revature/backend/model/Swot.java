@@ -147,6 +147,11 @@ public void setLastModified(Timestamp lastModified) {
 	this.lastModified = lastModified;
 }
 
+public void setLastModifiedNow() {
+	this.lastModified = new Timestamp(System.currentTimeMillis());
+}
+
+
 public List<AnalysisItem> getAnalysisItems() {
 	return analysisItems;
 }

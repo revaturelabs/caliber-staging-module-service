@@ -8,6 +8,7 @@ import static com.revature.backend.util.ClientMessageUtil.SUCCESSFULLY_DELETED;
 import java.util.List;
 
 import com.revature.backend.model.AnalysisItem;
+import com.revature.backend.model.ProgressReport;
 import com.revature.backend.model.Swot;
 import com.revature.backend.service.SwotService;
 import com.revature.backend.util.ClientMessage;
@@ -152,17 +153,11 @@ public class SwotController {
 	}
 
 	@PostMapping(path = "/swotprogressreport/new/{swotId}", consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ClientMessage> addSwotProgressReport(@RequestBody SwotProgressReport swotProgressReport,
+	public ResponseEntity<ClientMessage> addSwotProgressReport(@RequestBody ProgressReport swotProgressReport,
 															   @PathVariable Integer swotId) {
 		Swot swot = swotService.retrieveSwotById(swotId);
-		swot.getProgressReports.add(swotProgressReport);
+		swot.getProgressReports().add(swotProgressReport);
 		ClientMessage body = swotService.updateSwot(swot) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
 		return ResponseEntity.status(HttpStatus.CREATED).body(body);
 	}
-
-	/*@GetMapping(path = "/swotprogressreport/{associateId}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ClientMessage> getSwotProgressReportsByAssociateId(@PathVariable("associateId") Integer id) {
-		ClientMessage body = swotService.getSwotProgressReportsByAssociateId(id) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
-		return ResponseEntity.status(HttpStatus.CREATED).body(body);
-	}*/
 }

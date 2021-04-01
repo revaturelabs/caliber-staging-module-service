@@ -140,4 +140,11 @@ public class SwotService {
 	public List<Swot> retrieveAllSwot() {
 		return swotRepository.findAll();
 	}
+
+	public Swot retrieveSwotById(Integer id) { return swotRepository.getOne(id); }
+
+	public boolean updateSwot(Swot swot) {
+		swotRepository.save(swot);
+		return true;
+	}
 }

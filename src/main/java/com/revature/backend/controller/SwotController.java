@@ -8,21 +8,16 @@ import static com.revature.backend.util.ClientMessageUtil.SUCCESSFULLY_DELETED;
 import java.util.List;
 
 import com.revature.backend.model.AnalysisItem;
+import com.revature.backend.model.ProgressReport;
 import com.revature.backend.model.Swot;
 import com.revature.backend.service.SwotService;
 import com.revature.backend.util.ClientMessage;
 
+import kong.unirest.Client;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("swotController")
 @RequestMapping("/swot")
@@ -155,5 +150,14 @@ public class SwotController {
 	public ResponseEntity<ClientMessage> deleteSwotItem(@PathVariable("analysisItemId") int analysisItemId) {
 		ClientMessage body = swotService.deleteItem(analysisItemId) ? SUCCESSFULLY_DELETED : DELETION_FAILED;
 		return ResponseEntity.ok(body);
+	}
+
+	@PostMapping(path = "/swotprogressreport/new/{swotId}", consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ClientMessage> addSwotProgressReport(@RequestBody ProgressReport swotProgressReport,
+															   @PathVariable Integer swotId) {
+		Swot swot = swotService.retrieveSwotById(swotId);
+		swot.getProgressReports().add(swotProgressReport);
+		ClientMessage body = swotService.updateSwot(swot) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
+		return ResponseEntity.status(HttpStatus.CREATED).body(body);
 	}
 }

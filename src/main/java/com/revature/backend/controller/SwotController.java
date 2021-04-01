@@ -12,17 +12,11 @@ import com.revature.backend.model.Swot;
 import com.revature.backend.service.SwotService;
 import com.revature.backend.util.ClientMessage;
 
+import kong.unirest.Client;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("swotController")
 @RequestMapping("/swot")
@@ -156,4 +150,17 @@ public class SwotController {
 		ClientMessage body = swotService.deleteItem(analysisItemId) ? SUCCESSFULLY_DELETED : DELETION_FAILED;
 		return ResponseEntity.ok(body);
 	}
+
+	@PostMapping(path = "/swotprogressreport/new", consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ClientMessage> addSwotProgressReport(@RequestBody SwotProgressReport swotProgressReport) {
+		ClientMessage body = swotService.addSwotProgressReport(swotProgressReport) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
+		return ResponseEntity.status(HttpStatus.CREATED).body(body);
+	}
+
+	@GetMapping(path = "/swotprogressreport/{associateId}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ClientMessage> getSwotProgressReport(@PathVariable("associateId") Integer id) {
+		ClientMessage body = swotService.getSwotProgressReportById(id) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
+		return ResponseEntity.status(HttpStatus.CREATED).body(body);
+	}
+
 }

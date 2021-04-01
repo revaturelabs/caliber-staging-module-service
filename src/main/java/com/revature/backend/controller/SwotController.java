@@ -158,9 +158,8 @@ public class SwotController {
 	}
 
 	@GetMapping(path = "/swotprogressreport/{associateId}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ClientMessage> getSwotProgressReport(@PathVariable("associateId") Integer id) {
-		ClientMessage body = swotService.getSwotProgressReportById(id) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
+	public ResponseEntity<ClientMessage> getSwotProgressReportsByAssociateId(@PathVariable("associateId") Integer id) {
+		ClientMessage body = swotService.getSwotProgressReportsByAssociateId(id) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
 		return ResponseEntity.status(HttpStatus.CREATED).body(body);
 	}
-
 }

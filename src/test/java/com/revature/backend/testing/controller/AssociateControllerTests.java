@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 
@@ -50,6 +52,7 @@ import com.revature.backend.util.ClientMessage;
  */
 @SpringBootTest
 public class AssociateControllerTests {
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	ObjectMapper objectMapper = new ObjectMapper();
 
@@ -181,7 +184,7 @@ public class AssociateControllerTests {
 	}
 	
 
-	@Test
+	/*@Test
 	public void associateLogin() throws Exception {
 		//checks if email and id match
 		ClientMessage expectedResponse = new ClientMessage("2");
@@ -193,6 +196,16 @@ public class AssociateControllerTests {
 		String actualResponse = mvcResult.getResponse().getContentAsString();
 
 		assertThat(actualResponse).isNotEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expectedResponse));
-	}
+	}*/
 
+	@Test
+	public void checkAssociateLogin() throws Exception{
+		MvcResult mvcResult = this.mockMvc.perform(post("/associate").contentType("application/json")
+							  .content(objectMapper.writeValueAsString(new ClientMessage("email1@email.com"))))
+							  .andReturn();
+		String actualResponse = mvcResult.getResponse().getContentAsString();
+		logger.debug("actual response is: " + actualResponse);
+		logger.debug("expected response is: " + objectMapper.writeValueAsString(associates.get(0)));
+		assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(associates.get(0)));
+	}
 }

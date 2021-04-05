@@ -42,7 +42,7 @@ public class AssociateController {
   
   
   	@PostMapping("/associate")
-	public ResponseEntity<Associate> getLoggedInManager(@RequestBody String email) {
+	public ResponseEntity<Associate> getLoggedInAssociate(@RequestBody String email) {
 		Associate associate = new Associate();
 		try {
 			associate = assocService.getAssociateByEmail(email);

@@ -64,6 +64,20 @@ public class SwotService {
 	public List<Swot> retrieveAllSwotByAssociateId(int associateId) {
 		return swotRepository.findAllByAssociateId(associateId);
 	}
+	
+	/**
+	*
+	* @param swotId
+	* @return a swot of the corresponding swot id
+	*
+	* Retrieves a swot by a swot id
+	* Takes in the swot's id (as an int)
+	* as a parameter.
+	* Returns a Swot for that id
+	*/
+	public Swot retrieveSwotById(int swotId) {
+		return swotRepository.findById(swotId);
+	}
 
 	/**
 	 *

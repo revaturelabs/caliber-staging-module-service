@@ -83,20 +83,6 @@ public class SwotController {
 
 	/**
 	 *
-	 * @param swotId
-	 * @return ResponseEntity with a 200 HTTP status indicating whether or not deletion was successful
-	 *
-	 * DELETE request for deleting a SWOT. Returns ResponseEntity with a message indicating whether
-	 * or not deletion was successful.
-	 */
-	@DeleteMapping(path = "/delete/{swotId}")
-	public ResponseEntity<ClientMessage> deleteSwot(@PathVariable("swotId") int swotId) {
-		ClientMessage body = swotService.deleteSwot(swotId) ? SUCCESSFULLY_DELETED : DELETION_FAILED;
-		return ResponseEntity.ok(body);
-	}
-
-	/**
-	 *
 	 * @param analysisItem
 	 * @return ResponseEntity with 201 HTTP status indicating whether or not creation was successful
 	 *

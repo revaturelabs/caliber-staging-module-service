@@ -137,7 +137,6 @@ public class SwotService {
 			updateSwot.setLastModifiedNow();
 			swotRepository.save(updateSwot);
 			analysisItemRepository.deleteById(analysisItemId);
-			return true; //TODO: this will always return true, fix the condition.
 		}
 		return false; 
 	}

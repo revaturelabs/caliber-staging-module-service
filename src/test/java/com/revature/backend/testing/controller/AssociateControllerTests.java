@@ -182,21 +182,6 @@ public class AssociateControllerTests {
 			+ " }"
 		)).andExpect(status().isOk()).andExpect(jsonPath("$").value("Associate updated successfully"));
 	}
-	
-
-	/*@Test
-	public void associateLogin() throws Exception {
-		//checks if email and id match
-		ClientMessage expectedResponse = new ClientMessage("2");
-
-		MvcResult mvcResult = this.mockMvc.perform(post("/associate").contentType("application/json")
-							  .content(objectMapper.writeValueAsString(new ClientMessage("email1@email.com"))))
-							  .andReturn();
-
-		String actualResponse = mvcResult.getResponse().getContentAsString();
-
-		assertThat(actualResponse).isNotEqualToIgnoringWhitespace(objectMapper.writeValueAsString(expectedResponse));
-	}*/
 
 	@Test
 	public void checkAssociateLogin() throws Exception{

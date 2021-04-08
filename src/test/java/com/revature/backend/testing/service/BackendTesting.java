@@ -24,7 +24,7 @@ import com.revature.backend.model.Manager;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.repository.BackendRepo;
 import com.revature.backend.service.BackendService;
-import com.revature.backend.util.GetBatchById;
+import com.revature.backend.util.CaliberClient;
 
 @SpringBootTest()
 class BackendTesting {
@@ -33,7 +33,7 @@ class BackendTesting {
 	BackendRepo repo;
 
 	@Mock
-	GetBatchById getbatch;
+	CaliberClient getbatch;
 
 	@Autowired
 	@InjectMocks

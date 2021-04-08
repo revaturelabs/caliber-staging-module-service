@@ -33,9 +33,8 @@ public class ToastLocationTest {
 		this.homePage = new HomePage(DriverUtility.driver);
 		assertEquals(this.homePage.url, DriverUtility.driver.getCurrentUrl());
 	}
-	@When("a user clicks Create SWOT for associate in table row {string}")
-	public void a_user_clicks_create_swot_for_associate_in_table_row(String string) {
-		int associateId = Integer.parseInt(string);
+	@When("a user clicks Create SWOT for associate in table row")
+	public void a_user_clicks_create_swot_for_associate_in_table_row() {
 		WebElement createSwot = this.homePage.getCreateSwotButton();
 		wait.until(ExpectedConditions.elementToBeClickable(createSwot));
 		this.homePage.clickCreateSwotForAssociate();

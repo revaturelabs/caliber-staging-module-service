@@ -21,9 +21,6 @@ public class StagingListenerTesting {
 	void testGetNewBatches() {
 		stagingListener.checkForNewBatches();
 		List<ApiBatchTemplate> batches = stagingListener.getLatestBatches();
-		for (ApiBatchTemplate apiBatchTemplate : batches) {
-			System.out.println(apiBatchTemplate.toString());
-		}
 		if (stagingListener.triggerUpdate()) {
 			assertTrue(batches.size() > 0);
 		} else {

@@ -8,20 +8,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.backend.model.Associate;
 import com.revature.backend.model.api.ApiBatchTemplate;
 import com.revature.backend.repository.BackendRepo;
-import com.revature.backend.util.GetBatchById;
+import com.revature.backend.util.CaliberClient;
 
 @Service
 public class BackendService {
 	BackendRepo backendRepo;
-	GetBatchById batchRetriever;
+	CaliberClient batchRetriever;
 
-  public BackendService(BackendRepo backendRepo, GetBatchById batchRetriever) {
+  public BackendService(BackendRepo backendRepo, CaliberClient batchRetriever) {
     this.backendRepo = backendRepo;
     this.batchRetriever = batchRetriever;
   }
@@ -58,7 +57,6 @@ public class BackendService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate ld  = LocalDate.now();
 		try {
-			System.out.println("test");
 			List<Associate> associates = backendRepo.findAssociatesByManagerId(id);
 
 			// Make only unique batch id calls to make backend faster
@@ -70,7 +68,6 @@ public class BackendService {
 				LocalDate bd = LocalDate.parse(batch.getEndDate(), formatter);
 				long elapsedDays = ChronoUnit.DAYS.between(bd, ld);
 				if(elapsedDays<= 7) {
-					System.out.println(elapsedDays);
 					for (Associate a: associates) {
 						if(a.getBatch().getId() == x) {
 							ret.add(a);

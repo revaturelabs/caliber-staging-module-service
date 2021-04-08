@@ -12,12 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.revature.backend.controller.AssignmentController;
 import com.revature.backend.model.Associate;
@@ -33,8 +30,6 @@ import com.revature.backend.util.BatchWriter;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 /**
  * This is a set of tests for the AssignmentController class. It contains 4 tests.<p>
  * Test 1:Tests if dummy data will be converted to batch properly.<p>

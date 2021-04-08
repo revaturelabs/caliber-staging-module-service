@@ -25,17 +25,6 @@ public class ManagerService {
     this.backendRepo = backendRepo;
   }
 
-	public List<Manager> saveAll(List<Manager> mList) {
-		List<Manager> result = new ArrayList<>();
-
-		for(Manager m : mList)
-		{
-			result.add(managerRepo.save(m));
-		}
-		 return result;
-
-	}
-
   public Manager getManagerByEmail(String email) {
     return managerRepo.findByEmail(email);
   }

@@ -5,7 +5,6 @@ import java.util.List;
 import com.revature.backend.model.Associate;
 import com.revature.backend.repository.AssociateRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,18 +20,17 @@ public class AssociateService {
   }
 
   public List<Associate> saveAssociates(List<Associate> aList) {
-      // call the appropriate Repo method to save (aka insert) associates into DB
-      List<Associate> list = associateRepo.saveAll(aList);
-      return list;
+    return associateRepo.saveAll(aList);
   }
 
   public Associate getAssociateById(int id) {
-    // TODO call the appropriate Repo method to update an associate into DB
     return associateRepo.findById(id);
   }
 
   public void updateAssociate(Associate associate) {
-    // TODO call the appropriate Repo method to update an associate into DB
     associateRepo.save(associate);
   }
+  public Associate getAssociateByEmail(String email) {
+	    return associateRepo.findByEmail(email);
+	  }
 }

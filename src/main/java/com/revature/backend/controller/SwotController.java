@@ -8,22 +8,16 @@ import static com.revature.backend.util.ClientMessageUtil.SUCCESSFULLY_DELETED;
 import java.util.List;
 
 import com.revature.backend.model.AnalysisItem;
+import com.revature.backend.model.ProgressReport;
 import com.revature.backend.model.Swot;
 import com.revature.backend.service.SwotService;
 import com.revature.backend.util.ClientMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import kong.unirest.Client;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("swotController")
 @RequestMapping("/swot")
@@ -52,7 +46,6 @@ public class SwotController {
 	@PostMapping(path = "/create", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ClientMessage> createSwot(@RequestBody Swot swot) {
 		ClientMessage body = swotService.createNewSwot(swot) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
-		System.out.println(swot);
 		return ResponseEntity.status(HttpStatus.CREATED).body(body);
 	}
 
@@ -74,6 +67,22 @@ public class SwotController {
 
 	/**
 	 *
+	 * @param swotId
+	 * @return a SWOT for the corresponding swot id
+	 *
+	 * GET request for fetching a SWOT based on a swot's id as found in the
+	 * RESTful URL.
+	 *
+	 * Returns the SWOT as a JSON array with a 200 code if successful.
+	 */
+	@GetMapping(path = "/viewSwot/{swotId}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Swot> viewSelectedSwot(@PathVariable("swotId") int swotId) {
+		Swot selectedSwot = swotService.retrieveSwotById(swotId);
+		return ResponseEntity.ok(selectedSwot);
+	}
+	
+	/**
+	 *
 	 * @return List of all SWOTs in the database with a 200 HTTP status.
 	 *
 	 * GET request for fetching all existing SWOTs in the system. Returns the List
@@ -86,20 +95,6 @@ public class SwotController {
 	public ResponseEntity<List<Swot>> viewAllSwot() {
 		List<Swot> swotList = swotService.retrieveAllSwot();
 		return ResponseEntity.ok(swotList);
-	}
-
-	/**
-	 *
-	 * @param swotId
-	 * @return ResponseEntity with a 200 HTTP status indicating whether or not deletion was successful
-	 *
-	 * DELETE request for deleting a SWOT. Returns ResponseEntity with a message indicating whether
-	 * or not deletion was successful.
-	 */
-	@DeleteMapping(path = "/delete/{swotId}")
-	public ResponseEntity<ClientMessage> deleteSwot(@PathVariable("swotId") int swotId) {
-		ClientMessage body = swotService.deleteSwot(swotId) ? SUCCESSFULLY_DELETED : DELETION_FAILED;
-		return ResponseEntity.ok(body);
 	}
 
 	/**
@@ -157,5 +152,14 @@ public class SwotController {
 	public ResponseEntity<ClientMessage> deleteSwotItem(@PathVariable("analysisItemId") int analysisItemId) {
 		ClientMessage body = swotService.deleteItem(analysisItemId) ? SUCCESSFULLY_DELETED : DELETION_FAILED;
 		return ResponseEntity.ok(body);
+	}
+
+	@PostMapping(path = "/swotprogressreport/new/{swotId}", consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ClientMessage> addSwotProgressReport(@RequestBody ProgressReport swotProgressReport,
+															   @PathVariable Integer swotId) {
+		Swot swot = swotService.retrieveSwotById(swotId);
+		swot.getProgressReports().add(swotProgressReport);
+		ClientMessage body = swotService.updateSwot(swot) ? SUCCESSFULLY_CREATED : CREATION_FAILED;
+		return ResponseEntity.status(HttpStatus.CREATED).body(body);
 	}
 }
